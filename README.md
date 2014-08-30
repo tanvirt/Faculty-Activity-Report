@@ -1,15 +1,19 @@
 CEN3031-Project-Placeholder-name
 ================================
-
-We do NOT have a project!
-
-Members:
-xtineking (Christine), 
-mkwheeler (Morgan), 
-friedmangreg37 (Greg), 
-ifell0 (Ian), 
-Aknoxlor (),  
---1 more member--
+<html>
+  We do <Strong>NOT</Strong> have a project!
+  <body>
+    <h3>Collaborators</h3>
+      <ol>
+        <li>xtineking (Christine)</li>
+        <li>mkwheeler (Morgan)</li> 
+        <li>friedmangreg37 (Greg)</li>
+        <li>ifell0 (Ian)</li>
+        <li>Aknoxlor (<Strong>Put Name Here</Strong>)</li>
+        <li><Strong>--1 more member--</Strong></li>
+      </ol>
+  </body>
+</html>
 
 
 
