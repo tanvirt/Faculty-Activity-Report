@@ -9,7 +9,7 @@ CEN3031-Project-Placeholder-name
         <li>mkwheeler (Morgan)</li> 
         <li>friedmangreg37 (Greg)</li>
         <li>ifell0 (Ian)</li>
-        <li>Aknoxlor (<Strong>Put Name Here</Strong>)</li>
+        <li>Aknoxlor (Andrew Lorelle)</li>
         <li><Strong>--1 more member--</Strong></li>
       </ol>
   </body>
