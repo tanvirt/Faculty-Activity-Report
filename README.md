@@ -1,7 +1,7 @@
 CEN3031-Project-Placeholder-name
 ================================
 <html>
-  We do <Strong>NOT</Strong> have a project!
+  <Strong>Project:</Strong> Faculty Ability Report
   <body>
     <h3>Collaborators</h3>
       <ol>
