@@ -10,7 +10,7 @@ CEN3031-Faculty-Activity-Report
         <li>friedmangreg37 (Greg)</li>
         <li>ifell0 (Ian)</li>
         <li>Aknoxlor (Andrew Lorelle)</li>
-        <li><joshammock (Josh)</li>
+        <li>joshammock (Josh)</li>
       </ol>
   </body>
 </html>
