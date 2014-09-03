@@ -1,7 +1,7 @@
-CEN3031-Project-Placeholder-name
+CEN3031-Faculty-Activity-Report
 ================================
 <html>
-  <Strong>Project:</Strong> Faculty Ability Report
+  <Strong>Project:</Strong> Faculty Activity Report
   <body>
     <h3>Collaborators</h3>
       <ol>
