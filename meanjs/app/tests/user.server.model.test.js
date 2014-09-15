@@ -100,6 +100,15 @@ describe('User Model Unit Tests:', function() {
 			});
 - 		});
 
+		it('should throw an error if the displayName does not equal the firstName plus a space plus lastName', function(done) {
+			user.firstName = "A";
+			user.LastName = "B";
+			user.displayName = "C D";
+			return user.save(function(err) {
+				should.exist(err);
+				done();
+			});
+		});
 
 	});
 
