@@ -66,6 +66,15 @@ describe('User Model Unit Tests:', function() {
 				done();
 			});
 		});
+
+	    it('should be able to show an error when try to save without email', function(done) {
+			user.email = '';
+			return user.save(function(err) {
+				should.exist(err);
+				done();
+			});
+		});
+
 			
 		it('should be able to show an error when using try to save with too short password', function(done) {
 			user.password = '1';
