@@ -10,7 +10,7 @@ var should = require('should'),
 /**
  * Globals
  */
-var user, user2;
+var user, user2, user3;
 
 /**
  * Unit tests
@@ -37,13 +37,13 @@ describe('User Model Unit Tests:', function() {
 		});
 		
 		user3 = new User({
-			firstName: 'Full1',
-			lastName: 'Name1',
-			displayName: 'Full Name1',
-			email: 'test1@test.com',
+			firstName: 'Full',
+			lastName: 'Name',
+			displayName: 'Full Name',
+			email: 'test@test.com',
 			username: 'username',
-			password: 'password1',
-			provider: 'local1'
+			password: 'password',
+			provider: 'local'
 		});
 
 		done();
@@ -61,7 +61,7 @@ describe('User Model Unit Tests:', function() {
 			user.save(done);
 		});
 
-		it('should fail to save an existing user again', function(done) {
+		it('should fail to save an existing user again', function(done) { //this one - I dont understand what it's doing?
 			user.save();
 			return user2.save(function(err) {
 				should.exist(err);
@@ -70,8 +70,10 @@ describe('User Model Unit Tests:', function() {
 		});
 		
 		it('should be able to throw an error when trying to save a user with the same username', function(done) {
+			user.username = abc;
 			user.save();
-			return user3.save(function(err) {
+			user2.username = abc;
+			return user2.save(function(err) {
 				should.exist(err);
 				done();
 			});
