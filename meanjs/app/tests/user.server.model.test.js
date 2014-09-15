@@ -82,6 +82,14 @@ describe('User Model Unit Tests:', function() {
 				done();
 			});
 		});
+		
+		it('should be able to show an error if trying to save without a last name', function(done) {
+			user.lastName = '';
+			return user.save(function(err) {
+				should.exist(err);
+				done();
+			});
+- 		});
 
 
 	});
