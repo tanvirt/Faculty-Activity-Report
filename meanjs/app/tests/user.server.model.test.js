@@ -74,6 +74,16 @@ describe('User Model Unit Tests:', function() {
 				done();
 			});
 		});
+
+		it('should be able to show an error when trying to save without username', function(done) {
+			user.username = '';
+			return user.save(function(err) {
+				should.exist(err);
+				done();
+			});
+		});
+
+
 	});
 
 	after(function(done) {
