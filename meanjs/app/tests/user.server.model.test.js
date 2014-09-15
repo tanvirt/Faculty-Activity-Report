@@ -35,6 +35,16 @@ describe('User Model Unit Tests:', function() {
 			password: 'password',
 			provider: 'local'
 		});
+		
+		user3 = new User({
+			firstName: 'Full1',
+			lastName: 'Name1',
+			displayName: 'Full Name1',
+			email: 'test1@test.com',
+			username: 'username',
+			password: 'password1',
+			provider: 'local1'
+		});
 
 		done();
 	});
@@ -58,6 +68,15 @@ describe('User Model Unit Tests:', function() {
 				done();
 			});
 		});
+		
+		it('should be able to throw an error when trying to save a user with the same username', function(done) {
+			user.save();
+			return user3.save(function(err) {
+				should.exist(err);
+				done();
+			});
+		});
+		
 
 		it('should be able to show an error when try to save without first name', function(done) {
 			user.firstName = '';
