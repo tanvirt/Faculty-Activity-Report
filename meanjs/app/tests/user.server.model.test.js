@@ -65,13 +65,25 @@ describe('User Model Unit Tests:', function() {
 				should.exist(err);
 				done();
 			});
+		});
 			
 		it('should be able to show an error when using try to save with too short password', function(done) {
-			user.password = '1'
+			user.password = '1';
 			return user.save(function(err) {
 				should.exist(err);
-				done;
+				done();
+			});
 		});
+
+		it('should be able to show an error when trying to save without username', function(done) {
+			user.username = '';
+			return user.save(function(err) {
+				should.exist(err);
+				done();
+			});
+		});
+
+
 	});
 
 	after(function(done) {
