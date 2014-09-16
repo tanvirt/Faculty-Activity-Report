@@ -5,9 +5,9 @@ Faculty Activity Report
 *Front End*
    - Tanvir Talukder (tanvirt) 
    - Adam Fortier (fortieradam)
-   - Santiago Fernandez
-   - Daniel Fuentes (dfuentes)
-   - Pablo Arango (pabloaran17)
+   - Santiago Fernandez (santi777)
+   - Daniel Fuentes (dafefuve)
+   - Pablo Arango (whospablo)
 
 *Back End*
    - xtineking (Christine)
