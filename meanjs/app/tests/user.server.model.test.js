@@ -70,9 +70,9 @@ describe('User Model Unit Tests:', function() {
 		});
 		
 		it('should be able to throw an error when trying to save a user with the same username', function(done) {
-			user.username = abc;
+			user.username = 'abc';
 			user.save();
-			user2.username = abc;
+			user2.username = 'abc';
 			return user2.save(function(err) {
 				should.exist(err);
 				done();
@@ -119,12 +119,12 @@ describe('User Model Unit Tests:', function() {
 				should.exist(err);
 				done();
 			});
-- 		});
+ 		});
 
 		it('should throw an error if the displayName does not equal the firstName plus a space plus lastName', function(done) {
-			user.firstName = "A";
-			user.LastName = "B";
-			user.displayName = "C D";
+			user.firstName = 'A';
+			user.LastName = 'B';
+			user.displayName = 'C D';
 			return user.save(function(err) {
 				should.exist(err);
 				done();
