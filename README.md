@@ -10,9 +10,9 @@ Faculty Activity Report
    - Pablo Arango (whospablo)
 
 *Back End*
-   - xtineking (Christine)
-   - mkwheeler (Morgan) 
-   - friedmangreg37 (Greg)
-   - ifell0 (Ian)
-   - Aknoxlor (Andrew Lorelle)
-   - joshammock (Josh)
+   - Christine King (xtineking)
+   - Morgan Wheeler (mkwheeler) 
+   - Greg Friedman (friedmangreg37)
+   - Ian Fell (ifell0)
+   - Andrew Lorelle (Aknoxlor)
+   - Josh Hammock (joshammock)
