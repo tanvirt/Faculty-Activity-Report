@@ -96,8 +96,8 @@ describe('User Model Unit Tests:', function() {
 			});
 		});
 
-		it(‘should be able to show an error when trying to save without a valid email address', function(done) {
-			user.email = ' myemail@gmail';
+		it('should be able to show an error when trying to save without a valid email address', function(done) {
+			user.email = 'myemail@gmail';
 			return user.save(function(err) {
 				should.exist(err);
 				done();
