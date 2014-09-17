@@ -5,7 +5,7 @@ CEN3031-Faculty-Activity-Report
   <body>
     <h3>Collaborators</h3>
       <ol>
-        <li>xtineking (Christine)</li>
+        <li>xtineking (Christine King)</li>
         <li>mkwheeler (Morgan)</li> 
         <li>friedmangreg37 (Greg)</li>
         <li>ifell0 (Ian)</li>
