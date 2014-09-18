@@ -6,7 +6,7 @@ Faculty Activity Report
    - Tanvir Talukder (tanvirt) 
    - Adam Fortier (fortieradam)
    - Santiago Fernandez (santi777)
-   - Daniel Fuentes (dafefuve)
+   - Daniel Fuentes (dafefuve) - dfuentes@cise.ufl.edu
    - Pablo Arango (whospablo)
 
 *Back End*
