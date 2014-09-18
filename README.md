@@ -14,5 +14,5 @@ Faculty Activity Report
    - Morgan Wheeler (mkwheeler) 
    - Greg Friedman (friedmangreg37)
    - Ian Fell (ifell0) -ifell@ufl.edu
-   - Andrew Lorelle (Aknoxlor)
+   - Andrew Lorelle (Aknoxlor) - andrewlorelle@ufl.edu
    - Josh Hammock (joshammock)
