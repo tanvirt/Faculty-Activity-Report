@@ -3,7 +3,7 @@ Faculty Activity Report
 **CEN3031**
 ###Collaborators
 *Front End*
-   - Tanvir Talukder (tanvirt) 
+   - Tanvir Talukder (tanvirt) - tanvirt@ufl.edu
    - Adam Fortier (fortieradam)
    - Santiago Fernandez (santi777)
    - Daniel Fuentes (dafefuve) - dfuentes@cise.ufl.edu
