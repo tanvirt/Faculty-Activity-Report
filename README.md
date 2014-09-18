@@ -10,7 +10,7 @@ Faculty Activity Report
    - Pablo Arango (whospablo)
 
 *Back End*
-   - Christine King (xtineking)
+   - Christine King (xtineking) - airpwane@ufl.edu
    - Morgan Wheeler (mkwheeler) 
    - Greg Friedman (friedmangreg37)
    - Ian Fell (ifell0) -ifell@ufl.edu
