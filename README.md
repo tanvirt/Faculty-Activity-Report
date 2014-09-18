@@ -13,6 +13,6 @@ Faculty Activity Report
    - Christine King (xtineking)
    - Morgan Wheeler (mkwheeler) 
    - Greg Friedman (friedmangreg37)
-   - Ian Fell (ifell0)
+   - Ian Fell (ifell0) -ifell@ufl.edu
    - Andrew Lorelle (Aknoxlor)
    - Josh Hammock (joshammock)
