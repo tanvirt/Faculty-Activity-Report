@@ -4,10 +4,10 @@ Faculty Activity Report
 ###Collaborators
 *Front End*
    - Tanvir Talukder (tanvirt) - tanvirt@ufl.edu
-   - Adam Fortier (fortieradam)
-   - Santiago Fernandez (santi777)
+   - Adam Fortier (fortieradam) - fortieradam@ufl.edu
+   - Santiago Fernandez (santi777) - santiago7fergo@gmail.com
    - Daniel Fuentes (dafefuve) - dfuentes@cise.ufl.edu
-   - Pablo Arango (whospablo)
+   - Pablo Arango (whospablo) - pabloaran17@ufl.edu
 
 *Back End*
    - Christine King (xtineking) - airpwane@ufl.edu
