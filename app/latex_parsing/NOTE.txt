@@ -1,0 +1,6 @@
+This is only a temporary directory for latex/swig templates until we find a place to put them
+
+to run
+>node renderAssignedActivity.js
+
+this will generate the resultAssignedActivity.tex
