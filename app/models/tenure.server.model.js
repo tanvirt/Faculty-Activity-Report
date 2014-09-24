@@ -14,7 +14,7 @@ var Tenure = new Schema({
 	
 	tenure: {
 		type: String,
-		enum: [Tenured, Not Tenured],
+		enum: ['Tenured', 'Not Tenured'],
 		required: true
 	}
 }, {collection: 'Tenure'});
