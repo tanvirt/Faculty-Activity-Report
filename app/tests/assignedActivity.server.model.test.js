@@ -102,7 +102,6 @@ describe('Assigned Activity Model Unit Tests:', function() {
 
 			return activity01.save(function(err) {
 				should.exist(err);
-				console.log(err);
 				done();
 			});
 		});
