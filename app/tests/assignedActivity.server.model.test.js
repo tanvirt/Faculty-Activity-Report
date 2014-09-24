@@ -57,6 +57,14 @@ describe('Assigned Activity Model Unit Tests:', function() {
 			});
 		});
 
+		it('should fail to save a year that is below 1980', function(done) {
+			activity01.year = 1975;
+			return activity01.save(function(err) {
+				should.exist(err);
+				done();
+			});
+		});
+
 		it('should not fail to save a semester that is not spring, fall, summer', function(done) {
 			activity01.semester = 'fall';
 			activity01.save();
