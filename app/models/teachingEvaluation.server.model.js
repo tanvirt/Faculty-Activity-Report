@@ -10,7 +10,15 @@ var mongoose = require('mongoose'),
  * A Validation function for local mean properties
  */
 var validateLocalStrategyMean = function(property) {
-	//Figure out how to tranverse the child schema and check total schema size
+	var result = true;
+	if(property.length != 9)
+		return false;
+	for(var i = 0; i < 9; i++)
+	{
+		if(property[i] > highScore || property[i] < lowScore)
+			return false;
+	}
+	return true;
 };
 
 /**
@@ -19,9 +27,6 @@ var validateLocalStrategyMean = function(property) {
 var validateLocalStrategyDate = function(property) {
 	return new Date().getFullYear() >= property && 1980 <= property;
 };
-
-//Child schema to hold the mean scores for each question
-var meanScore = new Schema({ mean: {type: Number, default: 0}});
 
 //Contents of schema will pull majority of content from outside data source, not from user
 var teachingEvaluation = new Schema({
@@ -39,9 +44,8 @@ var teachingEvaluation = new Schema({
 		required: true,
 	},
 	required: {
-		type: String,
-		enum: ['Yes', 'No'],
-		default: 'No',
+		type: Boolean,
+		default: false,
 	},
 	year: {
 		type: Number,
@@ -71,25 +75,25 @@ var teachingEvaluation = new Schema({
 		required: true,
 	}
 	teacherMean: {	
-		type: [meanScore],
+		type: [Number],
 		required: true,
-		validate: [validateLocalStrategyMean, 'Numbers in collection must be between highScore and lowScore; total amount of numbers equal number of questions (10)']
+		validate: [validateLocalStrategyMean, 'Numbers in collection must be between highScore and lowScore; total amount of numbers equal number of questions (9)']
 	}
 	departmentMean: {
-		type: [meanScore],
+		type: [Number],
 		required: true,
-		validate: [validateLocalStrategyMean, 'Numbers in collection must be between highScore and lowScore; total amount of numbers equal number of questions (10)']
+		validate: [validateLocalStrategyMean, 'Numbers in collection must be between highScore and lowScore; total amount of numbers equal number of questions (9)']
 	}
 	collegeMean: {
-		type: [meanScore],
+		type: [Number],
 		required: true,
-		validate: [validateLocalStrategyMean, 'Numbers in collection must be between highScore and lowScore; total amount of numbers equal number of questions (10)']
+		validate: [validateLocalStrategyMean, 'Numbers in collection must be between highScore and lowScore; total amount of numbers equal number of questions (9)']
 	}
 	
 	
 	
 	
 	
-}, {collection:'teachingEvaluationsy'});
+}, {collection:'TeachingEvaluation'});
 
-mongoose.model('teachingEvaluation', teachingEvaluation);
+mongoose.model('TeachingEvaluation', teachingEvaluation);
