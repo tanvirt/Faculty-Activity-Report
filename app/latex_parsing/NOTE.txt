@@ -15,3 +15,9 @@ to run
 
 will generate resultTenure.tex
 
+
+	NAME
+to run
+>node renderName.js
+
+will generate resultName.tex
