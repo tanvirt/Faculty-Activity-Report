@@ -11,11 +11,11 @@ var mongoose = require('mongoose'),
  */
 var validateLocalStrategyMean = function(property) {
 	var result = true;
-	if(property.length != 9)
+	if(property.length !== 9)
 		return false;
 	for(var i = 0; i < 9; i++)
 	{
-		if(property[i] > highScore || property[i] < lowScore)
+		if(property[i] > 1 || property[i] < 5) //Figure a way to pull from high/low score
 			return false;
 	}
 	return true;
@@ -36,16 +36,16 @@ var teachingEvaluation = new Schema({
 		required: true
 	},
 	teacher: {			//multiple evaluations per teacher possible. Use this field to match with user.username
-		type: String
+		type: String,
 		required: true
 	},
 	course: {
 		type: String,
-		required: true,
+		required: true
 	},
 	required: {
 		type: Boolean,
-		default: false,
+		default: false
 	},
 	year: {
 		type: Number,
@@ -65,25 +65,25 @@ var teachingEvaluation = new Schema({
 	highScore: {
 		type: Number,
 		default: 5,
-	}
+	},
 	lowScore: {
 		type: Number,
 		default: 1,
-	}
+	},
 	responses: {
 		type: Number,
 		required: true,
-	}
+	},
 	teacherMean: {	
 		type: [Number],
 		required: true,
 		validate: [validateLocalStrategyMean, 'Numbers in collection must be between highScore and lowScore; total amount of numbers equal number of questions (9)']
-	}
+	},
 	departmentMean: {
 		type: [Number],
 		required: true,
 		validate: [validateLocalStrategyMean, 'Numbers in collection must be between highScore and lowScore; total amount of numbers equal number of questions (9)']
-	}
+	},
 	collegeMean: {
 		type: [Number],
 		required: true,

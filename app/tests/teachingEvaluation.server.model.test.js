@@ -12,7 +12,7 @@ var should = require('should'),
  */
 var evaluation01, evaluation02;
 
-describe('Assigned Activity Model Unit Tests:', function() {
+describe('Teaching Evaluation Model Unit Tests:', function() {
 	beforeEach(function(done) {
 	
 		evaluation01 = new TeachingEvaluation({
@@ -106,7 +106,7 @@ describe('Assigned Activity Model Unit Tests:', function() {
 	});
 
 	afterEach(function(done) {
-		AssignedActivity.remove().exec();
+		TeachingEvaluation.remove().exec();
 		done();
 	});
 });
