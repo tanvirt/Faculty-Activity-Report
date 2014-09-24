@@ -13,7 +13,7 @@ module.exports = {
 	assets: {
 		lib: {
 			css: [
-				'public/lib/bootstrap/dist/css/bootswatch.css',
+				'public/lib/bootstrap/dist/css/bootstrap.css',
 				/*'public/lib/bootstrap/dist/css/bootstrap-theme.css',*/
 			],
 			js: [
