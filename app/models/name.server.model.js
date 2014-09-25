@@ -1,10 +1,10 @@
 'use strict';
 
-var mongoose = require('mongoose'),
+var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var validateInitLength= function(property) {
-	return (property.length == 1 || property.length == 0);
+	return (property.length === 1);
 };
 
 	var nameSchema = new Schema({
