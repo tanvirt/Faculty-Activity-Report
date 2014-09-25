@@ -2,12 +2,9 @@
 
 //model dependencies
 var mongoose = require('mongoose'),
- db = mongoose.createConnection('localhost', 'NTdb');
 var Schema = mongoose.Schema;
-
-db.once('open', function() {	
+	
 	var tenureSchema = new Schema({
-				
 		tenure: {
 			type: String,
 			enum: ['Tenured', 'Not Tenured'],
@@ -15,10 +12,3 @@ db.once('open', function() {
 		}
 	}, {collection: 'namelist'});
 
-	var Tenure = mongoose.model('Tenure', tenureSchema);
-	
-	var D = new Tenure({tenure : 'Tenured'});
-	D.save();
-	
-	
-});
