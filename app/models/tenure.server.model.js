@@ -7,9 +7,7 @@ var Schema = mongoose.Schema;
 
 db.once('open', function() {	
 	var tenureSchema = new Schema({
-		
-		name: String,
-		
+				
 		tenure: {
 			type: String,
 			enum: ['Tenured', 'Not Tenured'],
@@ -19,7 +17,7 @@ db.once('open', function() {
 
 	var Tenure = mongoose.model('Tenure', tenureSchema);
 	
-	var D = new Tenure({name: 'D', tenure : 'Tenured'});
+	var D = new Tenure({tenure : 'Tenured'});
 	D.save();
 	
 	
