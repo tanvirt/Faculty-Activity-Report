@@ -15,7 +15,8 @@ var course;
 describe('Teaching/Advising Courses Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		course = new Courses({
-			body: 'CEN3031: Intro to Software Engineering...',
+			name: 'CEN3031: Intro to Software Engineering',
+			description: 'Introduction to software engineering...'
 			evaluationNumber: 4.84
 		});
 
@@ -38,6 +39,33 @@ describe('Teaching/Advising Courses Model Unit Tests:', function() {
 
 		it('should fail to save an evaluation number that is less than 0', function(done) {
 			course.evaluationNumber = -2;
+			return course.save(function(err) {
+				should.exist(err);
+				done();
+			});
+		});
+		
+		it('should fail to save without course name', function(done) {
+			course.name = '';
+
+			return course.save(function(err) {
+				should.exist(err);
+				done();
+			});
+		});
+		
+		it('should fail to save without course description', function(done) {
+			course.description = '';
+
+			return course.save(function(err) {
+				should.exist(err);
+				done();
+			});
+		});
+		
+		it('should fail to save without course evaluation number', function(done) {
+			course.evaluationNumber = '';
+
 			return course.save(function(err) {
 				should.exist(err);
 				done();
