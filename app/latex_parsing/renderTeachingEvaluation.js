@@ -5,6 +5,13 @@ var fs = require('fs');
 
 //Arrays are defined with letters to avoid any weird LaTeX issues with numbers
 fs.writeFile('resultTeachingEvaluation.tex', swig.renderFile('teachingEvaluation.tex', {
+	course: 'Otter Dancing 101',
+	teacher: 'Dr. Doctor',
+	required: 'No',
+	year: 2014,
+	semester: 'Summer',
+	enrolled: 123,
+	responses: 23,
 	teacherMean: {
 		a: 4.0,
 		b: 4.0,
