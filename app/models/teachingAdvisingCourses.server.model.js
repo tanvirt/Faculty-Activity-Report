@@ -11,11 +11,17 @@ var validateLocalStrategyCourses = function(property) {
 };
 
 var Courses = new Schema({
-	body: {
-		type: String
+	name: {
+		type: String,
+		required: true
 	},
+	description: {
+		type: String,
+		required: true
+	}
 	evaluationNumber: {
 		type: Number,
+		required: true,
 		validate: [validateLocalStrategyCourses, 
 			'Number must be between or including 0 and 5']
 	}
