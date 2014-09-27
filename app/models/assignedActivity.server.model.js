@@ -22,11 +22,6 @@ var validateLocalStrategyDate = function(property) {
 };
 
 var AssignedActivity = new Schema({
-	_id: {
-		type: Schema.ObjectId,
-		unique: true,
-		required: true
-	},
 	year: {
 		type: Number,
 		required: true,
