@@ -6,7 +6,7 @@
 % year: numeric value of year
 % semester: object with fields "fall", "spring", "summer". Each field of type
 % enrolled: numeric value of students enrolled
-% <!> highscore-lowscore currently unused; hardcoded 1-5 <!>
+% highscore-lowscore: numeric values corresponding to highest/lowest possible score
 % responses: numeric value of responses
 % teacherMean: array of numeric values pertaining to teacher mean scores
 % departmentMean: array of numeric values pertaining to department mean scores
@@ -14,7 +14,7 @@
 
 \noindent {{course}} \hfill Required: {{required}} \\
 \noindent {{semester}}, {{year}} \hfill \# Enrolled: {{enrolled}}\\
-High=5, Low=1 \hfill \# Responses: {{responses}}
+High={{highscore}}, Low={{lowscore}} \hfill \# Responses: {{responses}}
 \nopagebreak[4]
 \begin{center}
   \begin{tabular}{llll}

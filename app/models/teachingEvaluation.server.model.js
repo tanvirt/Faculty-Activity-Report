@@ -15,7 +15,7 @@ var validateLocalStrategyMean = function(property) {
 		return false;
 	for(var i = 0; i < 9; i++)
 	{
-		if(property[i] > 1 || property[i] < 5) //Figure a way to pull from high/low score
+		if(property[i] > this.lowScore || property[i] < this.highScore)
 			return false;
 	}
 	return true;
