@@ -24,4 +24,6 @@ var validateInitLength= function(property) {
 			required: true
 		}		
 		
-	}, {collection: 'namelist'});
+	}, {collection: 'nameSchema'});
+	
+	mongoose.model('nameSchema',nameSchema);

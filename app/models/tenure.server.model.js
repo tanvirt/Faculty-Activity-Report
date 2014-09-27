@@ -10,5 +10,7 @@ var Schema = mongoose.Schema;
 			enum: ['Tenured', 'Not Tenured'],
 			required: true
 		}
-	}, {collection: 'namelist'});
+	}, {collection: 'tenureSchema'});
+	
+	mongoose.model('tenureSchema',tenureSchema);
 

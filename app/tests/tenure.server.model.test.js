@@ -3,7 +3,7 @@
 //module dependencies
 var should = require('should'),
 	mongoose = require('mongoose'),
-	Tenure = mongoose.model('Tenure');
+	Tenure = mongoose.model('tenureSchema');
 	
 //Globals
 var tenure1, tenure2;
