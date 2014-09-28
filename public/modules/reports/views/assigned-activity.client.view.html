@@ -1,3 +1,59 @@
 <section data-ng-controller="ReportsController">
-	This is the Assigned activity
+    <form name="Activity">
+        <table class="myTable">
+            <caption><h3>Assigned activity table</h3></caption>
+            <colgroup><col></colgroup><colgroup><col></colgroup><colgroup><col></colgroup>
+            <thead>
+            <tr>
+                <th></th><th colspan="1">Fall{{year}}</th><th colspan="1">Spring{{year}}</th><th colspan="1">Summer{{year}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>Teaching</th>
+                <td>
+                    <input type="number" name="teachingSpring" ng-model="teachingSpring">
+                </td>
+                <td>
+                    <input type="number" name="teachingSummer" ng-model="teachingSummer">
+                </td>
+                <td>
+                    <input type="number" name="teachingFall" ng-model="teachingFall">
+                </td>
+            </tr>
+            <tr>
+                <th>Research</th>
+                <td>
+                    <input type="number" name="ResearchFall" ng-model="text">
+                </td>
+                <td>
+                    <input type="number" name="ResearchSpring" ng-model="text">
+                </td>
+                <td>
+                    <input type="number" name="ResearchSummer" ng-model="text">
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="1">Service</th><
+                <td>
+                    <input type="number" name="ServiceFall" ng-model="text">
+                </td>
+                <td>
+                    <input type="number" name="ServiceSpring" ng-model="text">
+                </td>
+                <td>
+                    <input type="number" name="ServiceSummer" ng-model="text">
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Total</th>
+                    <td ng-model="springTotal"></td>
+                    <td data-ng-model="fallTotal">100</td>
+                    <td data-ng-model="summerTotal">100</td>
+                </tr>
+            </tfoot>
+        </table>
+    </form>
 </section>
