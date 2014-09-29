@@ -9,6 +9,7 @@ var mongoose = require('mongoose'),
 /**
  * A Validation function for local mean properties
  */
+<<<<<<< HEAD
 var validateLocalStrategyMean = function(property) {
 	var result = true;
 	if(property.length !== 9)
@@ -18,23 +19,20 @@ var validateLocalStrategyMean = function(property) {
 		if(property[i] > this.lowScore || property[i] < this.highScore)
 			return false;
 	}
+
 	return true;
 };
 
 /**
 * A Validation function for local date properties
 */
+
 var validateLocalStrategyDate = function(property) {
 	return new Date().getFullYear() >= property && 1980 <= property;
 };
 
 //Contents of schema will pull majority of content from outside data source, not from user
 var teachingEvaluation = new Schema({
-	_id: {
-		type: Schema.ObjectId,
-		unique: true,
-		required: true
-	},
 	teacher: {			//multiple evaluations per teacher possible. Use this field to match with user.username
 		type: String,
 		required: true
@@ -77,22 +75,21 @@ var teachingEvaluation = new Schema({
 	teacherMean: {	
 		type: [Number],
 		required: true,
-		validate: [validateLocalStrategyMean, 'Numbers in collection must be between highScore and lowScore; total amount of numbers equal number of questions (9)']
+		default: [],
+		validate: [validateLocalStrategyLength, 'Array Length must equal number of questions (9)']
 	},
 	departmentMean: {
 		type: [Number],
 		required: true,
-		validate: [validateLocalStrategyMean, 'Numbers in collection must be between highScore and lowScore; total amount of numbers equal number of questions (9)']
+		default: [],
+		validate: [validateLocalStrategyLength, 'Array Length must equal number of questions (9)']
 	},
 	collegeMean: {
 		type: [Number],
 		required: true,
-		validate: [validateLocalStrategyMean, 'Numbers in collection must be between highScore and lowScore; total amount of numbers equal number of questions (9)']
-	}
-	
-	
-	
-	
+		default: [],
+		validate: [validateLocalStrategyLength, 'Array Length must equal number of questions (9)']
+	}	
 	
 }, {collection:'TeachingEvaluation'});
 

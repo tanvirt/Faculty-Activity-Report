@@ -16,7 +16,7 @@ describe('Teaching/Advising Courses Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		course = new Courses({
 			name: 'CEN3031: Intro to Software Engineering',
-			description: 'Introduction to software engineering...'
+			description: 'Introduction to software engineering...',
 			evaluationNumber: 4.84
 		});
 

@@ -15,7 +15,6 @@ var activity01, activity02;
 describe('Assigned Activity Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		activity01 = new AssignedActivity({
-			_id: '5421bc631b303e101ec67747',
 			year: '2014',
 			semester: 'spring',
 			teaching: 33,
@@ -24,7 +23,6 @@ describe('Assigned Activity Model Unit Tests:', function() {
 		});
 
 		activity02 = new AssignedActivity({
-			_id: '5421bc631b303e101ec67747',
 			year: '2014',
 			semester: 'spring',
 			teaching: 33,
@@ -39,14 +37,6 @@ describe('Assigned Activity Model Unit Tests:', function() {
 		it('should be able to save without problem', function(done) {
 			activity01.save();
 			done();
-		});
-
-		it('should fail to save an existing activity again', function(done) {
-			activity01.save();
-			return activity02.save(function(err) {
-				should.exist(err);
-				done();
-			});
 		});
 
 		it('should fail to save a year that is beyond the present year', function(done) {

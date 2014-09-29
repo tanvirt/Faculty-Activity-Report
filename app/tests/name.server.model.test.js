@@ -1,5 +1,4 @@
 'use strict';
-
 //module dependencies
 var should = require('should'),
 	mongoose = require('mongoose'),
@@ -67,8 +66,11 @@ describe('Name Model Unit Tests:', function() {
 			name1.save(done);
 		});	
 		
-		
+	});
+
+	afterEach(function(done) {
+		Name.remove().exec();
+		done();
 	});
 	
 });
-
