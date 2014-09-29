@@ -24,6 +24,6 @@ var Name = new Schema({
 		required: true
 	}		
 	
-}, {collection: 'Name'});
+}, {collection: 'nameSchema'});
 
-mongoose.model('Name', Name);
+mongoose.model('nameSchema', Name);

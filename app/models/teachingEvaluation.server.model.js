@@ -9,13 +9,15 @@ var mongoose = require('mongoose'),
 /**
  * A Validation function for local mean properties
  */
-var validateLocalStrategyLength = function(property) {
-	if (property.length !== 9) return false;
-
-	for (var i = 0; i < property.length; i++) {
-		if (property[i] < this.lowScore || property[i] > this.highScore) {
+<<<<<<< HEAD
+var validateLocalStrategyMean = function(property) {
+	var result = true;
+	if(property.length !== 9)
+		return false;
+	for(var i = 0; i < 9; i++)
+	{
+		if(property[i] > this.lowScore || property[i] < this.highScore)
 			return false;
-		}
 	}
 
 	return true;
