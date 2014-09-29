@@ -4,26 +4,26 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var validateInitLength= function(property) {
-	return (property.length === 1);
+	return (property.length === 1) || (property.length === 0);
 };
 
-	var nameSchema = new Schema({
+var Name = new Schema({
+
+	firstName: {
+		type: String,
+		required: true
+	},
 	
-		firstName: {
-			type: String,
-			required: true
-		},
-		
-		midInit: {
-			type: String,
-			validate: [validateInitLength, 'Middle Initial can only be one letter']
-		},
-		
-		lastName: {
-			type: String,
-			required: true
-		}		
-		
-	}, {collection: 'nameSchema'});
+	midInit: {
+		type: String,
+		validate: [validateInitLength, 'Middle Initial can only be one letter or blank']
+	},
 	
-	mongoose.model('nameSchema',nameSchema);
+	lastName: {
+		type: String,
+		required: true
+	}		
+	
+}, {collection: 'nameSchema'});
+
+mongoose.model('nameSchema', Name);

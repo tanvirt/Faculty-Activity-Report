@@ -18,7 +18,7 @@ var Courses = new Schema({
 	description: {
 		type: String,
 		required: true
-	}
+	},
 	evaluationNumber: {
 		type: Number,
 		required: true,

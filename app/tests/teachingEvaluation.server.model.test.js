@@ -10,13 +10,13 @@ var should = require('should'),
 /**
  * Globals
  */
+
 var evaluation01, evaluation02;
 
 describe('Teaching Evaluation Model Unit Tests:', function() {
 	beforeEach(function(done) {
 	
 		evaluation01 = new TeachingEvaluation({
-			_id: '5421bc631b303e101ec67747',
 			teacher: 'testName',
 			course: 'testCourse 101',
 			year: '2014',
@@ -29,7 +29,6 @@ describe('Teaching Evaluation Model Unit Tests:', function() {
 		});
 
 		evaluation02 = new TeachingEvaluation({
-			_id: '5421bc631b303e101ec67747',
 			teacher: 'testName',
 			course: 'testCourse 101',
 			year: '2014',
@@ -45,17 +44,17 @@ describe('Teaching Evaluation Model Unit Tests:', function() {
 	});
 
 	describe('Method Save', function() {
+		
 		it('should be able to save without problem', function(done) {
 			evaluation01.save();
 			done();
 		});
 
-		it('should fail to save an existing activity again', function(done) {
+
+
+		it('should not fail to save an existing activity again', function(done) {
 			evaluation01.save();
-			return evaluation02.save(function(err) {
-				should.exist(err);
-				done();
-			});
+			done();
 		});
 
 		it('should fail to save a year that is beyond the present year', function(done) {
@@ -103,6 +102,7 @@ describe('Teaching Evaluation Model Unit Tests:', function() {
 				done();
 			});
 		});
+
 	});
 
 	afterEach(function(done) {
