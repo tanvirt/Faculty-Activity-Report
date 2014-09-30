@@ -39,7 +39,7 @@ var teachingEvaluation = new Schema({
 		type: String,
 		required: true
 	},
-	requiredVar: { /*can not be 'required' because it is a mongoose keyword*/
+	required: {
 		type: Boolean,
 		default: false
 	},
