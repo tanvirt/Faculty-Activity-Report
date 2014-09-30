@@ -3,13 +3,14 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var validateLocalStrategyDateMonth = function(property) {
+
+/* var validateLocalStrategyDateMonth = function(property) {
     var d = new Date();
     var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    var n = d.getMonth(); /*gets int for current month */
-    var monthID = month.indexOf(property); /* gets int to represent month entered, 0 for January */
+    var n = d.getMonth(); // gets int for current month 
+    var monthID = month.indexOf(property); // gets int to represent month entered, 0 for January 
     return monthID  <= n;
-};
+}; */
 
 var validateLocalStrategyDate = function(property) {
     return new Date().getFullYear() >= property && 1900 <= property;
