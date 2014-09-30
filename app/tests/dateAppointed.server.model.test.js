@@ -4,7 +4,7 @@
  */
 var should = require('should'),
     mongoose = require('mongoose'),
-    AssignedActivity = mongoose.model('DateAppointed');
+    DateAppointed = mongoose.model('DateAppointed');
 /**
  * Globals
  */
