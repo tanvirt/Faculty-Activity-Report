@@ -30,7 +30,7 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
 	var tenuredoc = req.tenuredoc ;
 
-	report.save(function(err) {
+	tenuredoc.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -44,7 +44,8 @@ exports.update = function(req, res) {
 /**
  * Report middleware
  */
-exports.reportByID = function(req, res, next, id) { Report.findById(id).populate('user', 'displayName').exec(function(err, report) {
+exports.reportByID = function(req, res, next, id) { 
+	Tenure.findById(id).populate('user', 'displayName').exec(function(err, tenuredoc) {
 		if (err) return next(err);
 		if (! tenuredoc) return next(new Error('Failed to load Report ' + id));
 		req.tenuredoc = tenuredoc ;

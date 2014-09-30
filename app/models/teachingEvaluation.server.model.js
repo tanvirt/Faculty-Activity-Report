@@ -9,17 +9,15 @@ var mongoose = require('mongoose'),
 /**
  * A Validation function for local mean properties
  */
-<<<<<<< HEAD
 var validateLocalStrategyMean = function(property) {
-	var result = true;
 	if(property.length !== 9)
 		return false;
 	for(var i = 0; i < 9; i++)
 	{
-		if(property[i] > this.lowScore || property[i] < this.highScore)
+		if((property[i] < this.lowScore) || (property[i] > this.highScore))
 			return false;
 	}
-
+	
 	return true;
 };
 
@@ -75,20 +73,26 @@ var teachingEvaluation = new Schema({
 	teacherMean: {	
 		type: [Number],
 		required: true,
-		default: [],
-		validate: [validateLocalStrategyLength, 'Array Length must equal number of questions (9)']
+		default: [1, 1, 1, 
+				  1, 1, 1, 
+				  1, 1, 1],
+		validate: [validateLocalStrategyMean, 'Array Length must equal number of questions (9)']
 	},
 	departmentMean: {
 		type: [Number],
 		required: true,
-		default: [],
-		validate: [validateLocalStrategyLength, 'Array Length must equal number of questions (9)']
+		default: [1, 1, 1, 
+				  1, 1, 1, 
+				  1, 1, 1],
+		validate: [validateLocalStrategyMean, 'Array Length must equal number of questions (9)']
 	},
 	collegeMean: {
 		type: [Number],
 		required: true,
-		default: [],
-		validate: [validateLocalStrategyLength, 'Array Length must equal number of questions (9)']
+		default: [1, 1, 1, 
+				  1, 1, 1, 
+				  1, 1, 1],
+		validate: [validateLocalStrategyMean, 'Array Length must equal number of questions (9)']
 	}	
 	
 }, {collection:'TeachingEvaluation'});
