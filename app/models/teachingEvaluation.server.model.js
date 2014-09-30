@@ -9,7 +9,6 @@ var mongoose = require('mongoose'),
 /**
  * A Validation function for local mean properties
  */
-<<<<<<< HEAD
 var validateLocalStrategyMean = function(property) {
 	var result = true;
 	if(property.length !== 9)
