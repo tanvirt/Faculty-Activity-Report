@@ -36,7 +36,7 @@ var mongoose = require('mongoose'),
 	exports.renderToPdfFile = function(req, res)
 	{
 		//TODO: Format filename to be accessible by the frontend, how to properly send data over through req or res
-		var filename = (Math.random().toString().subString(2).concat('.pdf');
+		var filename = (Math.random().toString().subString(2).concat('.pdf'));
 		var outStream = fs.createWriteStream(filename);
 		renderPDF(req, res).pipe(outStream);
 		return filename;	
