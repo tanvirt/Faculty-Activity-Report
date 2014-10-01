@@ -2,5 +2,9 @@
 % courseName: the course number and name of the course
 % courseDescription: a short description of the course
 % evaluationNumber: the average instructor evaluation for the course
-\item \textbf{{courseName}} {{courseDescription}} My overall instruction evaluation 
-for this class was {{evaluationNumber}} out of 5.0.
+\begin {enumerate}
+<%for(course in courses){ %>
+\item \textbf{{course.name}} {{course.description}} My overall instruction evaluation 
+for this class was {{course.evaluationNumber}} out of 5.0.
+<% } %>
+\end {enumerate}

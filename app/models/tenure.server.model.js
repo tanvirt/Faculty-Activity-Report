@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
 
 /* Fails Tests - Tenure doesn't load	*/
 var TenureSchema = new Schema({
+	//user:
 	tenure: {
 		type: String,
 		enum: ['Tenured', 'Not Tenured'],
