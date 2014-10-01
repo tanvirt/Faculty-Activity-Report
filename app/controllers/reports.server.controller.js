@@ -72,7 +72,8 @@ exports.delete = function(req, res) {
 /**
  * List of Reports
  */
-exports.list = function(req, res) { Report.find().sort('-created').populate('user', 'displayName').exec(function(err, reports) {
+exports.list = function(req, res) { 
+	Report.find().sort('-created').populate('user', 'displayName').exec(function(err, reports) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
