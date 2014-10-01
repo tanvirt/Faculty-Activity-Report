@@ -22,11 +22,12 @@ describe('Teaching Evaluation Model Unit Tests:', function() {
 			year: '2014',
 			semester: 'spring',
 			enrolled: '100',
-			responses: '30',
-			teacherMean: [1.0,2.0,3.0,4.0,5.0,1.1,2.2,3.3,4.4],
-			departmentMean: [1.0,2.0,3.0,4.0,5.0,1.1,2.2,3.3,4.4],
-			collegeMean: [1.0,2.0,3.0,4.0,5.0,1.1,2.2,3.3,4.4]
+			responses: '30'
+			//teacherMean: [1.0,2.0,3.0,4.0,5.0,1.1,2.2,3.3,4.4],
+			//departmentMean: [1.0,2.0,3.0,4.0,5.0,1.1,2.2,3.3,4.4],
+			//collegeMean: [1.0,2.0,3.0,4.0,5.0,1.1,2.2,3.3,4.4]
 		});
+
 
 		evaluation02 = new TeachingEvaluation({
 			teacher: 'testName',
@@ -34,10 +35,10 @@ describe('Teaching Evaluation Model Unit Tests:', function() {
 			year: '2014',
 			semester: 'spring',
 			enrolled: '100',
-			responses: '30',
-			teacherMean: [1.0,2.0,3.0,4.0,5.0,1.1,2.2,3.3,4.4],
-			departmentMean: [1.0,2.0,3.0,4.0,5.0,1.1,2.2,3.3,4.4],
-			collegeMean: [1.0,2.0,3.0,4.0,5.0,1.1,2.2,3.3,4.4]
+			responses: '30'
+			//teacherMean: [1.0,2.0,3.0,4.0,5.0,1.1,2.2,3.3,4.4],
+			//departmentMean: [1.0,2.0,3.0,4.0,5.0,1.1,2.2,3.3,4.4],
+			//collegeMean: [1.0,2.0,3.0,4.0,5.0,1.1,2.2,3.3,4.4]
 		});
 
 		done();
@@ -49,9 +50,7 @@ describe('Teaching Evaluation Model Unit Tests:', function() {
 			evaluation01.save();
 			done();
 		});
-
-
-
+		
 		it('should not fail to save an existing activity again', function(done) {
 			evaluation01.save();
 			done();
@@ -89,6 +88,14 @@ describe('Teaching Evaluation Model Unit Tests:', function() {
 
 		it('should fail to save if one of the mean scores is over highScore', function(done) {
 			evaluation01.teacherMean[3] = 10;
+			return evaluation01.save(function(err) {
+				should.exist(err);
+				done();
+			});
+		});
+
+		it('should fail to save if one of the mean scores is below lowScore', function(done) {
+			evaluation01.teacherMean[3] = 0.5;
 			return evaluation01.save(function(err) {
 				should.exist(err);
 				done();
