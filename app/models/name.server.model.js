@@ -7,7 +7,7 @@ var validateInitLength= function(property) {
 	return (property.length === 1) || (property.length === 0);
 };
 
-var Name = new Schema({
+var NameSchema = new Schema({
 
 	firstName: {
 		type: String,
@@ -24,6 +24,6 @@ var Name = new Schema({
 		required: true
 	}		
 	
-}, {collection: 'nameSchema'});
+}, {collection: 'NameSchema'});
 
-mongoose.model('nameSchema', Name);
+mongoose.model('NameSchema', NameSchema);

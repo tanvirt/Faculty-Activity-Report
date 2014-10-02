@@ -12,13 +12,14 @@ var fs = require('fs');
 
 // Require render files here
 var renderTenure = require('../../app/templates/renderTenure');
+var renderName = require('../../app/templates/renderName');
 
 exports.latexString = function(req,res,next) {
 	var writeable = fs.createWriteStream('./app/pdf/report.pdf');
 	latex([
 		'\\documentclass{article}',
 		'\\begin{document}',	
-		//name.render(),
+		renderName.render(),
 		renderTenure.render(),
 		//assignedActivity.render(),
 		//teachingAdvising.render(),
