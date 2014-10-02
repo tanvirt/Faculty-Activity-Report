@@ -3,24 +3,37 @@
 var mongoose = require('mongoose');
 var swig = require('swig');
 var fs = require('fs');
-
 var Tenure = mongoose.model('TenureSchema');
 
-exports.render = function() {
-	// Define a temporary object
-	var object;
+var path = require('path');
+var join = path.join;
 
-	Tenure.find({}, function(err,tenure) {
-		if (err) return err;
-		// store tenure in that object
-		object = tenure;
+
+function createDummyTenure() {
+	var obj =  new Tenure({
+		tenure: 'Tenured'
 	});
 
-	// if object is NULL, write UNKNOWN
-	if (!object) object = 'UNKNOWN';
+	obj.save();
+	return obj;
+}
 
-	// return the rendered latex string
-	return swig.renderFile('./app/templates/tenure.tex', {
-		tenure: object
+
+function latexString(obj, fileName) {
+	return swig.renderFile(join('./app/templates', fileName), {
+		tenure: obj.tenure
+	});
+}
+
+exports.render = function( cb ) {
+	Tenure.findOne({}, function(err, obj) {
+		if (err) return err;
+		
+		if (!obj) {
+			obj = createDummyTenure();
+		}
+
+		cb( latexString(obj, 'tenure.tex') );
 	});
 };
+

@@ -6,28 +6,39 @@ var fs = require('fs');
 
 var Name = mongoose.model('NameSchema');
 
-exports.render = function() {
-	// Define a temporary object
-	var object1, object2, object3;
-//there's got to be a better way than this. Especially for the larger schemas. Ew.
+var path = require('path');
+var join = path.join;
 
-	Name.find({}, function(err,firstName,midInit,lastName) {
-		if (err) return err;
-		// store firstName, midInit, and lastName in that object
-		object1 = firstName;
-		object2 = midInit;
-		object3 = lastName;
+
+function createDummyName() {
+	var obj = new Name({
+		firstName: 'Rosie',
+		midInit: 'T',
+		lastName: 'Poodle'
 	});
 
-	// if object is NULL, write UNKNOWN
-	if (!object1) object1 = 'UNKNOWN';
-	if (!object2) object2 = '';
-	if (!object3) object3 = 'UNKNOWN';
+	obj.save();
+	return obj;
+}
 
-	// return the rendered latex string
-	return swig.renderFile('./app/templates/name.tex', {
-		firstName: object1,
-		midInit: object2,
-		lastName: object3
+
+function latexString(obj, fileName) {
+	return swig.renderFile(join('./app/templates', fileName), {
+		firstName: obj.firstName,
+		midInit: obj.midInit,
+		lastName: obj.lastName
+	});
+}
+
+
+exports.render = function( cb ) {
+	Name.findOne({}, function(err, obj) {
+		if (err) return err;
+
+		if (!obj) {
+			obj = createDummyName();
+		}
+
+		cb( latexString(obj, 'name.tex') );
 	});
 };

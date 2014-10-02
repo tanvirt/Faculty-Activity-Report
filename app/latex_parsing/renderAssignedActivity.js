@@ -20,7 +20,8 @@ fs.writeFile('resultAssignedActivity.tex', swig.renderFile('assignedActivity.tex
 			research: 40,
 			service: 15
 		}
-	}
+	},
+	year: 2014
 }), function(err) {
 	if (err) throw err;
 	console.log('Saved!');
