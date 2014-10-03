@@ -1,44 +1,54 @@
 'use strict';
 
-var mongoose = require('mongoose');
+//var mongoose = require('mongoose');
 var swig = require('swig');
-var fs = require('fs');
-
-var Name = mongoose.model('NameSchema');
 
 var path = require('path');
 var join = path.join;
 
-
-function createDummyName() {
-	var obj = new Name({
+function dummyObject(Model) {
+	var obj = new Model({
 		firstName: 'Rosie',
 		midInit: 'T',
 		lastName: 'Poodle'
 	});
-
-	obj.save();
 	return obj;
 }
 
-
-function latexString(obj, fileName) {
-	return swig.renderFile(join('./app/templates', fileName), {
+function swigTemplate(obj) {
+	var retObj = {
 		firstName: obj.firstName,
 		midInit: obj.midInit,
 		lastName: obj.lastName
-	});
+	};
+	return retObj;
+}
+
+function createDummy( objectFunction, Model ) {	
+	if ( typeof objectFunction === 'function' ) {
+		var obj = objectFunction(Model);
+		obj.save();
+		return obj;
+	} 
+	throw new Error('Function passed did not define a new Mongoose Model!');
+}
+
+function latexString( texFileName, objectFunction, obj ) {
+	if (typeof objectFunction === 'function') {
+		return swig.renderFile(join('./app/templates', texFileName), objectFunction(obj));
+	}
+	throw new Error('Function passed did not define an swig Object!');
 }
 
 
-exports.render = function( cb ) {
-	Name.findOne({}, function(err, obj) {
+exports.render = function( texFileName, Model, cb ) {
+	Model.findOne({}, function(err, obj) {
 		if (err) return err;
 
 		if (!obj) {
-			obj = createDummyName();
+			obj = createDummy(dummyObject, Model);
 		}
 
-		cb( latexString(obj, 'name.tex') );
+		cb( latexString( texFileName, swigTemplate, obj ) );
 	});
 };

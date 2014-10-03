@@ -12,15 +12,21 @@ var fs = require('fs');
 
 var async = require('async');
 
+var path = require('path');
+var join = path.join;
+
 // Require render files here
 var renderTenure = require('../../app/templates/renderTenure');
 var renderName = require('../../app/templates/renderName');
+
+// Require Models
+var Name = mongoose.model('NameSchema');
 
 exports.latexString = function(req,res,next) {	
 	async.parallel([
 		//Render Name Callback
 		function(callback) {
-			renderName.render( function ( renderNameStr ) {
+			renderName.render( 'name.tex', Name, function ( renderNameStr ) {
 				callback(null, renderNameStr);
 			});
 		},
@@ -41,7 +47,7 @@ exports.latexString = function(req,res,next) {
 			'\\title{COLLEGE OF ENGINEERING \\ Annual Activities Report}',
 			'\\date{}',
 			'\\maketitle',
-			results.toString(),
+			results.join(''), //results.toString() without the ','
 			'\\vspace{2in}',
 			'\\begin{center}',
 			'Signature', '\\line(1,0){200}', '\\hspace{1em}', 'Date', '\\line(1,0){50}',
@@ -51,8 +57,11 @@ exports.latexString = function(req,res,next) {
 		
 	});
 
+	res.setHeader('Content-Type', 'text/html');
+	res.end('<p>Report Generated!</p>');
+	
 	console.log('Report Generated!');
 
-	next();
+	//next();
 };
 
