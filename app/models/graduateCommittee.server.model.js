@@ -24,6 +24,10 @@ var validateLocalStrategyMean = function(property) {
 //The count of each role will be calculated on demand by using the MongoDB count command
 var graduateCommittee = new Schema({
 
+	teacher: {			//Use this field to match with user.username
+		type: String,
+		required: true
+	},
 	role: {
 		type: String,
 		enum: ['Chair','Co-Chair','External','Member','Minor'],
