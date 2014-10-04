@@ -26,7 +26,8 @@ exports.latexString = function(req,res,next) {
 	async.parallel([
 		//Initiate render functions here
 		renderName.render,
-		renderTenure.render
+		renderTenure.render,
+		renderDateAppointed.render
 		
 	], function(err, results) {
 		if (err) return err;
