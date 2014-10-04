@@ -20,6 +20,8 @@ var renderName = require('../../app/templates/name/renderName');
 var renderTenure = require('../../app/templates/tenure/renderTenure');
 var renderDateAppointed = require('../../app/templates/dateAppointed/renderDateAppointed');
 var renderAssignedActivity = require('../../app/templates/assignedActivity/renderAssignedActivity');
+var renderTeachingAdvising = require('../../app/templates/teachingAdvising/renderTeachingAdvising');
+var renderCurrentRank = require('../../app/templates/currentRank/renderCurrentRank');
 
 /*
 Generates the LaTex File into app/pdf directory
@@ -29,8 +31,10 @@ exports.latexString = function(req,res,next) {
 		//Initiate render functions here
 		renderName.render,
 		renderTenure.render,
+		renderCurrentRank.render,
 		renderDateAppointed.render,
-		renderAssignedActivity.render
+		renderAssignedActivity.render,
+		renderTeachingAdvising.render
 		
 	], function(err, results) {
 		if (err) return err;
