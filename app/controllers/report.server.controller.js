@@ -39,7 +39,7 @@ exports.latexString = function(req,res,next) {
 		latex([
 			'\\documentclass{article}',
 			'\\begin{document}',
-			'\\title{COLLEGE OF ENGINEERING \\ Annual Activities Report}',
+			'\\title{COLLEGE OF ENGINEERING \\newline Annual Activities Report}',
 			'\\date{}',
 			'\\maketitle',
 			results.join(''), //results.toString() without the ','
