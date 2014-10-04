@@ -1,57 +1,57 @@
-<section data-ng-controller="ReportsController">
+<section data-ng-controller="ReportsController as myController">
     <form name="Activity">
         <table class="myTable">
             <caption><h3>Assigned activity table</h3></caption>
             <colgroup><col></colgroup><colgroup><col></colgroup><colgroup><col></colgroup>
             <thead>
             <tr>
-                <th></th><th colspan="1">Fall{{year}}</th><th colspan="1">Spring{{year}}</th><th colspan="1">Summer{{year}}</th>
+                <th></th><th colspan="1">Spring{{year}}</th><th colspan="1">Summer{{year}}</th><th colspan="1">Fall{{year}}</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <th>Teaching</th>
                 <td>
-                    <input type="number" name="teachingSpring" ng-model="teachingSpring">
+                    <input type="number" name="teachingSpring" data-ng-model="teachingSpring">
                 </td>
                 <td>
-                    <input type="number" name="teachingSummer" ng-model="teachingSummer">
+                    <input type="number" name="teachingSummer" data-ng-model="teachingSummer">
                 </td>
                 <td>
-                    <input type="number" name="teachingFall" ng-model="teachingFall">
+                    <input type="number" name="teachingFall" data-ng-model="teachingFall">
                 </td>
             </tr>
             <tr>
                 <th>Research</th>
                 <td>
-                    <input type="number" name="ResearchFall" ng-model="text">
+                    <input type="number" name="researchSpring" data-ng-model="researchSpring">
                 </td>
                 <td>
-                    <input type="number" name="ResearchSpring" ng-model="text">
+                    <input type="number" name="researchSummer" data-ng-model="researchSummer">
                 </td>
                 <td>
-                    <input type="number" name="ResearchSummer" ng-model="text">
+                    <input type="number" name="researchFall" data-ng-model="researchFall">
                 </td>
             </tr>
             <tr>
                 <th rowspan="1">Service</th><
                 <td>
-                    <input type="number" name="ServiceFall" ng-model="text">
+                    <input type="number" name="serviceSpring" data-ng-model="serviceSpring">
                 </td>
                 <td>
-                    <input type="number" name="ServiceSpring" ng-model="text">
+                    <input type="number" name="serviceSummer" data-ng-model="serviceSummer">
                 </td>
                 <td>
-                    <input type="number" name="ServiceSummer" ng-model="text">
+                    <input type="number" name="serviceFall" data-ng-model="serviceFall">
                 </td>
             </tr>
             </tbody>
             <tfoot>
                 <tr>
                     <th>Total</th>
-                    <td ng-model="springTotal"></td>
-                    <td data-ng-model="fallTotal">100</td>
-                    <td data-ng-model="summerTotal">100</td>
+                    <td>{{myController.updateFall}}</td>
+                    <td data-ng-model="summerTotal">{{teachingSummer + researchSummer + serviceSummer}}</td>
+                    <td data-ng-model="fallTotal">{{teachingFall + researchFall + serviceFall}}</td>
                 </tr>
             </tfoot>
         </table>
