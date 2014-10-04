@@ -1,0 +1,26 @@
+<section data-ng-controller="Section10Controller">
+
+
+	<div class="col-md-3">This is the Section 10 tinymce</div>
+	<div class="col-md-6">
+        <form class="form-horizontal" data-ng-submit="update()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="name">Name</label>
+                    <div class="controls">
+                        <textarea ng-tinymce data-ng-model="report.name" id="name" class="form-control" placeholder="Name" required></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-default">
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>
+
+
+
+</section>
