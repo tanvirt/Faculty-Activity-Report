@@ -7,18 +7,10 @@ var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
 /**
- * A Validation function for local mean properties
+ * A Validation function for local date properties
  */
-var validateLocalStrategyMean = function(property) {
-	if(property.length !== 9)
-		return false;
-	for(var i = 0; i < 9; i++)
-	{
-		if((property[i] < this.lowScore) || (property[i] > this.highScore))
-			return false;
-	}
-	
-	return true;
+var validateLocalStrategyDate = function(property) {
+	return new Date() >= property && 1980 <= property.getFullYear();
 };
 
 //The count of each role will be calculated on demand by using the MongoDB count command
@@ -42,8 +34,14 @@ var graduateCommittee = new Schema({
 		enum: ['M.S.','Ph.D.'], //I have a feeling this will need to be expanded
 		required: true
 	},
+	major: {
+		type: String,
+		required: true
+	},
 	degreeDate: {
-		type: Date 
+		type: Date, 
+		validate: [validateLocalStrategyDate, 
+			'Date must be less than or equal to the current year and greator than or equal to 1980']
 	}
 }, {collection:'GraduateCommittee'});
 
