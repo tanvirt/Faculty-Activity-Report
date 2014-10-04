@@ -12,6 +12,7 @@ Populates the database with test data
 function dummyObject(Model) {
 	var obj = new Model({
 		year: 2014,
+		
 		fall: {
 			teaching: 45,
 			research: 40,
@@ -27,6 +28,7 @@ function dummyObject(Model) {
 			research: 40,
 			service: 15
 		}
+		
 	});
 	return obj;
 }

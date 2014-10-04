@@ -31,22 +31,16 @@ var AssignedActivity = new Schema({
 	fall: {
 		teaching: {
 			type: Number,
-			index: 1,
-			default: 0,
 			validate: [validateLocalStrategyProperty, 
 					'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
 		},
 		research: {
 			type: Number,
-			index: 2,
-			default: 0,
 			validate: [validateLocalStrategyProperty, 
 					'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
 		},
 		service: {
 			type: Number,
-			index: 3,
-			default: 0,
 			validate: [validateLocalStrategyProperty, 
 					'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
 			}
@@ -55,22 +49,16 @@ var AssignedActivity = new Schema({
 	spring: {
 		teaching: {
 			type: Number,
-			index: 1,
-			default: 0,
 			validate: [validateLocalStrategyProperty, 
 					'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
 		},
 		research: {
 			type: Number,
-			index: 2,
-			default: 0,
 			validate: [validateLocalStrategyProperty, 
 					'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
 		},
 		service: {
 			type: Number,
-			index: 3,
-			default: 0,
 			validate: [validateLocalStrategyProperty, 
 					'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
 		}		
@@ -79,22 +67,16 @@ var AssignedActivity = new Schema({
 	summer: {
 		teaching: {
 			type: Number,
-			index: 1,
-			default: 0,
 			validate: [validateLocalStrategyProperty, 
 					'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
 		},
 		research: {
 			type: Number,
-			index: 2,
-			default: 0,
 			validate: [validateLocalStrategyProperty, 
 					'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
 		},
 		service: {
 			type: Number,
-			index: 3,
-			default: 0,
 			validate: [validateLocalStrategyProperty, 
 					'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
 		}
