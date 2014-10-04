@@ -18,6 +18,7 @@ var join = path.join;
 // Require render files here
 var renderName = require('../../app/templates/name/renderName');
 var renderTenure = require('../../app/templates/tenure/renderTenure');
+var renderDateAppointed = require('../../app/templates/dateAppointed/renderDateAppointed');
 
 /*
 Generates the LaTex File into app/pdf directory
@@ -44,7 +45,7 @@ exports.latexString = function(req,res,next) {
 			results.join(''), //results.toString() without the ','
 			'\\vspace{2in}',
 			'\\begin{center}',
-			'Signature', '\\line(1,0){200}', '\\hspace{1em}', 'Date', '\\line(1,0){50}',
+			'Signature', '\\line(1,0){200}', '\\hspace{2em}', 'Date', '\\line(1,0){50}',
 			'\\end{center}',
 			'\\end{document}'
 		]).pipe(writeable).on('error', function(e) {
