@@ -4,8 +4,6 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
-
-/* Fails Tests - Tenure doesn't load	*/
 var TenureSchema = new Schema({
 	//user:
 	tenure: {

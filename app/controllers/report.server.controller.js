@@ -10,29 +10,51 @@ var latex = require('latex');
 var mongoose = require('mongoose');
 var fs = require('fs');
 
-// Require render files here
-var renderTenure = require('../../app/templates/renderTenure');
-var renderName = require('../../app/templates/renderName');
+var async = require('async');
 
-exports.latexString = function(req,res,next) {
-	var writeable = fs.createWriteStream('./app/pdf/report.pdf');
-	latex([
-		'\\documentclass{article}',
-		'\\begin{document}',
-		'\\title{COLLEGE OF ENGINEERING \\ Annual Activities Report}',
-		'\\date{}',
-		'\\maketitle',
-		renderName.render(),
-		renderTenure.render(),
-		//assignedActivity.render(),
-		//teachingAdvising.render(),
-		//teachingEvaluation.render(),
-		//dateAppointed.render(),
-		'\\vspace{2in}',
-		'\\begin{center}',
-		'Signature', '\\line(1,0){200}', '\\hspace{1em}', 'Date', '\\line(1,0){50}',
-		'\\end{center}',
-		'\\end{document}'
-	]).pipe(writeable); //print to console for debugging
-	next();
+var path = require('path');
+var join = path.join;
+
+// Require render files here
+var renderName = require('../../app/templates/name/renderName');
+var renderTenure = require('../../app/templates/tenure/renderTenure');
+
+/*
+Generates the LaTex File into app/pdf directory
+*/
+exports.latexString = function(req,res,next) {	
+	async.parallel([
+		//Initiate render functions here
+		renderName.render,
+		renderTenure.render
+		
+	], function(err, results) {
+		if (err) return err;
+
+		//Generate Report
+		var writeable = fs.createWriteStream('./app/pdf/report.pdf');
+
+		latex([
+			'\\documentclass{article}',
+			'\\begin{document}',
+			'\\title{COLLEGE OF ENGINEERING \\ Annual Activities Report}',
+			'\\date{}',
+			'\\maketitle',
+			results.join(''), //results.toString() without the ','
+			'\\vspace{2in}',
+			'\\begin{center}',
+			'Signature', '\\line(1,0){200}', '\\hspace{1em}', 'Date', '\\line(1,0){50}',
+			'\\end{center}',
+			'\\end{document}'
+		]).pipe(writeable).on('error', function(e) {
+			throw new Error('Cannot overwrite report.pdf when it is open on your system. Please close report.pdf.');
+		});
+		//next();
+	});
+
+	// only for testing purposes
+	res.setHeader('Content-Type', 'text/html');
+	res.end('<p>Report Generated!</p>');	
+	console.log('Report Generated!');	
 };
+
