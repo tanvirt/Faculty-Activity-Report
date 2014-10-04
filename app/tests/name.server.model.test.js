@@ -2,21 +2,19 @@
 //module dependencies
 var should = require('should'),
 	mongoose = require('mongoose'),
-	Name = mongoose.model('nameSchema');
+	Name = mongoose.model('NameSchema');
 
 var name1, name2;
 
 describe('Name Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		name1 = new Name({
-			_id: '5421bc631b303e101ec67747',
 			firstName: 'First',
 			midInit: 'I',
 			lastName: 'Last'
 		});
 		
 		name2 = new Name({
-			_id: '5421bc631b303e101ec67747',
 			firstName: 'First',
 			midInit: 'I',
 			lastName: 'Last'
@@ -28,14 +26,6 @@ describe('Name Model Unit Tests:', function() {
 		it('should save without problems', function(done) {
 			name1.save(done);
 		});	
-		
-		it('should fail to save an existing name again', function(done) {
-			name1.save();
-			return name2.save(function(err) {
-				should.exist(err);
-				done();
-			});
-		});
 		
 		it('should fail to save without a first name', function(done) {
 			name1.firstName = '';

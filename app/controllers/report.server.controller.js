@@ -19,6 +19,9 @@ var join = path.join;
 var renderName = require('../../app/templates/name/renderName');
 var renderTenure = require('../../app/templates/tenure/renderTenure');
 var renderDateAppointed = require('../../app/templates/dateAppointed/renderDateAppointed');
+var renderAssignedActivity = require('../../app/templates/assignedActivity/renderAssignedActivity');
+var renderTeachingAdvising = require('../../app/templates/teachingAdvising/renderTeachingAdvising');
+var renderCurrentRank = require('../../app/templates/currentRank/renderCurrentRank');
 
 /*
 Generates the LaTex File into app/pdf directory
@@ -28,7 +31,10 @@ exports.latexString = function(req,res,next) {
 		//Initiate render functions here
 		renderName.render,
 		renderTenure.render,
-		renderDateAppointed.render
+		renderCurrentRank.render,
+		renderDateAppointed.render,
+		//renderAssignedActivity.render,
+		renderTeachingAdvising.render
 		
 	], function(err, results) {
 		if (err) return err;
@@ -39,7 +45,7 @@ exports.latexString = function(req,res,next) {
 		latex([
 			'\\documentclass{article}',
 			'\\begin{document}',
-			'\\title{COLLEGE OF ENGINEERING \\ Annual Activities Report}',
+			'\\title{COLLEGE OF ENGINEERING \\newline Annual Activities Report}',
 			'\\date{}',
 			'\\maketitle',
 			results.join(''), //results.toString() without the ','
