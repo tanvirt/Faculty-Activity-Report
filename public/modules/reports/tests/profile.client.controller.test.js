@@ -1,10 +1,10 @@
 'use strict';
 
 (function() {
-	// Assigned activity Controller Spec
-	describe('Assigned activity Controller Tests', function() {
+	// Profile Controller Spec
+	describe('Profile Controller Tests', function() {
 		// Initialize global variables
-		var AssignedActivityController,
+		var ProfileController,
 			scope,
 			$httpBackend,
 			$stateParams,
@@ -44,8 +44,8 @@
 			$httpBackend = _$httpBackend_;
 			$location = _$location_;
 
-			// Initialize the Assigned activity controller.
-			AssignedActivityController = $controller('AssignedActivityController', {
+			// Initialize the Profile controller.
+			ProfileController = $controller('ProfileController', {
 				$scope: scope
 			});
 		}));
