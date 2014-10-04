@@ -5,6 +5,14 @@ angular.module('reports').controller('ReportsController', ['$scope', '$statePara
 	function($scope, $stateParams, $location, Authentication, Reports ) {
 		$scope.authentication = Authentication;
 
+        $scope.updateFall = function()
+        {
+            this.totalSpring =  44;
+
+        };
+
+        //$scope.teachingSpring = TeachingFall;
+
 		// Create new Report
 		$scope.create = function() {
 			// Create new Report object

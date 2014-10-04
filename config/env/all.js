@@ -35,7 +35,8 @@ module.exports = {
 			]
 		},
 		css: [
-			'public/modules/**/css/*.css'
+			'public/modules/**/css/*.css',
+            //'public/modules/reports/css/activity.css'
 		],
 		js: [
 			'public/config.js',
