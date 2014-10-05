@@ -21,6 +21,7 @@ var renderTenure = require('../../app/templates/tenure/renderTenure');
 var renderDateAppointed = require('../../app/templates/dateAppointed/renderDateAppointed');
 var renderAssignedActivity = require('../../app/templates/assignedActivity/renderAssignedActivity');
 var renderTeachingAdvising = require('../../app/templates/teachingAdvising/renderTeachingAdvising');
+//var renderTeachingAdvisingCourses = require('../../app/templates/teachingAdvisingCourses/renderTeachingAdvisingCourses');
 var renderCurrentRank = require('../../app/templates/currentRank/renderCurrentRank');
 
 /*
@@ -34,7 +35,8 @@ exports.latexString = function(req,res,next) {
 		renderCurrentRank.render,
 		renderDateAppointed.render,
 		//renderAssignedActivity.render,
-		renderTeachingAdvising.render
+		renderTeachingAdvising.render,
+		//renderTeachingAdvisingCourses.render
 		
 	], function(err, results) {
 		if (err) return err;
