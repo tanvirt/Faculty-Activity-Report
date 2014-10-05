@@ -23,6 +23,7 @@ var renderAssignedActivity = require('../../app/templates/assignedActivity/rende
 var renderTeachingAdvising = require('../../app/templates/teachingAdvising/renderTeachingAdvising');
 //var renderTeachingAdvisingCourses = require('../../app/templates/teachingAdvisingCourses/renderTeachingAdvisingCourses');
 var renderCurrentRank = require('../../app/templates/currentRank/renderCurrentRank');
+var renderCreativeWorks = require('../../app/templates/creativeWorks/renderCreativeWorks');
 
 /*
 Generates the LaTex File into app/pdf directory
@@ -36,10 +37,11 @@ exports.latexString = function(req,res,next) {
 		renderDateAppointed.render,
 		//renderAssignedActivity.render,
 		renderTeachingAdvising.render,
-		//renderTeachingAdvisingCourses.render
+		//renderTeachingAdvisingCourses.render,
+		renderCreativeWorks.render
 		
 	], function(err, results) {
-		if (err) return err;
+		if (err) res.status(500).send({ error: 'Report Generation Failed' });
 
 		//Generate Report
 		var writeable = fs.createWriteStream('./app/pdf/report.pdf');
@@ -59,12 +61,18 @@ exports.latexString = function(req,res,next) {
 		]).pipe(writeable).on('error', function(e) {
 			throw new Error('Cannot overwrite report.pdf when it is open on your system. Please close report.pdf.');
 		});
-		//next();
+		console.log('Report Generated!');
+		next();
 	});
-
-	// only for testing purposes
-	res.setHeader('Content-Type', 'text/html');
-	res.end('<p>Report Generated!</p>');	
-	console.log('Report Generated!');	
 };
 
+exports.debug = function(req,res,next) {
+	console.log('Dropped Database!');
+	mongoose.connection.db.dropDatabase();
+	next();
+};
+
+exports.download = function(req, res) {
+	//res.download('./app/pdf/report.pdf');
+	res.send('Report Generated!');
+};

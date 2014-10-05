@@ -1,0 +1,13 @@
+\section{CREATIVE WORKS OR ACTIVITIES}
+
+I developed/help develop {{ len }} major software systems:
+
+\begin{itemize}
+
+{% for work in works %}
+\item {{ work.name | capitalize }}: {{ work.description }}
+{ {{ work.website -}} } {{ work.date|date('M-d-Y') }}
+(joint effort with {% for joint in work.jointEfforts %}{{ joint }}{% if !loop.last %}, {% endif %}{% endfor %})
+{% endfor %}
+
+\end{itemize}
