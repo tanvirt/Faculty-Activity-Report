@@ -1,59 +1,97 @@
-<section data-ng-controller="ReportsController as myController">
-    <form name="Activity">
+<section data-ng-controller="ReportsController as myController" data-ng-init="initTable();year=2013;">
+
+    <!--<form name="Activity">
         <table class="myTable">
             <caption><h3>Assigned activity table</h3></caption>
             <colgroup><col></colgroup><colgroup><col></colgroup><colgroup><col></colgroup>
             <thead>
             <tr>
-                <th></th><th colspan="1">Spring{{year}}</th><th colspan="1">Summer{{year}}</th><th colspan="1">Fall{{year}}</th>
+                <th></th><th colspan="1">Spring {{year}}</th><th colspan="1">Summer {{year}}</th><th colspan="1">Fall {{year}}</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <th>Teaching</th>
                 <td>
-                    <input type="number" name="teachingSpring" data-ng-model="teachingSpring">
+                    <input type="number" name="springTeaching" min="0" max="100" data-ng-model="springTeaching" data-ng-click="springUpdate()" data-ng-focus="springUpdate()">
                 </td>
                 <td>
-                    <input type="number" name="teachingSummer" data-ng-model="teachingSummer">
+                    <input type="number" name="summerTeaching" min="0" max="100" data-ng-model="summerTeaching" data-ng-click="summerUpdate()" data-ng-focus="summerUpdate()">
                 </td>
                 <td>
-                    <input type="number" name="teachingFall" data-ng-model="teachingFall">
+                    <input type="number" name="fallTeaching" min="0" max="100" data-ng-model="fallTeaching" data-ng-click="fallUpdate()" data-ng-focus="fallUpdate()">
                 </td>
             </tr>
             <tr>
                 <th>Research</th>
                 <td>
-                    <input type="number" name="researchSpring" data-ng-model="researchSpring">
+                    <input type="number" name="springResearch" min="0" max="100" data-ng-model="springResearch" data-ng-click="springUpdate()" data-ng-focus="springUpdate()">
                 </td>
                 <td>
-                    <input type="number" name="researchSummer" data-ng-model="researchSummer">
+                    <input type="number" name="summerResearch" min="0" max="100" data-ng-model="summerResearch" data-ng-click="summerUpdate()" data-ng-focus="summerUpdate()">
                 </td>
                 <td>
-                    <input type="number" name="researchFall" data-ng-model="researchFall">
+                    <input type="number" name="fallResearch" min="0" max="100" data-ng-model="fallResearch" data-ng-click="fallUpdate()" data-ng-focus="fallUpdate()">
                 </td>
             </tr>
             <tr>
-                <th rowspan="1">Service</th><
+                <th rowspan="1">Service</th>
                 <td>
-                    <input type="number" name="serviceSpring" data-ng-model="serviceSpring">
+                    <input type="number" name="springService" min="0" max="100" data-ng-model="springService" data-ng-click="springUpdate()" data-ng-focus="springUpdate()">
                 </td>
                 <td>
-                    <input type="number" name="serviceSummer" data-ng-model="serviceSummer">
+                    <input type="number" name="summerService" min="0" max="100" data-ng-model="summerService" data-ng-click="summerUpdate()" data-ng-focus="summerUpdate()">
                 </td>
                 <td>
-                    <input type="number" name="serviceFall" data-ng-model="serviceFall">
+                    <input type="number" name="fallService" min="0" max="100" data-ng-model="fallService" data-ng-click="fallUpdate()" data-ng-focus="fallUpdate()">
                 </td>
             </tr>
             </tbody>
             <tfoot>
                 <tr>
                     <th>Total</th>
-                    <td>{{myController.updateFall}}</td>
-                    <td data-ng-model="summerTotal">{{teachingSummer + researchSummer + serviceSummer}}</td>
-                    <td data-ng-model="fallTotal">{{teachingFall + researchFall + serviceFall}}</td>
+                    <td>{{springTotal}}</td>
+                    <td>{{summerTotal}}</td>
+                    <td>{{fallTotal}}</td>
                 </tr>
             </tfoot>
         </table>
     </form>
+    </div>
+    -->
+        <form class="form-horizontal">
+            <div class="form-group col-md-2">
+                    <h3>Spring {{year}}</h3>
+                    <div class="input-group">
+                        <!--this inputs might need an ID and apparently a label as well-->
+                            <input type="number" class="form-control" name="springTeaching" min="0" max="100" placeholder="Teaching">
+                            <input type="number" class="form-control" name="springTeaching" min="0" max="100" placeholder="Research"
+                                   data-ng-model="springResearch" data-ng-click="springUpdate()" data-ng-focus="springUpdate()">
+                            <input type="number" class="form-control" id="123" name="springTeaching" min="0" max="100" placeholder="Service"
+                                   data-ng-model="springService" data-ng-click="springUpdate()" data-ng-focus="springUpdate()">
+                            <label class="form-control">{{springTotal}}</label>
+                    </div>
+            </div>
+            <div class="form-group col-md-2">
+                    <h3>Summer {{year}}</h3>
+                    <div class="input-group">
+                        <!--this inputs might need an ID and apparently a label as well-->
+                        <input type="number" class="form-control" name="springTeaching" min="0" max="100" placeholder="Teaching">
+                        <input type="number" class="form-control" name="springTeaching" min="0" max="100" placeholder="Research">
+                        <input type="number" class="form-control" name="springTeaching" min="0" max="100" placeholder="Service">
+                        <label class="form-control">{{summerTotal}}</label>
+                    </div>
+            </div>
+            <div class="form-group col-md-2">
+                    <h3>Fall {{year}}</h3>
+                    <div class="input-group">
+                        <!--this inputs might need an ID and apparently a label as well-->
+                        <input type="number" class="form-control" name="springTeaching" min="0" max="100" placeholder="Teaching">
+                        <input type="number" class="form-control" name="springTeaching" min="0" max="100" placeholder="Research">
+                        <input type="number" class="form-control" name="springTeaching" min="0" max="100" placeholder="Service">
+                        <label class="form-control">{{fallTotal}}</label>
+                    </div>
+            </div>
+        </form>
+
 </section>
