@@ -24,6 +24,7 @@ var renderTeachingAdvising = require('../../app/templates/teachingAdvising/rende
 var renderTeachingAdvisingCourses = require('../../app/templates/teachingAdvisingCourses/renderTeachingAdvisingCourses');
 var renderCurrentRank = require('../../app/templates/currentRank/renderCurrentRank');
 var renderCreativeWorks = require('../../app/templates/creativeWorks/renderCreativeWorks');
+//var renderContribution = require('../../app/templates/contribution/renderContribution');
 
 /*
 Generates the LaTex File into app/pdf directory
@@ -38,7 +39,8 @@ exports.latexString = function(req,res,next) {
 		//renderAssignedActivity.render,
 		renderTeachingAdvising.render,
 		renderTeachingAdvisingCourses.render,
-		renderCreativeWorks.render
+		renderCreativeWorks.render,
+		//renderContribution.render
 		
 	], function(err, results) {
 		if (err) res.status(500).send({ error: 'Report Generation Failed' });
