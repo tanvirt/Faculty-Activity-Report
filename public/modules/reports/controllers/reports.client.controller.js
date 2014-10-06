@@ -51,6 +51,7 @@ angular.module('reports').controller('ReportsController', ['$scope', '$statePara
 
         //functions for section 15 contracts_grants
 
+        // function for button "Add Entry" to add grants to the table  
         $scope.addGrants = function(){
          		$scope.grants.push({titleOfGrant: $scope.grants.titleOfGrant , fundingAgency: $scope.grants.fundingAgency, PI: $scope.grants.PI, value:$scope.grants.value, startEnd: $scope.grants.startEnd});
          		$scope.grants.titleOfGrant = "";
