@@ -4,7 +4,25 @@
 angular.module('reports').controller('ReportsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Reports',
 	function($scope, $stateParams, $location, Authentication, Reports ) {
 		$scope.authentication = Authentication;
-
+		//variable for section 15 to initialize the table
+		$scope.grants = 
+         	[{
+         		titleOfGrant:"Faculty Grants",
+         		fundingAgency:"EOF",
+         		PI:"Willy Nelson",
+         		startEnd:"01/13/2014",
+         		value:200	
+         	}];
+        //functions for section 15 contracts_grants
+        // function for button "Add Entry" to add grants to the table  
+        $scope.addGrants = function(){
+         		$scope.grants.push({titleOfGrant: $scope.grants.titleOfGrant , fundingAgency: $scope.grants.fundingAgency, PI: $scope.grants.PI, value:$scope.grants.value, startEnd: $scope.grants.startEnd});
+         		$scope.grants.titleOfGrant = "";
+         		$scope.grants.fundingAgency = "";
+         		$scope.grants.PI = "";
+         		$scope.grants.value= "";
+         		$scope.grants.startEnd="";
+         	};
 		// Create new Report
 		$scope.create = function() {
 			// Create new Report object
