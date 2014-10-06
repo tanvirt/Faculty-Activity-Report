@@ -35,7 +35,7 @@ exports.latexString = function(req,res,next) {
 		renderTenure.render,
 		renderCurrentRank.render,
 		renderDateAppointed.render,
-		//renderAssignedActivity.render,
+		renderAssignedActivity.render,
 		renderTeachingAdvising.render,
 		//renderTeachingAdvisingCourses.render,
 		renderCreativeWorks.render
