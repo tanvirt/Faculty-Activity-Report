@@ -21,7 +21,7 @@ var renderTenure = require('../../app/templates/tenure/renderTenure');
 var renderDateAppointed = require('../../app/templates/dateAppointed/renderDateAppointed');
 var renderAssignedActivity = require('../../app/templates/assignedActivity/renderAssignedActivity');
 var renderTeachingAdvising = require('../../app/templates/teachingAdvising/renderTeachingAdvising');
-//var renderTeachingAdvisingCourses = require('../../app/templates/teachingAdvisingCourses/renderTeachingAdvisingCourses');
+var renderTeachingAdvisingCourses = require('../../app/templates/teachingAdvisingCourses/renderTeachingAdvisingCourses');
 var renderCurrentRank = require('../../app/templates/currentRank/renderCurrentRank');
 var renderCreativeWorks = require('../../app/templates/creativeWorks/renderCreativeWorks');
 
@@ -37,7 +37,7 @@ exports.latexString = function(req,res,next) {
 		renderDateAppointed.render,
 		//renderAssignedActivity.render,
 		renderTeachingAdvising.render,
-		//renderTeachingAdvisingCourses.render,
+		renderTeachingAdvisingCourses.render,
 		renderCreativeWorks.render
 		
 	], function(err, results) {
