@@ -1,0 +1,31 @@
+\section{CONTRIBUTION TO DISCIPLINE/RESEARCH NARRATIVE}
+% PARAMETERS
+% intro: summary of these contributions
+% examples: specific exmaples of contributions, with optional title and body
+% conclusion: optional string wrapping up contributions
+% works: specific works, each with title and number of citations
+% totalCitations: total number of citations for user
+% h_index: h-index number of user
+% i_index: i10-index number of user
+% website: link to citations webpage
+{{intro}}
+\begin{itemize}
+
+{% for example in examples %}
+\item {{examples.title}}: {{examples.body}}
+{% endfor %}
+
+\end{itemize}
+
+{{conclusion}}
+
+\begin{itemize}
+
+{%for work in works %}
+\item \textit{ {{works.title}} }: {{works.citations}} citations
+{% endfor %}
+
+\end{itemize}
+
+I have {{totalCitations}} overall, an h-index of {{h_index}} and i10-index of {{i_index}}.
+({{website}})
