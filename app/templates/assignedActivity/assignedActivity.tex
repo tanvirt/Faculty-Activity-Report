@@ -6,9 +6,13 @@
 \begin{center}
 \begin{tabular}{lccc}
 
-{% for activity in activities %}
+{%
+for activity in activities 
+%}
 & {{activity.semester | capitalize}} {{activity.year}} 
-{% endfor %} 
+{% 
+endfor 
+%} 
 \\
 \hline
 Teaching 
