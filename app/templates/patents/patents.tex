@@ -2,7 +2,7 @@
 
 \begin{enumerate}
 {%for patent in patents %}
-  \item \emph{ {{patent.title}} },
+  \item \emph{ {{patent.title}}, }
   {%for author in patent.authors %} {{author}},{% endfor %} 
   Patent number: {{patent.patentNumber}}, Issue date: {{patent.date|date('M d, Y')}}
   
