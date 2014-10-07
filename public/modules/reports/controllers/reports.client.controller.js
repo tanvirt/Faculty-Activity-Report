@@ -13,48 +13,6 @@ angular.module('reports').controller('ReportsController', ['$scope', '$statePara
          		startEnd:'01/13/2014',
          		value:200	
          	}];
-<<<<<<< HEAD
-
-//functions for section 6 assigned_activity
-        $scope.springUpdate = function()
-        {
-             $scope.springTotal = $scope.springTeaching + $scope.springResearch + $scope.springService;
-        };
-
-        $scope.summerUpdate = function()
-        {
-            $scope.summerTotal = $scope.summerTeaching + $scope.summerResearch + $scope.summerService;
-        };
-
-        $scope.fallUpdate = function()
-        {
-            $scope.fallTotal = $scope.fallTeaching + $scope.fallResearch + $scope.fallService;
-        };
-        $scope.initTable = function(){
-            //Spring values
-            $scope.springTeaching = 0;
-            $scope.springResearch = 0;
-            $scope.springService = 0;
-            //Summer values
-
-            $scope.summerTeaching = 0;
-            $scope.summerResearch = 0;
-            $scope.summerService = 0;
-            //Fall Values
-            $scope.fallTeaching = 0;
-            $scope.fallResearch = 0;
-            $scope.fallService = 0;
-            //table totals
-            $scope.springTotal = 0;
-            $scope.summerTotal = 0;
-            $scope.fallTotal = 0;
-        };
-
-//functions for section 15 contracts_grants 
-=======
-        //functions for section 15 contracts_grants
-        // function for button "Add Entry" to add grants to the table  
->>>>>>> db8cac9589d454ea6fee045c1416c7b1868ab6f8
         $scope.addGrants = function(){
          		$scope.grants.push({titleOfGrant: $scope.grants.titleOfGrant , fundingAgency: $scope.grants.fundingAgency, PI: $scope.grants.PI, value:$scope.grants.value, startEnd: $scope.grants.startEnd});
          		$scope.grants.titleOfGrant = '';
