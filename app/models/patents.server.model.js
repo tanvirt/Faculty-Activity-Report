@@ -12,15 +12,18 @@ var validateDate = function(p) {
 var Patents = new Schema({
 	title: {
 		type: String,
-		required: true
+		required: 'please fill in title'
 	},
 	
 	authors: {
 		type: [String],
-		required: true
+		required: 'please list author(s)'
 	},
 	
-	patentNumber: Number,
+	patentNumber: {
+		type: String,
+		unique: 'testing error message'
+	},
 	
 	date: {
 		type: String,

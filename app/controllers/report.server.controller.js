@@ -25,6 +25,7 @@ var renderTeachingAdvisingCourses = require('../../app/templates/teachingAdvisin
 var renderCurrentRank = require('../../app/templates/currentRank/renderCurrentRank');
 var renderCreativeWorks = require('../../app/templates/creativeWorks/renderCreativeWorks');
 //var renderContribution = require('../../app/templates/contribution/renderContribution');
+var renderPatents = require('../../app/templates/patents/renderPatents');
 
 /*
 Generates the LaTex File into app/pdf directory
@@ -40,6 +41,7 @@ exports.latexString = function(req,res,next) {
 		renderTeachingAdvising.render,
 		renderTeachingAdvisingCourses.render,
 		renderCreativeWorks.render,
+		renderPatents.render
 		//renderContribution.render
 		
 	], function(err, results) {
