@@ -1,0 +1,37 @@
+\section{TEACHING EVALUATIONS}
+% PARAMETERS
+% course: string value of course name
+% teacher: string value of teacher name
+% required: boolean value of required
+% year: numeric value of year
+% semester: object with fields "fall", "spring", "summer". Each field of type
+% enrolled: numeric value of students enrolled
+% highscore-lowscore: numeric values corresponding to highest/lowest possible score
+% responses: numeric value of responses
+% teacherMean: array of numeric values pertaining to teacher mean scores
+% departmentMean: array of numeric values pertaining to department mean scores
+% collegeMean: array of numeric values pertaining to college mean scores
+
+\noindent {{course}} \hfill Required: {{required}} \\
+\noindent {{semester}}, {{year}} \hfill \# Enrolled: {{enrolled}}\\
+High={{highScore}}, Low={{lowScore}} \hfill \# Responses: {{responses}}
+\nopagebreak[4]
+\begin{center}
+  \begin{tabular}{llll}
+    Question & {{teacher}} & Dept. & College \\
+    & Mean & Mean & Mean \\
+    \hline
+    1. Description of course objectives and assignments & {{teacherMean.a}} & {{departmentMean.a}} & {{collegeMean.a}} \\
+    2. Communication of ideas and information & {{teacherMean.b}}	&{{departmentMean.b}}	&{{collegeMean.b}} \\
+    3. Expression of expectations for performance in this class 
+    & {{teacherMean.c}}	&{{departmentMean.c}}	&{{collegeMean.c}}\\
+    4. Availability to assist students in or out of class & {{teacherMean.d}}	&{{departmentMean.d}}	&{{collegeMean.d}}\\
+    5. Respect and concern for students & {{teacherMean.e}}	&{{departmentMean.e}}	&{{collegeMean.e}}\\
+    6. Stimulation of interest in course & {{teacherMean.f}}	&{{departmentMean.f}}	&{{collegeMean.f}} \\
+    7. Facilitation of learning & {{teacherMean.g}}	&{{departmentMean.g}}	&{{collegeMean.g}} \\
+    8. Enthusiasm for the subject & {{teacherMean.h}}	&{{departmentMean.h}}	&{{collegeMean.h}} \\
+    9. Encouragement of independent, creative, and critical thinking & {{teacherMean.i}}	&{{departmentMean.i}}	&{{collegeMean.i}} \\
+    \hline
+    10. Instructor Overall & {{teacherMean.z}}	&{{departmentMean.z}}	&{{collegeMean.z}}
+  \end{tabular}
+\end{center}
