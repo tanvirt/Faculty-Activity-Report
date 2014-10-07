@@ -1,8 +1,11 @@
 <section data-ng-controller="ReportsController">
 
-	<div class="row">
-        <h3 class="col-md-12">Contribution To Discipline/Research Narrative</h3>
-            <div class="col-md-12">
-                <textarea ui-tinymce data-ng-model="report.contributions" id="contributions"></textarea>
-            </div>
+	<div class="col-md-12" style="padding-top:30px">
+        <h3>10. Contribution To Discipline/Research Narrative</h3>
+        <form method="post" class="form-horizontal" data-ng-submit="create()" novalidate>
+                <textarea ui-tinymce data-ng-model="tinymceModel" id="contributions"></textarea>
+                <div ng-bind="tinymceModel">
+                </div>
+        </form>
+
 </section>
