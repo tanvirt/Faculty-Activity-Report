@@ -13,6 +13,7 @@ angular.module('reports').controller('ReportsController', ['$scope', '$statePara
          		startEnd:'01/13/2014',
          		value:200	
          	}];
+<<<<<<< HEAD
 
 //functions for section 6 assigned_activity
         $scope.springUpdate = function()
@@ -50,6 +51,10 @@ angular.module('reports').controller('ReportsController', ['$scope', '$statePara
         };
 
 //functions for section 15 contracts_grants 
+=======
+        //functions for section 15 contracts_grants
+        // function for button "Add Entry" to add grants to the table  
+>>>>>>> db8cac9589d454ea6fee045c1416c7b1868ab6f8
         $scope.addGrants = function(){
          		$scope.grants.push({titleOfGrant: $scope.grants.titleOfGrant , fundingAgency: $scope.grants.fundingAgency, PI: $scope.grants.PI, value:$scope.grants.value, startEnd: $scope.grants.startEnd});
          		$scope.grants.titleOfGrant = '';
@@ -58,10 +63,6 @@ angular.module('reports').controller('ReportsController', ['$scope', '$statePara
          		$scope.grants.value= '';
          		$scope.grants.startEnd='';
          	};
-        
-
-
-
 		// Create new Report
 		$scope.create = function() {
 			// Create new Report object
