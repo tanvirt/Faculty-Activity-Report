@@ -21,10 +21,11 @@ var renderTenure = require('../../app/templates/tenure/renderTenure');
 var renderDateAppointed = require('../../app/templates/dateAppointed/renderDateAppointed');
 var renderAssignedActivity = require('../../app/templates/assignedActivity/renderAssignedActivity');
 var renderTeachingAdvising = require('../../app/templates/teachingAdvising/renderTeachingAdvising');
-//var renderTeachingAdvisingCourses = require('../../app/templates/teachingAdvisingCourses/renderTeachingAdvisingCourses');
+var renderTeachingAdvisingCourses = require('../../app/templates/teachingAdvisingCourses/renderTeachingAdvisingCourses');
 var renderTeachingEvaluation = require('../../app/templates/teachingEvaluation/renderTeachingEvaluation');
 var renderCurrentRank = require('../../app/templates/currentRank/renderCurrentRank');
 var renderCreativeWorks = require('../../app/templates/creativeWorks/renderCreativeWorks');
+//var renderContribution = require('../../app/templates/contribution/renderContribution');
 
 /*
 Generates the LaTex File into app/pdf directory
@@ -36,11 +37,13 @@ exports.latexString = function(req,res,next) {
 		renderTenure.render,
 		renderCurrentRank.render,
 		renderDateAppointed.render,
-		//renderAssignedActivity.render,
+		renderAssignedActivity.render,
 		renderTeachingAdvising.render,
-		//renderTeachingAdvisingCourses.render,
+		renderTeachingAdvisingCourses.render,
 		renderTeachingEvaluation.render,
-		renderCreativeWorks.render
+		renderCreativeWorks.render,
+		//renderContribution.render
+
 		
 	], function(err, results) {
 		if (err) res.status(500).send({ error: 'Report Generation Failed' });

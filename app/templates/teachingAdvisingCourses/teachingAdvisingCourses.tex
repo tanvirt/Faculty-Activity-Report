@@ -2,9 +2,12 @@
 % name: the course number and name of the course
 % description: a short description of the course
 % evaluationNumber: the average instructor evaluation for the course
-%\begin {enumerate}
-%<%for(course in courses){ %>
-\textbf{{name}} {{description}} My overall instruction evaluation 
-for this class was {{evaluationNumber}} out of 5.0.
-%<% } %>
-%\end {enumerate}
+
+\noindent \subsection{Courses:}
+\begin{itemize}
+
+{% for course in courses %}
+\item \textbf{ {{course.name}}:} {{course.description}} My overall instruction evaluation for this class was {{course.evaluationNumber}} out of 5.0.
+{% endfor %}
+
+\end{itemize}
