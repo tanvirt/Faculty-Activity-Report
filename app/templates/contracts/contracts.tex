@@ -1,0 +1,82 @@
+\section{CONTRACTS AND GRANTS SINCE LAST PROMOTION OR DURING THE LAST
+  FIVE YEARS}
+  
+\subsection*{Funded Research Contracts and Grants}
+
+{% for contract in contracts %}
+
+\begin{enumerate}
+{% if contract.funded === 'externally' %}
+\item[a.] \textbf{Funded Externally}
+
+\begin{center}
+  \begin{tabular}{lllllll}
+    Title of Grant & Funding & PI & Start-End & Value
+    &Funding\\
+    & Agen. & & & &  Portion \\
+    \hline
+    {{contract.title}} & {{contract.fundingAgency}} & {{contract.PI}} & {{contract.startDate|date('M/d/Y')}}-{{contract.endDate|date('M/d/Y')}} & \${{contract.value}} & \${{contract.fundingPortion}}\\
+    
+  \end{tabular}
+\end{center}
+
+\textbf{
+  \begin{center}
+    Summary of Grant Funding Received \\
+    \begin{tabular}{lc}
+      Role & Total \\
+      \hline
+      {{contract.PI}} & \${{contract.fundingPortion}} \\
+      \hline
+      Totals & \$theTotal
+    \end{tabular}
+  \end{center}
+}
+{% endif %}
+{% if contract.funded === 'internally' %}
+\item[b.] \textbf{Funded Internally}
+
+\begin{center}
+  \begin{tabular}{lllllll}
+    Title of Grant & Funding & PI & Start-End & Value
+    &Funding\\
+    & Agen. & & & &  Portion \\
+    \hline
+    {{contract.title}} & N/A & {{contract.PI}} & {{contract.startDate|date('M/d/Y')}}-{{contract.endDate|date('M/d/Y')}} & \${{contract.value}} & \${{contract.fundingPortion}}\\
+    
+  \end{tabular}
+\end{center}
+
+{% endif %}
+{% if contract.funded == 'pending' %}
+\item[c.] \textbf{Submitted, Pending Decision}
+
+\begin{center}
+  \begin{tabular}{lllllll}
+    Title of Grant & Funding & PI & Start-End & Value
+    &Funding\\
+    & Agen. & & & &  Portion \\
+    \hline
+    {{contract.title}} & {{contract.fundingAgency}} & {{contract.PI}} & {{contract.startDate|date('M/d/Y')}}-{{contract.endDate|date('M/d/Y')}} & \${{contract.value}} & \${{contract.fundingPortion}}\\
+    
+  \end{tabular}
+\end{center}
+
+{% endif %}
+{% if contract.funded === 'not' %}
+\item[d.] \textbf{Submitted Not Funded}
+
+\begin{center}
+  \begin{tabular}{llllll}
+    Title of Grant & Fund.  & PI & Start-End & Value \\
+    & Agen. & & &  Funding \\
+    \hline
+    {{contract.title}} & {{contract.fundingAgency}} & {{contract.PI}} & {{contract.startDate|date('M/d/Y')}}-{{contract.endDate|date('M/d/Y')}} & \${{contract.value}}\\
+  \end{tabular}
+\end{center}
+
+{% endif %}
+
+\end{enumerate}
+
+{% endfor %}
