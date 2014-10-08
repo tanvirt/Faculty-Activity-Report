@@ -12,26 +12,26 @@
 % departmentMean: array of numeric values pertaining to department mean scores
 % collegeMean: array of numeric values pertaining to college mean scores
 
-\noindent {{course}} \hfill Required: {{required}} \\
-\noindent {{semester}}, {{year}} \hfill \# Enrolled: {{enrolled}}\\
-High={{highScore}}, Low={{lowScore}} \hfill \# Responses: {{responses}}
+\noindent {{evaluation.course}} \hfill Required: {{evaluation.required}} \\
+\noindent {{evaluation.semester}}, {{evaluation.year}} \hfill \# Enrolled: {{evaluation.enrolled}}\\
+High={{evaluation.highScore}}, Low={{evaluation.lowScore}} \hfill \# Responses: {{evaluation.responses}}
 \nopagebreak[4]
 \begin{center}
   \begin{tabular}{llll}
-    Question & {{teacher}} & Dept. & College \\
+    Question & {{evaluation.teacher}} & Dept. & College \\
     & Mean & Mean & Mean \\
     \hline
-    1. Description of course objectives and assignments & {{teacherMean[0]}} & {{departmentMean[0]}} & {{collegeMean[0]}} \\
-    2. Communication of ideas and information & {{teacherMean[1]}}	&{{departmentMean[1]}}	&{{collegeMean[1]}} \\
+    1. Description of course objectives and assignments & {{evaluation.teacherMean[0]}} & {{evaluation.departmentMean[0]}} & {{evaluation.collegeMean[0]}} \\
+    2. Communication of ideas and information & {{evaluation.teacherMean[1]}}	&{{evaluation.departmentMean[1]}}	&{{evaluation.collegeMean[1]}} \\
     3. Expression of expectations for performance in this class 
-    & {{teacherMean[2]}}	&{{departmentMean[2]}}	&{{collegeMean[2]}}\\
-    4. Availability to assist students in or out of class & {{teacherMean[3]}}	&{{departmentMean[3]}}	&{{collegeMean[3]}}\\
-    5. Respect and concern for students & {{teacherMean[4]}}	&{{departmentMean[4]}}	&{{collegeMean[4]}}\\
-    6. Stimulation of interest in course & {{teacherMean[5]}}	&{{departmentMean[5]}}	&{{collegeMean[5]}} \\
-    7. Facilitation of learning & {{teacherMean[6]}}	&{{departmentMean[6]}}	&{{collegeMean[6]}} \\
-    8. Enthusiasm for the subject & {{teacherMean[7]}}	&{{departmentMean[7]}}	&{{collegeMean[7]}} \\
-    9. Encouragement of independent, creative, and critical thinking & {{teacherMean[8]}}	&{{departmentMean[8]}}	&{{collegeMean[8]}} \\
+    & {{evaluation.teacherMean[2]}}	&{{evaluation.departmentMean[2]}}	&{{evaluation.collegeMean[2]}}\\
+    4. Availability to assist students in or out of class & {{evaluation.teacherMean[3]}}	&{{evaluation.departmentMean[3]}}	&{{evaluation.collegeMean[3]}}\\
+    5. Respect and concern for students & {{evaluation.teacherMean[4]}}	&{{evaluation.departmentMean[4]}}	&{{evaluation.collegeMean[4]}}\\
+    6. Stimulation of interest in course & {{evaluation.teacherMean[5]}}	&{{evaluation.departmentMean[5]}}	&{{evaluation.collegeMean[5]}} \\
+    7. Facilitation of learning & {{evaluation.teacherMean[6]}}	&{{evaluation.departmentMean[6]}}	&{{evaluation.collegeMean[6]}} \\
+    8. Enthusiasm for the subject & {{evaluation.teacherMean[7]}}	&{{evaluation.departmentMean[7]}}	&{{evaluation.collegeMean[7]}} \\
+    9. Encouragement of independent, creative, and critical thinking & {{evaluation.teacherMean[8]}}	&{{evaluation.departmentMean[8]}}	&{{evaluation.collegeMean[8]}} \\
     \hline
-    10. Instructor Overall & {{teacherMean.z}}	&{{departmentMean.z}}	&{{collegeMean.z}}
+    10. Instructor Overall & {{sum[0]}}	&{{sum[1]}}	&{{sum[2]}}
   \end{tabular}
 \end{center}

@@ -98,4 +98,15 @@ var teachingEvaluation = new Schema({
 	
 }, {collection:'TeachingEvaluation'});
 
+teachingEvaluation.methods.findTotalMean = function findTotalMean() {
+	var totalArr = [0,0,0];
+	for(var i = 0; i < 9; i++) {
+		totalArr[0] += this.teacherMean[0];
+		totalArr[1] += this.departmentMean[0];
+		totalArr[2] += this.collegeMean[0];
+	}
+	for(i = 0; i < 3; i++) totalArr[i] = (totalArr[i]/9);
+	return totalArr;
+};
+
 mongoose.model('TeachingEvaluation', teachingEvaluation);

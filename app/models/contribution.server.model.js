@@ -21,33 +21,12 @@ var validateNumbers = function(property) {
 	return property >= 0;
 };
 
-/**
-* Checks that length of string does not exceed 500 words
-
-var validateStringLength500 = function(property) {
-	return (property.length <= 500);
-};
-
-/**
-* Checks that length of string does not exceed 250 words
-
-var validateStringLength250 = function(property) {
-	return (property.length <= 250);
-};
-
-/**
-* Checks that length of titles does not exceed 50 words
-
-var validateTitleLength = function(property) {
-	return (property.length <= 50);
-};
-*/
 var Contribution = new Schema({
 	intro: {
 		type: String,
 		required: true
 	},
-	examples: {
+	examples: [{
 		title: {
 			type: String
 		},
@@ -55,11 +34,11 @@ var Contribution = new Schema({
 			type: String,
 			required: true
 		}
-	},
+	}],
 	conclusion: {
 		type: String
 	},
-	works: {
+	works: [{
 		title: {
 			type: String,
 			required: true
@@ -70,7 +49,7 @@ var Contribution = new Schema({
 			validate: [validateNumbers,
 					'Number must be greater than or equal to zero']
 		}
-	},
+	}],
 	totalCitations: {
 		type: Number,
 		required: true,

@@ -31,7 +31,7 @@ function dummyObjects(Model) {
 rearrange data, pass in additional fields
 */
 function passObj(objArray) {
-	return {'courses': objArray, 'len':objArray.length};
+	return {'courses': objArray};
 }
 
 /*
