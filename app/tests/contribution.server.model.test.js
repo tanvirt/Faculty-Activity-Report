@@ -16,15 +16,23 @@ describe('Contribution Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		contribution = new Contribution({
 			intro: 'Summary of my contributions',
-			examples: {
+			examples: [{
 				title: 'Contribution number 1',
 				body: 'I did stuff'
 			},
+			{
+				title: 'Contribution number 2',
+				body: 'I did more stuff'
+			}],
 			conclusion: 'And thats what I did',
-			works: {
+			works: [{
 				title: 'Work number 1',
 				citations: 50
 			},
+			{
+				title: 'Work number 2',
+				citations: 100
+			}],
 			totalCitations: 500,
 			h_index: 14,
 			i_index: 21,
@@ -50,7 +58,7 @@ describe('Contribution Model Unit Tests:', function() {
 		});
 
 		it('should fail to save without example body', function(done) {
-			contribution.examples.body = '';
+			contribution.examples[0].body = '';
 
 			return contribution.save(function(err) {
 				should.exist(err);
@@ -59,7 +67,7 @@ describe('Contribution Model Unit Tests:', function() {
 		});
 
 		it('should fail to save works title', function(done) {
-			contribution.works.title = '';
+			contribution.works[0].title = '';
 
 			return contribution.save(function(err) {
 				should.exist(err);
@@ -68,7 +76,7 @@ describe('Contribution Model Unit Tests:', function() {
 		});
 
 		it('should fail to save without works citations', function(done) {
-			contribution.works.citations = null;
+			contribution.works[0].citations = null;
 
 			return contribution.save(function(err) {
 				should.exist(err);
@@ -113,7 +121,7 @@ describe('Contribution Model Unit Tests:', function() {
 		});
 
 		it('should fail to save if works citation is negative number', function(done) {
-			contribution.works.citations = -5;
+			contribution.works[0].citations = -5;
 
 			return contribution.save(function(err) {
 				should.exist(err);

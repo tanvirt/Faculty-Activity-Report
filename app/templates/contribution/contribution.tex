@@ -8,24 +8,25 @@
 % h_index: h-index number of user
 % i_index: i10-index number of user
 % website: link to citations webpage
-{{intro}}
+{{contributions.intro}}
 \begin{itemize}
 
-{% for example in examples %}
+{% for example in contributions.examples %}
 \item {{example.title}}: {{example.body}}
 {% endfor %}
 
 \end{itemize}
 
-{{conclusion}}
+\noindent {{contributions.conclusion}}
 
 \begin{itemize}
 
-{%for work in works %}
+{%for work in contributions.works %}
 \item \textit{ {{work.title}} }: {{work.citations}} citations
 {% endfor %}
 
 \end{itemize}
 
-I have {{totalCitations}} overall, an h-index of {{h_index}} and i10-index of {{i_index}}.
-({{website}})
+\noindent I have {{contributions.totalCitations}} citations overall, an h-index of {{contributions.h_index}} and i10-index of {{contributions.i_index}}.
+
+\noindent ({{contributions.website}})
