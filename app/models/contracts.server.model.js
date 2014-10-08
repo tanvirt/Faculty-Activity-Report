@@ -11,13 +11,13 @@ var validateDate = function(p) {
 var Contracts = new Schema({
 	title: {
 		type: String,
-		required: 'Please fill in title'
+		required: true
 	},
 	funded: {
 		type: String,
 		enum: ['externally', 'internally', 'pending', 'not'],
 		default: 'externally',
-		required: 'please select: externally, internally, pending, or not'
+		required: true
 	},
 
 	PI: {
@@ -34,12 +34,12 @@ var Contracts = new Schema({
 	},
 	fundingAgency: {
 		type: String,
-		required: 'please fill in your funding agency'
+		required: true
 	},
 	fundingPortion: Number,
 	value: {
 		type: Number,
-		required: 'please fill in your funding portion'
+		required: true
 	}
 
 	

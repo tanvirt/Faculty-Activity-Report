@@ -18,7 +18,8 @@ describe('Contract Model Unit Tests:', function() {
 			PI: 'PI',
 			startDate: '01/22/1998',
 			endDate: '04/06/2010',
-			fundingPortion: 200000, //200,000
+			value: 200000, //200,000
+			fundingPortion: 10
 		});
 		done();
 	});
@@ -71,5 +72,8 @@ describe('Contract Model Unit Tests:', function() {
 		});
 	
 	});
-
+	afterEach(function(done) {
+        Contracts.remove().exec();
+        done();
+    });
 });
