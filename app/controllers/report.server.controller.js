@@ -25,7 +25,7 @@ var renderTeachingAdvisingCourses = require('../../app/templates/teachingAdvisin
 var renderTeachingEvaluation = require('../../app/templates/teachingEvaluation/renderTeachingEvaluation');
 var renderCurrentRank = require('../../app/templates/currentRank/renderCurrentRank');
 var renderCreativeWorks = require('../../app/templates/creativeWorks/renderCreativeWorks');
-//var renderContribution = require('../../app/templates/contribution/renderContribution');
+var renderContribution = require('../../app/templates/contribution/renderContribution');
 var renderPatents = require('../../app/templates/patents/renderPatents');
 var renderContracts = require('../../app/templates/contracts/renderContracts');
 
@@ -45,7 +45,7 @@ exports.latexString = function(req,res,next) {
 		renderTeachingEvaluation.render,
 		renderCreativeWorks.render,
 		renderPatents.render,
-		//renderContribution.render,
+		renderContribution.render,
 		renderContracts.render
 
 		
