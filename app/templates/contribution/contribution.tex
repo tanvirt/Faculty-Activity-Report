@@ -12,7 +12,7 @@
 \begin{itemize}
 
 {% for example in examples %}
-\item {{examples.title}}: {{examples.body}}
+\item {{example.title}}: {{example.body}}
 {% endfor %}
 
 \end{itemize}
@@ -22,7 +22,7 @@
 \begin{itemize}
 
 {%for work in works %}
-\item \textit{ {{works.title}} }: {{works.citations}} citations
+\item \textit{ {{work.title}} }: {{work.citations}} citations
 {% endfor %}
 
 \end{itemize}
