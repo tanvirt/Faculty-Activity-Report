@@ -24,12 +24,21 @@ function dummyObject(Model) {
 	return obj;
 }
 
+function passObj(objArray)
+{
+	return {'evaluation': objArray, 'sum': objArray.findTotalMean()};
+}
+
+
+
+
 /*
 Helper function that gets called in report.server.controller.js
 Output is pushed into a LaTex PDF there.
 */
 module.exports.render = function (callback) {
-	renderModel.render( 'teachingEvaluation/teachingEvaluation.tex', teachingEvaluation, dummyObject, function ( renderStr ) {
+	renderModel.renderMultiple( 'teachingEvaluation/teachingEvaluation.tex', teachingEvaluation, { }, passObj,dummyObject, function ( renderStr ) {
 		callback(null, renderStr);
 	});
 };
+
