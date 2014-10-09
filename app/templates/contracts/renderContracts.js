@@ -41,7 +41,7 @@ rearrange data, pass in additional fields
 */
 function passObj(objArray) {
 	var total = 0;
-	for(var i = 0; i != objArray.length; i++) {
+	for(var i = 0; i !== objArray.length; i++) {
 		if(objArray[i].funded === 'externally') {
 			total+=objArray[i].fundingPortion;
 		}

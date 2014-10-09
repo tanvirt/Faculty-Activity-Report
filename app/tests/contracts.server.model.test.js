@@ -19,11 +19,7 @@ describe('Contract Model Unit Tests:', function() {
 			startDate: '01/22/1998',
 			endDate: '04/06/2010',
 			value: 200000, //200,000
-<<<<<<< HEAD
 			fundingPortion: 10000
-=======
-			fundingPortion: 10
->>>>>>> 64e52b01242d47d33350897b4a5c3257b305cbe0
 		});
 		done();
 	});
@@ -75,18 +71,14 @@ describe('Contract Model Unit Tests:', function() {
 			});
 		});
 	
-	});
-<<<<<<< HEAD
-	
+	});	
 	afterEach(function(done) {
 		Contracts.remove().exec();
 		done();
 	});
 
-=======
 	afterEach(function(done) {
         Contracts.remove().exec();
         done();
     });
->>>>>>> 64e52b01242d47d33350897b4a5c3257b305cbe0
 });
