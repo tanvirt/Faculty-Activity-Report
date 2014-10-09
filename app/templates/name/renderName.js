@@ -27,3 +27,14 @@ module.exports.render = function (callback) {
 		callback(null, renderStr);
 	});
 };
+
+module.exports.submit = function(req, res, callback) {
+	Name.create({
+		firstName: req.body.name.firstName,
+		midInit: req.body.name.midInit,
+		lastName: req.body.name.lastName,
+		user: req.user
+	}, function(err) {
+		callback(err);
+	});
+};

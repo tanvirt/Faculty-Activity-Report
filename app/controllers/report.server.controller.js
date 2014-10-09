@@ -32,21 +32,21 @@ var renderContracts = require('../../app/templates/contracts/renderContracts');
 /*
 Generates the LaTex File into app/pdf directory
 */
-exports.latexString = function(req,res,next) {	
+exports.generate = function(req,res,next) {	
 	async.parallel([
 		//Initiate render functions here
 		renderName.render,
-		renderTenure.render,
-		renderCurrentRank.render,
-		renderDateAppointed.render,
-		renderAssignedActivity.render,
-		renderTeachingAdvising.render,
-		renderTeachingAdvisingCourses.render,
-		renderTeachingEvaluation.render,
-		renderCreativeWorks.render,
-		renderPatents.render,
-		renderContribution.render,
-		renderContracts.render
+		renderTenure.render
+		//renderCurrentRank.render,
+		//renderDateAppointed.render,
+		//renderAssignedActivity.render,
+		//renderTeachingAdvising.render,
+		//renderTeachingAdvisingCourses.render,
+		//renderTeachingEvaluation.render,
+		//renderCreativeWorks.render,
+		//renderPatents.render,
+		//renderContribution.render,
+		//renderContracts.render
 
 		
 	], function(err, results) {
@@ -82,6 +82,25 @@ exports.debug = function(req,res,next) {
 };
 
 exports.download = function(req, res) {
-	//res.download('./app/pdf/report.pdf');
-	res.send('Report Generated!');
+	res.download('./app/pdf/report.pdf');
 };
+
+exports.form = function(req, res){
+  res.render('report', {
+    title: 'Report Upload' 
+  });
+};
+
+exports.submit = function(req, res, next) {
+	async.parallel([
+		async.apply(renderName.submit, req, res),
+		async.apply(renderTenure.submit, req, res)
+	], function(err) {
+		if (err) res.status(500).send({ error: 'Submit Failed' });	
+		console.log(req.body);
+		res.redirect('/report/test');	
+	});
+};
+
+
+
