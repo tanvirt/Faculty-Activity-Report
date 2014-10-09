@@ -8,9 +8,7 @@ module.exports = function(app) {
 		.get(reports.form)
 		.post(users.requiresLogin, reports.submit);
 
-	app.route('/report/test/generate')
-		.get(reports.generate);
-
-	app.route('/report/test/download')
-		.get(reports.download);
+	app.route('/report')
+		.get(reports.testForm, reports.generate)
+		.post(reports.download);
 };

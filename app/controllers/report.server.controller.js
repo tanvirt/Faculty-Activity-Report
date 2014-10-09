@@ -86,9 +86,15 @@ exports.download = function(req, res) {
 };
 
 exports.form = function(req, res){
-  res.render('report', {
-    title: 'Report Upload' 
-  });
+	res.render('report/test', {
+	    title: 'Report Upload' 
+	});
+};
+
+exports.testForm = function(req, res) {
+	res.render('report/report', {
+		title: 'Report Download'
+	});
 };
 
 exports.submit = function(req, res, next) {
@@ -98,7 +104,7 @@ exports.submit = function(req, res, next) {
 	], function(err) {
 		if (err) res.status(500).send({ error: 'Submit Failed' });	
 		console.log(req.body);
-		res.redirect('/report/test');	
+		res.redirect('/report');	
 	});
 };
 
