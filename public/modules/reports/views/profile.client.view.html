@@ -1,0 +1,62 @@
+<section data-ng-controller="ReportsController">
+
+<div class="col-md-12" style="padding-top:20px">
+    <h3>1-5. Faculty Profile</h3>
+     <hr>
+
+    <form class="form-horizontal" data-ng-submit="create()" novalidate>
+        <fieldset>
+        	
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="name">Name</label>
+                <div class="col-md-2 controls">
+                    <input type="text" data-ng-model="name" id="first" class="form-control" placeholder="First" required>
+                </div>
+                <div class="col-md-1 controls">
+                    <input type="text" data-ng-model="name" id="middle" class="form-control" placeholder="M." required>
+                </div>
+                <div class="col-md-3 controls">
+                    <input type="text" data-ng-model="name" id="last" class="form-control" placeholder="Last" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="tenure">Tenure</label>
+                <div class="col-sm-1 controls">
+                    <input type="checkbox" data-ng-model="tenure" id="tenure" class="" placeholder="Tenured" value="Tenured">
+                    <input type="hidden" data-ng-model="tenure" id="tenure" class="form-control" placeholder="Tenured" value="Not Tenured">
+                </div>
+            </div>
+          
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="currentRank">Current Rank</label>
+                <div class="col-md-6 controls">
+                    <input type="text" data-ng-model="currentRank" id="currentRank" class="form-control" placeholder="Professor" required>
+                </div>
+            </div>
+         
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="dateAppointed">Date Appointed to this Rank</label>
+                <div class="col-md-6 controls">
+                    <input type="date" data-ng-model="dateAppointed" ng-model-instant id="dateAppointed" class="form-control" required>
+                </div>
+                
+            </div>
+            
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="affiliateAppintments">Affiliate Appointments</label>
+                <div class="col-md-6 controls">
+                    <input type="text" data-ng-model="affiliateAppintments" id="affiliateAppintments" class="form-control" placeholder="Affiliate Appointments" required>
+                </div>
+            </div>
+
+            
+
+            <div data-ng-show="error" class="text-danger col-md-offset-3 col-md-6">
+                <strong data-ng-bind="error"></strong>
+            </div>
+        </fieldset>
+    </form>
+</div>
+</section>
+        

@@ -7,5 +7,7 @@ angular.module('reports').run(['Menus',
 		Menus.addMenuItem('topbar', 'Reports', 'reports', 'dropdown', '/reports(/create)?');
 		Menus.addSubMenuItem('topbar', 'reports', 'List Reports', 'reports');
 		Menus.addSubMenuItem('topbar', 'reports', 'New Report', 'reports/create');
+        Menus.addSubMenuItem('topbar', 'reports', 'Assigned activity', 'Activity');
+
 	}
 ]);

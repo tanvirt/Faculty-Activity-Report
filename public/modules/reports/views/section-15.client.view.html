@@ -1,0 +1,50 @@
+<section ng-controller='ReportsController'>
+	  <div class="col-md-12" style="padding-top-:300px">
+         <h3>15. Contracts and Grants Since Last Promotion or During The Last Five Years</h3>
+         <hr>
+         <div class="col-md-4">
+         <form role="form">
+              <div class="form-group">
+                <label for="titleOfGrant">Title of Grant</label>
+                <input type="text" ng-model="grants.titleOfGrant" ng-model-instant class="form-control" id="titleOfGrant" placeholder="Title">
+             </div>
+            <div class="form-group">
+               <label for="fundingAgency">Funding Agency</label>
+               <input type="text" ng-model="grants.fundingAgency" ng-model-instant class="form-control" id="fundingAgency" placeholder="Agency">
+            </div>
+            <div class="form-group">
+               <label for="privateInve">Investigator</label>
+               <input type="text" ng-model="grants.PI" class="form-control" ng-model-instant  id="privateInve" placeholder="PI">
+            </div>
+            <div class="form-group">
+               <label for="startEnd">Start Date</label>
+               <input type="date" ng-model="grants.startEnd" class="form-control" ng-model-instant  id="startEnd">
+            </div>
+            <div class="form-group">
+               <label for="value">Value</label>
+               <input type="number" ng-model="grants.value" class="form-control" ng-model-instant id="value" placeholder="How Much?">
+            </div>
+            <div style="padding-bottom:10px">
+            <button class="btn" ng-click="addGrants()"> Add Entry </button>
+            </div>
+      </div>
+
+      <div class="col-md-12">
+            <table class="table table-bordered">
+                <tr>
+                     <th>Title of Grant</th>
+                     <th>Funding Agency</th>
+                     <th>PI</th>
+                     <th>Start-End</th>
+                     <th>Funding Portion</th>
+                </tr>
+                 <tr ng-repeat="grant in grants">
+                     <td> {{grant.titleOfGrant}}     </td>
+                     <td> {{grant.fundingAgency}}    </td>
+                     <td> {{grant.PI}}               </td>
+                     <td> {{grant.startEnd}}         </td>
+                     <td> {{grant.value | currency}} </td>
+                  </tr>
+            </table>
+          </div>
+</section>
