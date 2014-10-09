@@ -87,10 +87,11 @@ exports.list = function(req, res) {
 /**
  * Report middleware
  */
-exports.reportByID = function(req, res, next, id) { Report.findById(id).populate('user', 'displayName').exec(function(err, report) {
+exports.reportByID = function(req, res, next, id) { 
+	Report.findById(id).populate('user', 'displayName').exec(function(err, report) {
 		if (err) return next(err);
-		if (! report) return next(new Error('Failed to load Report ' + id));
-		req.report = report ;
+		if (!report) return next(new Error('Failed to load Report ' + id));
+		req.report = report;
 		next();
 	});
 };

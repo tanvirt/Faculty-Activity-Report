@@ -25,3 +25,12 @@ module.exports.render = function (callback) {
 		callback(null, renderStr);
 	});
 };
+
+module.exports.submit = function(req, res, callback) {
+	Tenure.create({
+		tenure: req.body.tenure.tenure,
+		user: req.user
+	}, function(err) {
+		callback(err);
+	});
+};
