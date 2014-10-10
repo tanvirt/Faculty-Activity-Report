@@ -44,6 +44,7 @@ exports.generate = function(req,res,next) {
 		renderTeachingAdvising.render,
 		renderTeachingAdvisingCourses.render,
 		renderTeachingEvaluation.render,
+		renderGraduateCommittee.render,
 		renderCreativeWorks.render,
 		renderPatents.render,
 		renderContribution.render,
