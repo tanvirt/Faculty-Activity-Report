@@ -24,6 +24,10 @@ var TeachingAdvisingCourses = new Schema({
 		required: true,
 		validate: [validateLocalStrategyCourses, 
 			'Number must be between or including 0 and 5']
+	},
+	user: {
+		type: Schema.ObjectId,
+		ref: 'User'
 	}
 }, {collection:'TeachingAdvisingCourses'});
 
