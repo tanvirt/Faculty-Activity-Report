@@ -71,7 +71,7 @@ exports.generate = function(req,res,next) {
 			throw new Error('Cannot overwrite report.pdf when it is open on your system. Please close report.pdf.');
 		});
 		console.log('Report Generated!');
-		next();
+		res.redirect('/report/download');
 	});
 };
 
@@ -91,9 +91,15 @@ exports.form = function(req, res){
 	});
 };
 
-exports.testForm = function(req, res) {
+exports.testForm = function(req, res, next) {
 	res.render('report/report', {
 		title: 'Report Download'
+	});
+};
+
+exports.testGenerate = function(req, res, next) {
+	res.render('report/generate', {
+		title: 'Generating Report'
 	});
 };
 
@@ -104,8 +110,10 @@ exports.submit = function(req, res, next) {
 	], function(err) {
 		if (err) res.status(500).send({ error: 'Submit Failed' });	
 		console.log(req.body);
-		res.redirect('/report');	
+		res.redirect('/report/generate');	
+		//next();
 	});
+
 };
 
 
