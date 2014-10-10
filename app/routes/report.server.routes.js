@@ -11,4 +11,8 @@ module.exports = function(app) {
 	app.route('/report')
 		.get(reports.testForm, reports.generate)
 		.post(reports.download);
+		
+	app.route('/report/dummyDebug')
+		.get(reports.debug, reports.generate)
+		.post(reports.download);
 };
