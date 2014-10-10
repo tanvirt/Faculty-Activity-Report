@@ -15,4 +15,8 @@ module.exports = function(app) {
 	app.route('/report/download')
 		.get(reports.testForm)
 		.post(reports.download);
+		
+	app.route('/report/oldDebug')
+		.get(reports.debug, reports.generate)
+		.post(reports.download);
 };

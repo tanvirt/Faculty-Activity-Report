@@ -11,7 +11,7 @@ Populates the database with test data
 */
 function dummyObject(Model) {
 	var obj = new Model({
-		teacher: 'testName',
+		//teacher: 'testName',
 		course: 'testCourse1',
 		year: 2003,
 		semester: 'fall',
@@ -39,6 +39,22 @@ Output is pushed into a LaTex PDF there.
 module.exports.render = function (callback) {
 	renderModel.renderMultiple( 'teachingEvaluation/teachingEvaluation.tex', teachingEvaluation, { }, passObj,dummyObject, function ( renderStr ) {
 		callback(null, renderStr);
+	});
+};
+
+module.exports.submit = function(req, res, callback) {
+	teachingEvaluation.create({
+		course: req.body.teachingEvaluation.course,
+		year: req.body.teachingEvaluation.year,
+		semester: req.body.teachingEvaluation.semester,
+		enrolled: req.body.teachingEvaluation.enrolled,
+		responses: req.body.teachingEvaluation.responses,
+		teacherMean: [1,2,3,1,2,3,1,2,3],  //Figure out array.
+		departmentMean: [2,3,4,2,3,4,2,3,4],
+		collegeMean: [4,4,4,4,4,4,4,4,4],
+		user: req.user
+	}, function(err) {
+		callback(err);
 	});
 };
 

@@ -17,7 +17,7 @@ describe('Graduate Committee Model Unit Tests:', function() {
 	beforeEach(function(done) {
 	
 		committee01 = new GraduateCommittee({
-			teacher: 'testName',
+			//teacher: 'testName',
 			role: 'Chair',
 			studentName: 'studentTestName',
 			degree: 'M.S.',
@@ -27,7 +27,7 @@ describe('Graduate Committee Model Unit Tests:', function() {
 
 
 		committee02 = new GraduateCommittee({
-			teacher: 'testName',
+			//teacher: 'testName',
 			role: 'Chair',
 			studentName: 'studentTestName',
 			degree: 'M.S.',

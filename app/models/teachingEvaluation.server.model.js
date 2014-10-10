@@ -32,9 +32,9 @@ var validateLocalStrategyDate = function(property) {
 //Contents of schema will pull majority of content from outside data source, not from user
 //Overall mean is to be calculated on demand, not stored
 var teachingEvaluation = new Schema({
-	teacher: {			//multiple evaluations per teacher possible. Use this field to match with user.username
-		type: String,
-		required: true
+	user: {			//multiple evaluations per user possible. Use this field to match with user
+		type: Schema.ObjectId,
+		ref: 'User'
 	},
 	course: {
 		type: String,
@@ -101,9 +101,9 @@ var teachingEvaluation = new Schema({
 teachingEvaluation.methods.findTotalMean = function findTotalMean() {
 	var totalArr = [0,0,0];
 	for(var i = 0; i < 9; i++) {
-		totalArr[0] += this.teacherMean[0];
-		totalArr[1] += this.departmentMean[0];
-		totalArr[2] += this.collegeMean[0];
+		totalArr[0] += this.teacherMean[i];
+		totalArr[1] += this.departmentMean[i];
+		totalArr[2] += this.collegeMean[i];
 	}
 	for(i = 0; i < 3; i++) totalArr[i] = (totalArr[i]/9);
 	return totalArr;
