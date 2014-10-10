@@ -16,9 +16,9 @@ var validateLocalStrategyDate = function(property) {
 //The count of each role will be calculated on demand by using the MongoDB count command
 var graduateCommittee = new Schema({
 
-	teacher: {			//Use this field to match with user.username
-		type: String,
-		required: true
+	user: {			//multiple evaluations per user possible. Use this field to match with user
+		type: Schema.ObjectId,
+		ref: 'User'
 	},
 	role: {
 		type: String,
