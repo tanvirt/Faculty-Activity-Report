@@ -36,17 +36,17 @@ exports.generate = function(req,res,next) {
 	async.parallel([
 		//Initiate render functions here
 		renderName.render,
-		renderTenure.render
-		//renderCurrentRank.render,
-		//renderDateAppointed.render,
-		//renderAssignedActivity.render,
-		//renderTeachingAdvising.render,
-		//renderTeachingAdvisingCourses.render,
-		//renderTeachingEvaluation.render,
-		//renderCreativeWorks.render,
-		//renderPatents.render,
-		//renderContribution.render,
-		//renderContracts.render
+		renderTenure.render,
+		renderCurrentRank.render,
+		renderDateAppointed.render,
+		renderAssignedActivity.render,
+		renderTeachingAdvising.render,
+		renderTeachingAdvisingCourses.render,
+		renderTeachingEvaluation.render,
+		renderCreativeWorks.render,
+		renderPatents.render,
+		renderContribution.render,
+		renderContracts.render
 
 		
 	], function(err, results) {
