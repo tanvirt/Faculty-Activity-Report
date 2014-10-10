@@ -47,7 +47,7 @@ module.exports.submit = function(req, res, callback) {
 		course: req.body.teachingEvaluation.course,
 		year: req.body.teachingEvaluation.year,
 		semester: req.body.teachingEvaluation.semester,
-		enrolled: req.body.teachingEvaluation.numberEnrolled,
+		enrolled: req.body.teachingEvaluation.enrolled,
 		responses: req.body.teachingEvaluation.responses,
 		teacherMean: [1,2,3,1,2,3,1,2,3],  //Figure out array.
 		departmentMean: [2,3,4,2,3,4,2,3,4],

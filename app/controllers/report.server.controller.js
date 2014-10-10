@@ -23,6 +23,7 @@ var renderAssignedActivity = require('../../app/templates/assignedActivity/rende
 var renderTeachingAdvising = require('../../app/templates/teachingAdvising/renderTeachingAdvising');
 var renderTeachingAdvisingCourses = require('../../app/templates/teachingAdvisingCourses/renderTeachingAdvisingCourses');
 var renderTeachingEvaluation = require('../../app/templates/teachingEvaluation/renderTeachingEvaluation');
+var renderGraduateCommittee = require('../../app/templates/graduateCommittee/renderGraduateCommittee');
 var renderCurrentRank = require('../../app/templates/currentRank/renderCurrentRank');
 var renderCreativeWorks = require('../../app/templates/creativeWorks/renderCreativeWorks');
 var renderContribution = require('../../app/templates/contribution/renderContribution');
@@ -36,13 +37,14 @@ exports.generate = function(req,res,next) {
 	async.parallel([
 		//Initiate render functions here
 		renderName.render,
-		renderTenure.render
+		renderTenure.render,
 		//renderCurrentRank.render,
 		//renderDateAppointed.render,
 		//renderAssignedActivity.render,
 		//renderTeachingAdvising.render,
 		//renderTeachingAdvisingCourses.render,
-		//renderTeachingEvaluation.render,
+		renderTeachingEvaluation.render,
+		renderGraduateCommittee.render
 		//renderCreativeWorks.render,
 		//renderPatents.render,
 		//renderContribution.render,
