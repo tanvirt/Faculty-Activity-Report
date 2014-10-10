@@ -158,3 +158,31 @@ app.directive('section15', function(){
       templateUrl: 'modules/reports/views/section-15.client.view.html'
     };
 });
+
+app.directive('section16', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'modules/reports/views/section-16.client.view.html'
+	};
+});
+
+app.directive('section17', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'modules/reports/views/section-17.client.view.html'
+	};
+});
+
+app.directive('section18', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'modules/reports/views/section-18.client.view.html'
+	};
+});
+
+app.directive('section19', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'modules/reports/views/section-19.client.view.html'
+	};
+});
