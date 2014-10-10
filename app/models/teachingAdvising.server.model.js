@@ -13,6 +13,10 @@ var TeachingAdvising = new Schema({
 	},
 	supervising: {
 		type: String
+	},
+	user: {
+		type: Schema.ObjectId,
+		ref: 'User'
 	}
 }, {collection:'TeachingAdvising'});
 

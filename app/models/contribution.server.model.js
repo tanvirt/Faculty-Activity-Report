@@ -71,6 +71,10 @@ var Contribution = new Schema({
 	website: {
 		type: String,
 		validate: [validateWebsite, 'Must be a valid website']
+	},
+	user: {
+		type: Schema.ObjectId,
+		ref: 'User'
 	}
 }, {collection:'Contribution'});
 
