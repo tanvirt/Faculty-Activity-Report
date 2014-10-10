@@ -32,9 +32,9 @@ var validateLocalStrategyDate = function(property) {
 //Contents of schema will pull majority of content from outside data source, not from user
 //Overall mean is to be calculated on demand, not stored
 var teachingEvaluation = new Schema({
-	teacher: {			//multiple evaluations per teacher possible. Use this field to match with user.username
-		type: String,
-		required: true
+	user: {			//multiple evaluations per user possible. Use this field to match with user
+		type: Schema.ObjectId,
+		ref: 'User'
 	},
 	course: {
 		type: String,
