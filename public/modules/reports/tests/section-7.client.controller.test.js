@@ -1,10 +1,10 @@
 'use strict';
 
 (function() {
-	// Profile Controller Spec
-	describe('Profile Controller Tests', function() {
+	// Section 7 Controller Spec
+	describe('Section 7 Controller Tests', function() {
 		// Initialize global variables
-		var ProfileController,
+		var Section7Controller,
 			scope,
 			$httpBackend,
 			$stateParams,
@@ -44,8 +44,8 @@
 			$httpBackend = _$httpBackend_;
 			$location = _$location_;
 
-			// Initialize the Profile controller.
-			ProfileController = $controller('ProfileController', {
+			// Initialize the Section 7 controller.
+			Section7Controller = $controller('Section7Controller', {
 				$scope: scope
 			});
 		}));
