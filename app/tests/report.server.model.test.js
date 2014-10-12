@@ -24,13 +24,26 @@ describe('Report Model Unit Tests:', function() {
 			displayName: 'Full Name',
 			email: 'test@test.com',
 			username: 'username',
-			password: 'password'
+			password: 'password',
+			
 		});
 
 		user.save(function() { 
 			report = new Report({
 				reportName: 'Report Name',
-				user: user
+				user: user,
+
+				firstName: 'First',
+				middleName: 'M',
+				lastName: 'Last',
+
+				tenure: 'Tenured',
+
+				currentRank: 'Current Rank',
+
+				dateAppointed: 'October 2012',
+
+				affiliateAppointments: 'Affiliate Appointments',
 			});
 
 			done();
