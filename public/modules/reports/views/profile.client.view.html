@@ -6,25 +6,26 @@
 
     <form class="form-horizontal">
         <fieldset>
-        	
             <div class="form-group">
                 <label class="col-md-3 control-label" for="name">Name</label>
                 <div class="col-md-2 controls">
-                    <input type="text" data-ng-model="name.firstName" id="firstName" class="form-control" placeholder="First" required>
+                    <input type="text" data-ng-model="firstName" id="firstName" class="form-control" placeholder="First" required>
                 </div>
                 <div class="col-md-1 controls">
-                    <input type="text" data-ng-model="name.middleName" id="middleName" class="form-control" placeholder="M." required>
+                    <input type="text" data-ng-model="middleName" id="middleName" class="form-control" placeholder="M." required>
                 </div>
                 <div class="col-md-3 controls">
-                    <input type="text" data-ng-model="name.lastName" id="lastName" class="form-control" placeholder="Last" required>
+                    <input type="text" data-ng-model="lastName" id="lastName" class="form-control" placeholder="Last" required>
                 </div>
             </div>
             
             <div class="form-group">
                 <label class="col-md-3 control-label" for="tenure">Tenure</label>
-                <div class="col-sm-1 controls">
-                    <input type="checkbox" data-ng-model="tenure" id="tenure" class="" placeholder="Tenured" value="Tenured">
-                    <input type="hidden" data-ng-model="tenure" id="tenure" class="form-control" placeholder="Tenured" value="Not Tenured">
+                <div class="col-sm-6 controls">
+                    <select class="form-control">
+                      <option value="Tenured">Tenured</option>
+                      <option value="Not Tenured">Not Tenured</option>
+                    </select>
                 </div>
             </div>
           
@@ -38,15 +39,15 @@
             <div class="form-group">
                 <label class="col-md-3 control-label" for="dateAppointed">Date Appointed to this Rank</label>
                 <div class="col-md-6 controls">
-                    <input type="date" data-ng-model="dateAppointed" ng-model-instant id="dateAppointed" class="form-control" required>
+                    <input type="month" data-ng-model="dateAppointed" id="dateAppointed" class="form-control" required>
                 </div>
                 
             </div>
             
             <div class="form-group">
-                <label class="col-md-3 control-label" for="affiliateAppintments">Affiliate Appointments</label>
+                <label class="col-md-3 control-label" for="affiliateAppointments">Affiliate Appointments</label>
                 <div class="col-md-6 controls">
-                    <input type="text" data-ng-model="affiliateAppintments" id="affiliateAppintments" class="form-control" placeholder="Affiliate Appointments" required>
+                    <input type="text" data-ng-model="affiliateAppointments" id="affiliateAppointments" class="form-control" placeholder="Affiliate Appointments" required>
                 </div>
             </div>
 

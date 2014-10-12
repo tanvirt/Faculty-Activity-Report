@@ -1,8 +1,55 @@
 <section data-ng-controller="ReportsController" data-ng-init="findOne()">
+
 	<div class="page-header">
 		<h1 data-ng-bind="report.reportName"></h1>
 	</div>
-	<div class="pull-right" data-ng-show="authentication.user._id == report.user._id">
+	
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
+		<h3 class="text-center">COLLEGE OF ENGINEERING<p>Annual Activities Report</h3>
+		<br>
+
+		<h4><b>1 NAME:</b></h4>
+		<div>
+			<span>{{report.firstName}} {{report.middleName}} {{report.lastName}} </span>
+		</div>
+		<br>
+
+
+	    <h4><b>2 TENURE:</b></h4>
+	    <div>
+			<span> {{report.tenure}} </span>
+		</div>
+		<br>
+
+
+		<h4><b>3 CURRENT RANK:</b></h4>
+	    <div>
+	    	<span> {{report.currentRank}} </span>
+		</div>
+		<br>
+
+
+		<h4><b>4 DATE APPOINTED:</b></h4>
+	    <div>
+			<span>{{report.dateAppointed | date:'MMMM yyyy'}}</span>
+		</div>
+		<br>
+
+
+		<h4><b>5 AFFILIATE APPOINTMENTS:</b></h4>
+	    <div>
+			<span>{{report.affiliateAppointments}}</span>
+		</div>
+		
+		<br><br>
+
+
+    </div>
+    <div class="col-md-1"></div>
+
+<div class="col-md-12">
+    <div class="pull-right" data-ng-show="authentication.user._id == report.user._id">
 		<a class="btn btn-primary" href="/#!/reports/{{report._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
 		</a>
@@ -12,10 +59,11 @@
 	</div>
 	<small>
 		<em class="text-muted">
-			Posted on
+			Created on
 			<span data-ng-bind="report.created | date:'mediumDate'"></span>
 			by
 			<span data-ng-bind="report.user.displayName"></span>
 		</em>
 	</small>
+</div>
 </section>
