@@ -1,10 +1,10 @@
-<section data-ng-controller="ReportsController">
+<section>
 		
-	<div class="col-md-12">
+	<div class="col-md-12" style="padding-top:20px">
 		<h3>7. Teaching, Advising and/or Instructional Accomplishments</h3>
 		<hr>
     <form class="form-horizontal" data-ng-submit="create()" novalidate>
-      <textarea ui-tinymce ng-model="tinymceModel" id="section-10" class="form-control"></textarea>  
+        <textarea name="section7" data-ng-model="section7" id="section7" class="form-control" cols="30" rows="10" placeholder="Content" ui-tinymce="tinymceOptions"></textarea>
     </form>
 </div>
 </section>

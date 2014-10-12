@@ -53,7 +53,7 @@
 		it('$scope.find() should create an array with at least one Report object fetched from XHR', inject(function(Reports) {
 			// Create sample Report using the Reports service
 			var sampleReport = new Reports({
-				name: 'New Report'
+				reportName: 'New Report'
 			});
 
 			// Create a sample Reports array that includes the new Report
@@ -73,7 +73,7 @@
 		it('$scope.findOne() should create an array with one Report object fetched from XHR using a reportId URL parameter', inject(function(Reports) {
 			// Define a sample Report object
 			var sampleReport = new Reports({
-				name: 'New Report'
+				reportName: 'New Report'
 			});
 
 			// Set the URL parameter
@@ -93,17 +93,17 @@
 		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Reports) {
 			// Create a sample Report object
 			var sampleReportPostData = new Reports({
-				name: 'New Report'
+				reportName: 'New Report'
 			});
 
 			// Create a sample Report response
 			var sampleReportResponse = new Reports({
 				_id: '525cf20451979dea2c000001',
-				name: 'New Report'
+				reportName: 'New Report'
 			});
 
 			// Fixture mock form input values
-			scope.name = 'New Report';
+			scope.reportName = 'New Report';
 
 			// Set POST response
 			$httpBackend.expectPOST('reports', sampleReportPostData).respond(sampleReportResponse);
@@ -113,7 +113,7 @@
 			$httpBackend.flush();
 
 			// Test form inputs are reset
-			expect(scope.name).toEqual('');
+			expect(scope.reportName).toEqual('');
 
 			// Test URL redirection after the Report was created
 			expect($location.path()).toBe('/reports/' + sampleReportResponse._id);
@@ -123,7 +123,7 @@
 			// Define a sample Report put data
 			var sampleReportPutData = new Reports({
 				_id: '525cf20451979dea2c000001',
-				name: 'New Report'
+				reportName: 'New Report'
 			});
 
 			// Mock Report in scope

@@ -20,28 +20,26 @@ app.controller('ReportsController', ['$scope', '$stateParams', '$location', 'Aut
 		};
 
 		$scope.authentication = Authentication;
-		//variable for section 15 to initialize the table
-		$scope.grants = 
-         	[{
-         		titleOfGrant:'Faculty Grants',
-         		fundingAgency:'EOF',
-         		PI:'Willy Nelson',
-         		startEnd:'01/13/2014',
-         		value:200	
-         	}];
-        $scope.addGrants = function(){
-         		$scope.grants.push({titleOfGrant: $scope.grants.titleOfGrant , fundingAgency: $scope.grants.fundingAgency, PI: $scope.grants.PI, value:$scope.grants.value, startEnd: $scope.grants.startEnd});
-         		$scope.grants.titleOfGrant = '';
-         		$scope.grants.fundingAgency = '';
-         		$scope.grants.PI = '';
-         		$scope.grants.value= '';
-         		$scope.grants.startEnd='';
-         	};
+		
+		
 		// Create new Report
 		$scope.create = function() {
 			// Create new Report object
 			var report = new Reports ({
-				name: this.name
+				reportName: this.reportName,
+
+				firstName: this.firstName,
+				middleName: this.middleName,
+				lastName: this.lastName,
+
+				tenure: this.tenure,
+
+				currentRank: this.currentRank,
+
+				dateAppointed: this.dateAppointed,
+
+				affiliateAppointments: this.affiliateAppointments,
+
 			});
 
 			// Redirect after save
@@ -49,7 +47,7 @@ app.controller('ReportsController', ['$scope', '$stateParams', '$location', 'Aut
 				$location.path('reports/' + response._id);
 
 				// Clear form fields
-				$scope.name = '';
+				$scope.reportName = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

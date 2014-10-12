@@ -5,14 +5,6 @@ angular.module('reports').config(['$stateProvider',
 	function($stateProvider) {
 		// Reports state routing
 		$stateProvider.
-		state('teaching-evaluations', {
-			url: '/teaching-evaluations',
-			templateUrl: 'modules/reports/views/teaching-evaluations.client.view.html'
-		}).
-		state('assigned-activity', {
-			url: '/Activity',
-			templateUrl: 'modules/reports/views/assigned-activity.client.view.html'
-		}).
 		state('listReports', {
 			url: '/reports',
 			templateUrl: 'modules/reports/views/list-reports.client.view.html'

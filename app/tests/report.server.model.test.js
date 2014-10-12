@@ -29,7 +29,7 @@ describe('Report Model Unit Tests:', function() {
 
 		user.save(function() { 
 			report = new Report({
-				name: 'Report Name',
+				reportName: 'Report Name',
 				user: user
 			});
 
@@ -46,7 +46,7 @@ describe('Report Model Unit Tests:', function() {
 		});
 
 		it('should be able to show an error when try to save without name', function(done) { 
-			report.name = '';
+			report.reportName = '';
 
 			return report.save(function(err) {
 				should.exist(err);
