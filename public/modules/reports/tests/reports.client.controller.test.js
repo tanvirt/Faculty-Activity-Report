@@ -53,7 +53,18 @@
 		it('$scope.find() should create an array with at least one Report object fetched from XHR', inject(function(Reports) {
 			// Create sample Report using the Reports service
 			var sampleReport = new Reports({
-				reportName: 'New Report'
+				reportName: 'New Report',
+				firstName: 'First',
+				middleName: 'M',
+				lastName: 'Last',
+
+				tenure: 'Tenured',
+
+				currentRank: 'Current Rank',
+
+				dateAppointed: 'October 2012',
+
+				affiliateAppointments: 'Affiliate Appointments',
 			});
 
 			// Create a sample Reports array that includes the new Report
@@ -73,7 +84,18 @@
 		it('$scope.findOne() should create an array with one Report object fetched from XHR using a reportId URL parameter', inject(function(Reports) {
 			// Define a sample Report object
 			var sampleReport = new Reports({
-				reportName: 'New Report'
+				reportName: 'New Report',
+				firstName: 'First',
+				middleName: 'M',
+				lastName: 'Last',
+
+				tenure: 'Tenured',
+
+				currentRank: 'Current Rank',
+
+				dateAppointed: 'October 2012',
+
+				affiliateAppointments: 'Affiliate Appointments',
 			});
 
 			// Set the URL parameter
@@ -93,17 +115,50 @@
 		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Reports) {
 			// Create a sample Report object
 			var sampleReportPostData = new Reports({
-				reportName: 'New Report'
+				reportName: 'New Report',
+				firstName: 'First',
+				middleName: 'M',
+				lastName: 'Last',
+
+				tenure: 'Tenured',
+
+				currentRank: 'Current Rank',
+
+				dateAppointed: 'October 2012',
+
+				affiliateAppointments: 'Affiliate Appointments',
 			});
 
 			// Create a sample Report response
 			var sampleReportResponse = new Reports({
 				_id: '525cf20451979dea2c000001',
-				reportName: 'New Report'
+				reportName: 'New Report',
+				firstName: 'First',
+				middleName: 'M',
+				lastName: 'Last',
+
+				tenure: 'Tenured',
+
+				currentRank: 'Current Rank',
+
+				dateAppointed: 'October 2012',
+
+				affiliateAppointments: 'Affiliate Appointments',
 			});
 
 			// Fixture mock form input values
 			scope.reportName = 'New Report';
+			scope.firstName = 'First';
+			scope.middleName = 'M';
+			scope.lastName = 'Last';
+
+			scope.tenure = 'Tenured';
+
+			scope.currentRank = 'Current Rank';
+
+			scope.dateAppointed = 'October 2012';
+
+			scope.affiliateAppointments = 'Affiliate Appointments';
 
 			// Set POST response
 			$httpBackend.expectPOST('reports', sampleReportPostData).respond(sampleReportResponse);
