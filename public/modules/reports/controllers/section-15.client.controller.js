@@ -31,8 +31,6 @@ angular.module('reports').controller('Section15Controller', ['$scope', '$statePa
 
             };
 
-        $scope.$watch('grants.titleOfGrant',function(){$scope.test();});
-
             
          //When the add grant button is pressed this function is called.
         $scope.addGrants = function(){
@@ -44,7 +42,7 @@ angular.module('reports').controller('Section15Controller', ['$scope', '$statePa
                $scope.grants.startEnd = null;
                $scope.hideTable = false;
             };
-            
+
        /*
       //Function to look for changes that are happening in the Grants object.
       $scope.$watch('grants.titleOfGrant',function(){$scope.test();});
