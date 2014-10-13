@@ -21,23 +21,38 @@ var renderTenure = require('../../app/templates/tenure/renderTenure');
 var renderDateAppointed = require('../../app/templates/dateAppointed/renderDateAppointed');
 var renderAssignedActivity = require('../../app/templates/assignedActivity/renderAssignedActivity');
 var renderTeachingAdvising = require('../../app/templates/teachingAdvising/renderTeachingAdvising');
+var renderTeachingAdvisingCourses = require('../../app/templates/teachingAdvisingCourses/renderTeachingAdvisingCourses');
+var renderTeachingEvaluation = require('../../app/templates/teachingEvaluation/renderTeachingEvaluation');
+var renderGraduateCommittee = require('../../app/templates/graduateCommittee/renderGraduateCommittee');
 var renderCurrentRank = require('../../app/templates/currentRank/renderCurrentRank');
+var renderCreativeWorks = require('../../app/templates/creativeWorks/renderCreativeWorks');
+var renderContribution = require('../../app/templates/contribution/renderContribution');
+var renderPatents = require('../../app/templates/patents/renderPatents');
+var renderContracts = require('../../app/templates/contracts/renderContracts');
 
 /*
 Generates the LaTex File into app/pdf directory
 */
-exports.latexString = function(req,res,next) {	
+exports.generate = function(req,res,next) {	
 	async.parallel([
 		//Initiate render functions here
 		renderName.render,
 		renderTenure.render,
 		renderCurrentRank.render,
 		renderDateAppointed.render,
-		//renderAssignedActivity.render,
-		renderTeachingAdvising.render
+		renderAssignedActivity.render,
+		renderTeachingAdvising.render,
+		renderTeachingAdvisingCourses.render,
+		renderTeachingEvaluation.render,
+		renderGraduateCommittee.render,
+		renderCreativeWorks.render,
+		renderPatents.render,
+		renderContribution.render,
+		renderContracts.render
+
 		
 	], function(err, results) {
-		if (err) return err;
+		if (err) res.status(500).send({ error: 'Report Generation Failed' });
 
 		//Generate Report
 		var writeable = fs.createWriteStream('./app/pdf/report.pdf');
@@ -57,12 +72,51 @@ exports.latexString = function(req,res,next) {
 		]).pipe(writeable).on('error', function(e) {
 			throw new Error('Cannot overwrite report.pdf when it is open on your system. Please close report.pdf.');
 		});
+		console.log('Report Generated!');
+		res.redirect('/report/download');
+	});
+};
+
+exports.debug = function(req,res,next) {
+	console.log('Dropped Database!');
+	mongoose.connection.db.dropDatabase();
+	next();
+};
+
+exports.download = function(req, res) {
+	res.download('./app/pdf/report.pdf');
+};
+
+exports.form = function(req, res){
+	res.render('report/test', {
+	    title: 'Report Upload' 
+	});
+};
+
+exports.testForm = function(req, res, next) {
+	res.render('report/report', {
+		title: 'Report Download'
+	});
+};
+
+exports.testGenerate = function(req, res, next) {
+	res.render('report/generate', {
+		title: 'Generating Report'
+	});
+};
+
+exports.submit = function(req, res, next) {
+	async.parallel([
+		async.apply(renderName.submit, req, res),
+		async.apply(renderTenure.submit, req, res)
+	], function(err) {
+		if (err) res.status(500).send({ error: 'Submit Failed' });	
+		console.log(req.body);
+		res.redirect('/report/generate');	
 		//next();
 	});
 
-	// only for testing purposes
-	res.setHeader('Content-Type', 'text/html');
-	res.end('<p>Report Generated!</p>');	
-	console.log('Report Generated!');	
 };
+
+
 

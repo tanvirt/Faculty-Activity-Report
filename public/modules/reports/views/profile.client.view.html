@@ -1,22 +1,22 @@
-<section data-ng-controller="ReportsController">
+<section>
 
 <div class="col-md-12" style="padding-top:20px">
     <h3>1-5. Faculty Profile</h3>
      <hr>
 
-    <form class="form-horizontal" data-ng-submit="create()" novalidate>
+    <form class="form-horizontal">
         <fieldset>
         	
             <div class="form-group">
                 <label class="col-md-3 control-label" for="name">Name</label>
                 <div class="col-md-2 controls">
-                    <input type="text" data-ng-model="name" id="first" class="form-control" placeholder="First" required>
+                    <input type="text" data-ng-model="name.firstName" id="firstName" class="form-control" placeholder="First" required>
                 </div>
                 <div class="col-md-1 controls">
-                    <input type="text" data-ng-model="name" id="middle" class="form-control" placeholder="M." required>
+                    <input type="text" data-ng-model="name.middleName" id="middleName" class="form-control" placeholder="M." required>
                 </div>
                 <div class="col-md-3 controls">
-                    <input type="text" data-ng-model="name" id="last" class="form-control" placeholder="Last" required>
+                    <input type="text" data-ng-model="name.lastName" id="lastName" class="form-control" placeholder="Last" required>
                 </div>
             </div>
             
@@ -50,11 +50,7 @@
                 </div>
             </div>
 
-            
-
-            <div data-ng-show="error" class="text-danger col-md-offset-3 col-md-6">
-                <strong data-ng-bind="error"></strong>
-            </div>
+        
         </fieldset>
     </form>
 </div>

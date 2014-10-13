@@ -28,59 +28,27 @@ var AssignedActivity = new Schema({
 		validate: [validateLocalStrategyDate, 
 					'Date must be less than or equal to the current year and greator than or equal to 1980']
 	},
-	fall: {
-		teaching: {
-			type: Number,
-			validate: [validateLocalStrategyProperty, 
-					'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
-		},
-		research: {
-			type: Number,
-			validate: [validateLocalStrategyProperty, 
-					'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
-		},
-		service: {
-			type: Number,
-			validate: [validateLocalStrategyProperty, 
-					'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
-			}
+	semester: {
+		type: String,
+		required: true,
+		enum: ['spring', 'fall', 'summer']
 	},
-		
-	spring: {
-		teaching: {
-			type: Number,
-			validate: [validateLocalStrategyProperty, 
-					'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
-		},
-		research: {
-			type: Number,
-			validate: [validateLocalStrategyProperty, 
-					'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
-		},
-		service: {
-			type: Number,
-			validate: [validateLocalStrategyProperty, 
-					'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
-		}		
+	teaching: {
+		type: Number,
+		validate: [validateLocalStrategyProperty, 
+				'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
 	},
+	research: {
+		type: Number,
+		validate: [validateLocalStrategyProperty, 
+				'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
+	},
+	service: {
+		type: Number,
+		validate: [validateLocalStrategyProperty, 
+				'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
+	}
 		
-	summer: {
-		teaching: {
-			type: Number,
-			validate: [validateLocalStrategyProperty, 
-					'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
-		},
-		research: {
-			type: Number,
-			validate: [validateLocalStrategyProperty, 
-					'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
-		},
-		service: {
-			type: Number,
-			validate: [validateLocalStrategyProperty, 
-					'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
-		}
-	}	
 }, {collection:'AssignedActivity'});
 
 mongoose.model('AssignedActivity', AssignedActivity);

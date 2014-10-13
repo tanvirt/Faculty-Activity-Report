@@ -1,6 +1,6 @@
 <section data-ng-controller="ReportsController" data-ng-init="findOne()">
 	<div class="page-header">
-		<h1 data-ng-bind="report.name"></h1>
+		<h1 data-ng-bind="report.reportName"></h1>
 	</div>
 	<div class="pull-right" data-ng-show="authentication.user._id == report.user._id">
 		<a class="btn btn-primary" href="/#!/reports/{{report._id}}/edit">

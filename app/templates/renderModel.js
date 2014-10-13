@@ -18,6 +18,14 @@ function createDummy( objectFunction, Model ) {
 	throw new Error('Function passed did not define a new Mongoose Model!');
 }
 
+function createDummys( arrayObjectFunction, Model, cb ) {	
+	var objA = arrayObjectFunction(Model);
+	for (var i = 0; i < objA.length; i++) {
+		objA[i].save();
+	}
+	cb(objA);
+}
+
 /*
 Helper function that both query's and gets an object from the database 
 and renders the object into latex.
@@ -44,5 +52,33 @@ exports.render = function( filePath, Model, dummyFunction, cb ) {
 			if (err) throw err;
 			cb( output );
 		});
+	});
+};
+
+function renderSwig(filePath, objArray, cb) {
+	swig.renderFile(join('./app/templates', filePath), objArray, function(err, output) {
+		if (err) throw err;
+		cb( output );
+	});
+}
+
+exports.renderMultiple = function( filePath, Model, criteria, passObj, arrayDummyFunction, cb ) {
+	Model.find(criteria, function(err, objArray) {
+		if (err) return err;
+
+		if (objArray.length === 0) {
+			if (arrayDummyFunction) {
+				createDummys(arrayDummyFunction, Model, function(objArray) {
+					objArray = passObj(objArray);
+					renderSwig(filePath, objArray, cb);
+				});
+			} else {
+				var errStr = 'There does not exist an entry in the ' + Model.modelName + ' collection.';
+				throw new Error(errStr);
+			}
+		} else {
+			objArray = passObj(objArray);
+			renderSwig(filePath, objArray, cb);
+		}
 	});
 };

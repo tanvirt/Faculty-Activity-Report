@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
  * Report Schema
  */
 var ReportSchema = new Schema({
-	name: {
+	reportName: {
 		type: String,
 		default: '',
 		required: 'Please fill Report name',

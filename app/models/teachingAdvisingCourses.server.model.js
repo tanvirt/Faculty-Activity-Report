@@ -10,7 +10,7 @@ var validateLocalStrategyCourses = function(property) {
 	return property >= 0 && property <= 5;
 };
 
-var Courses = new Schema({
+var TeachingAdvisingCourses = new Schema({
 	name: {
 		type: String,
 		required: true
@@ -24,7 +24,11 @@ var Courses = new Schema({
 		required: true,
 		validate: [validateLocalStrategyCourses, 
 			'Number must be between or including 0 and 5']
+	},
+	user: {
+		type: Schema.ObjectId,
+		ref: 'User'
 	}
-}, {collection:'Courses'});
+}, {collection:'TeachingAdvisingCourses'});
 
-mongoose.model('Courses', Courses);
+mongoose.model('TeachingAdvisingCourses', TeachingAdvisingCourses);

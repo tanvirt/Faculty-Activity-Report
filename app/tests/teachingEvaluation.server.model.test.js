@@ -17,7 +17,7 @@ describe('Teaching Evaluation Model Unit Tests:', function() {
 	beforeEach(function(done) {
 	
 		evaluation01 = new TeachingEvaluation({
-			teacher: 'testName',
+			//teacher: 'testName',
 			course: 'testCourse 101',
 			year: '2014',
 			semester: 'spring',
@@ -30,7 +30,7 @@ describe('Teaching Evaluation Model Unit Tests:', function() {
 
 
 		evaluation02 = new TeachingEvaluation({
-			teacher: 'testName',
+			//teacher: 'testName',
 			course: 'testCourse 101',
 			year: '2014',
 			semester: 'spring',

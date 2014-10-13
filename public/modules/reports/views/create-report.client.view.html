@@ -1,13 +1,49 @@
 <section data-ng-controller="ReportsController">
-    <div class="page-header">
-        <h1>New Report</h1>
-    </div>
-    <div class="col-md-12">
-        <div ng-include src="'modules/reports/views/profile.client.view.html'"></div>
-        <div style="padding-top:30px">
-        <div ng-include src="'modules/reports/views/assigned-activity.client.view.html'"></div>
-        <div ng-include src="'modules/reports/views/section-7.client.view.html'"></div>
-        <div ng-include src="'modules/reports/views/section-10.client.view.html'"></div>
-        <div ng-include src="'modules/reports/views/section-15.client.view.html'"></div>
-    </div>
+        <div class="page-header">
+            <h1>New Report</h1>
+        </div>
+
+
+        <div class="col-md-1"></div>
+        <div class="col-md-10" style="padding-bottom: 50px">
+            <form class="form-horizontal" data-ng-submit="create()" novalidate>
+                <div class="col-md-12" style="padding-top:20px">
+                <div class="form-group">
+                    <label class="control-label" for="name">Report Name</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="reportName" id="reportName" class="form-control" placeholder="Name" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+
+                <div data-ng-show="error" class="text-danger col-md-offset-3 col-md-6">
+                    <strong data-ng-bind="error"></strong>
+                </div>
+                </div>
+
+
+            <!-- The directives below are defined in the reports.client.controller.js file. -->
+            <!-- They will be moved to a new directory: modules/reports/directives at a later time -->
+            <profile></profile>
+            <assigned-activity></assigned-activity>
+            <section7></section7>
+            <section10></section10>
+            <section11></section11>
+            <section12></section12>
+            <section13></section13>
+            <section14></section14>
+            <section15></section15>
+            <section16></section16>
+            <section17></section17>
+            <section18></section18>
+            <section19></section19>
+        
+
+        </form> 
+        </div>
+        <div class="col-md-1"></div>
+        
 </section>

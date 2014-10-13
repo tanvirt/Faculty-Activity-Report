@@ -8,7 +8,6 @@ var validateInitLength= function(property) {
 };
 
 var NameSchema = new Schema({
-
 	firstName: {
 		type: String,
 		required: true
@@ -22,8 +21,12 @@ var NameSchema = new Schema({
 	lastName: {
 		type: String,
 		required: true
-	}		
-	
+	},
+
+	user: {
+		type: Schema.ObjectId,
+		ref: 'User'
+	}	
 }, {collection: 'NameSchema'});
 
 mongoose.model('NameSchema', NameSchema);

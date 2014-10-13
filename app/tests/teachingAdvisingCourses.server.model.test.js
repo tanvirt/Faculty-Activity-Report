@@ -5,7 +5,7 @@
  */
 var should = require('should'),
 	mongoose = require('mongoose'),
-	Courses = mongoose.model('Courses');
+	Courses = mongoose.model('TeachingAdvisingCourses');
 
 /**
  * Globals
