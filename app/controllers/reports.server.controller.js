@@ -7,24 +7,48 @@ var mongoose = require('mongoose'),
 	errorHandler = require('./errors'),
 	Report = mongoose.model('Report'),
 	_ = require('lodash');
+var Name = mongoose.model('NameSchema');
+var Tenure = mongoose.model('TenureSchema');
 
 /**
  * Create a Report
  */
-exports.create = function(req, res) {
+
+
+ exports.create = function(req, res, callback) {
+
 	var report = new Report(req.body);
 	report.user = req.user;
 
-	report.save(function(err) {
+	var name = new Name();
+	name.firstName = req.body.firstName;
+	name.midInit = req.body.middleName;
+	name.lastName = req.body.lastName;
+	var tenure = new Tenure();
+	tenure.tenure = req.body.tenure;
+	console.log('saved');
+	/*
+	tenure.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(report);
+			res.jsonp(tenure);
+			console.log('saved3');
+		}
+	}); */
+	name.save(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(name);
+			console.log('saved2');
 		}
 	});
-};
+};*/
 
 /**
  * Show the current Report
