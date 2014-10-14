@@ -26,11 +26,13 @@ module.exports.render = function (callback) {
 	});
 };
 
-module.exports.submit = function(req, res, callback) {
-	Tenure.create({
-		tenure: req.body.tenure.tenure,
-		user: req.user
-	}, function(err) {
-		callback(err);
+module.exports.submit = function(req, callback) {
+	var tenure = new Tenure({
+		tenure: req.body.tenure,
+		user: req.user		
+	});
+
+	tenure.save(function(err) {
+		callback(null, tenure);
 	});
 };

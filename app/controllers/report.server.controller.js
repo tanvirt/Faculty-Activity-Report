@@ -49,8 +49,7 @@ exports.generate = function(req,res,next) {
 		renderPatents.render,
 		renderContribution.render,
 		renderContracts.render
-
-		
+	
 	], function(err, results) {
 		if (err) res.status(500).send({ error: 'Report Generation Failed' });
 
@@ -113,10 +112,21 @@ exports.submit = function(req, res, next) {
 		if (err) res.status(500).send({ error: 'Submit Failed' });	
 		console.log(req.body);
 		res.redirect('/report/generate');	
-		//next();
 	});
 
 };
 
+exports.submit_02 = function(req, res, callback) {
+	async.parallel({		
+		name: async.apply(renderName.submit, req),
+		tenure: async.apply(renderTenure.submit, req)
+	}, function(err, models) {
+		if (err) {
+			callback(err, null);	
+		} else {
+			callback(err, models);
+		}
+	});
+};
 
 

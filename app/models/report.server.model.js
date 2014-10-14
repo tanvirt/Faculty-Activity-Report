@@ -27,7 +27,7 @@ var ReportSchema = new Schema({
 	},
 
 	//TEMPORARY FIELDS FOR REPORT SECTIONS------------------------------------------------
-
+	/*
 	firstName: {
 		type: String,
 		default: '',
@@ -53,6 +53,17 @@ var ReportSchema = new Schema({
 		default: 'Not Tenured',
 		enum: ['Tenured', 'Not Tenured'],
 		trim: true
+	},
+	*/
+
+
+
+	name: {
+		type: Schema.Types.ObjectId, ref: 'NameSchema'
+	},
+
+	tenure: {
+		type: Schema.Types.ObjectId, ref: 'TenureSchema'
 	},
 
 	currentRank: {

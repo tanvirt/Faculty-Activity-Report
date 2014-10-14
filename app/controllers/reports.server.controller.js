@@ -8,23 +8,55 @@ var mongoose = require('mongoose'),
 	Report = mongoose.model('Report'),
 	_ = require('lodash');
 
+var rCtrl = require('./report');
+
 /**
  * Create a Report
  */
 exports.create = function(req, res) {
-	var report = new Report(req.body);
-	report.user = req.user;
-
-	report.save(function(err) {
+	//console.log('body: ' + req.body.firstName);
+	
+	rCtrl.submit_02(req, res, function(err, models) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(report);
+			var report = new Report();
+			report.user = req.user;
+
+			// Assign Prev values
+			report.reportName = req.body.reportName;
+
+			// Temporary Values, Delete when Reference has been made
+			//report.firstName = req.body.firstName;
+			//report.middleName = req.body.middleName;
+			//report.lastName = req.body.lastName;
+			//report.tenure = req.body.tenure;
+			report.currentRank = req.body.currentRank; //needs currentRank ref
+			report.dateAppointed = req.body.dateAppointed; //needs dateAppointed ref
+			report.affiliateAppointments = req.body.affiliateAppointments; //needs affiliate reff
+
+			// Assign Name References
+			report.name = models.name._id;
+
+			// Assign Tenure References
+			report.tenure = models.tenure._id;
+
+			report.save(function(err) {
+				if (err) {
+					return res.status(400).send({
+						message: errorHandler.getErrorMessage(err)
+					});
+				} else {
+					console.log(JSON.stringify(report));
+					res.jsonp(report);
+				}
+			});			
 		}
 	});
 };
+
 
 /**
  * Show the current Report
@@ -37,9 +69,9 @@ exports.read = function(req, res) {
  * Update a Report
  */
 exports.update = function(req, res) {
-	var report = req.report ;
+	var report = req.report;
 
-	report = _.extend(report , req.body);
+	report = _.extend(report, req.body);
 
 	report.save(function(err) {
 		if (err) {
@@ -50,13 +82,14 @@ exports.update = function(req, res) {
 			res.jsonp(report);
 		}
 	});
+
 };
 
 /**
  * Delete an Report
  */
 exports.delete = function(req, res) {
-	var report = req.report ;
+	var report = req.report;
 
 	report.remove(function(err) {
 		if (err) {
@@ -73,7 +106,14 @@ exports.delete = function(req, res) {
  * List of Reports
  */
 exports.list = function(req, res) { 
-	Report.find().sort('-created').populate('user', 'displayName').exec(function(err, reports) {
+	Report.find()
+	.sort('-created')
+	.populate('user', 'displayName')
+
+	.populate('name')
+	.populate('tenure')
+
+	.exec(function(err, reports) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -88,7 +128,13 @@ exports.list = function(req, res) {
  * Report middleware
  */
 exports.reportByID = function(req, res, next, id) { 
-	Report.findById(id).populate('user', 'displayName').exec(function(err, report) {
+	Report.findById(id)
+	.populate('user', 'displayName')
+
+	.populate('name')
+	.populate('tenure')
+
+	.exec(function(err, report) {
 		if (err) return next(err);
 		if (!report) return next(new Error('Failed to load Report ' + id));
 		req.report = report;

@@ -7,8 +7,8 @@ var mongoose = require('mongoose'),
 var TenureSchema = new Schema({
 	tenure: {
 		type: String,
-		enum: ['Tenured', 'Not Tenured'],
-		required: true
+		default: 'Not Tenured',
+		enum: ['Tenured', 'Not Tenured']
 	},
 	user: {
 		type: Schema.ObjectId,

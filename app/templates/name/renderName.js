@@ -12,7 +12,7 @@ Populates the database with test data
 function dummyObject(Model) {
 	var obj = new Model({
 		firstName: 'Rosie',
-		midInit: 'T',
+		middleName: 'T',
 		lastName: 'Poodle'
 	});
 	return obj;
@@ -28,13 +28,15 @@ module.exports.render = function (callback) {
 	});
 };
 
-module.exports.submit = function(req, res, callback) {
-	Name.create({
-		firstName: req.body.name.firstName,
-		midInit: req.body.name.midInit,
-		lastName: req.body.name.lastName,
-		user: req.user
-	}, function(err) {
-		callback(err);
+module.exports.submit = function(req, callback) {
+	var name = new Name({
+		firstName: req.body.firstName,
+		middleName: req.body.middleName,
+		lastName: req.body.lastName,
+		user: req.user		
+	});
+
+	name.save(function(err) {
+		callback(null, name);
 	});
 };
