@@ -2,7 +2,7 @@
 //module dependencies
 var should = require('should'),
 	mongoose = require('mongoose'),
-	Name = mongoose.model('NameSchema');
+	Name = mongoose.model('Name');
 
 var name1, name2;
 
@@ -44,7 +44,7 @@ describe('Name Model Unit Tests:', function() {
 		});
 		
 		it('should fail to save with a midInit longer than 1 character', function(done) {
-			name1.midInit = 'alsdj';
+			name1.middleName = 'alsdj';
 			return name1.save(function(err) {
 				should.exist(err);
 				done();
@@ -52,7 +52,7 @@ describe('Name Model Unit Tests:', function() {
 		});
 		
 		it('should save normally without a middle name', function(done) {
-			name1.midInit = '';
+			name1.middleName = '';
 			name1.save(done);
 		});	
 		

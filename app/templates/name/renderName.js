@@ -4,7 +4,7 @@ var renderModel = require('../../../app/templates/renderModel');
 var mongoose = require('mongoose');
 
 // Compile Schema into Model here
-var Name = mongoose.model('NameSchema');
+var Name = mongoose.model('Name');
 
 /*
 Populates the database with test data

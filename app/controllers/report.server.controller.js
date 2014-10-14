@@ -71,8 +71,11 @@ exports.generate = function(req,res,next) {
 		]).pipe(writeable).on('error', function(e) {
 			throw new Error('Cannot overwrite report.pdf when it is open on your system. Please close report.pdf.');
 		});
-		console.log('Report Generated!');
-		res.redirect('/report/download');
+
+		writeable.on('finish', function() {
+			console.log('Report Generated!');
+			res.redirect('/report/download');
+		});
 	});
 };
 
@@ -106,9 +109,9 @@ exports.testGenerate = function(req, res, next) {
 
 exports.submit = function(req, res, next) {
 	async.parallel([
-		async.apply(renderName.submit, req, res),
-		async.apply(renderTenure.submit, req, res)
-	], function(err) {
+		async.apply(renderName.submit, req),
+		async.apply(renderTenure.submit, req)
+	], function(err, models) {
 		if (err) res.status(500).send({ error: 'Submit Failed' });	
 		console.log(req.body);
 		res.redirect('/report/generate');	

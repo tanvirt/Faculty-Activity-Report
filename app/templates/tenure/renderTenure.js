@@ -4,7 +4,7 @@ var renderModel = require('../../../app/templates/renderModel');
 var mongoose = require('mongoose');
 
 // Compile Schema into Model here
-var Tenure = mongoose.model('TenureSchema');
+var Tenure = mongoose.model('Tenure');
 
 /*
 Populates the database with test data

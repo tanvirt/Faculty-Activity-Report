@@ -140,13 +140,5 @@ module.exports = function(db) {
 		});
 	});
 
-	app.use(function(req, res, next) {
-		 res.on('header', function() {
-		   	console.log('HEADERS GOING TO BE WRITTEN');
-		});
-		next();
-	});
-
-
 	return app;
 };

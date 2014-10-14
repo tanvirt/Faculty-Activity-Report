@@ -59,11 +59,11 @@ var ReportSchema = new Schema({
 
 
 	name: {
-		type: Schema.Types.ObjectId, ref: 'NameSchema'
+		type: Schema.Types.ObjectId, ref: 'Name'
 	},
 
 	tenure: {
-		type: Schema.Types.ObjectId, ref: 'TenureSchema'
+		type: Schema.Types.ObjectId, ref: 'Tenure'
 	},
 
 	currentRank: {

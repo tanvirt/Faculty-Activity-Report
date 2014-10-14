@@ -14,8 +14,8 @@ var TenureSchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User'
 	}	
-}, {collection: 'TenureSchema'});
+}, {collection: 'Tenure'});
 
-mongoose.model('TenureSchema', TenureSchema);
+mongoose.model('Tenure', TenureSchema);
 
 
