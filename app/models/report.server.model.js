@@ -34,7 +34,7 @@ var ReportSchema = new Schema({
 		required: 'Please fill first name',
 		trim: true
 	},
-	midInit: {
+	middleName: {
 		type: String,
 		default: '',
 		required: 'Please fill middle name',

@@ -13,7 +13,7 @@ var NameSchema = new Schema({
 		required: true
 	},
 	
-	midInit: {
+	middleName: {
 		type: String,
 		validate: [validateInitLength, 'Middle Initial can only be one letter or blank']
 	},

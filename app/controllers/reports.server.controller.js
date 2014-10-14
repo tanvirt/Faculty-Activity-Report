@@ -32,25 +32,15 @@ module.exports.submit = function(req, res, callback) {
 
 	var name = new Name();
 	name.firstName = req.body.firstName;
-	name.midInit =  req.body.midInit;
+	name.middleName =  req.body.middleName;
 	name.lastName = req.body.lastName;
 	name.user = req.user;
-	
-	/*
 	var tenure = new Tenure();
 	tenure.tenure = req.body.tenure;
+	//var all = [name, tenure];
 	console.log('saved');
 	
-	tenure.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(tenure);
-			console.log('saved3');
-		}
-	}); */
+
 	name.save(function(err) {
 		if (err) {
 			return res.status(400).send({
