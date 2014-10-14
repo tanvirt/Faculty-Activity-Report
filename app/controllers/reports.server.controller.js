@@ -25,23 +25,16 @@ module.exports.submit = function(req, res, callback) {
 	});
 };*/
  
- exports.create = function(req, res, callback) {
+ exports.create = function(req, res) {
 
-	var report = new Report(req.body);
+	var report = new Report();
 	report.user = req.user;
 
-	var name = Name.create({
-		firstName: req.body.firstName,
-		midInit: req.body.middleName,
-		lastName: req.body.lastName,
-		user: req.user
-	},function(err) {
-		res.jsonp(report);
-		callback(err);
-		console.log('saved');
-			
-	});
-	
+	var name = new Name();
+	name.firstName = req.body.firstName;
+	name.midInit =  req.body.midInit;
+	name.lastName = req.body.lastName;
+	name.user = req.user;
 	
 	/*
 	var tenure = new Tenure();
@@ -57,7 +50,7 @@ module.exports.submit = function(req, res, callback) {
 			res.jsonp(tenure);
 			console.log('saved3');
 		}
-	}); 
+	}); */
 	name.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -67,14 +60,16 @@ module.exports.submit = function(req, res, callback) {
 			res.jsonp(name);
 			console.log('saved2');
 		}
-	}); */
+	}); 
 };
 
 /**
  * Show the current Report
  */
 exports.read = function(req, res) {
+	console.log('reading');
 	res.jsonp(req.report);
+	console.log('read ' + req.report);
 };
 
 /**
@@ -100,7 +95,7 @@ exports.update = function(req, res) {
  * Delete an Report
  */
 exports.delete = function(req, res) {
-	var report = req.report ;
+	var report = req.report;
 
 	report.remove(function(err) {
 		if (err) {
@@ -132,8 +127,9 @@ exports.list = function(req, res) {
  * Report middleware
  */
 exports.reportByID = function(req, res, next, id) { 
-	Report.findById(id).populate('user', 'displayName').exec(function(err, report) {
+	Name.findById(id).populate('user', 'displayName').exec(function(err, report) {
 		if (err) return next(err);
+		//var newname = Name.find({_id: {_id: id}});
 		if (!report) return next(new Error('Failed to load Report ' + id));
 		req.report = report;
 		next();
