@@ -13,21 +13,41 @@ var Tenure = mongoose.model('TenureSchema');
 /**
  * Create a Report
  */
-
-
+/*
+module.exports.submit = function(req, res, callback) {
+	Name.create({
+		firstName: req.body.name.firstName,
+		midInit: req.body.name.midInit,
+		lastName: req.body.name.lastName,
+		user: req.user
+	}, function(err) {
+		callback(err);
+	});
+};*/
+ 
  exports.create = function(req, res, callback) {
 
 	var report = new Report(req.body);
 	report.user = req.user;
 
-	var name = new Name();
-	name.firstName = req.body.firstName;
-	name.midInit = req.body.middleName;
-	name.lastName = req.body.lastName;
+	var name = Name.create({
+		firstName: req.body.firstName,
+		midInit: req.body.middleName,
+		lastName: req.body.lastName,
+		user: req.user
+	},function(err) {
+		
+			callback(err);
+			console.log('saved');
+			//res.jsonp(name);
+	});
+	
+	
+	/*
 	var tenure = new Tenure();
 	tenure.tenure = req.body.tenure;
 	console.log('saved');
-	/*
+	
 	tenure.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -37,7 +57,7 @@ var Tenure = mongoose.model('TenureSchema');
 			res.jsonp(tenure);
 			console.log('saved3');
 		}
-	}); */
+	}); 
 	name.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -47,8 +67,8 @@ var Tenure = mongoose.model('TenureSchema');
 			res.jsonp(name);
 			console.log('saved2');
 		}
-	});
-};*/
+	}); */
+};
 
 /**
  * Show the current Report
