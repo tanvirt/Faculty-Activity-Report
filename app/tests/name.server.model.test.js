@@ -10,13 +10,13 @@ describe('Name Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		name1 = new Name({
 			firstName: 'First',
-			midInit: 'I',
+			middleName: 'I',
 			lastName: 'Last'
 		});
 		
 		name2 = new Name({
 			firstName: 'First',
-			midInit: 'I',
+			middleName: 'I',
 			lastName: 'Last'
 		});
 		done();
@@ -43,7 +43,11 @@ describe('Name Model Unit Tests:', function() {
 			});
 		});
 		
+<<<<<<< HEAD
 		it('should fail to save with a midInit longer than 1 character', function(done) {
+=======
+		it('should fail to save with a middleName longer than 1 character', function(done) {
+>>>>>>> master
 			name1.middleName = 'alsdj';
 			return name1.save(function(err) {
 				should.exist(err);

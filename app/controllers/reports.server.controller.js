@@ -7,6 +7,8 @@ var mongoose = require('mongoose'),
 	errorHandler = require('./errors'),
 	Report = mongoose.model('Report'),
 	_ = require('lodash');
+var Name = mongoose.model('NameSchema');
+var Tenure = mongoose.model('TenureSchema');
 
 var rCtrl = require('./report');
 
@@ -15,7 +17,6 @@ var rCtrl = require('./report');
  */
 exports.create = function(req, res) {
 	//console.log('body: ' + req.body.firstName);
-	
 	rCtrl.submit_02(req, res, function(err, models) {
 		if (err) {
 			return res.status(400).send({
@@ -54,7 +55,7 @@ exports.create = function(req, res) {
 				}
 			});			
 		}
-	});
+	}); 
 };
 
 
@@ -62,7 +63,9 @@ exports.create = function(req, res) {
  * Show the current Report
  */
 exports.read = function(req, res) {
+	console.log('reading');
 	res.jsonp(req.report);
+	console.log('read ' + req.report);
 };
 
 /**
