@@ -36,10 +36,10 @@ module.exports.submit = function(req, res, callback) {
 		lastName: req.body.lastName,
 		user: req.user
 	},function(err) {
-		
-			callback(err);
-			console.log('saved');
-			//res.jsonp(name);
+		res.jsonp(report);
+		callback(err);
+		console.log('saved');
+			
 	});
 	
 	
