@@ -7,9 +7,8 @@ var mongoose = require('mongoose'),
 	errorHandler = require('./errors'),
 	Report = mongoose.model('Report'),
 	_ = require('lodash');
-var Name = mongoose.model('Name');
-var Tenure = mongoose.model('Tenure');
-var CurrentRank = mongoose.model('currentRank');
+
+
 
 var rCtrl = require('./report');
 
