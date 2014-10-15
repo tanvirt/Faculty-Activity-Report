@@ -7,8 +7,9 @@ var mongoose = require('mongoose'),
 	errorHandler = require('./errors'),
 	Report = mongoose.model('Report'),
 	_ = require('lodash');
-var Name = mongoose.model('NameSchema');
-var Tenure = mongoose.model('TenureSchema');
+var Name = mongoose.model('Name');
+var Tenure = mongoose.model('Tenure');
+var CurrentRank = mongoose.model('currentRank');
 
 var rCtrl = require('./report');
 
@@ -34,7 +35,7 @@ exports.create = function(req, res) {
 			//report.middleName = req.body.middleName;
 			//report.lastName = req.body.lastName;
 			//report.tenure = req.body.tenure;
-			report.currentRank = req.body.currentRank; //needs currentRank ref
+			//report.currentRank = req.body.currentRank; //needs currentRank ref
 			report.dateAppointed = req.body.dateAppointed; //needs dateAppointed ref
 			report.affiliateAppointments = req.body.affiliateAppointments; //needs affiliate reff
 
@@ -43,6 +44,7 @@ exports.create = function(req, res) {
 
 			// Assign Tenure References
 			report.tenure = models.tenure._id;
+			report.currentRank = models.currentRank._id;
 
 			report.save(function(err) {
 				if (err) {
@@ -115,6 +117,7 @@ exports.list = function(req, res) {
 
 	.populate('name')
 	.populate('tenure')
+	.populate('currentRank')
 
 	.exec(function(err, reports) {
 		if (err) {
@@ -136,6 +139,7 @@ exports.reportByID = function(req, res, next, id) {
 
 	.populate('name')
 	.populate('tenure')
+	.populate('currentRank')
 
 	.exec(function(err, report) {
 		if (err) return next(err);

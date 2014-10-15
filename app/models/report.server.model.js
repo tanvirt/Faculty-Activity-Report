@@ -67,10 +67,7 @@ var ReportSchema = new Schema({
 	},
 
 	currentRank: {
-		type: String,
-		default: 'None',
-		required: 'Please fill current rank',
-		trim: true
+		type: Schema.Types.ObjectId, ref: 'currentRank'
 	},
 
 	dateAppointed: {

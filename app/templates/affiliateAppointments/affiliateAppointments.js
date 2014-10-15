@@ -4,15 +4,14 @@ var renderModel = require('../../../app/templates/renderModel');
 var mongoose = require('mongoose');
 
 // Compile Schema into Model here
-var CurrentRank = mongoose.model('currentRank');
+var AffiliateApp = mongoose.model('affiliateAppointments');
 
 /*
 Populates the database with test data
 */
 function dummyObject(Model) {
 	var obj = new Model({
-		rank: 'chairperson',
-		department:'Computer and Informational Science and Engineering'
+		app: 'this is some nonsensical jibberish'
 	});
 	return obj;
 }
@@ -22,19 +21,18 @@ Helper function that gets called in report.server.controller.js
 Output is pushed into a LaTex PDF there.
 */
 module.exports.render = function (callback) {
-	renderModel.render( 'currentRank/currentRank.tex', CurrentRank, dummyObject, function ( renderStr ) {
+	renderModel.render( 'affiliateAppointments/affiliateAppointments.tex', AffiliateApp, dummyObject, function ( renderStr ) {
 		callback(null, renderStr);
 	});
 };
+
 module.exports.submit = function(req, callback) {
-	var currentRank = new CurrentRank({
-		rank: req.body.currentRank,
-		//department: req.body.department,
+	var affApp = new AffiliateApp({
+		app: req.body.affiliateAppointments,
 		user: req.user		
 	});
 
-	currentRank.save(function(err) {
-		callback(null, currentRank);
+	affApp.save(function(err) {
+		callback(null, name);
 	});
 };
-
