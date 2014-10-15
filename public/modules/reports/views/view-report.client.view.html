@@ -11,21 +11,21 @@
 
 		<h4><b>1 NAME:</b></h4>
 		<div>
-			<span>{{report.firstName}} {{report.middleName}} {{report.lastName}} </span>
+			<span>{{report.name.firstName}} {{report.name.middleName}} {{report.name.lastName}} </span>
 		</div>
 		<br>
 
 
 	    <h4><b>2 TENURE:</b></h4>
 	    <div>
-			<span> {{report.tenure}} </span>
+			<span> {{report.tenure.tenure}} </span>
 		</div>
 		<br>
 
 
 		<h4><b>3 CURRENT RANK:</b></h4>
 	    <div>
-	    	<span> {{report.currentRank}} </span>
+	    	<span> {{report.currentRank.rank}} {{report.currentRank.department}}</span>
 		</div>
 		<br>
 
@@ -39,7 +39,7 @@
 
 		<h4><b>5 AFFILIATE APPOINTMENTS:</b></h4>
 	    <div>
-			<span>{{report.affiliateAppointments}}</span>
+			<span>{{report.affiliateAppointments.app}}</span>
 		</div>
 		
 		<br><br>

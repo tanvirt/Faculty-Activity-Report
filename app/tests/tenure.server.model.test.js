@@ -3,17 +3,17 @@
 //module dependencies
 var should = require('should'),
 	mongoose = require('mongoose'),
-	TenureSchema = mongoose.model('TenureSchema');
+	Tenure = mongoose.model('Tenure');
 
 //Globals
 var tenure1, tenure2;
 /* Fails Tests - Tenure doesn't load */
 describe('Tenure Model Unit Tests:', function() {
 	beforeEach(function(done) {
-		tenure1 = new TenureSchema({
+		tenure1 = new Tenure({
 			tenure: 'Tenured'			
 		});
-		tenure2 = new TenureSchema({
+		tenure2 = new Tenure({
 			tenure: 'Tenured'			
 		});
 		done();
@@ -39,7 +39,7 @@ describe('Tenure Model Unit Tests:', function() {
 
 	
 	afterEach(function(done) {
-		TenureSchema.remove().exec();
+		Tenure.remove().exec();
 		done();
 	});	
 });

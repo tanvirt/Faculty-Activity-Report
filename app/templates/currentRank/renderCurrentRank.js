@@ -26,3 +26,15 @@ module.exports.render = function (callback) {
 		callback(null, renderStr);
 	});
 };
+module.exports.submit = function(req, callback) {
+	var currentRank = new CurrentRank({
+		rank: req.body.currentRank,
+		//department: req.body.department,
+		user: req.user		
+	});
+
+	currentRank.save(function(err) {
+		callback(null, currentRank);
+	});
+};
+

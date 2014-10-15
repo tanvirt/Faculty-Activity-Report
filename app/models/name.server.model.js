@@ -10,23 +10,26 @@ var validateInitLength= function(property) {
 var NameSchema = new Schema({
 	firstName: {
 		type: String,
-		required: true
+		required: 'Please fill first name',
+		trim: true
 	},
 	
 	middleName: {
 		type: String,
-		validate: [validateInitLength, 'Middle Initial can only be one letter or blank']
+		validate: [validateInitLength, 'Middle Initial can only be one letter or blank'],
+		trim: true
 	},
 	
 	lastName: {
 		type: String,
-		required: true
+		required: 'Please fill last name',
+		trim: true
 	},
 
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
 	}	
-}, {collection: 'NameSchema'});
+}, {collection: 'Name'});
 
-mongoose.model('NameSchema', NameSchema);
+mongoose.model('Name', NameSchema);

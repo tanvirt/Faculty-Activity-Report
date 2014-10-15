@@ -49,8 +49,7 @@ exports.generate = function(req,res,next) {
 		renderPatents.render,
 		renderContribution.render,
 		renderContracts.render
-
-		
+	
 	], function(err, results) {
 		if (err) res.status(500).send({ error: 'Report Generation Failed' });
 
@@ -72,8 +71,11 @@ exports.generate = function(req,res,next) {
 		]).pipe(writeable).on('error', function(e) {
 			throw new Error('Cannot overwrite report.pdf when it is open on your system. Please close report.pdf.');
 		});
-		console.log('Report Generated!');
-		res.redirect('/report/download');
+
+		writeable.on('finish', function() {
+			console.log('Report Generated!');
+			res.redirect('/report/download');
+		});
 	});
 };
 
@@ -107,16 +109,29 @@ exports.testGenerate = function(req, res, next) {
 
 exports.submit = function(req, res, next) {
 	async.parallel([
-		async.apply(renderName.submit, req, res),
-		async.apply(renderTenure.submit, req, res)
-	], function(err) {
+		async.apply(renderName.submit, req),
+		async.apply(renderTenure.submit, req),
+		async.apply(renderCurrentRank.submit, req)
+	], function(err, models) {
 		if (err) res.status(500).send({ error: 'Submit Failed' });	
 		console.log(req.body);
 		res.redirect('/report/generate');	
-		//next();
 	});
 
 };
 
+exports.submit_02 = function(req, res, callback) {
+	async.parallel({		
+		name: async.apply(renderName.submit, req),
+		tenure: async.apply(renderTenure.submit, req),
+		currentRank: async.apply(renderCurrentRank.submit, req)
+	}, function(err, models) {
+		if (err) {
+			callback(err, null);	
+		} else {
+			callback(err, models);
+		}
+	});
+};
 
 

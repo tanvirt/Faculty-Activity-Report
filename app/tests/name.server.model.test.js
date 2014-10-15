@@ -2,7 +2,7 @@
 //module dependencies
 var should = require('should'),
 	mongoose = require('mongoose'),
-	Name = mongoose.model('NameSchema');
+	Name = mongoose.model('Name');
 
 var name1, name2;
 

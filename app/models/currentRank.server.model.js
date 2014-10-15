@@ -17,7 +17,7 @@ var currentRank = new Schema({
             'chairperson', 'research professor'],
         required: true
     },
-
+/*
     department: { //more departments need to be added, most can be found at http://www.ufl.edu/academics/colleges/
         //engineering depts and business depts listed so far
         type: String,
@@ -26,8 +26,12 @@ var currentRank = new Schema({
             'Industrial and Systems Engineering', 'Mechanical and Aerospace Engineering', 'Materials Science and Engineering',
         'Finance Insurance and Real Estate', 'Information Systems and Operations Management', 'Management', 'Marketing'],
         required: true
-    }
-
+    },*/
+	
+	user: {
+		type: Schema.ObjectId,
+		ref: 'User'
+	}
 
 }, {collection: 'currentRank'});
 

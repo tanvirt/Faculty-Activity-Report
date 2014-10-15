@@ -27,7 +27,7 @@ var ReportSchema = new Schema({
 	},
 
 	//TEMPORARY FIELDS FOR REPORT SECTIONS------------------------------------------------
-
+	/*
 	firstName: {
 		type: String,
 		default: '',
@@ -54,12 +54,20 @@ var ReportSchema = new Schema({
 		enum: ['Tenured', 'Not Tenured'],
 		trim: true
 	},
+	*/
+
+
+
+	name: {
+		type: Schema.Types.ObjectId, ref: 'Name'
+	},
+
+	tenure: {
+		type: Schema.Types.ObjectId, ref: 'Tenure'
+	},
 
 	currentRank: {
-		type: String,
-		default: 'None',
-		required: 'Please fill current rank',
-		trim: true
+		type: Schema.Types.ObjectId, ref: 'currentRank'
 	},
 
 	dateAppointed: {

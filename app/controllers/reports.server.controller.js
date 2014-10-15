@@ -7,51 +7,58 @@ var mongoose = require('mongoose'),
 	errorHandler = require('./errors'),
 	Report = mongoose.model('Report'),
 	_ = require('lodash');
-var Name = mongoose.model('NameSchema');
-var Tenure = mongoose.model('TenureSchema');
+
+
+
+var rCtrl = require('./report');
 
 /**
  * Create a Report
  */
-/*
-module.exports.submit = function(req, res, callback) {
-	Name.create({
-		firstName: req.body.name.firstName,
-		midInit: req.body.name.midInit,
-		lastName: req.body.name.lastName,
-		user: req.user
-	}, function(err) {
-		callback(err);
-	});
-};*/
- 
- exports.create = function(req, res) {
-
-	var report = new Report();
-	report.user = req.user;
-
-	var name = new Name();
-	name.firstName = req.body.firstName;
-	name.middleName =  req.body.middleName;
-	name.lastName = req.body.lastName;
-	name.user = req.user;
-	var tenure = new Tenure();
-	tenure.tenure = req.body.tenure;
-	//var all = [name, tenure];
-	console.log('saved');
-	
-
-	name.save(function(err) {
+exports.create = function(req, res) {
+	//console.log('body: ' + req.body.firstName);
+	rCtrl.submit_02(req, res, function(err, models) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(name);
-			console.log('saved2');
+			var report = new Report();
+			report.user = req.user;
+
+			// Assign Prev values
+			report.reportName = req.body.reportName;
+
+			// Temporary Values, Delete when Reference has been made
+			//report.firstName = req.body.firstName;
+			//report.middleName = req.body.middleName;
+			//report.lastName = req.body.lastName;
+			//report.tenure = req.body.tenure;
+			//report.currentRank = req.body.currentRank; //needs currentRank ref
+			report.dateAppointed = req.body.dateAppointed; //needs dateAppointed ref
+			report.affiliateAppointments = req.body.affiliateAppointments; //needs affiliate reff
+
+			// Assign Name References
+			report.name = models.name._id;
+
+			// Assign Tenure References
+			report.tenure = models.tenure._id;
+			report.currentRank = models.currentRank._id;
+
+			report.save(function(err) {
+				if (err) {
+					return res.status(400).send({
+						message: errorHandler.getErrorMessage(err)
+					});
+				} else {
+					console.log(JSON.stringify(report));
+					res.jsonp(report);
+				}
+			});			
 		}
 	}); 
 };
+
 
 /**
  * Show the current Report
@@ -66,9 +73,9 @@ exports.read = function(req, res) {
  * Update a Report
  */
 exports.update = function(req, res) {
-	var report = req.report ;
+	var report = req.report;
 
-	report = _.extend(report , req.body);
+	report = _.extend(report, req.body);
 
 	report.save(function(err) {
 		if (err) {
@@ -79,6 +86,7 @@ exports.update = function(req, res) {
 			res.jsonp(report);
 		}
 	});
+
 };
 
 /**
@@ -102,7 +110,15 @@ exports.delete = function(req, res) {
  * List of Reports
  */
 exports.list = function(req, res) { 
-	Report.find().sort('-created').populate('user', 'displayName').exec(function(err, reports) {
+	Report.find()
+	.sort('-created')
+	.populate('user', 'displayName')
+
+	.populate('name')
+	.populate('tenure')
+	.populate('currentRank')
+
+	.exec(function(err, reports) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -117,9 +133,15 @@ exports.list = function(req, res) {
  * Report middleware
  */
 exports.reportByID = function(req, res, next, id) { 
-	Name.findById(id).populate('user', 'displayName').exec(function(err, report) {
+	Report.findById(id)
+	.populate('user', 'displayName')
+
+	.populate('name')
+	.populate('tenure')
+	.populate('currentRank')
+
+	.exec(function(err, report) {
 		if (err) return next(err);
-		//var newname = Name.find({_id: {_id: id}});
 		if (!report) return next(new Error('Failed to load Report ' + id));
 		req.report = report;
 		next();
