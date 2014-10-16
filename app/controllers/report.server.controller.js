@@ -29,6 +29,7 @@ var renderCreativeWorks = require('../../app/templates/creativeWorks/renderCreat
 var renderContribution = require('../../app/templates/contribution/renderContribution');
 var renderPatents = require('../../app/templates/patents/renderPatents');
 var renderContracts = require('../../app/templates/contracts/renderContracts');
+var renderAffiliateAppointments = require('../../app/templates/affiliateAppointments/renderAffiliateAppointments');
 
 /*
 Generates the LaTex File into app/pdf directory
@@ -39,6 +40,7 @@ exports.generate = function(req,res,next) {
 		renderName.render,
 		renderTenure.render,
 		renderCurrentRank.render,
+		renderAffiliateAppointments.render,
 		renderDateAppointed.render,
 		renderAssignedActivity.render,
 		renderTeachingAdvising.render,
@@ -111,7 +113,8 @@ exports.submit = function(req, res, next) {
 	async.parallel([
 		async.apply(renderName.submit, req),
 		async.apply(renderTenure.submit, req),
-		async.apply(renderCurrentRank.submit, req)
+		async.apply(renderCurrentRank.submit, req),
+		async.apply(renderAffiliateAppointments.submit, req)
 	], function(err, models) {
 		if (err) res.status(500).send({ error: 'Submit Failed' });	
 		console.log(req.body);
@@ -124,7 +127,8 @@ exports.submit_02 = function(req, res, callback) {
 	async.parallel({		
 		name: async.apply(renderName.submit, req),
 		tenure: async.apply(renderTenure.submit, req),
-		currentRank: async.apply(renderCurrentRank.submit, req)
+		currentRank: async.apply(renderCurrentRank.submit, req),
+		affiliateAppointments: async.apply(renderAffiliateAppointments.submit,req)
 	}, function(err, models) {
 		if (err) {
 			callback(err, null);	

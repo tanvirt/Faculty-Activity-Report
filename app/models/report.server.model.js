@@ -77,10 +77,8 @@ var ReportSchema = new Schema({
 	},
 
 	affiliateAppointments: {
-		type: String,
-		default: 'None',
-		trim: true
-	},
+		type: Schema.Types.ObjectId, ref: 'affiliateAppointments'
+	}
 
 
 //END TEMP-------------------------------------------------

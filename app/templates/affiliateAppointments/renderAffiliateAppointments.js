@@ -33,6 +33,6 @@ module.exports.submit = function(req, callback) {
 	});
 
 	affApp.save(function(err) {
-		callback(null, name);
+		callback(null, affApp);
 	});
 };

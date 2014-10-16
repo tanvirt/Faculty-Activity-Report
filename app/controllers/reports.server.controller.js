@@ -36,7 +36,7 @@ exports.create = function(req, res) {
 			//report.tenure = req.body.tenure;
 			//report.currentRank = req.body.currentRank; //needs currentRank ref
 			report.dateAppointed = req.body.dateAppointed; //needs dateAppointed ref
-			report.affiliateAppointments = req.body.affiliateAppointments; //needs affiliate reff
+			//report.affiliateAppointments = req.body.affiliateAppointments; //needs affiliate reff
 
 			// Assign Name References
 			report.name = models.name._id;
@@ -44,6 +44,7 @@ exports.create = function(req, res) {
 			// Assign Tenure References
 			report.tenure = models.tenure._id;
 			report.currentRank = models.currentRank._id;
+			report.affiliateAppointments = models.affiliateAppointments._id;
 
 			report.save(function(err) {
 				if (err) {
@@ -117,6 +118,7 @@ exports.list = function(req, res) {
 	.populate('name')
 	.populate('tenure')
 	.populate('currentRank')
+	.populate('affiliateAppointments')
 
 	.exec(function(err, reports) {
 		if (err) {
@@ -139,6 +141,7 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('name')
 	.populate('tenure')
 	.populate('currentRank')
+	.populate('affiliateAppointments')
 
 	.exec(function(err, report) {
 		if (err) return next(err);
