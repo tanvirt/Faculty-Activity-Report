@@ -30,6 +30,7 @@ var renderContribution = require('../../app/templates/contribution/renderContrib
 var renderPatents = require('../../app/templates/patents/renderPatents');
 var renderContracts = require('../../app/templates/contracts/renderContracts');
 var renderAffiliateAppointments = require('../../app/templates/affiliateAppointments/renderAffiliateAppointments');
+var renderPublication = require('../../app/templates/publication/renderPublication');
 
 /*
 Generates the LaTex File into app/pdf directory
@@ -49,6 +50,7 @@ exports.generate = function(req,res,next) {
 		renderGraduateCommittee.render,
 		renderCreativeWorks.render,
 		renderPatents.render,
+		renderPublication.render,
 		renderContribution.render,
 		renderContracts.render
 	

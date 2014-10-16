@@ -1,0 +1,43 @@
+
+\section{PUBLICATIONS}
+{% for publication in publications %}
+\begin{itemize}
+  \renewcommand{\labelenumi}{\alph{enumi}}
+{% if publication.section === 'Books, Sole Author' %}
+  \item \textbf{Books, Sole Author}
+    \begin{itemize}
+      \item {{publication.authors}}. {{publication.title}} {{publication.publicationInfo}}, {{publication.year | date('Y')}}
+    \end{itemize}
+{% endif %}
+{% if publication.section === 'Books, Co-authored' %}
+  \item \textbf{Books, Co-authored}
+  	\begin{itemize}
+  	      \item {{publication.authors}}. {{publication.title}} {{publication.publicationInfo}}, {{publication.year | date('Y')}}
+  	\end{itemize}
+{% endif %}
+{% if publication.section === 'Books, Edited' %}
+  \item \textbf{Books, Edited}
+  	\begin{itemize}
+  	   	\item {{publication.authors}}. {{publication.title}} {{publication.publicationInfo}}, {{publication.year | date('Y')}}
+  	\end{itemize}
+{% endif %}
+{% if publication.section === 'Books, Contributor' %}
+  \item \textbf{Books, Contributor}
+  	  \begin{itemize}
+        \item {{publication.authors}}. {{publication.title}} {{publication.publicationInfo}}, {{publication.year | date('Y')}}
+      \end{itemize}
+{% endif %}
+{% if publication.section === 'Monograph' %}
+  \item \textbf{Monographs}
+  	\begin{itemize}
+  	      \item {{publication.authors}}. {{publication.title}} {{publication.publicationInfo}}, {{publication.year | date('Y')}}
+  	\end{itemize}
+{% endif %}
+{% if publication.section === 'Refereed Publications' %}
+  \item \textbf{Refereed Publications}
+    \begin{itemize}
+          \item {{publication.authors}}. {{publication.title}} {{publication.publicationInfo}}, {{publication.year | date('Y')}}
+    \end{itemize}
+{% endif %}
+\end{itemize}
+{% endfor %}

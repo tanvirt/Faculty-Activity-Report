@@ -4,9 +4,10 @@ var mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
 	validator = require('validator');
 
+	/*
 var validateDate = function(p) {
 	return validator.isDate(p);
-};	
+};	*/
 
 	
 var Publication = new Schema({
@@ -22,7 +23,6 @@ var Publication = new Schema({
 	
 	publicationInfo: {
 		type: String,
-		unique: 'testing error message'
 	},
 	
 	section: {
@@ -37,7 +37,7 @@ var Publication = new Schema({
 	
 	year: {
 		type: Date,
-		validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
+		//validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
 	}
 
 }, {collection: 'Publication'});
