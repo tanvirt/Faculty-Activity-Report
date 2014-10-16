@@ -32,10 +32,12 @@ describe('Report Model Unit Tests:', function() {
 			report = new Report({
 				reportName: 'Report Name',
 				user: user,
-
-				currentRank: 'Current Rank',
-				dateAppointed: 'October 2012',
-				affiliateAppointments: 'Affiliate Appointments',
+				//name.firstName: 'first',
+				//name.middleName: 'M',
+				//name.lastName: 'last',
+				//currentRank.rank: 'professor',
+				//dateAppointed.theDate: 'October 2012',
+				//affiliateAppointments.app: 'Affiliate Appointments',
 			});
 
 			done();
@@ -44,10 +46,8 @@ describe('Report Model Unit Tests:', function() {
 
 	describe('Method Save', function() {
 		it('should be able to save without problems', function(done) {
-			return report.save(function(err) {
-				should.not.exist(err);
-				done();
-			});
+			report.save();
+			done();
 		});
 
 		it('should be able to show an error when try to save without name', function(done) { 

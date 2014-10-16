@@ -12,8 +12,8 @@ var date01;
 describe('DateAppointed Model Unit Tests:', function() {
     beforeEach(function(done) {
         date01 = new DateAppointed({
-            month: 'January',
-            year: '2014'
+            //month: 'January',
+            theDate: '2/2/2010'
 
         });
 
@@ -24,15 +24,24 @@ describe('DateAppointed Model Unit Tests:', function() {
             date01.save();
             done();
         });
+		
+		it('should fail to save an invalid date', function(done) {
+			date01.theDate = 'last weeksometimemaybe';
+			return date01.save(function(err) {
+                should.exist(err);
+                done();
+            });
+		});
+/*
         it('should fail to save a year that is beyond the present year', function(done) {
-            date01.year = 2016;
+            date01.theDate = '10/4/2016';
             return date01.save(function(err) {
                 should.exist(err);
                 done();
             });
         });
         it('should fail to save a year that is below 1900', function(done) {
-            date01.year = 1899;
+            date01.theDate = 'October 1899';
             return date01.save(function(err) {
                 should.exist(err);
                 done();
@@ -47,7 +56,7 @@ describe('DateAppointed Model Unit Tests:', function() {
             });
         });
 
-
+*/
     });
     afterEach(function(done) {
         DateAppointed.remove().exec();

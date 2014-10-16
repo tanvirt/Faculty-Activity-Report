@@ -26,8 +26,8 @@ var Patents = new Schema({
 	},
 	
 	date: {
-		type: String,
-		validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
+		type: Date,
+		//validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
 	},
 	
 	description: String

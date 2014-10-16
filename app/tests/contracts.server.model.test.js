@@ -77,8 +77,4 @@ describe('Contract Model Unit Tests:', function() {
 		done();
 	});
 
-	afterEach(function(done) {
-        Contracts.remove().exec();
-        done();
-    });
 });

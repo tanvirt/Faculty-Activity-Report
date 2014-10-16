@@ -44,7 +44,7 @@ describe('Patents Model Unit Tests:', function() {
 				done();
 			});
 		});
-	/*	
+		
 		it('should fail to save a patent with the same patent number', function(done) {
 			patent1.patentNumber = '010101';
 			patent1.save();
@@ -54,7 +54,7 @@ describe('Patents Model Unit Tests:', function() {
 				done();
 			});
 		});
-	*/
+	
 		it('should fail to save without authors', function(done) {
 			patent1.authors = [];
 			return patent1.save(function(err) {
@@ -64,7 +64,7 @@ describe('Patents Model Unit Tests:', function() {
 		});
 		
 		it('should fail to save with an invalid date', function(done) {
-			patent1.date = 'Just Yesterday';
+			patent1.date = 'yunno, that one day. It rained.';
 			return patent1.save(function(err) {
 				should.exist(err);
 				done();
@@ -72,5 +72,8 @@ describe('Patents Model Unit Tests:', function() {
 		});
 	
 	});
-
+	afterEach(function(done) {
+        Patents.remove().exec();
+        done();
+    });
 });
