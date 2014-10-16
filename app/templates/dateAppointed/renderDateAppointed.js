@@ -11,8 +11,7 @@ Populates the database with test data
 */
 function dummyObject(Model) {
 	var obj = new Model({
-		month: 'August',
-		year: 2000
+		theDate: 'August 2000'
 	});
 	return obj;
 }
@@ -24,5 +23,16 @@ Output is pushed into a LaTex PDF there.
 module.exports.render = function (callback) {
 	renderModel.render( 'dateAppointed/dateAppointed.tex', DateAppointed, dummyObject, function ( renderStr ) {
 		callback(null, renderStr);
+	});
+};
+
+module.exports.submit = function(req, callback) {
+	var dateApp = new DateAppointed({
+		theDate: req.body.dateAppointed,
+		user: req.user		
+	});
+
+	dateApp.save(function(err) {
+		callback(null, dateApp);
 	});
 };

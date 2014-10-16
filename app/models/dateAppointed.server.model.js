@@ -18,12 +18,12 @@ var validateLocalStrategyDate = function(property) {
 
 var DateAppointed = new Schema({
 
-    month: {
+    /*month: {
         type: String,
         enum: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         required: true,
         /*validate: [validateLocalStrategyDateMonth,
-         'Date must be less than or equal to the current month'] */
+         'Date must be less than or equal to the current month'] 
     },
     year: {
         type: Number,
@@ -31,6 +31,11 @@ var DateAppointed = new Schema({
         validate: [validateLocalStrategyDate,
             'Date must be less than or equal to the current year and greater than or equal to 1900']
     }
+	*/
+	theDate: {
+		type: Date,
+		required: true
+	}
 
 }, {collection: 'DateAppointed'});
 

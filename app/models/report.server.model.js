@@ -71,9 +71,7 @@ var ReportSchema = new Schema({
 	},
 
 	dateAppointed: {
-		type: Date,
-		required: 'Please fill date appointed',
-		trim: true
+		type: Schema.Types.ObjectId, ref: 'DateAppointed'
 	},
 
 	affiliateAppointments: {
