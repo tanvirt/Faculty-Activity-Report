@@ -1,0 +1,18 @@
+\section{UNIVERSITY GOVERNANCE AND SERVICE}
+{% for gov in govs %}
+
+{% if gov.subsection === 'Department Committee Memberships' %}
+\subsection{Department Committee Memberships}
+\begin{itemize}
+  \item {{gov.committee}}  
+\end{itemize}
+{% endif %}
+
+{% if gov.subsection === 'Other' %}
+\subsection{Other}
+\begin{itemize}
+  \item {{gov.committee}}  
+\end{itemize}
+{% endif %}
+
+{% endfor %}
