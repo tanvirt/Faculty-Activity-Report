@@ -1,0 +1,24 @@
+\section{LECTURES, SPEECHES OR POSTERS PRESENTED AT PROFESSIONAL
+  CONFERENCES/MEETINGS}
+{ %for conference in conferences %}
+
+	{ %if conference.area === 'International' %}
+	\subsection*{International}
+		{{conference.presentation}} at {{conference.title}} on {{conference.date | date('M d, Y') }}
+	{ % endif %}
+
+
+{ % if conference.area === 'State' %}
+\subsection*{State}
+	{{conference.presentation}} at {{conference.title}} on {{conference.date | date('M d, Y') }}
+{ % endif %}
+
+
+{ % if conference.area === 'Local' %}
+\subsection*{Local}
+	{{conference.presentation}} at {{conference.title}} on {{conference.date | date('M d, Y') }}
+{ % endif %}
+
+
+{ % endfor %}
+
