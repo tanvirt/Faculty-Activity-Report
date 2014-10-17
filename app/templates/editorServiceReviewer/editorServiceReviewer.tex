@@ -1,0 +1,22 @@
+\section{EDITOR OF A SCHOLARLY JOURNAL, SERVICE ON AN EDITORIAL
+  ADVISORY BOARD OR REVIEWER FOR A SCHOLARLY JOURNAL}
+{% for esr in ESRs %}
+{% if esr.position === 'reviewer' %}
+Reviewer for the following journals:
+\begin{itemize}
+\item {{esr.object}}
+\end{itemize}
+{% endif %}
+{% if esr.position === 'editor' %}
+Editor for the following journals:
+\begin{itemize}
+\item {{esr.object}}
+\end{itemize}
+{% endif %}
+{% if esr.position === 'service' %}
+Service on the following advisory boards:
+\begin{itemize}
+\item {{esr.object}}
+\end{itemize}
+{% endif %}
+{% endfor %}
