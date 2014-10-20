@@ -36,6 +36,7 @@ var renderGovernance = require('../../app/templates/governance/renderGovernance'
 var renderConsultationsOutsideUniversity = require('../../app/templates/consultationsOutsideUniversity/renderConsultationsOutsideUniversity');
 var renderEditorServiceReviewer = require('../../app/templates/editorServiceReviewer/renderEditorServiceReviewer');
 var renderMembership = require('../../app/templates/membership/renderMembership');
+var renderInternational = require('../../app/templates/international/renderInternational');
 
 /*
 Generates the LaTex File into app/pdf directory
@@ -62,7 +63,8 @@ exports.generate = function(req,res,next) {
 		renderGovernance.render,
 		renderConsultationsOutsideUniversity.render,
 		renderEditorServiceReviewer.render,
-		renderMembership.render
+		renderMembership.render,
+		renderInternational.render
 	
 	], function(err, results) {
 		if (err) res.status(500).send({ error: 'Report Generation Failed' });

@@ -20,7 +20,11 @@ var Membership = new Schema({
 			validate: [validateLocalStrategyCourses, 
 			'Year must not be after current year or before 1900']
 		}
-	}]
+	}],
+	user: {
+		type: Schema.ObjectId,
+		ref: 'User'
+	}
 
 }, {collection:'Membership'});
 
