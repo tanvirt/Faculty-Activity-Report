@@ -66,7 +66,7 @@ describe('Contribution Model Unit Tests:', function() {
 			});
 		});
 
-		it('should fail to save works title', function(done) {
+		it('should fail to save without works title', function(done) {
 			contribution.works[0].title = '';
 
 			return contribution.save(function(err) {
