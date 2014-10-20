@@ -17,7 +17,7 @@ describe('Membership Model Unit Tests:', function() {
 	beforeEach(function(done) {
 
 		membership = new Membership({
-			programCommittee: [{
+			examples: [{
 				title: 'Internation Conference on Data Engineering',
 				year: 2014
 			},
@@ -37,7 +37,7 @@ describe('Membership Model Unit Tests:', function() {
 		});
 
 		it('should fail to save with a future date', function(done) {
-			membership.programCommittee[0].year = 2020;
+			membership.examples[0].year = 2020;
 
 			return membership.save(function(err) {
 				should.exist(err);
@@ -46,7 +46,7 @@ describe('Membership Model Unit Tests:', function() {
 		});
 
 		it('should fail to save with a date prior to 1900', function(done) {
-			membership.programCommittee[0].year = 1865;
+			membership.examples[0].year = 1865;
 
 			return membership.save(function(err) {
 				should.exist(err);
@@ -54,8 +54,8 @@ describe('Membership Model Unit Tests:', function() {
 			});
 		});
 
-		it('should fail to save without programCommittee title', function(done) {
-			membership.programCommittee[0].title = '';
+		it('should fail to save without example title', function(done) {
+			membership.examples[0].title = '';
 
 			return membership.save(function(err) {
 				should.exist(err);
@@ -63,8 +63,8 @@ describe('Membership Model Unit Tests:', function() {
 			});
 		});
 
-		it('should fail to save without programCommittee year', function(done) {
-			membership.programCommittee[0].year = null;
+		it('should fail to save without example year', function(done) {
+			membership.examples[0].year = null;
 
 			return membership.save(function(err) {
 				should.exist(err);

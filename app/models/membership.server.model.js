@@ -9,7 +9,7 @@ var validateLocalStrategyCourses = function(property) {
 
 var Membership = new Schema({
 	// add more arrays when you find out what else there can be
-	programCommittee: [{
+	examples: [{
 		title: {
 			type: String,
 			required: true
