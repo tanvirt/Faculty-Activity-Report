@@ -22,7 +22,7 @@ var validateNumbers = function(property) {
 };
 
 var Contribution = new Schema({
-	intro: {
+	/*intro: {
 		type: String,
 		required: true
 	},
@@ -71,6 +71,10 @@ var Contribution = new Schema({
 	website: {
 		type: String,
 		validate: [validateWebsite, 'Must be a valid website']
+	},*/
+	info: {
+		type: String,
+		default: 'N/A'
 	},
 	user: {
 		type: Schema.ObjectId,

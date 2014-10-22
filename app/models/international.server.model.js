@@ -10,10 +10,7 @@ var validateLocalStrategyProperty = function(property) {
 var International = new Schema({
 	activities: {
 		type: String,
-		required: true,
-		default: 'N/A',
-		validate: [validateLocalStrategyProperty,
-            'If no value is specified, please input "N/A"']
+		default: 'N/A'
 	},
 	user: {
 		type: Schema.ObjectId,

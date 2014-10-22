@@ -15,8 +15,9 @@ var advising;
 describe('Teaching/Advising Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		advising = new TeachingAdvising({
-			philosophy: 'My strength as a teacher is...',
-			supervising: 'I supervised...'
+			info: 'I taught the following courses...'
+			//philosophy: 'My strength as a teacher is...',
+			//supervising: 'I supervised...'
 		});
 
 		done();
@@ -28,14 +29,14 @@ describe('Teaching/Advising Model Unit Tests:', function() {
 			done();
 		});
 
-		it('should fail to save without teaching philosophy', function(done) {
+		/*it('should fail to save without teaching philosophy', function(done) {
 			advising.philosophy = '';
 
 			return advising.save(function(err) {
 				should.exist(err);
 				done();
 			});
-		});
+		});*/
 	});
 
 	afterEach(function(done) {

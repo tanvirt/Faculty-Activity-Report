@@ -15,7 +15,8 @@ var contribution;
 describe('Contribution Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		contribution = new Contribution({
-			intro: 'Summary of my contributions',
+			info: 'I made the following contributions...'
+			/*intro: 'Summary of my contributions',
 			examples: [{
 				title: 'Contribution number 1',
 				body: 'I did stuff'
@@ -36,7 +37,7 @@ describe('Contribution Model Unit Tests:', function() {
 			totalCitations: 500,
 			h_index: 14,
 			i_index: 21,
-			website: 'www.google.com'
+			website: 'www.google.com'*/
 		});
 
 		done();
@@ -48,7 +49,7 @@ describe('Contribution Model Unit Tests:', function() {
 			done();
 		});
 
-		it('should fail to save without intro', function(done) {
+		/*it('should fail to save without intro', function(done) {
 			contribution.intro = '';
 
 			return contribution.save(function(err) {
@@ -154,7 +155,7 @@ describe('Contribution Model Unit Tests:', function() {
 				should.exist(err);
 				done();
 			});
-		});
+		});*/
 	});
 
 	afterEach(function(done) {
