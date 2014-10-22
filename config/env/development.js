@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/uf-faculty-activity-report-dev',
+	db: 'mongodb://localhost/far-dev',
 	app: {
 		title: 'UF Faculty Activity Report - Development Environment'
 	},

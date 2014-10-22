@@ -50,6 +50,11 @@
 
 <div class="col-md-12">
     <div class="pull-right" data-ng-show="authentication.user._id == report.user._id">
+
+		<a class="btn btn-primary" data-ng-click="download();">
+			<i class="glyphicon glyphicon-download"></i>
+		</a>
+
 		<a class="btn btn-primary" href="/#!/reports/{{report._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
 		</a>

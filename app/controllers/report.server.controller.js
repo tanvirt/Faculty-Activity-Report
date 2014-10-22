@@ -39,10 +39,12 @@ var renderEditorServiceReviewer = require('../../app/templates/editorServiceRevi
 /*
 Generates the LaTex File into app/pdf directory
 */
+// async.apply(renderName.submit, req)
 exports.generate = function(req,res,next) {	
+	//console.log('Req.report' + req.report);
 	async.parallel([
 		//Initiate render functions here
-		renderName.render,
+		async.apply(renderName.render, req),
 		renderTenure.render,
 		renderCurrentRank.render,
 		renderAffiliateAppointments.render,
@@ -63,10 +65,11 @@ exports.generate = function(req,res,next) {
 		renderEditorServiceReviewer.render
 	
 	], function(err, results) {
+		console.log('Here!');
 		if (err) res.status(500).send({ error: 'Report Generation Failed' });
 
 		//Generate Report
-		var writeable = fs.createWriteStream('./app/pdf/report.pdf');
+		var writeable = fs.createWriteStream('./public/modules/reports/pdf/report.pdf');
 
 		latex([
 			'\\documentclass{article}',
@@ -86,7 +89,7 @@ exports.generate = function(req,res,next) {
 
 		writeable.on('finish', function() {
 			console.log('Report Generated!');
-			res.redirect('/report/download');
+			next();
 		});
 	});
 };
@@ -98,7 +101,8 @@ exports.debug = function(req,res,next) {
 };
 
 exports.download = function(req, res) {
-	res.download('./app/pdf/report.pdf');
+	console.log('Downloading');
+	res.sendfile('./public/modules/reports/pdf/report.pdf');
 };
 
 exports.form = function(req, res){

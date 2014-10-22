@@ -14,6 +14,9 @@ module.exports = function(app) {
 		.put(users.requiresLogin, reports.hasAuthorization, reports.update)
 		.delete(users.requiresLogin, reports.hasAuthorization, reports.delete);
 
+	app.route('/reportdownload/:reportId')
+		.get(users.requiresLogin, reports.hasAuthorization, reports.rCtrl.generate, reports.rCtrl.download);
+
 	// Finish by binding the Report middleware
 	app.param('reportId', reports.reportByID);
 };

@@ -20,6 +20,10 @@ angular.module('reports').config(['$stateProvider',
 		state('editReport', {
 			url: '/reports/:reportId/edit',
 			templateUrl: 'modules/reports/views/edit-report.client.view.html'
+		})
+		.state('downloadReport', {
+			url: '/reports/:reportId/download',
+			templateUrl: 'modules/reports/views/download-report.client.view.html'
 		});
 	}
 ]);
