@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 
 var renderModel = require('../../../app/templates/renderModel');
 var mongoose = require('mongoose');
@@ -8,7 +8,7 @@ var TeachingAdvisingCourses = mongoose.model('TeachingAdvisingCourses');
 
 /*
 Populates the database with test data
-*/
+
 function dummyObjects(Model) {
 	var objs = [];
 
@@ -29,7 +29,7 @@ function dummyObjects(Model) {
 
 /*
 rearrange data, pass in additional fields
-*/
+
 function passObj(objArray) {
 	return {'courses': objArray};
 }
@@ -37,9 +37,10 @@ function passObj(objArray) {
 /*
 Helper function that gets called in report.server.controller.js
 Output is pushed into a LaTex PDF there.
-*/
+
 module.exports.render = function (callback) {
 	renderModel.renderMultiple('teachingAdvisingCourses/teachingAdvisingCourses.tex', TeachingAdvisingCourses, {}, passObj, dummyObjects, function ( renderStr ) {
 		callback(null, renderStr);
 	});
 };
+*/

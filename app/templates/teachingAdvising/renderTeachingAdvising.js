@@ -11,8 +11,9 @@ Populates the database with test data
 */
 function dummyObject(Model) {
 	var obj = new Model({
-		philosophy: 'I have a dream',
-		supervising: 'about cake'
+		info: 'My teaching philosophy is...and I taught the following courses: '
+		//philosophy: 'I have a dream',
+		//supervising: 'about cake'
 	});
 	return obj;
 }
