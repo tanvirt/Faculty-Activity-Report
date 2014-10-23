@@ -21,7 +21,7 @@ var renderTenure = require('../../app/templates/tenure/renderTenure');
 var renderDateAppointed = require('../../app/templates/dateAppointed/renderDateAppointed');
 var renderAssignedActivity = require('../../app/templates/assignedActivity/renderAssignedActivity');
 var renderTeachingAdvising = require('../../app/templates/teachingAdvising/renderTeachingAdvising');
-var renderTeachingAdvisingCourses = require('../../app/templates/teachingAdvisingCourses/renderTeachingAdvisingCourses');
+//var renderTeachingAdvisingCourses = require('../../app/templates/teachingAdvisingCourses/renderTeachingAdvisingCourses');
 var renderTeachingEvaluation = require('../../app/templates/teachingEvaluation/renderTeachingEvaluation');
 var renderGraduateCommittee = require('../../app/templates/graduateCommittee/renderGraduateCommittee');
 var renderCurrentRank = require('../../app/templates/currentRank/renderCurrentRank');
@@ -35,6 +35,8 @@ var renderConferences = require('../../app/templates/conferences/renderConferenc
 var renderGovernance = require('../../app/templates/governance/renderGovernance');
 var renderConsultationsOutsideUniversity = require('../../app/templates/consultationsOutsideUniversity/renderConsultationsOutsideUniversity');
 var renderEditorServiceReviewer = require('../../app/templates/editorServiceReviewer/renderEditorServiceReviewer');
+var renderMembership = require('../../app/templates/membership/renderMembership');
+var renderInternational = require('../../app/templates/international/renderInternational');
 
 /*
 Generates the LaTex File into app/pdf directory
@@ -51,7 +53,7 @@ exports.generate = function(req,res,next) {
 		renderDateAppointed.render,
 		renderAssignedActivity.render,
 		renderTeachingAdvising.render,
-		renderTeachingAdvisingCourses.render,
+		//renderTeachingAdvisingCourses.render,
 		renderTeachingEvaluation.render,
 		renderGraduateCommittee.render,
 		renderCreativeWorks.render,
@@ -62,7 +64,9 @@ exports.generate = function(req,res,next) {
 		renderContracts.render,
 		renderGovernance.render,
 		renderConsultationsOutsideUniversity.render,
-		renderEditorServiceReviewer.render
+		renderEditorServiceReviewer.render,
+		renderMembership.render,
+		renderInternational.render
 	
 	], function(err, results) {
 		if (err) return res.status(500).send({ error: 'Report Generation Failed' });

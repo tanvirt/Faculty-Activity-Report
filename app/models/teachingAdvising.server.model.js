@@ -7,12 +7,16 @@ var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
 var TeachingAdvising = new Schema({
-	philosophy: {
+	/*philosophy: {
 		type: String,
 		required: true
 	},
 	supervising: {
 		type: String
+	},*/
+	info: {
+		type: String,
+		default: 'N/A'
 	},
 	user: {
 		type: Schema.ObjectId,

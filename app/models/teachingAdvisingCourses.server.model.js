@@ -1,8 +1,8 @@
-'use strict';
+/*'use strict';
 
 /**
  * Module dependencies.
- */
+ 
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
@@ -32,3 +32,4 @@ var TeachingAdvisingCourses = new Schema({
 }, {collection:'TeachingAdvisingCourses'});
 
 mongoose.model('TeachingAdvisingCourses', TeachingAdvisingCourses);
+*/

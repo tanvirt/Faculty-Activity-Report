@@ -1,15 +1,15 @@
-'use strict';
+/*'use strict';
 
 /**
  * Module dependencies.
- */
+ 
 var should = require('should'),
 	mongoose = require('mongoose'),
 	Courses = mongoose.model('TeachingAdvisingCourses');
 
 /**
  * Globals
- */
+ 
 var course;
 
 describe('Teaching/Advising Courses Model Unit Tests:', function() {
@@ -79,3 +79,4 @@ describe('Teaching/Advising Courses Model Unit Tests:', function() {
 		done();
 	});
 });
+*/
