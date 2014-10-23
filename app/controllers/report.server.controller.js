@@ -65,8 +65,7 @@ exports.generate = function(req,res,next) {
 		renderEditorServiceReviewer.render
 	
 	], function(err, results) {
-		console.log('Here!');
-		if (err) res.status(500).send({ error: 'Report Generation Failed' });
+		if (err) return res.status(500).send({ error: 'Report Generation Failed' });
 
 		//Generate Report
 		var writeable = fs.createWriteStream('./public/modules/reports/pdf/report.pdf');
@@ -131,7 +130,7 @@ exports.submit = function(req, res, next) {
 		async.apply(renderAffiliateAppointments.submit, req),
 		async.apply(renderDateAppointed.submit, req)
 	], function(err, models) {
-		if (err) res.status(500).send({ error: 'Submit Failed' });	
+		if (err) return res.status(500).send({ error: 'Submit Failed' });	
 		console.log(req.body);
 		res.redirect('/report/generate');	
 	});

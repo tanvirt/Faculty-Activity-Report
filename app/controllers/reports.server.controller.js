@@ -29,10 +29,8 @@ exports.create = function(req, res) {
 			// Assign Prev values
 			report.reportName = req.body.reportName;
 
-			// Assign Name References
+			// Assign References References
 			report.name = models.name._id;
-
-			// Assign Tenure References
 			report.tenure = models.tenure._id;
 			report.currentRank = models.currentRank._id;
 			report.affiliateAppointments = models.affiliateAppointments._id;
