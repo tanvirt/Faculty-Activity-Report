@@ -8,15 +8,15 @@ var mongoose = require('mongoose'),
 	Report = mongoose.model('Report'),
 	_ = require('lodash');
 
-
-
+//load in functions from previous controller
 var rCtrl = require('./report');
+//make available to routes
+exports.rCtrl = rCtrl;
 
 /**
  * Create a Report
  */
 exports.create = function(req, res) {
-	//console.log('body: ' + req.body.firstName);
 	rCtrl.submit_02(req, res, function(err, models) {
 		if (err) {
 			return res.status(400).send({
@@ -29,19 +29,8 @@ exports.create = function(req, res) {
 			// Assign Prev values
 			report.reportName = req.body.reportName;
 
-			// Temporary Values, Delete when Reference has been made
-			//report.firstName = req.body.firstName;
-			//report.middleName = req.body.middleName;
-			//report.lastName = req.body.lastName;
-			//report.tenure = req.body.tenure;
-			//report.currentRank = req.body.currentRank; //needs currentRank ref
-			//report.dateAppointed = req.body.dateAppointed; //needs dateAppointed ref
-			//report.affiliateAppointments = req.body.affiliateAppointments; //needs affiliate reff
-
-			// Assign Name References
+			// Assign References References
 			report.name = models.name._id;
-
-			// Assign Tenure References
 			report.tenure = models.tenure._id;
 			report.currentRank = models.currentRank._id;
 			report.affiliateAppointments = models.affiliateAppointments._id;
@@ -53,7 +42,15 @@ exports.create = function(req, res) {
 						message: errorHandler.getErrorMessage(err)
 					});
 				} else {
-					console.log(JSON.stringify(report));
+					//Now that report is saved, assign reference
+					models.name.report = report;
+
+					//Updatae existing document
+					models.name.save(function(err) {
+						console.log('Name Saved');
+					});
+
+					//get json to frontend
 					res.jsonp(report);
 				}
 			});			
@@ -61,14 +58,13 @@ exports.create = function(req, res) {
 	}); 
 };
 
-
 /**
  * Show the current Report
  */
 exports.read = function(req, res) {
-	console.log('reading');
+	//console.log('reading');
 	res.jsonp(req.report);
-	console.log('read ' + req.report);
+	//console.log(util.inspect(req));
 };
 
 /**
@@ -95,6 +91,7 @@ exports.update = function(req, res) {
  * Delete an Report
  */
 exports.delete = function(req, res) {
+	console.log('Backend Removed');
 	var report = req.report;
 
 	report.remove(function(err) {

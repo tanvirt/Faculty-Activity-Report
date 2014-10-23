@@ -1,5 +1,16 @@
 'use strict';
 
+/*
+DEPRECIATED DON'T USE THIS CODE IN NEWER VERSIONS,
+	ONLY HERE FOR BACKWARD COMPATABILITY. USE modelClass.js
+
+DEPRECIATED DON'T USE THIS CODE IN NEWER VERSIONS,
+	ONLY HERE FOR BACKWARD COMPATABILITY. USE modelClass.js
+
+DEPRECIATED DON'T USE THIS CODE IN NEWER VERSIONS,
+	ONLY HERE FOR BACKWARD COMPATABILITY. USE modelClass.js
+*/
+
 var swig = require('swig');
 var path = require('path');
 var join = path.join;
@@ -61,6 +72,25 @@ function renderSwig(filePath, objArray, cb) {
 		cb( output );
 	});
 }
+
+exports.renderUser = function( req, filePath, Model, dummyFunction, cb ) {
+	Model.find({report: req.report}, function(err, obj) {
+		if (err) return err;
+
+		if (!obj[0]) {
+			if (dummyFunction) {
+				// if the parameter is not null, then assign fake data
+				obj[0] = createDummy(dummyFunction, Model);
+			} else {
+				// render N/A to the screen
+				filePath = 'name/na.tex';
+			}
+		}
+
+		// inject values into latex
+		renderSwig(filePath, obj[0], cb);
+	});
+};
 
 exports.renderMultiple = function( filePath, Model, criteria, passObj, arrayDummyFunction, cb ) {
 	Model.find(criteria, function(err, objArray) {

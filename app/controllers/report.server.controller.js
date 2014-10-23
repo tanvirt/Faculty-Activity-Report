@@ -41,10 +41,12 @@ var renderInternational = require('../../app/templates/international/renderInter
 /*
 Generates the LaTex File into app/pdf directory
 */
+// async.apply(renderName.submit, req)
 exports.generate = function(req,res,next) {	
+	//console.log('Req.report' + req.report);
 	async.parallel([
 		//Initiate render functions here
-		renderName.render,
+		async.apply(renderName.render, req),
 		renderTenure.render,
 		renderCurrentRank.render,
 		renderAffiliateAppointments.render,
@@ -67,10 +69,10 @@ exports.generate = function(req,res,next) {
 		renderInternational.render
 	
 	], function(err, results) {
-		if (err) res.status(500).send({ error: 'Report Generation Failed' });
+		if (err) return res.status(500).send({ error: 'Report Generation Failed' });
 
 		//Generate Report
-		var writeable = fs.createWriteStream('./app/pdf/report.pdf');
+		var writeable = fs.createWriteStream('./public/modules/reports/pdf/report.pdf');
 
 		latex([
 			'\\documentclass{article}',
@@ -90,7 +92,7 @@ exports.generate = function(req,res,next) {
 
 		writeable.on('finish', function() {
 			console.log('Report Generated!');
-			res.redirect('/report/download');
+			next();
 		});
 	});
 };
@@ -102,7 +104,8 @@ exports.debug = function(req,res,next) {
 };
 
 exports.download = function(req, res) {
-	res.download('./app/pdf/report.pdf');
+	console.log('Downloading');
+	res.sendfile('./public/modules/reports/pdf/report.pdf');
 };
 
 exports.form = function(req, res){
@@ -131,7 +134,7 @@ exports.submit = function(req, res, next) {
 		async.apply(renderAffiliateAppointments.submit, req),
 		async.apply(renderDateAppointed.submit, req)
 	], function(err, models) {
-		if (err) res.status(500).send({ error: 'Submit Failed' });	
+		if (err) return res.status(500).send({ error: 'Submit Failed' });	
 		console.log(req.body);
 		res.redirect('/report/generate');	
 	});

@@ -51,7 +51,7 @@ Helper function that gets called in report.server.controller.js
 Output is pushed into a LaTex PDF there.
 */
 module.exports.render = function (callback) {
-	renderModel.render( 'Contribution/Contribution.tex', Contribution, dummyObject, function ( renderStr ) {
+	renderModel.render( 'contribution/contribution.tex', Contribution, dummyObject, function ( renderStr ) {
 		callback(null, renderStr);
 	});
 };

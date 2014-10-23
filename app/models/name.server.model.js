@@ -3,15 +3,15 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var validateInitLength= function(property) {
-	return (property.length === 1) || (property.length === 0);
+var validateInitLength = function(property) {
+	return (!property) || (property.length === 1) ;
 };
 
 var NameSchema = new Schema({
 	firstName: {
 		type: String,
-		required: 'Please fill first name',
-		trim: true
+		trim: true,
+		required: 'Please fill first name'
 	},
 	
 	middleName: {
@@ -22,13 +22,18 @@ var NameSchema = new Schema({
 	
 	lastName: {
 		type: String,
-		required: 'Please fill last name',
-		trim: true
+		trim: true,
+		required: 'Please fill last name'
 	},
 
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
+	},
+
+	report: {
+		type: Schema.ObjectId,
+		ref: 'Report'
 	}	
 }, {collection: 'Name'});
 

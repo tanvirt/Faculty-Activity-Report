@@ -1,42 +1,64 @@
 'use strict';
 
-var renderModel = require('../../../app/templates/renderModel');
 var mongoose = require('mongoose');
-
-// Compile Schema into Model here
 var Name = mongoose.model('Name');
 
-/*
-Populates the database with test data
-*/
-function dummyObject(Model) {
-	var obj = new Model({
-		firstName: 'Rosie',
-		middleName: 'T',
-		lastName: 'Poodle'
-	});
-	return obj;
-}
+var modelClass = require('../modelClass');
+var renderModel = new modelClass.RenderModel( Name, 'name/name.tex', 'name/na.tex');
 
 /*
-Helper function that gets called in report.server.controller.js
-Output is pushed into a LaTex PDF there.
+will explicitly populate the report with
+the data you provide
 */
-module.exports.render = function (callback) {
-	renderModel.render( 'name/name.tex', Name, dummyObject, function ( renderStr ) {
-		callback(null, renderStr);
+renderModel.setDebugPopulate( false, {
+	firstName: 'Rosie',
+	middleName: 'T',
+	lastName: 'Poodle'
+});
+
+/*
+will explicitely print the N/A latex
+to the screen for debugging purposes
+*/
+renderModel.isDebugNull = false;
+
+/*
+render function that finds the obj in the database
+and converts it into latex.
+*/
+module.exports.render = function(req, callback) {
+	renderModel.findOneModelByReport( req, function( obj ) {
+		renderModel.render( obj, callback );
 	});
 };
 
+/*
+//Exactly the same as the render above, but 
+//uses the fidnModelsByReport, which returns
+//an array of JSON objects
+module.exports.render = function(req, callback) {
+	renderModel.findModelsByReport( req, function( arrayOfObjs ) {
+		return arrayOfObjs[0];
+	}, function( single_obj ) {
+		renderModel.render( single_obj, callback );
+	});
+};
+*/
+
+/*
+Gets the data from the frontend and
+saves it in the database.
+*/
 module.exports.submit = function(req, callback) {
 	var name = new Name({
 		firstName: req.body.firstName,
 		middleName: req.body.middleName,
 		lastName: req.body.lastName,
-		user: req.user		
+		user: req.user
 	});
 
 	name.save(function(err) {
 		callback(null, name);
 	});
 };
+

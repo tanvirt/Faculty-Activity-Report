@@ -3,8 +3,8 @@
 // Reports controller
 var app = angular.module('reports');
 
-app.controller('ReportsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Reports',
-	function($scope, $stateParams, $location, Authentication, Reports ) {
+app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Reports',
+	function($scope, $http, $stateParams, $location, Authentication, Reports ) {
 		
 		//custom tinymce textarea
 		$scope.tinymceOptions = {
@@ -55,7 +55,8 @@ app.controller('ReportsController', ['$scope', '$stateParams', '$location', 'Aut
 
 		// Remove existing Report
 		$scope.remove = function( report ) {
-			if ( report ) { report.$remove();
+			if ( report ) { 
+				report.$remove();
 
 				for (var i in $scope.reports ) {
 					if ($scope.reports [i] === report ) {
@@ -71,7 +72,7 @@ app.controller('ReportsController', ['$scope', '$stateParams', '$location', 'Aut
 
 		// Update existing Report
 		$scope.update = function() {
-			var report = $scope.report ;
+			var report = $scope.report;
 
 			report.$update(function() {
 				$location.path('reports/' + report._id);
@@ -90,6 +91,24 @@ app.controller('ReportsController', ['$scope', '$stateParams', '$location', 'Aut
 			$scope.report = Reports.get({ 
 				reportId: $stateParams.reportId
 			});
+		};
+
+		// Download existing report
+		$scope.download = function() {
+			//var report = $scope.report;
+			//console.log(report);
+			//console.log('http: ' + $http);
+			// window.open(downloadPath, '_blank', ''); 
+			if ($scope.report) {
+				$http.get('/reportdownload/' + $scope.report._id).
+					success(function(data, status, headers, config) {
+						window.open('/modules/reports/pdf/report.pdf', '_blank', '');
+						console.log('Headers: ' + headers);
+					}).
+					error(function(data, status, headers, config) {
+						console.log('Error');
+					});
+			}
 		};
 	}
 ]);
