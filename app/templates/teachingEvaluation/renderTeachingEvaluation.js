@@ -43,7 +43,7 @@ module.exports.render = function (callback) {
 };
 
 module.exports.submit = function(req, res, callback) {
-	teachingEvaluation.create({
+	var evaluation = new teachingEvaluation({
 		course: req.body.teachingEvaluation.course,
 		year: req.body.teachingEvaluation.year,
 		semester: req.body.teachingEvaluation.semester,
@@ -53,8 +53,31 @@ module.exports.submit = function(req, res, callback) {
 		departmentMean: [2,3,4,2,3,4,2,3,4],
 		collegeMean: [4,4,4,4,4,4,4,4,4],
 		user: req.user
-	}, function(err) {
-		callback(err);
+	});
+	
+	evaluation.save(function(err) {
+		callback(null, evaluation);
 	});
 };
 
+//Excel parser is on backburner for now
+/*
+module.exports.submit = function(req, res, callback) {
+	var excel = req.body.excelAddress;
+	parseXlsx(excel, function(err, data){
+		teachingEvaluation.create({
+			course: data[0][0],
+			year: data[0][0],
+			semester: data[0][0],
+			enrolled: data[0][0],
+			responses: data[0][0],
+			teacherMean: data[1],
+			departmentMean: data[1],
+			collegeMean: data[1],
+			user: req.user
+		}, function(err) {
+			callback(err);
+		});
+	});
+};
+*/
