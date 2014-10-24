@@ -10,7 +10,7 @@ var renderModel = new modelClass.RenderModel( Name, 'name/name.tex', 'name/na.te
 will explicitly populate the report with
 the data you provide
 */
-renderModel.setDebugPopulate( false, {
+renderModel.setDebugPopulate( true, {
 	firstName: 'Rosie',
 	middleName: 'T',
 	lastName: 'Poodle'
@@ -27,9 +27,13 @@ render function that finds the obj in the database
 and converts it into latex.
 */
 module.exports.render = function(req, callback) {
-	renderModel.findOneModelByReport( req, function( obj ) {
-		renderModel.render( obj, callback );
-	});
+	if(!renderModel.isDebugNull && !renderModel.isDebugPopulate) {
+		renderModel.findOneModelByReport( req, function( obj ) {
+			renderModel.render( obj, callback );
+		});
+	}
+	else
+		renderModel.render({}, callback);
 };
 
 /*
