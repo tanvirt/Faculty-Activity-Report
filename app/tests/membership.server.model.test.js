@@ -17,14 +17,15 @@ describe('Membership Model Unit Tests:', function() {
 	beforeEach(function(done) {
 
 		membership = new Membership({
-			examples: [{
-				title: 'Internation Conference on Data Engineering',
+			info: 'I am a member of these things in the profession: '
+			/*examples: [{
+				title: 'International Conference on Data Engineering',
 				year: 2014
 			},
 			{
 				title: 'ACM-SIGMOD',
 				year: 2013
-			}]
+			}]*/
 		});
 		done();
 	});
@@ -36,7 +37,7 @@ describe('Membership Model Unit Tests:', function() {
 			done();
 		});
 
-		it('should fail to save with a future date', function(done) {
+		/*it('should fail to save with a future date', function(done) {
 			membership.examples[0].year = 2020;
 
 			return membership.save(function(err) {
@@ -70,7 +71,7 @@ describe('Membership Model Unit Tests:', function() {
 				should.exist(err);
 				done();
 			});
-		});
+		});*/
 
 	});
 
