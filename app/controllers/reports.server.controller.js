@@ -45,6 +45,7 @@ exports.create = function(req, res) {
 					//Now that report is saved, assign reference
 					models.name.report = report;
 					models.tenure.report = report;
+					models.currentRank.report = report;
 
 					//Updatae existing document
 					models.name.save(function(err) {
@@ -52,6 +53,9 @@ exports.create = function(req, res) {
 					});
 					models.tenure.save(function(err) {
 						console.log('Tenure Saved');
+					});
+					models.currentRank.save(function(err) {
+						console.log('CurrentRank Saved');
 					});
 
 					//get json to frontend

@@ -47,7 +47,7 @@ exports.generate = function(req,res,next) {
 		//Initiate render functions here
 		async.apply(renderName.render, req),
 		async.apply(renderTenure.render, req),
-		renderCurrentRank.render,
+		async.apply(renderCurrentRank.render, req),
 		renderAffiliateAppointments.render,
 		renderDateAppointed.render,
 		renderAssignedActivity.render,
