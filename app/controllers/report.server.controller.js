@@ -41,9 +41,8 @@ var renderInternational = require('../../app/templates/international/renderInter
 /*
 Generates the LaTex File into app/pdf directory
 */
-// async.apply(renderName.submit, req)
 exports.generate = function(req,res,next) {	
-	//console.log('Req.report' + req.report);
+	console.log('Req.report' + req.report);
 	async.parallel([
 		//Initiate render functions here
 		async.apply(renderName.render, req),
@@ -72,7 +71,7 @@ exports.generate = function(req,res,next) {
 		if (err) return res.status(500).send({ error: 'Report Generation Failed' });
 
 		//Generate Report
-		var writeable = fs.createWriteStream('./public/modules/reports/pdf/report.pdf');
+		var writeable = fs.createWriteStream('./public/modules/reports/pdf/' + req.report._id + '.pdf');
 
 		latex([
 			'\\documentclass{article}',
@@ -105,7 +104,7 @@ exports.debug = function(req,res,next) {
 
 exports.download = function(req, res) {
 	console.log('Downloading');
-	res.sendfile('./public/modules/reports/pdf/report.pdf');
+	res.sendfile('./public/modules/reports/pdf/' + req.report._id + '.pdf');
 };
 
 exports.form = function(req, res){
@@ -138,7 +137,6 @@ exports.submit = function(req, res, next) {
 		console.log(req.body);
 		res.redirect('/report/generate');	
 	});
-
 };
 
 exports.submit_02 = function(req, res, callback) {

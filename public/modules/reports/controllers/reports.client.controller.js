@@ -95,18 +95,13 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 
 		// Download existing report
 		$scope.download = function() {
-			//var report = $scope.report;
-			//console.log(report);
-			//console.log('http: ' + $http);
-			// window.open(downloadPath, '_blank', ''); 
 			if ($scope.report) {
 				$http.get('/reportdownload/' + $scope.report._id).
 					success(function(data, status, headers, config) {
-						window.open('/modules/reports/pdf/report.pdf', '_blank', '');
-						console.log('Headers: ' + headers);
+						window.open('/modules/reports/pdf/' + $scope.report._id + '.pdf', '_blank', '');
 					}).
 					error(function(data, status, headers, config) {
-						console.log('Error');
+						console.log('error');
 					});
 			}
 		};
