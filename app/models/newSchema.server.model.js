@@ -13,6 +13,14 @@ var NewSchema = new Schema({
 	desc: {
 		type: String,
 		required: true
+	},
+	user: {
+		type: Schema.ObjectId,
+		ref: 'User'
+	},
+	report: {
+		type: Schema.ObjectId,
+		ref: 'Report'
 	}
 	
 }, {collection: 'NewSchema'});
