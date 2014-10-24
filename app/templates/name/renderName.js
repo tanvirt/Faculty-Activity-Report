@@ -17,7 +17,7 @@ renderModel.setDebugPopulate( false, {
 });
 
 /*
-will explicitely print the N/A latex
+will explicitly print the N/A latex
 to the screen for debugging purposes
 */
 renderModel.isDebugNull = false;

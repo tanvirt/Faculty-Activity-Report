@@ -46,7 +46,7 @@ exports.generate = function(req,res,next) {
 	async.parallel([
 		//Initiate render functions here
 		async.apply(renderName.render, req),
-		renderTenure.render,
+		async.apply(renderTenure.render, req),
 		renderCurrentRank.render,
 		renderAffiliateAppointments.render,
 		renderDateAppointed.render,

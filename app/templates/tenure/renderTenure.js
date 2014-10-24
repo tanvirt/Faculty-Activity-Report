@@ -1,28 +1,32 @@
 'use strict';
 
-var renderModel = require('../../../app/templates/renderModel');
 var mongoose = require('mongoose');
 
 // Compile Schema into Model here
 var Tenure = mongoose.model('Tenure');
+var modelClass = require('../modelClass');
+var renderModel = new modelClass.RenderModel( Tenure, 'tenure/tenure.tex', 'tenure/na.tex');
 
 /*
 Populates the database with test data
 */
-function dummyObject(Model) {
-	var obj = new Model({
-		tenure: 'Tenured'
-	});
-	return obj;
-}
+renderModel.setDebugPopulate( false, {
+	tenure: 'Tenured'
+});
 
 /*
-Helper function that gets called in report.server.controller.js
-Output is pushed into a LaTex PDF there.
+will explicitly print the N/A latex
+to the screen for debugging purposes
 */
-module.exports.render = function (callback) {
-	renderModel.render( 'tenure/tenure.tex', Tenure, dummyObject, function ( renderStr ) {
-		callback(null, renderStr);
+renderModel.isDebugNull = false;
+
+/*
+render function that finds the obj in the database
+and converts it into latex.
+*/
+module.exports.render = function(req, callback) {
+	renderModel.findOneModelByReport( req, function( obj ) {
+		renderModel.render( obj, callback );
 	});
 };
 
