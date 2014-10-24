@@ -105,7 +105,7 @@ teachingEvaluation.methods.findTotalMean = function findTotalMean() {
 		totalArr[1] += this.departmentMean[i];
 		totalArr[2] += this.collegeMean[i];
 	}
-	for(i = 0; i < 3; i++) totalArr[i] = (totalArr[i]/9);
+	for(i = 0; i < 3; i++) totalArr[i] = (Math.round((totalArr[i]/9)*100))/100;
 	return totalArr;
 };
 
