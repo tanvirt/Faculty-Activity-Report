@@ -15,6 +15,6 @@ Faculty Activity Report
    - Christine King (xtineking) - airpwane@ufl.edu
    - Morgan Wheeler (mkwheeler) - mkwheeler@ufl.edu
    - Greg Friedman (friedmangreg37) - friedmangreg37@ufl.edu
-   - Ian Fell (ifell0) - ifell@ufl.edu
+   - Ian Fell (ifell0 (name change to ifell) ) - ifell@ufl.edu
    - Andrew Lorelle (Aknoxlor) - andrewlorelle@ufl.edu
    - Josh Hammock (joshammock) - joshammock@gmail.com
