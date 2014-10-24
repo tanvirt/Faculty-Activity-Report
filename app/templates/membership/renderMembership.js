@@ -11,32 +11,26 @@ Populates the database with test data
 */
 function dummyObject(Model) {
 	var obj = new Model({
-		examples: [{
-			title: 'Internation Conference on Data Engineering',
+		/*examples: [{
+			title: 'International Conference on Data Engineering',
 			year: 2014
 		},
 		{
 			title: 'ACM-SIGMOD',
 			year: 2014
-		}]
+		}]*/
+		info: 'I am a member of the following things...'
 	});
 
 	return obj;
 }
 
 /*
-rearrange data, pass in additional fields
-*/
-function passObj(objArray) {
-	return {'memberships': objArray};
-}
-
-/*
 Helper function that gets called in report.server.controller.js
 Output is pushed into a LaTex PDF there.
 */
-module.exports.render = function(callback) {
-	renderModel.renderMultiple('membership/membership.tex', Membership, {}, passObj, dummyObject, function ( renderStr ) {
+module.exports.render = function (callback) {
+	renderModel.render( 'membership/membership.tex', Membership, dummyObject, function ( renderStr ) {
 		callback(null, renderStr);
 	});
 };
