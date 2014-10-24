@@ -1,28 +1,32 @@
 'use strict';
 
-var renderModel = require('../../../app/templates/renderModel');
 var mongoose = require('mongoose');
-
 // Compile Schema into Model here
 var DateAppointed = mongoose.model('DateAppointed');
+var modelClass = require('../modelClass');
+var renderModel = new modelClass.RenderModel( DateAppointed, 'dateAppointed/dateAppointed.tex', 'dateAppointed/na.tex');
 
 /*
-Populates the database with test data
+will explicitly populate the report with
+the data you provide
 */
-function dummyObject(Model) {
-	var obj = new Model({
-		theDate: 'August 2000'
-	});
-	return obj;
-}
+renderModel.setDebugPopulate( false, {
+	date: 'November 2012'
+});
 
 /*
-Helper function that gets called in report.server.controller.js
-Output is pushed into a LaTex PDF there.
+will explicitly print the N/A latex
+to the screen for debugging purposes
 */
-module.exports.render = function (callback) {
-	renderModel.render( 'dateAppointed/dateAppointed.tex', DateAppointed, dummyObject, function ( renderStr ) {
-		callback(null, renderStr);
+renderModel.isDebugNull = false;
+
+/*
+render function that finds the obj in the database
+and converts it into latex.
+*/
+module.exports.render = function(req, callback) {
+	renderModel.findOneModelByReport( req, function( obj ) {
+		renderModel.render( obj, callback );
 	});
 };
 

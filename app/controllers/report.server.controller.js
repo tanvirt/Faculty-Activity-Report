@@ -49,7 +49,7 @@ exports.generate = function(req,res,next) {
 		async.apply(renderTenure.render, req),
 		async.apply(renderCurrentRank.render, req),
 		renderAffiliateAppointments.render,
-		renderDateAppointed.render,
+		async.apply(renderDateAppointed.render, req),
 		renderAssignedActivity.render,
 		renderTeachingAdvising.render,
 		//renderTeachingAdvisingCourses.render, 

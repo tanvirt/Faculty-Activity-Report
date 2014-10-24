@@ -50,7 +50,7 @@ Gets the data from the frontend and
 saves it in the database.
 */
 module.exports.submit = function(req, callback) {
-	var shem = new NewSchema({
+	var schem = new NewSchema({
 		section: req.body.section,
 		desc: req.body.desc,
 		user: req.user

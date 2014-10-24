@@ -46,6 +46,7 @@ exports.create = function(req, res) {
 					models.name.report = report;
 					models.tenure.report = report;
 					models.currentRank.report = report;
+					models.dateAppointed.report =  report;
 
 					//Updatae existing document
 					models.name.save(function(err) {
@@ -56,6 +57,9 @@ exports.create = function(req, res) {
 					});
 					models.currentRank.save(function(err) {
 						console.log('CurrentRank Saved');
+					});
+					models.dateAppointed.save(function(err) {
+						console.log('DateAppointed Saved');
 					});
 
 					//get json to frontend
