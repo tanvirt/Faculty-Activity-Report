@@ -47,6 +47,7 @@ exports.create = function(req, res) {
 					models.tenure.report = report;
 					models.currentRank.report = report;
 					models.dateAppointed.report =  report;
+					models.affiliateAppointments.report = report;
 
 					//Updatae existing document
 					models.name.save(function(err) {
@@ -60,6 +61,9 @@ exports.create = function(req, res) {
 					});
 					models.dateAppointed.save(function(err) {
 						console.log('DateAppointed Saved');
+					});
+					models.affiliateAppointments.save(function(err) {
+						console.log('AffiliateAppointments Saved');
 					});
 
 					//get json to frontend
