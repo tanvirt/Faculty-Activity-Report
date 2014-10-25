@@ -39,7 +39,7 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 				dateAppointed: this.dateAppointed,
 
 				affiliateAppointments: this.affiliateAppointments,
-
+								
 			});
 
 			// Redirect after save
