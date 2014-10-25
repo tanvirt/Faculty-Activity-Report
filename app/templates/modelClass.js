@@ -99,5 +99,23 @@ RenderModel.prototype.render = function( obj, cb ) {
 	}
 };
 
+RenderModel.prototype.renderOne = function(req, callback) {
+	var _this = this;
+
+	_this.findOneModelByReport( req, function( obj ) {
+		_this.render( obj, callback );
+	});
+};
+
+RenderModel.prototype.renderMultiple = function(req, callback, passObj) {
+	var _this = this;
+
+	_this.findModelsByReport( req, function( arrayOfObjs ) {
+		return passObj( arrayOfObjs );
+	}, function( single_obj ) {
+		_this.render( single_obj, callback );
+	});
+};
+
 // Export the function to the world
 module.exports.RenderModel = RenderModel;

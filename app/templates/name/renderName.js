@@ -27,9 +27,7 @@ render function that finds the obj in the database
 and converts it into latex.
 */
 module.exports.render = function(req, callback) {
-	renderModel.findOneModelByReport( req, function( obj ) {
-		renderModel.render( obj, callback );
-	});
+	renderModel.renderOne(req, callback);
 };
 
 /*
@@ -38,7 +36,7 @@ module.exports.render = function(req, callback) {
 //an array of JSON objects
 module.exports.render = function(req, callback) {
 	renderModel.findModelsByReport( req, function( arrayOfObjs ) {
-		return arrayOfObjs[0];
+		return arrayOfObjs[0]; //put contents of passObj here
 	}, function( single_obj ) {
 		renderModel.render( single_obj, callback );
 	});
