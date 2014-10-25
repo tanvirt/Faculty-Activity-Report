@@ -11,7 +11,9 @@ var mongoose = require('mongoose'),
  */
 var validateLocalStrategyProperty = function(property) {
 	return property >= 0 && property <= 100 && 
-		this.teaching + this.research + this.service === 100;
+		(this.springTeaching + this.springResearch + this.springService === 100) || 
+		(this.summerTeaching + this.summerResearch + this.summerService === 100) ||
+		(this.fallTeaching + this.fallResearch + this.fallService === 100);
 };
 
 /**
@@ -93,4 +95,4 @@ var AssignedActivity = new Schema({
 		
 }, {collection:'AssignedActivity'});
 
-mongoose.model('AssignedActivity', AssignedActivity);
+mongoose.model('assignedActivity', AssignedActivity);

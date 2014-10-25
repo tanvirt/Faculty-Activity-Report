@@ -35,7 +35,7 @@ exports.create = function(req, res) {
 			report.currentRank = models.currentRank._id;
 			report.affiliateAppointments = models.affiliateAppointments._id;
 			report.dateAppointed = models.dateAppointed._id;
-			report.assignedActivity = models.AssignedActivity._id;
+			report.assignedActivity = models.assignedActivity._id;
 			
 			report.save(function(err) {
 				if (err) {
@@ -49,7 +49,7 @@ exports.create = function(req, res) {
 					models.currentRank.report = report;
 					models.dateAppointed.report =  report;
 					models.affiliateAppointments.report = report;
-					models.AssignedActivity.report = report;
+					models.assignedActivity.report = report;
 
 					//Updatae existing document
 					models.name.save(function(err) {
@@ -67,7 +67,7 @@ exports.create = function(req, res) {
 					models.affiliateAppointments.save(function(err) {
 						console.log('AffiliateAppointments Saved');
 					});
-					models.AssignedActivity.save(function(err) {
+					models.assignedActivity.save(function(err) {
 						console.log('AssignedActivity Saved');
 					});
 
@@ -139,7 +139,7 @@ exports.list = function(req, res) {
 	.populate('currentRank')
 	.populate('affiliateAppointments')
 	.populate('dateAppointed')
-	.populate('AssignedActivity')
+	.populate('assignedActivity')
 
 	.exec(function(err, reports) {
 		if (err) {
@@ -164,7 +164,7 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('currentRank')
 	.populate('affiliateAppointments')
 	.populate('dateAppointed')
-	.populate('AssignedActivity')
+	.populate('assignedActivity')
 
 	.exec(function(err, report) {
 		if (err) return next(err);

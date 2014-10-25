@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 
 // Compile Schema into Model here
-var AssignedActivity = mongoose.model('AssignedActivity');
+var AssignedActivity = mongoose.model('assignedActivity');
 
 var modelClass = require('../modelClass');
 var renderModel = new modelClass.RenderModel( AssignedActivity, 'assignedActivity/assignedActivity.tex', 'assignedActivity/na.tex');
