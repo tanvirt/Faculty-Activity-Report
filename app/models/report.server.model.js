@@ -76,6 +76,10 @@ var ReportSchema = new Schema({
 
 	affiliateAppointments: {
 		type: Schema.Types.ObjectId, ref: 'affiliateAppointments'
+	},
+
+	teachingAdvising: {
+		type: Schema.Types.ObjectId, ref: 'TeachingAdvising'
 	}
 
 
