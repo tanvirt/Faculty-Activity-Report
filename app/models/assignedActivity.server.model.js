@@ -9,10 +9,18 @@ var mongoose = require('mongoose'),
 /**
  * A Validation function for local strategy properties
  */
-var validateLocalStrategyProperty = function(property) {
+var validateSpring = function(property) {
 	return property >= 0 && property <= 100 && 
-		(this.springTeaching + this.springResearch + this.springService === 100) || 
-		(this.summerTeaching + this.summerResearch + this.summerService === 100) ||
+		(this.springTeaching + this.springResearch + this.springService === 100);
+};
+
+var validateSummer = function(property) {
+	return property >= 0 && property <= 100 && 
+		(this.summerTeaching + this.summerResearch + this.summerService === 100);
+};
+
+var validateFall = function(property) {
+	return property >= 0 && property <= 100 && 
 		(this.fallTeaching + this.fallResearch + this.fallService === 100);
 };
 
@@ -39,48 +47,48 @@ var AssignedActivity = new Schema({
 	*/
 	springTeaching: {
 		type: Number,
-		validate: [validateLocalStrategyProperty, 
-				'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
+		//validate: [validateSpring, 
+		//		'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
 	},
 	springResearch: {
 		type: Number,
-		validate: [validateLocalStrategyProperty, 
-				'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
+		//validate: [validateSpring, 
+		//		'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
 	},
 	springService: {
 		type: Number,
-		validate: [validateLocalStrategyProperty, 
-				'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
+		//validate: [validateSpring, 
+		//		'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
 	},
 	fallTeaching: {
 		type: Number,
-		validate: [validateLocalStrategyProperty, 
-				'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
+		//validate: [validateFall, 
+		//		'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
 	},
 	fallResearch: {
 		type: Number,
-		validate: [validateLocalStrategyProperty, 
-				'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
+		//validate: [validateFall, 
+		//		'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
 	},
 	fallService: {
 		type: Number,
-		validate: [validateLocalStrategyProperty, 
-				'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
+		//validate: [validateFall, 
+		//		'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
 	},
 	summerTeaching: {
 		type: Number,
-		validate: [validateLocalStrategyProperty, 
-				'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
+		//validate: [validateSummer, 
+		//		'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
 	},
 	summerResearch: {
 		type: Number,
-		validate: [validateLocalStrategyProperty, 
-				'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
+		//validate: [validateSummer, 
+		//		'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
 	},
 	summerService: {
 		type: Number,
-		validate: [validateLocalStrategyProperty, 
-				'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
+		//validate: [validateSummer, 
+		//		'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
 	},
 	
 	user: {
@@ -95,4 +103,4 @@ var AssignedActivity = new Schema({
 		
 }, {collection:'AssignedActivity'});
 
-mongoose.model('assignedActivity', AssignedActivity);
+mongoose.model('AssignedActivity', AssignedActivity);

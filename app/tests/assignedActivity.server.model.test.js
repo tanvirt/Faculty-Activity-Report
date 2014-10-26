@@ -1,6 +1,6 @@
 'use strict';
 //Fails because fields were changed in model
-/*
+
 var should = require('should'),
 	mongoose = require('mongoose'),
 	AssignedActivity = mongoose.model('AssignedActivity');
@@ -10,30 +10,43 @@ var activity01, activity02;
 describe('Assigned Activity Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		activity01 = new AssignedActivity({
-			year: '2014',
-			semester: 'spring',
-			teaching: 33,
-			research: 33,
-			service: 34
+			springTeaching: 30,
+			springResearch: 30,
+			springService: 30,
+
+			fallTeaching: 30,
+			fallResearch: 30,
+			fallService: 30,
+
+			summerTeaching: 40,
+			summerResearch: 40,
+			summerService: 40
 		});
 
 		activity02 = new AssignedActivity({
-			year: '2014',
-			semester: 'spring',
-			teaching: 33,
-			research: 33,
-			service: 34
+			springTeaching: 30,
+			springResearch: 30,
+			springService: 30,
+
+			fallTeaching: 30,
+			fallResearch: 30,
+			fallService: 30,
+
+			summerTeaching: 40,
+			summerResearch: 40,
+			summerService: 40
 		});
 
 		done();
 	});
 
 	describe('Method Save', function() {
-		it('should be able to save without problem', function(done) {
+
+		it('should be able to save without problems', function(done) {
 			activity01.save();
 			done();
 		});
-
+/*
 		it('should fail to save a year that is beyond the present year', function(done) {
 			activity01.year = 2015;
 			return activity01.save(function(err) {
@@ -41,6 +54,7 @@ describe('Assigned Activity Model Unit Tests:', function() {
 				done();
 			});
 		});
+
 
 		it('should fail to save a year that is below 1980', function(done) {
 			activity01.year = 1975;
@@ -98,6 +112,7 @@ describe('Assigned Activity Model Unit Tests:', function() {
 				done();
 			});
 		});
+*/
 	});
 
 	afterEach(function(done) {
@@ -105,4 +120,3 @@ describe('Assigned Activity Model Unit Tests:', function() {
 		done();
 	});
 });
-*/

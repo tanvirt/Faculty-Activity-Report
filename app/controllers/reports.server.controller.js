@@ -26,6 +26,8 @@ exports.create = function(req, res) {
 			var report = new Report();
 			report.user = req.user;
 
+			console.log(require('util').inspect(models));
+
 			// Assign Prev values
 			report.reportName = req.body.reportName;
 
@@ -49,7 +51,7 @@ exports.create = function(req, res) {
 					models.currentRank.report = report;
 					models.dateAppointed.report =  report;
 					models.affiliateAppointments.report = report;
-					models.assignedActivity.report = report;
+					//models.assignedActivity.report = report;
 
 					//Updatae existing document
 					models.name.save(function(err) {
@@ -67,6 +69,7 @@ exports.create = function(req, res) {
 					models.affiliateAppointments.save(function(err) {
 						console.log('AffiliateAppointments Saved');
 					});
+					
 					models.assignedActivity.save(function(err) {
 						console.log('AssignedActivity Saved');
 					});

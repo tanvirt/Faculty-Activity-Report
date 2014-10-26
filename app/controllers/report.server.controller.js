@@ -132,7 +132,7 @@ exports.submit = function(req, res, next) {
 		async.apply(renderCurrentRank.submit, req),
 		async.apply(renderAffiliateAppointments.submit, req),
 		async.apply(renderDateAppointed.submit, req),
-		async.apply(renderAssignedActivity.submit, req),
+		async.apply(renderAssignedActivity.submit, req)
 	], function(err, models) {
 		if (err) return res.status(500).send({ error: 'Submit Failed' });	
 		console.log(req.body);
@@ -147,7 +147,7 @@ exports.submit_02 = function(req, res, callback) {
 		currentRank: async.apply(renderCurrentRank.submit, req),
 		affiliateAppointments: async.apply(renderAffiliateAppointments.submit, req),
 		dateAppointed: async.apply(renderDateAppointed.submit, req),
-		assignedAcivity: async.apply(renderAssignedActivity.submit, req)
+		assignedActivity: async.apply(renderAssignedActivity.submit, req)
 	}, function(err, models) {
 		if (err) {
 			callback(err, null);	
