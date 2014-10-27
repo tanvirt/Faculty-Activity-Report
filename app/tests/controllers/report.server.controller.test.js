@@ -48,7 +48,7 @@ describe('Report Controller Tests:', function() {
 		});	
 			
 		it('should catch and show a 500 error code on blank req.report._id', function(done) {
-			var req = {report: {_id: ""}};
+			var req = {report: {_id: ''}};
 			this.timeout(10000);
 		
 			report.generate(req,{
