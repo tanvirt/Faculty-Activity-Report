@@ -49,7 +49,7 @@ saves it in the database.
 */
 module.exports.submit = function(req, callback) {
 	var teachingAdvising = new TeachingAdvising({
-		info: 'My teaching philosophy is...and I taught the following courses: ',
+		info: req.body.info,
 		user: req.user
 	});
 
