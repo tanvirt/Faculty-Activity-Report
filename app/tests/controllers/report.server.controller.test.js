@@ -12,13 +12,6 @@ var should = require('should'),
 /**
  * Globals
  */
- var standardRes = {
-	render: function(){},
-	status: function(status){varStatus = status; return this;},
-	send: function(info){varInfo = info; return this;}, 
-	varInfo: '0',
-	varStatus: 0
- };
  var fileCreated = false;
 
 describe('Report Controller Tests:', function() {
@@ -33,7 +26,7 @@ describe('Report Controller Tests:', function() {
 			var req = {report: {_id: 'debug'}};
 			this.timeout(10000);
 	
-			report.generate(req, standardRes, function(){
+			report.generate(req, {}, function(){
 				fileCreated = true;
 				
 				//Will have error if pdf was not created successfully
@@ -44,14 +37,25 @@ describe('Report Controller Tests:', function() {
 			});
 		});
 		
-		it('should show an error code on missing report (TEST NOT IMPLEMENTED)', function(done) {
-			//report.generate({}, standardRes, function(){});
-			done();
+		it('should catch and show a 500 error code on null req', function(done) {
+			this.timeout(10000);
+		
+			report.generate({},{
+				status: function(data) { 
+				expect(data).to.equal(500);
+				done();
+			}}, function(){});
 		});	
 			
-		it('should handle a missing report id correctly (TEST NOT IMPLEMENTED)', function(done) {
-			//report.generate({}, standardRes, function(){});
-			done();
+		it('should catch and show a 500 error code on blank req.report._id', function(done) {
+			var req = {report: {_id: ""}};
+			this.timeout(10000);
+		
+			report.generate(req,{
+				status: function(data) { 
+				expect(data).to.equal(500);
+				done();
+			}}, function(){});
 		});
 	});
 	
@@ -62,8 +66,8 @@ describe('Report Controller Tests:', function() {
 	});
 
 	afterEach(function(done) {
-		if(fileCreated)
-			fs.unlinkSync('./public/modules/reports/pdf/debug.pdf')
+		if(fileCreated) //Unlink deletes file
+			fs.unlinkSync('./public/modules/reports/pdf/debug.pdf');
 		fileCreated = false;
 		done(); 
 	});
