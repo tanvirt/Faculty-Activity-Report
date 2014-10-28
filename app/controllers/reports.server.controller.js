@@ -152,6 +152,7 @@ exports.list = function(req, res) {
 	.populate('currentRank')
 	.populate('affiliateAppointments')
 	.populate('dateAppointed')
+	.populate('teachingAdvising')
 	
 	//.populate('teachingEvaluation')
 
@@ -178,6 +179,7 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('currentRank')
 	.populate('affiliateAppointments')
 	.populate('dateAppointed')
+	.populate('teachingAdvising')
 
 	//.populate('teachingEvaluation')
 
