@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var should = require('should'),
+	assert = require('assert'),
 	mongoose = require('mongoose'),
 	Contribution = mongoose.model('Contribution');
 
@@ -15,7 +16,7 @@ var contribution;
 describe('Contribution Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		contribution = new Contribution({
-			info: 'I made the following contributions...'
+			//info: 'I made the following contributions...'
 			/*intro: 'Summary of my contributions',
 			examples: [{
 				title: 'Contribution number 1',
@@ -46,6 +47,11 @@ describe('Contribution Model Unit Tests:', function() {
 	describe('Method Save', function() {
 		it('should be able to save without problem', function(done) {
 			contribution.save();
+			done();
+		});
+
+		it('should set info to N/A if nothing given', function(done) {
+			assert.equal(contribution.info, 'N/A');
 			done();
 		});
 

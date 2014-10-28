@@ -13,7 +13,7 @@ angular.module('ui.tinymce', [])
         var expression, options, tinyInstance,
           updateView = function () {
             ngModel.$setViewValue(elm.val());
-            if (!scope.$root.$$phase) {
+            if (scope.$root && !scope.$root.$$phase) {
               scope.$apply();
             }
           };
@@ -63,6 +63,14 @@ angular.module('ui.tinymce', [])
         angular.extend(options, uiTinymceConfig, expression);
         setTimeout(function () {
           tinymce.init(options);
+        });
+
+        scope.$on('$destroy', function() {
+          if (!tinyInstance) { tinyInstance = tinymce.get(attrs.id); }
+          if (tinyInstance) {
+            tinyInstance.remove();
+            tinyInstance = null;
+          }
         });
 
 

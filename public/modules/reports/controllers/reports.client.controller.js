@@ -40,6 +40,8 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 
 				affiliateAppointments: this.affiliateAppointments,
 
+				teachingAdvising: this.teachingAdvising
+
 			});
 
 			// Redirect after save

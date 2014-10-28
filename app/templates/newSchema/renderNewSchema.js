@@ -1,19 +1,18 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var Name = mongoose.model('Name');
+var NewSchema = mongoose.model('NewSchema');
 
 var modelClass = require('../modelClass');
-var renderModel = new modelClass.RenderModel( Name, 'name/name.tex', 'name/na.tex');
+var renderModel = new modelClass.RenderModel( NewSchema, 'newSchema/newSchema.tex', 'newSchema/na.tex');
 
 /*
 will explicitly populate the report with
 the data you provide
 */
-renderModel.setDebugPopulate( true, {
-	firstName: 'Rosie',
-	middleName: 'T',
-	lastName: 'Poodle'
+renderModel.setDebugPopulate( false, {
+	section: 'My Extra Section',
+	desc: 'all this nonsense: blah blah blah blah~'
 });
 
 /*
@@ -25,44 +24,40 @@ renderModel.isDebugNull = false;
 /*
 render function that finds the obj in the database
 and converts it into latex.
-*/
-module.exports.render = function(req, callback) {
-	if(!renderModel.isDebugNull && !renderModel.isDebugPopulate) {
-		renderModel.findOneModelByReport( req, function( obj ) {
-			renderModel.renderOne( obj, callback );
-		});
-	}
-	else
-		renderModel.renderOne({}, callback);
-};
 
+module.exports.render = function(req, callback) {
+	renderModel.findOneModelByReport( req, function( obj ) {
+		renderModel.render( obj, callback );
+	});
+};
+*/
 /*
 //Exactly the same as the render above, but 
 //uses the fidnModelsByReport, which returns
 //an array of JSON objects
+*/
 module.exports.render = function(req, callback) {
 	renderModel.findModelsByReport( req, function( arrayOfObjs ) {
-		return arrayOfObjs[0]; //put contents of passObj here
+		return arrayOfObjs[0];
 	}, function( single_obj ) {
 		renderModel.render( single_obj, callback );
 	});
 };
-*/
+
 
 /*
 Gets the data from the frontend and
 saves it in the database.
 */
 module.exports.submit = function(req, callback) {
-	var name = new Name({
-		firstName: req.body.firstName,
-		middleName: req.body.middleName,
-		lastName: req.body.lastName,
+	var schem = new NewSchema({
+		section: req.body.section,
+		desc: req.body.desc,
 		user: req.user
 	});
 
-	name.save(function(err) {
-		callback(null, name);
+	schem.save(function(err) {
+		callback(null, schem);
 	});
 };
 
