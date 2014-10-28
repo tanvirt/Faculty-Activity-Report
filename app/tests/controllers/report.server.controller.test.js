@@ -27,7 +27,7 @@ describe('Report Controller Tests:', function() {
 			this.timeout(10000);
 	
 			report.generate(req, {}, function(){
-				//fileCreated = true;
+				fileCreated = true;
 				
 				//Will have error if pdf was not created successfully
 				fs.readFile('./public/modules/reports/pdf/' + req.report._id + '.pdf', function(err, data){

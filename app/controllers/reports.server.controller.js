@@ -48,16 +48,17 @@ exports.create = function(req, res) {
 					models.name.report = report;
 					//models.teachingEvaluation.report = report;
 
-					//Updatae existing document
+					//Update existing document
 					models.name.save(function(err) {
-						//This is gonna flood the console when all schemas are implemented
-						//console.log('Name Saved');
-						if (err) console.log(err);
+						console.log('Name Saved');
+						/*if (err) {
+							return res.status(400).send({
+								message: errorHandler.getErrorMessage(err)});
+						}*/						
 					});
 					//models.teachingEvaluation.save(function(err) {
 					//	if (err) console.log(err);
 					//});
-					console.log('Model Saves Successful');
 
 					//get json to frontend
 					res.jsonp(report);
@@ -128,7 +129,7 @@ exports.list = function(req, res) {
 	.populate('affiliateAppointments')
 	.populate('dateAppointed')
 	
-	.populate('teachingEvaluation')
+	//.populate('teachingEvaluation')
 
 	.exec(function(err, reports) {
 		if (err) {
@@ -154,7 +155,7 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('affiliateAppointments')
 	.populate('dateAppointed')
 	
-	.populate('teachingEvaluation')
+	//.populate('teachingEvaluation')
 
 	.exec(function(err, report) {
 		if (err) return next(err);
