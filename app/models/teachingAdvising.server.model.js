@@ -21,6 +21,10 @@ var TeachingAdvising = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
+	},
+	report: {
+		type: Schema.ObjectId,
+		ref: 'Report'
 	}
 }, {collection:'TeachingAdvising'});
 

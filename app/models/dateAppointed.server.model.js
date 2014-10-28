@@ -35,6 +35,14 @@ var DateAppointed = new Schema({
 	theDate: {
 		type: Date,
 		required: true
+	},
+	user: {
+		type: Schema.ObjectId,
+		ref: 'User'
+	},
+	report: {
+		type: Schema.ObjectId,
+		ref: 'Report'
 	}
 
 }, {collection: 'DateAppointed'});

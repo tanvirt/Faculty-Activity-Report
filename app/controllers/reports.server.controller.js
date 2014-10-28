@@ -35,6 +35,7 @@ exports.create = function(req, res) {
 			report.currentRank = models.currentRank._id;
 			report.affiliateAppointments = models.affiliateAppointments._id;
 			report.dateAppointed = models.dateAppointed._id;
+			report.teachingAdvising = models.teachingAdvising._id;
 			
 			//report.teachingEvaluation = models.teachingEvaluation._id;
 			
@@ -46,7 +47,14 @@ exports.create = function(req, res) {
 				} else {
 					//Now that report is saved, assign reference
 					models.name.report = report;
+
 					//models.teachingEvaluation.report = report;
+
+					models.tenure.report = report;
+					models.currentRank.report = report;
+					models.dateAppointed.report =  report;
+					models.affiliateAppointments.report = report;
+					models.teachingAdvising.report = report;
 
 					//Update existing document
 					models.name.save(function(err) {
@@ -56,10 +64,26 @@ exports.create = function(req, res) {
 								message: errorHandler.getErrorMessage(err)});
 						}*/						
 					});
+
 					//models.teachingEvaluation.save(function(err) {
 					//	if (err) console.log(err);
 					//});
 
+					models.tenure.save(function(err) {
+						console.log('Tenure Saved');
+					});
+					models.currentRank.save(function(err) {
+						console.log('CurrentRank Saved');
+					});
+					models.dateAppointed.save(function(err) {
+						console.log('DateAppointed Saved');
+					});
+					models.affiliateAppointments.save(function(err) {
+						console.log('AffiliateAppointments Saved');
+					});
+					models.teachingAdvising.save(function(err) {
+						console.log('TeachingAdvising Saved');
+					});
 					//get json to frontend
 					res.jsonp(report);
 				}
@@ -154,7 +178,7 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('currentRank')
 	.populate('affiliateAppointments')
 	.populate('dateAppointed')
-	
+
 	//.populate('teachingEvaluation')
 
 	.exec(function(err, report) {

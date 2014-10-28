@@ -21,7 +21,6 @@ var renderTenure = require('../../app/templates/tenure/renderTenure');
 var renderDateAppointed = require('../../app/templates/dateAppointed/renderDateAppointed');
 var renderAssignedActivity = require('../../app/templates/assignedActivity/renderAssignedActivity');
 var renderTeachingAdvising = require('../../app/templates/teachingAdvising/renderTeachingAdvising');
-//var renderTeachingAdvisingCourses = require('../../app/templates/teachingAdvisingCourses/renderTeachingAdvisingCourses');
 var renderTeachingEvaluation = require('../../app/templates/teachingEvaluation/renderTeachingEvaluation');
 var renderGraduateCommittee = require('../../app/templates/graduateCommittee/renderGraduateCommittee');
 var renderCurrentRank = require('../../app/templates/currentRank/renderCurrentRank');
@@ -42,17 +41,17 @@ var renderInternational = require('../../app/templates/international/renderInter
 Generates the LaTex File into app/pdf directory
 */
 exports.generate = function(req,res,next) {	
-	console.log('Req.report' + req.report._id);
+	//console.log('Req.report' + req.report._id);
+	
 	async.parallel([
 		//Initiate render functions here
 		async.apply(renderName.render, req),
-		renderTenure.render,
-		renderCurrentRank.render,
-		renderAffiliateAppointments.render,
-		renderDateAppointed.render,
+		async.apply(renderTenure.render, req),
+		async.apply(renderCurrentRank.render, req),
+		async.apply(renderAffiliateAppointments.render, req),
+		async.apply(renderDateAppointed.render, req),
+		async.apply(renderTeachingAdvising.render, req),
 		renderAssignedActivity.render,
-		renderTeachingAdvising.render,
-		//renderTeachingAdvisingCourses.render, 
 		async.apply(renderTeachingEvaluation.render, req),
 		renderGraduateCommittee.render,
 		renderCreativeWorks.render,
@@ -131,7 +130,8 @@ exports.submit = function(req, res, next) {
 		async.apply(renderTenure.submit, req),
 		async.apply(renderCurrentRank.submit, req),
 		async.apply(renderAffiliateAppointments.submit, req),
-		async.apply(renderDateAppointed.submit, req)
+		async.apply(renderDateAppointed.submit, req),
+		async.apply(renderTeachingAdvising.submit, req)
 	], function(err, models) {
 		if (err) return res.status(500).send({ error: 'Submit Failed' });	
 		console.log(req.body);
@@ -145,7 +145,8 @@ exports.submit_02 = function(req, res, callback) {
 		tenure: async.apply(renderTenure.submit, req),
 		currentRank: async.apply(renderCurrentRank.submit, req),
 		affiliateAppointments: async.apply(renderAffiliateAppointments.submit, req),
-		dateAppointed: async.apply(renderDateAppointed.submit, req)
+		dateAppointed: async.apply(renderDateAppointed.submit, req),
+		teachingAdvising: async.apply(renderTeachingAdvising.submit, req)
 	}, function(err, models) {
 		if (err) {
 			callback(err, null);	
