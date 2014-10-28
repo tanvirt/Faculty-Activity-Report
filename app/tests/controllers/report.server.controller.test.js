@@ -22,12 +22,12 @@ describe('Report Controller Tests:', function() {
 
 	describe('Method Generate', function() {
 		
-		it('should successfully execute given normal parameters', function(done) {
-			var req = {report: {_id: 'debug'}};
+		it('should successfully execute given normal parameters - TEST IS NOT FUNCTIONAL', function(done) {
+			var req = {report: {_id: 'debug', Name:{firstName: 'Ace', middleName: 'B', lastName: 'Denton'}}}; //This needs to be corrected
 			this.timeout(10000);
 	
 			report.generate(req, {}, function(){
-				fileCreated = true;
+				//fileCreated = true;
 				
 				//Will have error if pdf was not created successfully
 				fs.readFile('./public/modules/reports/pdf/' + req.report._id + '.pdf', function(err, data){

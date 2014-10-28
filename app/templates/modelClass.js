@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 
 /*
 class that takes care of rendering the swig/debugging
@@ -36,8 +36,8 @@ Finds one document for the current user's report.
 RenderModel.prototype.findOneModelByReport = function( req, cb ) {
 	//Model.findOne returns an object, so assign to findObj
 	this.Model.findOne({report: req.report}, function(err, obj) {
-		if (err) return err;
-		cb( obj );
+		//if (err) return err;
+		cb( err, obj );
 	});
 };
 
@@ -52,11 +52,11 @@ RenderModel.prototype.findModelsByReport = function ( req, arrayToObj, cb ) {
 	//Model.find returns an array of objects! so reorganize into
 	//one object and assign
 	this.Model.find({report: req.report}, function(err, arrayOfObjs) {
-		if (err) return err;
+		//if (err) return err;
 
 		var single_obj = arrayToObj( arrayOfObjs );
 
-		cb( single_obj );
+		cb( err, single_obj );
 	});
 };
 
@@ -65,7 +65,7 @@ Helper function that injects values into the latex.tex files
 */
 function renderSwig( filePath, json, cb ) {
 	require('swig').renderFile(require('path').join('./app/templates', filePath), json, function(err, output) {
-		if (err) return err;
+		//if (err) return err;
 
 		// Callback to report.server.controller.js submit
 		// error must be past first, and then the output

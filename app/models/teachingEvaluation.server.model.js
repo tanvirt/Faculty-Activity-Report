@@ -36,6 +36,10 @@ var teachingEvaluation = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User'
 	},
+	report: {
+		type: Schema.ObjectId,
+		ref: 'Report'
+	},
 	course: {
 		type: String,
 		required: true

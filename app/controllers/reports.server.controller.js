@@ -36,6 +36,8 @@ exports.create = function(req, res) {
 			report.affiliateAppointments = models.affiliateAppointments._id;
 			report.dateAppointed = models.dateAppointed._id;
 			
+			//report.teachingEvaluation = models.teachingEvaluation._id;
+			
 			report.save(function(err) {
 				if (err) {
 					return res.status(400).send({
@@ -44,11 +46,18 @@ exports.create = function(req, res) {
 				} else {
 					//Now that report is saved, assign reference
 					models.name.report = report;
+					//models.teachingEvaluation.report = report;
 
 					//Updatae existing document
 					models.name.save(function(err) {
-						console.log('Name Saved');
+						//This is gonna flood the console when all schemas are implemented
+						//console.log('Name Saved');
+						if (err) console.log(err);
 					});
+					//models.teachingEvaluation.save(function(err) {
+					//	if (err) console.log(err);
+					//});
+					console.log('Model Saves Successful');
 
 					//get json to frontend
 					res.jsonp(report);
@@ -118,6 +127,8 @@ exports.list = function(req, res) {
 	.populate('currentRank')
 	.populate('affiliateAppointments')
 	.populate('dateAppointed')
+	
+	.populate('teachingEvaluation')
 
 	.exec(function(err, reports) {
 		if (err) {
@@ -142,6 +153,8 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('currentRank')
 	.populate('affiliateAppointments')
 	.populate('dateAppointed')
+	
+	.populate('teachingEvaluation')
 
 	.exec(function(err, report) {
 		if (err) return next(err);
