@@ -56,7 +56,7 @@ exports.generate = function(req,res,next) {
 		renderCreativeWorks.render,
 		renderPatents.render,
 		renderPublication.render,
-		renderContribution.render,
+		async.apply(renderContribution.render, req),
 		renderConferences.render,
 		renderContracts.render,
 		renderGovernance.render,
@@ -130,7 +130,8 @@ exports.submit = function(req, res, next) {
 		async.apply(renderCurrentRank.submit, req),
 		async.apply(renderAffiliateAppointments.submit, req),
 		async.apply(renderDateAppointed.submit, req),
-		async.apply(renderTeachingAdvising.submit, req)
+		async.apply(renderTeachingAdvising.submit, req),
+		async.apply(renderContribution.submit, req)
 	], function(err, models) {
 		if (err) return res.status(500).send({ error: 'Submit Failed' });	
 		console.log(req.body);
@@ -145,7 +146,8 @@ exports.submit_02 = function(req, res, callback) {
 		currentRank: async.apply(renderCurrentRank.submit, req),
 		affiliateAppointments: async.apply(renderAffiliateAppointments.submit, req),
 		dateAppointed: async.apply(renderDateAppointed.submit, req),
-		teachingAdvising: async.apply(renderTeachingAdvising.submit, req)
+		teachingAdvising: async.apply(renderTeachingAdvising.submit, req),
+		contribution: async.apply(renderContribution.submit, req)
 	}, function(err, models) {
 		if (err) {
 			callback(err, null);	
