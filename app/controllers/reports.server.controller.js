@@ -37,7 +37,8 @@ exports.create = function(req, res) {
 			report.dateAppointed = models.dateAppointed._id;
 			report.teachingAdvising = models.teachingAdvising._id;
 			report.contribution = models.contribution._id;
-			
+			report.international = models.international._id;
+
 			report.save(function(err) {
 				if (err) {
 					return res.status(400).send({
@@ -52,6 +53,7 @@ exports.create = function(req, res) {
 					models.affiliateAppointments.report = report;
 					models.teachingAdvising.report = report;
 					models.contribution.report = report;
+					models.international.report = report;
 
 					//Updatae existing document
 					models.name.save(function(err) {
@@ -74,6 +76,9 @@ exports.create = function(req, res) {
 					});
 					models.contribution.save(function(err) {
 						console.log('Contribution Saved');
+					});
+					models.international.save(function(err) {
+						console.log('International Saved');
 					});
 
 					//get json to frontend
@@ -146,6 +151,7 @@ exports.list = function(req, res) {
 	.populate('dateAppointed')
 	.populate('teachingAdvising')
 	.populate('contribution')
+	.populate('international')
 
 	.exec(function(err, reports) {
 		if (err) {
@@ -172,6 +178,7 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('dateAppointed')
 	.populate('teachingAdvising')
 	.populate('contribution')
+	.populate('international')
 
 	.exec(function(err, report) {
 		if (err) return next(err);

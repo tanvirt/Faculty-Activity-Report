@@ -63,7 +63,7 @@ exports.generate = function(req,res,next) {
 		renderConsultationsOutsideUniversity.render,
 		renderEditorServiceReviewer.render,
 		renderMembership.render,
-		renderInternational.render
+		async.apply(renderInternational.render, req)
 	
 	], function(err, results) {
 		if (err) return res.status(500).send({ error: 'Report Generation Failed' });
@@ -131,7 +131,8 @@ exports.submit = function(req, res, next) {
 		async.apply(renderAffiliateAppointments.submit, req),
 		async.apply(renderDateAppointed.submit, req),
 		async.apply(renderTeachingAdvising.submit, req),
-		async.apply(renderContribution.submit, req)
+		async.apply(renderContribution.submit, req),
+		async.apply(renderInternational.submit, req)
 	], function(err, models) {
 		if (err) return res.status(500).send({ error: 'Submit Failed' });	
 		console.log(req.body);
@@ -147,7 +148,8 @@ exports.submit_02 = function(req, res, callback) {
 		affiliateAppointments: async.apply(renderAffiliateAppointments.submit, req),
 		dateAppointed: async.apply(renderDateAppointed.submit, req),
 		teachingAdvising: async.apply(renderTeachingAdvising.submit, req),
-		contribution: async.apply(renderContribution.submit, req)
+		contribution: async.apply(renderContribution.submit, req),
+		international: async.apply(renderInternational.submit, req)
 	}, function(err, models) {
 		if (err) {
 			callback(err, null);	
