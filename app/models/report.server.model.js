@@ -80,6 +80,10 @@ var ReportSchema = new Schema({
 
 	teachingAdvising: {
 		type: Schema.Types.ObjectId, ref: 'TeachingAdvising'
+	},
+
+	contribution: {
+		type: Schema.Types.ObjectId, ref: 'Contribution'
 	}
 
 
