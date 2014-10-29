@@ -62,7 +62,7 @@ exports.generate = function(req,res,next) {
 		renderGovernance.render,
 		renderConsultationsOutsideUniversity.render,
 		renderEditorServiceReviewer.render,
-		renderMembership.render,
+		async.apply(renderMembership.render, req),
 		async.apply(renderInternational.render, req)
 	
 	], function(err, results) {
@@ -132,7 +132,8 @@ exports.submit = function(req, res, next) {
 		async.apply(renderDateAppointed.submit, req),
 		async.apply(renderTeachingAdvising.submit, req),
 		async.apply(renderContribution.submit, req),
-		async.apply(renderInternational.submit, req)
+		async.apply(renderInternational.submit, req),
+		async.apply(renderMembership.submit, req)
 	], function(err, models) {
 		if (err) return res.status(500).send({ error: 'Submit Failed' });	
 		console.log(req.body);
@@ -149,7 +150,8 @@ exports.submit_02 = function(req, res, callback) {
 		dateAppointed: async.apply(renderDateAppointed.submit, req),
 		teachingAdvising: async.apply(renderTeachingAdvising.submit, req),
 		contribution: async.apply(renderContribution.submit, req),
-		international: async.apply(renderInternational.submit, req)
+		international: async.apply(renderInternational.submit, req),
+		membership: async.apply(renderMembership.submit, req)
 	}, function(err, models) {
 		if (err) {
 			callback(err, null);	

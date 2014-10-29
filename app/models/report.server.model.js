@@ -88,6 +88,10 @@ var ReportSchema = new Schema({
 
 	international: {
 		type: Schema.Types.ObjectId, ref: 'International'
+	},
+
+	membership: {
+		type: Schema.Types.ObjectId, ref: 'Membership'
 	}	
 
 
