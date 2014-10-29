@@ -42,7 +42,11 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 
 				teachingAdvising: this.teachingAdvising,
 
-				contribution: this.contribution
+				contribution: this.contribution,
+				
+				international: this.international,
+				
+				membership: this.membership
 
 			});
 
