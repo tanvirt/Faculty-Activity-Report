@@ -80,6 +80,10 @@ var ReportSchema = new Schema({
 	
 	assignedActivity: {
 		type: Schema.Types.ObjectId, ref: 'AssignedActivity'
+	},
+
+	teachingAdvising: {
+		type: Schema.Types.ObjectId, ref: 'TeachingAdvising'
 	}
 
 

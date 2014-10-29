@@ -21,7 +21,6 @@ var renderTenure = require('../../app/templates/tenure/renderTenure');
 var renderDateAppointed = require('../../app/templates/dateAppointed/renderDateAppointed');
 var renderAssignedActivity = require('../../app/templates/assignedActivity/renderAssignedActivity');
 var renderTeachingAdvising = require('../../app/templates/teachingAdvising/renderTeachingAdvising');
-//var renderTeachingAdvisingCourses = require('../../app/templates/teachingAdvisingCourses/renderTeachingAdvisingCourses');
 var renderTeachingEvaluation = require('../../app/templates/teachingEvaluation/renderTeachingEvaluation');
 var renderGraduateCommittee = require('../../app/templates/graduateCommittee/renderGraduateCommittee');
 var renderCurrentRank = require('../../app/templates/currentRank/renderCurrentRank');
@@ -51,8 +50,7 @@ exports.generate = function(req,res,next) {
 		async.apply(renderAffiliateAppointments.render, req),
 		async.apply(renderDateAppointed.render, req),
 		async.apply(renderAssignedActivity.render, req),
-		renderTeachingAdvising.render,
-		//renderTeachingAdvisingCourses.render, 
+		async.apply(renderTeachingAdvising.render, req),
 		async.apply(renderTeachingEvaluation.render, req),
 		renderGraduateCommittee.render,
 		renderCreativeWorks.render,
@@ -132,7 +130,8 @@ exports.submit = function(req, res, next) {
 		async.apply(renderCurrentRank.submit, req),
 		async.apply(renderAffiliateAppointments.submit, req),
 		async.apply(renderDateAppointed.submit, req),
-		async.apply(renderAssignedActivity.submit, req)
+		async.apply(renderAssignedActivity.submit, req),
+		async.apply(renderTeachingAdvising.submit, req)
 	], function(err, models) {
 		if (err) return res.status(500).send({ error: 'Submit Failed' });	
 		console.log(req.body);
@@ -147,7 +146,8 @@ exports.submit_02 = function(req, res, callback) {
 		currentRank: async.apply(renderCurrentRank.submit, req),
 		affiliateAppointments: async.apply(renderAffiliateAppointments.submit, req),
 		dateAppointed: async.apply(renderDateAppointed.submit, req),
-		assignedActivity: async.apply(renderAssignedActivity.submit, req)
+		assignedActivity: async.apply(renderAssignedActivity.submit, req),
+		teachingAdvising: async.apply(renderTeachingAdvising.submit, req)
 	}, function(err, models) {
 		if (err) {
 			callback(err, null);	

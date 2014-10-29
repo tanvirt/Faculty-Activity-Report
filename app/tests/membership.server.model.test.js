@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var should = require('should'),
+	assert = require('assert'),
 	mongoose = require('mongoose'),
 	Membership = mongoose.model('Membership');
 
@@ -17,7 +18,7 @@ describe('Membership Model Unit Tests:', function() {
 	beforeEach(function(done) {
 
 		membership = new Membership({
-			info: 'I am a member of these things in the profession: '
+			//info: 'I am a member of these things in the profession: '
 			/*examples: [{
 				title: 'International Conference on Data Engineering',
 				year: 2014
@@ -34,6 +35,11 @@ describe('Membership Model Unit Tests:', function() {
 
 		it('should be able to save without problems', function(done) {
 			membership.save();
+			done();
+		});
+
+		it('should set info to N/A if nothing given', function(done) {
+			assert.equal(membership.info, 'N/A');
 			done();
 		});
 
