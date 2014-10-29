@@ -6,42 +6,22 @@
 \begin{center}
 \begin{tabular}{lccc}
 
-{%
-for activity in activities 
-%}
-& {{activity.semester | capitalize}} {{activity.year}} 
-{% 
-endfor 
-%} 
+
+& Spring & Summer & Fall 
+ 
 \\
 \hline
 Teaching 
-{% 
-for activity in activities 
-%}
-& {{activity.teaching}}\% 
-{% 
-endfor 
-%}
+& {{springTeaching}}\%  & {{summerTeaching}}\% & {{fallTeaching}}\%
+
 \\
 Research 
-{% 
-for activity in activities 
-%}
-& {{activity.research}}\%  
-{%
-endfor 
-%}
-\\
+& {{springResearch}}\% & {{summerResearch}}\% & {{fallResearch}}\%
 
+\\
 Service
-{% 
-for activity in activities 
-%}
-& {{activity.service}}\%   
-{% 
-endfor 
-%}
+& {{springService}}\% & {{summerService}}\% & {{fallService}}\%   
+
 \\
 \hline
 Total & 100\% & 100\% & 100\%

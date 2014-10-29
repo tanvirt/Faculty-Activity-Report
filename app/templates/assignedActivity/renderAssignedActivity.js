@@ -13,7 +13,7 @@ will explicitly populate the report with
 the data you provide
 */
 renderModel.setDebugPopulate( true, {
-	springTeaching: 20, springResearch: 40, springService: 20,
+	springTeaching: 20, springResearch: 40, springService: 40,
 	summerTeaching: 30, summerResearch: 60, summerService: 10,
 	fallTeaching: 70, fallResearch: 15, fallService: 15
 });
