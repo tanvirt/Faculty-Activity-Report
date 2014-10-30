@@ -93,11 +93,11 @@ RenderModel.prototype.render = function( obj, cb ) {
 
 	if (this.isDebugPopulate && this.debugJSON) {
 		if (this.isDebugPopulate)
-			console.log('\'Debuggin Population\' on for ' + this.Model.modelName);
+			console.log('\'Debugging Population\' on for ' + this.Model.modelName);
 		renderSwig(this.renderFilePath, this.debugJSON, cb);
 	} else if (this.isDebugNull || !obj) {
 		if (this.isDebugNull)
-			console.log('\'Debuggin Null\' on for ' + this.Model.modelName);
+			console.log('\'Debugging Null\' on for ' + this.Model.modelName);
 		renderSwig(this.naFilePath, null, cb);
 	} else {
 		renderSwig(this.renderFilePath, obj, cb);
@@ -114,6 +114,7 @@ RenderModel.prototype.renderOne = function(req, callback) {
 
 RenderModel.prototype.renderMultiple = function(req, callback, passObj) {
 	var _this = this;
+	
 	_this.findModelsByReport( req, function( arrayOfObjs ) {
 		if (arrayOfObjs.length) {
 			return passObj( arrayOfObjs );
@@ -121,6 +122,7 @@ RenderModel.prototype.renderMultiple = function(req, callback, passObj) {
 			return null;
 		}
 	}, function( single_obj ) {
+		console.log(require('util').inspect(single_obj));
 		_this.render( single_obj, callback );
 	});
 };

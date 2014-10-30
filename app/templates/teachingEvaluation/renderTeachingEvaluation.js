@@ -65,7 +65,7 @@ module.exports.render = function (req, callback) {
 
 function passObj(objArray)
 {
-	return {'evaluation': objArray, 'sum': [11, 11, 11]/*objArray.findTotalMean()*/};
+	return {'evaluations': objArray, 'sum': [11, 11, 11]/*objArray.findTotalMean()*/};
 }
 
 module.exports.render = function(req, callback) {
