@@ -12,7 +12,7 @@ Populates the database with test data
 */
 
 renderModel.setDebugPopulate(false, {
-	//evaluation: {
+	evaluations: [{
 		//teacher: 'testName',
 		course: 'testCourse1',
 		year: 2003,
@@ -22,7 +22,7 @@ renderModel.setDebugPopulate(false, {
 		teacherMean: [1,2,3,1,2,3,1,2,3],
 		departmentMean: [2,3,4,2,3,4,2,3,4],
 		collegeMean: [4,4,4,4,4,4,4,4,4],
-	//},
+	}],
 	sum: ['Debug','Debug','Debug']
 });
 
@@ -65,7 +65,7 @@ module.exports.render = function (req, callback) {
 
 function passObj(objArray)
 {
-	return {'evaluations': objArray, 'sum': [11, 11, 11]/*objArray.findTotalMean()*/};
+	return {'evaluations': objArray};
 }
 
 module.exports.render = function(req, callback) {
