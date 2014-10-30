@@ -94,8 +94,11 @@ var teachingEvaluation = new Schema({
 				  1, 1, 1, 
 				  1, 1, 1],
 		validate: [validateLocalStrategyMean, 'Array Length must equal number of questions (9)']
-	}	
-	
+	},
+	report: {
+		type: Schema.ObjectId,
+		ref: 'Report'
+	}		
 }, {collection:'TeachingEvaluation'});
 
 teachingEvaluation.methods.findTotalMean = function findTotalMean() {

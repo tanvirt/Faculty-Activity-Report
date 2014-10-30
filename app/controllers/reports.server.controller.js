@@ -26,6 +26,8 @@ exports.create = function(req, res) {
 			var report = new Report();
 			report.user = req.user;
 
+			//console.log(require('util').inspect(req.body));
+
 			// Assign Prev values
 			report.reportName = req.body.reportName;
 
@@ -34,11 +36,13 @@ exports.create = function(req, res) {
 			report.tenure = models.tenure._id;
 			report.currentRank = models.currentRank._id;
 			report.affiliateAppointments = models.affiliateAppointments._id;
+			report.assignedActivity = models.assignedActivity._id;
 			report.dateAppointed = models.dateAppointed._id;
 			report.teachingAdvising = models.teachingAdvising._id;
 			report.contribution = models.contribution._id;
 			report.international = models.international._id;
 			report.membership = models.membership._id;
+			report.teachingEvaluation = models.teachingEvaluation._id;
 
 			report.save(function(err) {
 				if (err) {
@@ -52,38 +56,47 @@ exports.create = function(req, res) {
 					models.currentRank.report = report;
 					models.dateAppointed.report =  report;
 					models.affiliateAppointments.report = report;
+					models.assignedActivity.report = report;
 					models.teachingAdvising.report = report;
 					models.contribution.report = report;
 					models.international.report = report;
 					models.membership.report = report;
+					models.teachingEvaluation.report = report;
+					
 
 					//Updatae existing document
 					models.name.save(function(err) {
-						console.log('Name Saved');
+						//console.log('Name Saved');
 					});
 					models.tenure.save(function(err) {
-						console.log('Tenure Saved');
+						//console.log('Tenure Saved');
 					});
 					models.currentRank.save(function(err) {
-						console.log('CurrentRank Saved');
+						//console.log('CurrentRank Saved');
 					});
 					models.dateAppointed.save(function(err) {
-						console.log('DateAppointed Saved');
+						//console.log('DateAppointed Saved');
 					});
 					models.affiliateAppointments.save(function(err) {
-						console.log('AffiliateAppointments Saved');
+						//console.log('AffiliateAppointments Saved');
+					});					
+					models.assignedActivity.save(function(err) {
+						//console.log('AssignedActivity Saved');
 					});
 					models.teachingAdvising.save(function(err) {
-						console.log('TeachingAdvising Saved');
+						//console.log('TeachingAdvising Saved');
 					});
 					models.contribution.save(function(err) {
-						console.log('Contribution Saved');
+						//console.log('Contribution Saved');
 					});
 					models.international.save(function(err) {
-						console.log('International Saved');
+						//console.log('International Saved');
 					});
 					models.membership.save(function(err) {
-						console.log('Membership Saved');
+						//console.log('Membership Saved');
+					});
+					models.teachingEvaluation.save(function(err) {
+
 					});
 
 					//get json to frontend
@@ -153,11 +166,13 @@ exports.list = function(req, res) {
 	.populate('tenure')
 	.populate('currentRank')
 	.populate('affiliateAppointments')
+	.populate('assignedActivity')
 	.populate('dateAppointed')
 	.populate('teachingAdvising')
 	.populate('contribution')
 	.populate('international')
 	.populate('membership')
+	.populate('teachingEvaluation')
 
 	.exec(function(err, reports) {
 		if (err) {
@@ -181,11 +196,13 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('tenure')
 	.populate('currentRank')
 	.populate('affiliateAppointments')
+	.populate('assignedActivity')
 	.populate('dateAppointed')
 	.populate('teachingAdvising')
 	.populate('contribution')
 	.populate('international')
 	.populate('membership')
+	.populate('teachingEvaluation')
 
 	.exec(function(err, report) {
 		if (err) return next(err);

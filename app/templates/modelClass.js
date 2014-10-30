@@ -54,7 +54,10 @@ RenderModel.prototype.findModelsByReport = function ( req, arrayToObj, cb ) {
 	this.Model.find({report: req.report}, function(err, arrayOfObjs) {
 		if (err) return err;
 
-		var single_obj = arrayToObj( arrayOfObjs );
+		var single_obj = null;
+
+		if (arrayOfObjs)
+			single_obj = arrayToObj( arrayOfObjs );
 
 		cb( single_obj );
 	});
@@ -89,10 +92,12 @@ RenderModel.prototype.render = function( obj, cb ) {
 	}
 
 	if (this.isDebugPopulate && this.debugJSON) {
-		console.log('\'Debuggin Population\' on for ' + this.Model.modelName);
+		if (this.isDebugPopulate)
+			console.log('\'Debuggin Population\' on for ' + this.Model.modelName);
 		renderSwig(this.renderFilePath, this.debugJSON, cb);
 	} else if (this.isDebugNull || !obj) {
-		console.log('\'Debuggin Null\' on for ' + this.Model.modelName);
+		if (this.isDebugNull)
+			console.log('\'Debuggin Null\' on for ' + this.Model.modelName);
 		renderSwig(this.naFilePath, null, cb);
 	} else {
 		renderSwig(this.renderFilePath, obj, cb);
@@ -109,9 +114,12 @@ RenderModel.prototype.renderOne = function(req, callback) {
 
 RenderModel.prototype.renderMultiple = function(req, callback, passObj) {
 	var _this = this;
-
 	_this.findModelsByReport( req, function( arrayOfObjs ) {
-		return passObj( arrayOfObjs );
+		if (arrayOfObjs.length) {
+			return passObj( arrayOfObjs );
+		} else {
+			return null;
+		}
 	}, function( single_obj ) {
 		_this.render( single_obj, callback );
 	});

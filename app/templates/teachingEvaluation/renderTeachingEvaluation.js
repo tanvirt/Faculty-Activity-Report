@@ -5,13 +5,14 @@ var modelClass = require('../modelClass');
 
 // Compile Schema into Model here
 var teachingEvaluation = mongoose.model('TeachingEvaluation');
-var renderModel = new modelClass.RenderModel(teachingEvaluation, 'teachingEvaluation/teachingEvaluation.tex', 'teachingEvaluation/teachingEvaluation.tex');
+var renderModel = new modelClass.RenderModel(teachingEvaluation, 'teachingEvaluation/teachingEvaluation.tex', 'teachingEvaluation/na.tex');
 
 /*
 Populates the database with test data
 */
-renderModel.setDebugPopulate(true, {
-	evaluation: {
+
+renderModel.setDebugPopulate(false, {
+	//evaluation: {
 		//teacher: 'testName',
 		course: 'testCourse1',
 		year: 2003,
@@ -20,8 +21,8 @@ renderModel.setDebugPopulate(true, {
 		responses: 30,
 		teacherMean: [1,2,3,1,2,3,1,2,3],
 		departmentMean: [2,3,4,2,3,4,2,3,4],
-		collegeMean: [4,4,4,4,4,4,4,4,4]
-	},
+		collegeMean: [4,4,4,4,4,4,4,4,4],
+	//},
 	sum: ['Debug','Debug','Debug']
 });
 
@@ -62,7 +63,16 @@ module.exports.render = function (req, callback) {
 };
 */
 
+function passObj(objArray)
+{
+	return {'evaluation': objArray, 'sum': [11, 11, 11]/*objArray.findTotalMean()*/};
+}
 
+module.exports.render = function(req, callback) {
+	renderModel.renderMultiple(req, callback, passObj);
+};
+
+/*
 module.exports.render = function(req, callback) {
 	
 	if(!renderModel.isDebugNull && !renderModel.isDebugPopulate) {
@@ -75,6 +85,7 @@ module.exports.render = function(req, callback) {
 	else
 		renderModel.render({}, callback);
 };
+*/
 
 
 /*
@@ -91,21 +102,21 @@ module.exports.render = function (req, callback) {
 */
 
 
-module.exports.submit = function(req, res, callback) {
+module.exports.submit = function(req, callback) {
 	var evaluation = new teachingEvaluation({
 		course: req.body.teachingEvaluation.course,
 		year: req.body.teachingEvaluation.year,
 		semester: req.body.teachingEvaluation.semester,
 		enrolled: req.body.teachingEvaluation.enrolled,
 		responses: req.body.teachingEvaluation.responses,
-		teacherMean: [1,2,3,1,2,3,1,2,3],  //Figure out array.
-		departmentMean: [2,3,4,2,3,4,2,3,4],
-		collegeMean: [4,4,4,4,4,4,4,4,4],
+		teacherMean: req.body.teachingEvaluation.teacherMean,//[1,2,3,1,2,3,1,2,3],  //Figure out array.
+		departmentMean: req.body.teachingEvaluation.departmentMean,//[2,3,4,2,3,4,2,3,4],
+		collegeMean: req.body.teachingEvaluation.collegeMean,//[4,4,4,4,4,4,4,4,4],
 		user: req.user
 	});
-	
+
 	evaluation.save(function(err) {
-		callback(null, evaluation);
+		callback(err, evaluation);
 	});
 };
 

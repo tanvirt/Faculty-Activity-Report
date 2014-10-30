@@ -92,7 +92,11 @@ var ReportSchema = new Schema({
 
 	membership: {
 		type: Schema.Types.ObjectId, ref: 'Membership'
-	}	
+	},
+
+	teachingEvaluation: {
+		type: Schema.Types.ObjectId, ref: 'TeachingEvaluation'
+	}
 
 
 //END TEMP-------------------------------------------------

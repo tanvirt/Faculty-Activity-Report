@@ -37,7 +37,7 @@ saves it in the database.
 module.exports.submit = function(req, callback) {
 	var currentRank = new CurrentRank({
 		rank: req.body.currentRank,
-		//department: req.body.department,
+		department: req.body.department,
 		user: req.user		
 	});
 
