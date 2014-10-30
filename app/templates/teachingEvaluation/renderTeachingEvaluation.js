@@ -65,7 +65,8 @@ module.exports.render = function (req, callback) {
 
 function passObj(objArray)
 {
-	return {'evaluations': objArray};
+	//console.log('objArray: ' + require('util').inspect({'evaluations':objArray}));
+	return objArray[0];
 }
 
 module.exports.render = function(req, callback) {
@@ -103,21 +104,31 @@ module.exports.render = function (req, callback) {
 
 
 module.exports.submit = function(req, callback) {
+	var arr = [];
+
+	for(var i=0; i<req.body.teachingEvaluation.length; i++) {
+		var path = req.body.teachingEvaluation[i];
+		var subdoc = {
+			course: path.course,
+			year: path.year,
+			semester: path.semester,
+			enrolled: path.enrolled,
+			responses: path.responses,
+			teacherMean: path.teacherMean,//[1,2,3,1,2,3,1,2,3],  //Figure out array.
+			departmentMean: path.departmentMean,//[2,3,4,2,3,4,2,3,4],
+			collegeMean: path.collegeMean//[4,4,4,4,4,4,4,4,4],
+		};
+		arr.push(subdoc);
+	}
+
 	var evaluation = new teachingEvaluation({
-		course: req.body.teachingEvaluation.course,
-		year: req.body.teachingEvaluation.year,
-		semester: req.body.teachingEvaluation.semester,
-		enrolled: req.body.teachingEvaluation.enrolled,
-		responses: req.body.teachingEvaluation.responses,
-		teacherMean: req.body.teachingEvaluation.teacherMean,//[1,2,3,1,2,3,1,2,3],  //Figure out array.
-		departmentMean: req.body.teachingEvaluation.departmentMean,//[2,3,4,2,3,4,2,3,4],
-		collegeMean: req.body.teachingEvaluation.collegeMean,//[4,4,4,4,4,4,4,4,4],
+		sub: arr,
 		user: req.user
 	});
-
+		
 	evaluation.save(function(err) {
 		callback(err, evaluation);
-	});
+	});	
 };
 
 

@@ -68,8 +68,9 @@ Helper function that injects values into the latex.tex files
 */
 function renderSwig( filePath, json, cb ) {
 	require('swig').renderFile(require('path').join('./app/templates', filePath), json, function(err, output) {
-		if (err) return err;
-
+		if (err) {
+			throw err;
+		}
 		// Callback to report.server.controller.js submit
 		// error must be past first, and then the output
 		// from the render
@@ -122,7 +123,7 @@ RenderModel.prototype.renderMultiple = function(req, callback, passObj) {
 			return null;
 		}
 	}, function( single_obj ) {
-		console.log(require('util').inspect(single_obj));
+		//console.log(require('util').inspect(single_obj));
 		_this.render( single_obj, callback );
 	});
 };
