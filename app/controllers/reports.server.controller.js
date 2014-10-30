@@ -26,7 +26,7 @@ exports.create = function(req, res) {
 			var report = new Report();
 			report.user = req.user;
 
-			console.log(require('util').inspect(models));
+			//console.log(require('util').inspect(req.body));
 
 			// Assign Prev values
 			report.reportName = req.body.reportName;
@@ -57,25 +57,25 @@ exports.create = function(req, res) {
 
 					//Updatae existing document
 					models.name.save(function(err) {
-						console.log('Name Saved');
+						//console.log('Name Saved');
 					});
 					models.tenure.save(function(err) {
-						console.log('Tenure Saved');
+						//console.log('Tenure Saved');
 					});
 					models.currentRank.save(function(err) {
-						console.log('CurrentRank Saved');
+						//console.log('CurrentRank Saved');
 					});
 					models.dateAppointed.save(function(err) {
-						console.log('DateAppointed Saved');
+						//console.log('DateAppointed Saved');
 					});
 					models.affiliateAppointments.save(function(err) {
-						console.log('AffiliateAppointments Saved');
+						//console.log('AffiliateAppointments Saved');
 					});					
 					models.assignedActivity.save(function(err) {
-						console.log('AssignedActivity Saved');
+						//console.log('AssignedActivity Saved');
 					});
 					models.teachingAdvising.save(function(err) {
-						console.log('TeachingAdvising Saved');
+						//console.log('TeachingAdvising Saved');
 					});
 
 					//get json to frontend

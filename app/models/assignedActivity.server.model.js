@@ -4,25 +4,8 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	Schema = mongoose.Schema;
-
-/**
- * A Validation function for local strategy properties
- */
-var validateSpring = function(property) {
-	return property >= 0 && property <= 100 && 
-		(this.springTeaching + this.springResearch + this.springService === 100);
-};
-
-var validateSummer = function(property) {
-	return property >= 0 && property <= 100 && 
-		(this.summerTeaching + this.summerResearch + this.summerService === 100);
-};
-
-var validateFall = function(property) {
-	return property >= 0 && property <= 100 && 
-		(this.fallTeaching + this.fallResearch + this.fallService === 100);
-};
+	Schema = mongoose.Schema,
+	validator = require('validator');
 
 /**
  * A Validation function for local date properties
@@ -31,64 +14,71 @@ var validateLocalStrategyDate = function(property) {
 	return new Date().getFullYear() >= property && 1980 <= property;
 };
 
+var requiredStr = function(str) {
+	return str + ' is a required field.';
+};
+
 var AssignedActivity = new Schema({
-	/*
+	
 	year: {
 		type: Number,
 		required: true,
 		validate: [validateLocalStrategyDate, 
 					'Date must be less than or equal to the current year and greator than or equal to 1980']
 	},
-	semester: {
-		type: String,
-		required: true,
-		enum: ['spring', 'fall', 'summer']
-	},
-	*/
 	springTeaching: {
 		type: Number,
-		//validate: [validateSpring, 
-		//		'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
+		required: requiredStr('SpringTeaching'),
+		min: 0,
+		max: 100
 	},
 	springResearch: {
 		type: Number,
-		//validate: [validateSpring, 
-		//		'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
+		required: requiredStr('SpringResearch'),
+		min: 0,
+		max: 100
 	},
 	springService: {
 		type: Number,
-		//validate: [validateSpring, 
-		//		'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
+		required: requiredStr('SpringService'),
+		min: 0,
+		max: 100
 	},
 	fallTeaching: {
 		type: Number,
-		//validate: [validateFall, 
-		//		'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
+		required: requiredStr('FallTeaching'),
+		min: 0,
+		max: 100
 	},
 	fallResearch: {
 		type: Number,
-		//validate: [validateFall, 
-		//		'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
+		required: requiredStr('FallResearch'),
+		min: 0,
+		max: 100
 	},
 	fallService: {
 		type: Number,
-		//validate: [validateFall, 
-		//		'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
+		required: requiredStr('FallService'),
+		min: 0,
+		max: 100
 	},
 	summerTeaching: {
 		type: Number,
-		//validate: [validateSummer, 
-		//		'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
+		required: requiredStr('SummerTeaching'),
+		min: 0,
+		max: 100
 	},
 	summerResearch: {
 		type: Number,
-		//validate: [validateSummer, 
-		//		'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
+		required: requiredStr('SummerResearch'),
+		min: 0,
+		max: 100
 	},
 	summerService: {
 		type: Number,
-		//validate: [validateSummer, 
-		//		'Number must be between or inclusing 0-100 and teaching + research + service Must Equal 100']
+		required: requiredStr('SummerService'),
+		min: 0,
+		max: 100
 	},
 	
 	user: {
@@ -102,5 +92,29 @@ var AssignedActivity = new Schema({
 	}
 		
 }, {collection:'AssignedActivity'});
+
+
+AssignedActivity.pre('save', function(next) {
+	var err;
+
+	if (this.springTeaching + this.springResearch + this.springService !== 100) {
+		err = new Error('springTeaching + springResearch + springService Must Equal 100');
+	}
+
+	if (this.summerTeaching + this.summerResearch + this.summerService !== 100) {
+		err = new Error('summerTeaching + summerResearch + summerService Must Equal 100');
+	}
+
+	if (this.fallTeaching + this.fallResearch + this.fallService !== 100) {
+		err = new Error('fallTeaching + fallResearch + fallService Must Equal 100');
+	}
+
+	if (err) {
+		next(err);
+	} else {
+		next();
+	}
+});
+
 
 mongoose.model('AssignedActivity', AssignedActivity);

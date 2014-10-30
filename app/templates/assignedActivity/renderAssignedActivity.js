@@ -12,7 +12,7 @@ var renderModel = new modelClass.RenderModel( AssignedActivity, 'assignedActivit
 will explicitly populate the report with
 the data you provide
 */
-renderModel.setDebugPopulate( true, {
+renderModel.setDebugPopulate( false, {
 	springTeaching: 20, springResearch: 40, springService: 40,
 	summerTeaching: 30, summerResearch: 60, summerService: 10,
 	fallTeaching: 70, fallResearch: 15, fallService: 15
@@ -54,23 +54,13 @@ saves it in the database.
 */
 
 module.exports.submit = function(req, callback) {
-	console.log('Spring teaching is ' + req.body.springTeaching);
-	console.log('Spring research is ' + req.body.springResearch);
-	console.log('Spring service is ' + req.body.springService);	
-
-	console.log('Summer teaching is ' + req.body.summerTeaching);
-	console.log('Summer research is ' + req.body.summerResearch);
-	console.log('Summer service is ' + req.body.summerService);	
-
-	console.log('Fall teaching is ' + req.body.fallTeaching);
-	console.log('Fall research is ' + req.body.fallResearch);
-	console.log('Fall service is ' + req.body.fallService);	
-
+	//console.log(require('util').inspect(req.body));
 
 	var act = new AssignedActivity({
 		springTeaching: req.body.springTeaching, springResearch: req.body.springResearch, springService: req.body.springService,
 		summerTeaching: req.body.summerTeaching, summerResearch: req.body.summerResearch, summerService: req.body.summerService,
 		fallTeaching: req.body.fallTeaching, fallResearch: req.body.fallResearch, fallService: req.body.fallService,
+		year: req.body.year,
 		user: req.user
 	});
 
