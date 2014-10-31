@@ -68,9 +68,11 @@ Helper function that injects values into the latex.tex files
 */
 function renderSwig( filePath, json, cb ) {
 	require('swig').renderFile(require('path').join('./app/templates', filePath), json, function(err, output) {
+		/*
 		if (err) {
 			throw err;
 		}
+		*/
 		// Callback to report.server.controller.js submit
 		// error must be past first, and then the output
 		// from the render
@@ -84,7 +86,7 @@ Renders the obj into latex as a callback.
 if obj is not defined, then the null latex gets rendered
 
 @param obj, the obj you would like swig to render
-@param cb, a callback that is contains an err as
+@param cb, a callback that contains an err as
 	the first parameter and the resulting latex output as the second
 */
 RenderModel.prototype.render = function( obj, cb ) {
@@ -108,8 +110,12 @@ RenderModel.prototype.render = function( obj, cb ) {
 RenderModel.prototype.renderOne = function(req, callback) {
 	var _this = this;
 
-	_this.findOneModelByReport( req, function( obj ) {
-		_this.render( obj, callback );
+	_this.findOneModelByReport( req, function( err, obj ) {
+		if (err) {
+			callback(err, null);
+		} else {
+			_this.render( obj, callback );
+		}
 	});
 };
 
@@ -122,9 +128,12 @@ RenderModel.prototype.renderMultiple = function(req, callback, passObj) {
 		} else {
 			return null;
 		}
-	}, function( single_obj ) {
-		//console.log(require('util').inspect(single_obj));
-		_this.render( single_obj, callback );
+	}, function( err, single_obj ) {
+		if (err) {
+			callback(err, null);
+		} else {
+			_this.render( single_obj, callback );
+		}
 	});
 };
 

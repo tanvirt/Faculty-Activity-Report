@@ -26,7 +26,7 @@ exports.create = function(req, res) {
 			var report = new Report();
 			report.user = req.user;
 
-			//console.log(require('util').inspect(req.body));
+			console.log(require('util').inspect(req.body));
 
 			// Assign Prev values
 			report.reportName = req.body.reportName;

@@ -27,6 +27,8 @@ render function that finds the obj in the database
 and converts it into latex.
 */
 module.exports.render = function(req, callback) {
+	renderModel.renderOne(req, callback);
+	/*
 	if(!renderModel.isDebugNull && !renderModel.isDebugPopulate) {
 		renderModel.findOneModelByReport( req, function( err, obj ) {
 			if (err) throw err;
@@ -35,6 +37,7 @@ module.exports.render = function(req, callback) {
 	}
 	else
 		renderModel.renderOne({}, callback);
+	*/
 };
 
 /*
@@ -63,7 +66,7 @@ module.exports.submit = function(req, callback) {
 	});
 
 	name.save(function(err) {
-		callback(null, name);
+		callback(err, name);
 	});
 };
 
