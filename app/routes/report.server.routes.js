@@ -6,7 +6,7 @@ module.exports = function(app) {
 
 	app.route('/report/test')
 		.get(reports.form)
-		.post(/*users.requiresLogin,*/reports.debug, reports.submit);
+		.post(/*users.requiresLogin,*/reports.debug, reports.submit_02);
 
 	app.route('/report/generate')
 		.get(reports.testGenerate)
@@ -17,6 +17,6 @@ module.exports = function(app) {
 		.post(reports.download);
 		
 	app.route('/report/oldDebug')
-		.get(reports.debug, reports.generate)
+		.get(reports.submit_02, reports.generate)
 		.post(reports.download);
 };
