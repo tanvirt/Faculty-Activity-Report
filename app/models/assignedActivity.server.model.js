@@ -4,8 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	Schema = mongoose.Schema,
-	validator = require('validator');
+	Schema = mongoose.Schema;
 
 /**
  * A Validation function for local date properties
@@ -115,6 +114,5 @@ AssignedActivity.pre('save', function(next) {
 		next();
 	}
 });
-
 
 mongoose.model('AssignedActivity', AssignedActivity);

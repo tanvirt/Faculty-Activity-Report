@@ -13,8 +13,7 @@ describe('currentRank Model Unit Tests:', function() {
     beforeEach(function(done) {
         rank01 = new currentRank({
             rank: 'professor',
-            //department: 'Computer and Informational Science and Engineering'
-
+            department: 'Computer and Informational Science and Engineering'
         });
 
         done();
@@ -40,7 +39,7 @@ describe('currentRank Model Unit Tests:', function() {
                 done();
             });
         });
-/*
+
         it('should fail to save if the department is not one of the possible departments', function(done) {
             rank01.department = 'asdf';
             return rank01.save(function(err) {
@@ -48,7 +47,6 @@ describe('currentRank Model Unit Tests:', function() {
                 done();
             });
         });
-*/
 
     });
     afterEach(function(done) {

@@ -84,6 +84,22 @@ var ReportSchema = new Schema({
 
 	teachingAdvising: {
 		type: Schema.Types.ObjectId, ref: 'TeachingAdvising'
+	},
+
+	contribution: {
+		type: Schema.Types.ObjectId, ref: 'Contribution'
+	},
+
+	international: {
+		type: Schema.Types.ObjectId, ref: 'International'
+	},
+
+	membership: {
+		type: Schema.Types.ObjectId, ref: 'Membership'
+	},
+
+	teachingEvaluation: {
+		type: Schema.Types.ObjectId, ref: 'TeachingEvaluation'
 	}
 
 

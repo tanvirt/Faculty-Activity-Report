@@ -42,7 +42,14 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 				
 				assignedActivity: this.assignedActivity,
 
-				teachingAdvising: this.teachingAdvising
+				teachingAdvising: this.teachingAdvising,
+
+				contribution: this.contribution,
+				
+				international: this.international,
+				
+				membership: this.membership
+
 			});
 
 			// Redirect after save

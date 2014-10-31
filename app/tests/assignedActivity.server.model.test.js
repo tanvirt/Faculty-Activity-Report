@@ -331,3 +331,4 @@ describe('Assigned Activity Model Unit Tests:', function() {
 		done();
 	});
 });
+

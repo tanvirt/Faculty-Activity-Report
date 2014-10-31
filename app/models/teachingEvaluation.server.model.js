@@ -29,13 +29,7 @@ var validateLocalStrategyDate = function(property) {
 	return new Date().getFullYear() >= property && 1980 <= property;
 };
 
-//Contents of schema will pull majority of content from outside data source, not from user
-//Overall mean is to be calculated on demand, not stored
-var teachingEvaluation = new Schema({
-	user: {			//multiple evaluations per user possible. Use this field to match with user
-		type: Schema.ObjectId,
-		ref: 'User'
-	},
+var section = new Schema({
 	course: {
 		type: String,
 		required: true
@@ -94,11 +88,10 @@ var teachingEvaluation = new Schema({
 				  1, 1, 1, 
 				  1, 1, 1],
 		validate: [validateLocalStrategyMean, 'Array Length must equal number of questions (9)']
-	}	
-	
-}, {collection:'TeachingEvaluation'});
+	}
+});
 
-teachingEvaluation.methods.findTotalMean = function findTotalMean() {
+section.methods.findTotalMean = function findTotalMean() {
 	var totalArr = [0,0,0];
 	for(var i = 0; i < 9; i++) {
 		totalArr[0] += this.teacherMean[i];
@@ -108,5 +101,19 @@ teachingEvaluation.methods.findTotalMean = function findTotalMean() {
 	for(i = 0; i < 3; i++) totalArr[i] = (Math.round((totalArr[i]/9)*100))/100;
 	return totalArr;
 };
+
+//Contents of schema will pull majority of content from outside data source, not from user
+//Overall mean is to be calculated on demand, not stored
+var teachingEvaluation = new Schema({
+	user: {			//multiple evaluations per user possible. Use this field to match with user
+		type: Schema.ObjectId,
+		ref: 'User'
+	},
+	sub: [section],
+	report: {
+		type: Schema.ObjectId,
+		ref: 'Report'
+	}		
+}, {collection:'TeachingEvaluation'});
 
 mongoose.model('TeachingEvaluation', teachingEvaluation);
