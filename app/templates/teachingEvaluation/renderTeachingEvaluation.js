@@ -106,6 +106,9 @@ module.exports.render = function (req, callback) {
 module.exports.submit = function(req, callback) {
 	var arr = [];
 
+	if (!req.body.teachingEvaluation)
+		return;
+
 	for(var i=0; i<req.body.teachingEvaluation.length; i++) {
 		var path = req.body.teachingEvaluation[i];
 		var subdoc = {
