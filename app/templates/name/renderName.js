@@ -10,7 +10,7 @@ var renderModel = new modelClass.RenderModel( Name, 'name/name.tex', 'name/na.te
 will explicitly populate the report with
 the data you provide
 */
-renderModel.setDebugPopulate( true, {
+renderModel.setDebugPopulate( false, {
 	firstName: 'Rosie',
 	middleName: 'T',
 	lastName: 'Poodle'
@@ -28,7 +28,8 @@ and converts it into latex.
 */
 module.exports.render = function(req, callback) {
 	if(!renderModel.isDebugNull && !renderModel.isDebugPopulate) {
-		renderModel.findOneModelByReport( req, function( obj ) {
+		renderModel.findOneModelByReport( req, function( err, obj ) {
+			if (err) throw err;
 			renderModel.renderOne( obj, callback );
 		});
 	}

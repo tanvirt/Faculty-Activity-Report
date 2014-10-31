@@ -41,7 +41,8 @@ var renderInternational = require('../../app/templates/international/renderInter
 Generates the LaTex File into app/pdf directory
 */
 exports.generate = function(req,res,next) {	
-//	console.log('Req.report' + req.report);
+	//console.log('Req.report' + req.report._id);
+	
 	async.parallel([
 		//Initiate render functions here
 		async.apply(renderName.render, req),

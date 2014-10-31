@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 
 /*
 class that takes care of rendering the swig/debugging
@@ -36,8 +36,8 @@ Finds one document for the current user's report.
 RenderModel.prototype.findOneModelByReport = function( req, cb ) {
 	//Model.findOne returns an object, so assign to findObj
 	this.Model.findOne({report: req.report}, function(err, obj) {
-		if (err) return err;
-		cb( obj );
+		//if (err) return err;
+		cb( err, obj );
 	});
 };
 
@@ -52,14 +52,14 @@ RenderModel.prototype.findModelsByReport = function ( req, arrayToObj, cb ) {
 	//Model.find returns an array of objects! so reorganize into
 	//one object and assign
 	this.Model.find({report: req.report}, function(err, arrayOfObjs) {
-		if (err) return err;
+		//if (err) return err;
 
 		var single_obj = null;
 
 		if (arrayOfObjs)
 			single_obj = arrayToObj( arrayOfObjs );
 
-		cb( single_obj );
+		cb( err, single_obj );
 	});
 };
 
