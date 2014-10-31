@@ -10,7 +10,7 @@ var activity01, activity02;
 describe('Assigned Activity Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		activity01 = new AssignedActivity({
-			year: '2014',
+			year: 2013,
 			springTeaching: 30,
 			springResearch: 30,
 			springService: 40,
@@ -23,11 +23,13 @@ describe('Assigned Activity Model Unit Tests:', function() {
 			summerResearch: 30,
 			summerService: 40
 		});
+
 		done();
 	});
 
 	describe('Method Save', function() {
-		it('should be able to save without problem', function(done) {
+
+		it('should be able to save without problems', function(done) {
 			activity01.save();
 			done();
 		});
@@ -321,6 +323,7 @@ describe('Assigned Activity Model Unit Tests:', function() {
 				done();
 			});
 		});
+
 	});
 
 	afterEach(function(done) {

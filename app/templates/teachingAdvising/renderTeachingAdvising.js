@@ -18,7 +18,7 @@ renderModel.setDebugPopulate( false, {
 will explicitely print the N/A latex
 to the screen for debugging purposes
 */
-renderModel.isDebugNull = false;
+renderModel.isDebugNull = true;
 
 /*
 render function that finds the obj in the database

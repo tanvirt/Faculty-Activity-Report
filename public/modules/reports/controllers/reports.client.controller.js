@@ -39,6 +39,8 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 				dateAppointed: this.dateAppointed,
 
 				affiliateAppointments: this.affiliateAppointments,
+				
+				assignedActivity: this.assignedActivity,
 
 				teachingAdvising: this.teachingAdvising,
 

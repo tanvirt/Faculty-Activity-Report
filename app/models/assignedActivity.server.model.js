@@ -18,6 +18,7 @@ var requiredStr = function(str) {
 };
 
 var AssignedActivity = new Schema({
+	
 	year: {
 		type: Number,
 		required: true,

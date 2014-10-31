@@ -38,6 +38,7 @@ exports.create = function(req, res) {
 			report.affiliateAppointments = models.affiliateAppointments._id;
 			report.assignedActivity = models.assignedActivity._id;
 			report.dateAppointed = models.dateAppointed._id;
+			report.assignedActivity = models.assignedActivity._id;
 			report.teachingAdvising = models.teachingAdvising._id;
 			report.contribution = models.contribution._id;
 			report.international = models.international._id;
@@ -180,6 +181,7 @@ exports.list = function(req, res) {
 	.populate('affiliateAppointments')
 	.populate('assignedActivity')
 	.populate('dateAppointed')
+	.populate('assignedActivity')
 	.populate('teachingAdvising')
 	.populate('contribution')
 	.populate('international')
@@ -210,6 +212,7 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('affiliateAppointments')
 	.populate('assignedActivity')
 	.populate('dateAppointed')
+	.populate('assignedActivity')
 	.populate('teachingAdvising')
 	.populate('contribution')
 	.populate('international')

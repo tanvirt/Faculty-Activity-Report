@@ -50,8 +50,8 @@ exports.generate = function(req,res,next) {
 		async.apply(renderCurrentRank.render, req),
 		async.apply(renderAffiliateAppointments.render, req),
 		async.apply(renderDateAppointed.render, req),
-		async.apply(renderTeachingAdvising.render, req),
 		async.apply(renderAssignedActivity.render, req),
+		async.apply(renderTeachingAdvising.render, req),
 		async.apply(renderTeachingEvaluation.render, req),
 
 		renderGraduateCommittee.render,
@@ -137,6 +137,7 @@ exports.submit = function(req, res, next) {
 		async.apply(renderCurrentRank.submit, req),
 		async.apply(renderAffiliateAppointments.submit, req),
 		async.apply(renderDateAppointed.submit, req),
+		async.apply(renderAssignedActivity.submit, req),
 		async.apply(renderTeachingAdvising.submit, req),
 		async.apply(renderContribution.submit, req),
 		async.apply(renderInternational.submit, req),
@@ -155,12 +156,16 @@ exports.submit_02 = function(req, res, callback) {
 		currentRank: async.apply(renderCurrentRank.submit, req),
 		affiliateAppointments: async.apply(renderAffiliateAppointments.submit, req),
 		dateAppointed: async.apply(renderDateAppointed.submit, req),
-		teachingAdvising: async.apply(renderTeachingAdvising.submit, req),
-		contribution: async.apply(renderContribution.submit, req),
-		international: async.apply(renderInternational.submit, req),
-		membership: async.apply(renderMembership.submit, req),
 		assignedActivity: async.apply(renderAssignedActivity.submit, req),
-		teachingEvaluation: async.apply(renderTeachingEvaluation.submit, req)
+		teachingAdvising: async.apply(renderTeachingAdvising.submit, req)
+	}, function(err, models) {
+		console.log(require('util').inspect(req.body));
+	//	teachingAdvising: async.apply(renderTeachingAdvising.submit, req),
+	//	contribution: async.apply(renderContribution.submit, req),
+	//	international: async.apply(renderInternational.submit, req),
+	//	membership: async.apply(renderMembership.submit, req),
+	//	assignedActivity: async.apply(renderAssignedActivity.submit, req),
+	//	teachingEvaluation: async.apply(renderTeachingEvaluation.submit, req)
 	}, function(err, models) {
 		//console.log(require('util').inspect(req.body));
 		if (err) {
