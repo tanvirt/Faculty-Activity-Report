@@ -53,6 +53,9 @@ exports.create = function(req, res) {
 				} else {
 					//Now that report is saved, assign reference
 					models.name.report = report;
+
+					//models.teachingEvaluation.report = report;
+
 					models.tenure.report = report;
 					models.currentRank.report = report;
 					models.dateAppointed.report =  report;
@@ -65,10 +68,20 @@ exports.create = function(req, res) {
 					models.teachingEvaluation.report = report;
 					
 
-					//Updatae existing document
+					//Update existing document
 					models.name.save(function(err) {
+
 						//console.log('Name Saved');
+						/*if (err) {
+							return res.status(400).send({
+								message: errorHandler.getErrorMessage(err)});
+						}*/						
 					});
+
+					//models.teachingEvaluation.save(function(err) {
+					//	if (err) console.log(err);
+					//});
+
 					models.tenure.save(function(err) {
 						//console.log('Tenure Saved');
 					});
@@ -99,7 +112,6 @@ exports.create = function(req, res) {
 					models.teachingEvaluation.save(function(err) {
 
 					});
-
 					//get json to frontend
 					res.jsonp(report);
 				}
@@ -206,6 +218,8 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('international')
 	.populate('membership')
 	.populate('teachingEvaluation')
+
+	//.populate('teachingEvaluation')
 
 	.exec(function(err, report) {
 		if (err) return next(err);

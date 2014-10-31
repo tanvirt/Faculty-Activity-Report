@@ -109,15 +109,17 @@ describe('Teaching Evaluation Model Unit Tests:', function() {
 				done();
 			});
 		});
-		
-		it('should be able to compute an the total Mean scores to two decimal places', function(done) {
+	
+	}); 
+	
+	describe('Method Misc', function() {
+			it('should be able to compute an the total Mean scores to two decimal places', function(done) {
 				evaluation01.teacherMean = [1,1,1,1,1,1,1,1,1];
 				evaluation01.departmentMean = [4.45,3.35,2.25,1.15,3.75,3.75,4.5,2.10,4.99];
 				var array = evaluation01.findTotalMean();
 				array.should.eql([1.00,3.37,2.89]);
 				done();
 		});
-
 	});
 
 	afterEach(function(done) {
