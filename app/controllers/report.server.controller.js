@@ -51,23 +51,29 @@ exports.generate = function(req,res,next) {
 		async.apply(renderAffiliateAppointments.render, req),
 		async.apply(renderDateAppointed.render, req),
 		async.apply(renderTeachingAdvising.render, req),
-		renderAssignedActivity.render,
+		async.apply(renderAssignedActivity.render, req),
 		async.apply(renderTeachingEvaluation.render, req),
+
 		renderGraduateCommittee.render,
 		renderCreativeWorks.render,
 		renderPatents.render,
 		renderPublication.render,
-		renderContribution.render,
+		async.apply(renderContribution.render, req),
+
 		renderConferences.render,
 		renderContracts.render,
 		renderGovernance.render,
 		renderConsultationsOutsideUniversity.render,
 		renderEditorServiceReviewer.render,
-		renderMembership.render,
-		renderInternational.render
+		async.apply(renderMembership.render, req),
+		async.apply(renderInternational.render, req)
+		
 	
 	], function(err, results) {
-		if (err) return res.status(500).send({ error: 'Report Generation Failed' });
+		if (err) {
+			console.log('There was an error');
+			return res.status(500).send({ error: 'Report Generation Failed' });
+		}
 
 		//Generate Report
 		var writeable = fs.createWriteStream('./public/modules/reports/pdf/' + req.report._id + '.pdf');
@@ -131,7 +137,10 @@ exports.submit = function(req, res, next) {
 		async.apply(renderCurrentRank.submit, req),
 		async.apply(renderAffiliateAppointments.submit, req),
 		async.apply(renderDateAppointed.submit, req),
-		async.apply(renderTeachingAdvising.submit, req)
+		async.apply(renderTeachingAdvising.submit, req),
+		async.apply(renderContribution.submit, req),
+		async.apply(renderInternational.submit, req),
+		async.apply(renderMembership.submit, req)
 	], function(err, models) {
 		if (err) return res.status(500).send({ error: 'Submit Failed' });	
 		console.log(req.body);
@@ -146,8 +155,14 @@ exports.submit_02 = function(req, res, callback) {
 		currentRank: async.apply(renderCurrentRank.submit, req),
 		affiliateAppointments: async.apply(renderAffiliateAppointments.submit, req),
 		dateAppointed: async.apply(renderDateAppointed.submit, req),
-		teachingAdvising: async.apply(renderTeachingAdvising.submit, req)
+		teachingAdvising: async.apply(renderTeachingAdvising.submit, req),
+		contribution: async.apply(renderContribution.submit, req),
+		international: async.apply(renderInternational.submit, req),
+		membership: async.apply(renderMembership.submit, req),
+		assignedActivity: async.apply(renderAssignedActivity.submit, req),
+		teachingEvaluation: async.apply(renderTeachingEvaluation.submit, req)
 	}, function(err, models) {
+		//console.log(require('util').inspect(req.body));
 		if (err) {
 			callback(err, null);	
 		} else {

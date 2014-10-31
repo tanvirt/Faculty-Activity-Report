@@ -1,36 +1,58 @@
 'use strict';
 
-var renderModel = require('../../../app/templates/renderModel');
 var mongoose = require('mongoose');
 
 // Compile Schema into Model here
 var Membership = mongoose.model('Membership');
 
+var modelClass = require('../modelClass');
+var renderModel = new modelClass.RenderModel( Membership, 'membership/membership.tex', 'membership/na.tex');
+
 /*
-Populates the database with test data
+will explicitly populate the report with
+the data you provide
 */
-function dummyObject(Model) {
-	var obj = new Model({
-		/*examples: [{
-			title: 'International Conference on Data Engineering',
-			year: 2014
-		},
-		{
-			title: 'ACM-SIGMOD',
-			year: 2014
-		}]*/
-		info: 'I am a member of the following things...'
+renderModel.setDebugPopulate( false, {
+	info: 'I am a member of the following organizations...'
+});
+
+/*
+will explicitly print the N/A latex
+to the screen for debugging purposes
+*/
+renderModel.isDebugNull = false;
+
+/*
+render function that finds the obj in the database
+and converts it into latex.
+*/
+module.exports.render = function(req, callback) {
+	renderModel.findOneModelByReport( req, function( obj ) {
+		renderModel.render( obj, callback );
+	});
+};
+
+/*
+//Exactly the same as the render above, but 
+//uses the fidnModelsByReport, which returns
+//an array of JSON objects
+
+module.exports.render = function(req, callback) {
+	renderModel.findModelsByReport( req, function( arrayOfObjs ) {
+		return arrayOfObjs[0];
+	}, function( single_obj ) {
+		renderModel.render( single_obj, callback );
+	});
+};
+*/
+
+module.exports.submit = function(req, callback) {
+	var membership = new Membership({
+		info: req.body.membership,
+		user: req.user		
 	});
 
-	return obj;
-}
-
-/*
-Helper function that gets called in report.server.controller.js
-Output is pushed into a LaTex PDF there.
-*/
-module.exports.render = function (callback) {
-	renderModel.render( 'membership/membership.tex', Membership, dummyObject, function ( renderStr ) {
-		callback(null, renderStr);
+	membership.save(function(err) {
+		callback(null, membership);
 	});
 };

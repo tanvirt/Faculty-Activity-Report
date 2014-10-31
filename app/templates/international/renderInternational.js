@@ -1,27 +1,58 @@
 'use strict';
 
-var renderModel = require('../../../app/templates/renderModel');
 var mongoose = require('mongoose');
 
 // Compile Schema into Model here
 var International = mongoose.model('International');
 
-/*
-Populates the database with test data
-*/
-function dummyObject(Model) {
-	var obj = new Model({
-		activities: 'N/A'
-	});
-	return obj;
-}
+var modelClass = require('../modelClass');
+var renderModel = new modelClass.RenderModel( International, 'international/international.tex', 'international/na.tex');
 
 /*
-Helper function that gets called in report.server.controller.js
-Output is pushed into a LaTex PDF there.
+will explicitly populate the report with
+the data you provide
 */
-module.exports.render = function (callback) {
-	renderModel.render( 'international/international.tex', International, dummyObject, function ( renderStr ) {
-		callback(null, renderStr);
+renderModel.setDebugPopulate( false, {
+	activities: 'I participated in things in other countries'
+});
+
+/*
+will explicitly print the N/A latex
+to the screen for debugging purposes
+*/
+renderModel.isDebugNull = false;
+
+/*
+render function that finds the obj in the database
+and converts it into latex.
+*/
+module.exports.render = function(req, callback) {
+	renderModel.findOneModelByReport( req, function( obj ) {
+		renderModel.render( obj, callback );
+	});
+};
+
+/*
+//Exactly the same as the render above, but 
+//uses the fidnModelsByReport, which returns
+//an array of JSON objects
+
+module.exports.render = function(req, callback) {
+	renderModel.findModelsByReport( req, function( arrayOfObjs ) {
+		return arrayOfObjs[0];
+	}, function( single_obj ) {
+		renderModel.render( single_obj, callback );
+	});
+};
+*/
+
+module.exports.submit = function(req, callback) {
+	var international = new International({
+		activities: req.body.international,
+		user: req.user		
+	});
+
+	international.save(function(err) {
+		callback(null, international);
 	});
 };
