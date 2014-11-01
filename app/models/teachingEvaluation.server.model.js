@@ -42,8 +42,8 @@ var section = new Schema({
 	year: {
 		type: Number,
 		required: true,
-		validate: [validateLocalStrategyDate, 
-					'Date must be less than or equal to the current year and greator than or equal to 1980']
+		min: 1980,
+		max: new Date().getFullYear()
 	},
 	semester: {
 		type: String,
