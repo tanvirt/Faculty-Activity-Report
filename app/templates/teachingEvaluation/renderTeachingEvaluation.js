@@ -10,10 +10,8 @@ var renderModel = new modelClass.RenderModel(teachingEvaluation, 'teachingEvalua
 /*
 Populates the database with test data
 */
-
 renderModel.setDebugPopulate(false, {
-	evaluations: [{
-		//teacher: 'testName',
+	sub: [{
 		course: 'testCourse1',
 		year: 2003,
 		semester: 'fall',
@@ -21,9 +19,19 @@ renderModel.setDebugPopulate(false, {
 		responses: 30,
 		teacherMean: [1,2,3,1,2,3,1,2,3],
 		departmentMean: [2,3,4,2,3,4,2,3,4],
-		collegeMean: [4,4,4,4,4,4,4,4,4],
-	}],
-	sum: ['Debug','Debug','Debug']
+		collegeMean: [4,4,4,4,4,4,4,4,4]
+	},
+	{
+		course: 'testCourse2',
+		year: 2013,
+		semester: 'spring',
+		enrolled: 15,
+		responses: 45,
+		teacherMean: [1,2,3,1,2,3,1,3,4],
+		departmentMean: [2,3,4,3,3,4,2,3,4],
+		collegeMean: [4,1,4,1,4,3,4,4,2]
+	}]
+	// Methods Don't get called
 });
 
 renderModel.isDebugNull = false;

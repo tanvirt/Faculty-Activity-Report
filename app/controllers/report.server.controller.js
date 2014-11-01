@@ -71,7 +71,7 @@ exports.generate = function(req,res,next) {
 	
 	], function(err, results) {
 		if (err) {
-			console.log('There was an error');
+			console.log('There was an error: ' + err);
 			return res.status(500).send({ error: 'Report Generation Failed' });
 		}
 
