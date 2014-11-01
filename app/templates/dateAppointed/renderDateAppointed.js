@@ -35,6 +35,6 @@ module.exports.submit = function(req, callback) {
 	});
 
 	dateApp.save(function(err) {
-		callback(null, dateApp);
+		callback(err, dateApp);
 	});
 };

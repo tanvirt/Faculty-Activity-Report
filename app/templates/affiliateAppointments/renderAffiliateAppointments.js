@@ -29,21 +29,6 @@ and converts it into latex.
 module.exports.render = function(req, callback) {
 	renderModel.render(req, callback);
 };
-
-/*
-//Exactly the same as the render above, but 
-//uses the fidnModelsByReport, which returns
-//an array of JSON objects
-
-module.exports.render = function(req, callback) {
-	renderModel.findModelsByReport( req, function( arrayOfObjs ) {
-		return arrayOfObjs[0];
-	}, function( single_obj ) {
-		renderModel.render( single_obj, callback );
-	});
-};
-*/
-
 module.exports.submit = function(req, callback) {
 	var affApp = new AffiliateApp({
 		app: req.body.affiliateAppointments,
@@ -51,6 +36,6 @@ module.exports.submit = function(req, callback) {
 	});
 
 	affApp.save(function(err) {
-		callback(null, affApp);
+		callback(err, affApp);
 	});
 };

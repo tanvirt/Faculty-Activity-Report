@@ -40,7 +40,7 @@ module.exports.submit = function(req, callback) {
 	});
 
 	currentRank.save(function(err) {
-		callback(null, currentRank);
+		callback(err, currentRank);
 	});
 };
 

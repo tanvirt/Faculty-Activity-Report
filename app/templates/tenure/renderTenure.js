@@ -35,6 +35,6 @@ module.exports.submit = function(req, callback) {
 	});
 
 	tenure.save(function(err) {
-		callback(null, tenure);
+		callback(err, tenure);
 	});
 };

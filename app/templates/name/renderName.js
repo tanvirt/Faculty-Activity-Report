@@ -28,30 +28,7 @@ and converts it into latex.
 */
 module.exports.render = function(req, callback) {
 	renderModel.render(req, callback);
-	/*
-	if(!renderModel.isDebugNull && !renderModel.isDebugPopulate) {
-		renderModel.findOneModelByReport( req, function( err, obj ) {
-			if (err) throw err;
-			renderModel.renderOne( obj, callback );
-		});
-	}
-	else
-		renderModel.renderOne({}, callback);
-	*/
 };
-
-/*
-//Exactly the same as the render above, but 
-//uses the fidnModelsByReport, which returns
-//an array of JSON objects
-module.exports.render = function(req, callback) {
-	renderModel.findModelsByReport( req, function( arrayOfObjs ) {
-		return arrayOfObjs[0]; //put contents of passObj here
-	}, function( single_obj ) {
-		renderModel.render( single_obj, callback );
-	});
-};
-*/
 
 /*
 Gets the data from the frontend and

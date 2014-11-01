@@ -32,25 +32,6 @@ module.exports.render = function(req, callback) {
 	renderModel.render(req, callback);
 };
 
-/*
-//Exactly the same as the render above, but 
-//uses the fidnModelsByReport, which returns
-//an array of JSON objects
-
-module.exports.render = function(req, callback) {
-	renderModel.findModelsByReport( req, function( arrayOfObjs ) {
-		return arrayOfObjs[0];
-	}, function( single_obj ) {
-		renderModel.render( single_obj, callback );
-	});
-};
-*/
-
-/*
-Gets the data from the frontend and
-saves it in the database.
-*/
-
 module.exports.submit = function(req, callback) {
 	//console.log(require('util').inspect(req.body));
 
