@@ -36,10 +36,16 @@ module.exports.submit = function(req, callback) {
 	//console.log(require('util').inspect(req.body));
 
 	var act = new AssignedActivity({
-		springTeaching: req.body.springTeaching, springResearch: req.body.springResearch, springService: req.body.springService,
-		summerTeaching: req.body.summerTeaching, summerResearch: req.body.summerResearch, summerService: req.body.summerService,
-		fallTeaching: req.body.fallTeaching, fallResearch: req.body.fallResearch, fallService: req.body.fallService,
-		year: req.body.year,
+		springTeaching: req.body.assignedActivity.springTeaching, 
+		springResearch: req.body.assignedActivity.springResearch, 
+		springService: req.body.assignedActivity.springService,
+		summerTeaching: req.body.assignedActivity.summerTeaching, 
+		summerResearch: req.body.assignedActivity.summerResearch, 
+		summerService: req.body.assignedActivity.summerService,
+		fallTeaching: req.body.assignedActivity.fallTeaching, 
+		fallResearch: req.body.assignedActivity.fallResearch, 
+		fallService: req.body.assignedActivity.fallService,
+		year: req.body.assignedActivity.year,
 		user: req.user
 	});
 

@@ -30,7 +30,7 @@ module.exports.render = function(req, callback) {
 
 module.exports.submit = function(req, callback) {
 	var dateApp = new DateAppointed({
-		theDate: req.body.dateAppointed,
+		theDate: req.body.dateAppointed.date,
 		user: req.user		
 	});
 

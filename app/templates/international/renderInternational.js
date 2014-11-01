@@ -32,7 +32,7 @@ module.exports.render = function(req, callback) {
 
 module.exports.submit = function(req, callback) {
 	var international = new International({
-		activities: req.body.international,
+		activities: req.body.international.activities,
 		user: req.user		
 	});
 

@@ -31,7 +31,7 @@ module.exports.render = function(req, callback) {
 };
 module.exports.submit = function(req, callback) {
 	var affApp = new AffiliateApp({
-		app: req.body.affiliateAppointments,
+		app: req.body.affiliateAppointments.appointments,
 		user: req.user		
 	});
 

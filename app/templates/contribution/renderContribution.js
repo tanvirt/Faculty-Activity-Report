@@ -32,7 +32,7 @@ module.exports.render = function(req, callback) {
 
 module.exports.submit = function(req, callback) {
 	var contribution = new Contribution({
-		info: req.body.contribution,
+		info: req.body.contribution.info,
 		user: req.user		
 	});
 

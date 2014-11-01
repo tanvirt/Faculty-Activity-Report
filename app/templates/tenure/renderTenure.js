@@ -30,7 +30,7 @@ module.exports.render = function(req, callback) {
 
 module.exports.submit = function(req, callback) {
 	var tenure = new Tenure({
-		tenure: req.body.tenure,
+		tenure: req.body.tenure.tenure,
 		user: req.user		
 	});
 

@@ -34,7 +34,7 @@ saves it in the database.
 */
 module.exports.submit = function(req, callback) {
 	var teachingAdvising = new TeachingAdvising({
-		info: req.body.teachingAdvising,
+		info: req.body.teachingAdvising.advising,
 		user: req.user
 	});
 
