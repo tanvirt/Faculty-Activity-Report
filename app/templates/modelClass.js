@@ -34,7 +34,7 @@ Sets the debugging on for populating the pdf with dummy data, (if defined)
 */
 RenderModel.prototype.setDebugPopulate = function( isDebugPopulate, debugJSON ) {
 	this.isDebugPopulate = isDebugPopulate;
-	this.debugJSON = debugJSON;
+	this.debugJSON = ( new this.Model( debugJSON ) ).toJSON();
 };
 
 /*
@@ -109,8 +109,9 @@ RenderModel.prototype._render = function( obj, cb ) {
 	}
 
 	if (this.isDebugPopulate && this.debugJSON) {
-		if (this.isDebugPopulate)
-			console.log('\'Debugging Population\' on for ' + this.Model.modelName);
+		console.log('\'Debugging Population\' on for ' + this.Model.modelName);
+		console.log(require('util').inspect(this.debugJSON));
+		console.log(require('util').inspect(obj));
 		renderSwig(this.renderFilePath, this.debugJSON, cb);
 	} else if (this.isDebugNull || !obj) {
 		if (this.isDebugNull)

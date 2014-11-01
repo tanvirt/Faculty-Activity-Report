@@ -114,7 +114,7 @@ var teachingEvaluation = new Schema({
 	report: {
 		type: Schema.ObjectId,
 		ref: 'Report'
-	}		
+	}	
 }, {collection:'TeachingEvaluation'});
 
 mongoose.model('TeachingEvaluation', teachingEvaluation);
