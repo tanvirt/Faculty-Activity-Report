@@ -8,14 +8,23 @@ class that takes care of rendering the swig/debugging
 	when model.find returns empty (nothing in the collection for that user)
 */
 function RenderModel( MongooseModel, renderFilePath, naFilePath ) {
+	//private field
 	this.Model = MongooseModel;
+
+	//private field
 	this.renderFilePath = renderFilePath;
+
+	//private field
 	this.naFilePath = naFilePath;
 
+	//private field
 	this.isDebugPopulate = false;
-	this.debugJSON = null;
 
-	this.isDebugNull = false;
+	//private field
+	this.debugJSON = null; 
+
+	//public field
+	this.isDebugNull = false; 
 }
 
 /*
@@ -29,26 +38,29 @@ RenderModel.prototype.setDebugPopulate = function( isDebugPopulate, debugJSON ) 
 };
 
 /*
+PRIVATE METHOD
+
 Finds one document for the current user's report.
 @param req, the request field
 @param cb, a callback function that contains the object returned
 */
-RenderModel.prototype.findOneModelByReport = function( req, cb ) {
+RenderModel.prototype._findOneModelByReport = function( req, cb ) {
 	//Model.findOne returns an object, so assign to findObj
 	this.Model.findOne({report: req.report}, function(err, obj) {
-		//if (err) return err;
 		cb( err, obj );
 	});
 };
 
 /*
+PRIVATE METHOD
+
 Finds many documents for the current user's report
 @param req, the request field
 @param arrayToObj, a callback that allows to rearrange the array returned 
 	by model.find. Contains the arrayOfObjs as a parameter
 @param cb, a callback function that contains the single object
 */
-RenderModel.prototype.findModelsByReport = function ( req, arrayToObj, cb ) {
+RenderModel.prototype._findModelsByReport = function ( req, arrayToObj, cb ) {
 	//Model.find returns an array of objects! so reorganize into
 	//one object and assign
 	this.Model.find({report: req.report}, function(err, arrayOfObjs) {
@@ -81,6 +93,8 @@ function renderSwig( filePath, json, cb ) {
 }
 
 /*
+PRIVATE METHOD
+
 Renders the obj into latex as a callback.
 
 if obj is not defined, then the null latex gets rendered
@@ -89,7 +103,7 @@ if obj is not defined, then the null latex gets rendered
 @param cb, a callback that contains an err as
 	the first parameter and the resulting latex output as the second
 */
-RenderModel.prototype.render = function( obj, cb ) {
+RenderModel.prototype._render = function( obj, cb ) {
 	if ( this.isDebugNull && this.isDebugPopulate ) {
 		throw new Error('Error: isDebugPopulate and isDebugNull can not both be true.');
 	}
@@ -107,18 +121,19 @@ RenderModel.prototype.render = function( obj, cb ) {
 	}
 };
 
-RenderModel.prototype.renderOne = function(req, callback) {
+RenderModel.prototype.render = function(req, callback) {
 	var _this = this;
 
-	_this.findOneModelByReport( req, function( err, obj ) {
+	_this._findOneModelByReport( req, function( err, obj ) {
 		if (err) {
 			callback(err, null);
 		} else {
-			_this.render( obj, callback );
+			_this._render( obj, callback );
 		}
 	});
 };
 
+/* Don't use this. See teachingEvaluation for rendering multiple
 RenderModel.prototype.renderMultiple = function(req, callback, passObj) {
 	var _this = this;
 	
@@ -136,6 +151,7 @@ RenderModel.prototype.renderMultiple = function(req, callback, passObj) {
 		}
 	});
 };
+*/
 
 // Export the function to the world
 module.exports.RenderModel = RenderModel;

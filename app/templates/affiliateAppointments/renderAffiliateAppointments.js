@@ -27,7 +27,7 @@ render function that finds the obj in the database
 and converts it into latex.
 */
 module.exports.render = function(req, callback) {
-	renderModel.renderOne(req, callback);
+	renderModel.render(req, callback);
 };
 
 /*

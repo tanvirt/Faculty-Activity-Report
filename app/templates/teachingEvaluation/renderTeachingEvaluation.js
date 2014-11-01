@@ -63,14 +63,10 @@ module.exports.render = function (req, callback) {
 };
 */
 
-function passObj(objArray)
-{
-	//console.log('objArray: ' + require('util').inspect({'evaluations':objArray}));
-	return objArray[0];
-}
+
 
 module.exports.render = function(req, callback) {
-	renderModel.renderMultiple(req, callback, passObj);
+	renderModel.render(req, callback);
 };
 
 /*
