@@ -10,7 +10,18 @@ var furtherInformationSection = new Schema({
         type: String,
         default: ''
 
+    },
+    
+	user: {
+        type: Schema.ObjectId,
+        ref: 'User'
+        },
+        
+    report: {
+        type: Schema.ObjectId,
+        ref: 'Report'
     }
+
 
 
 }, {collection: 'furtherInformationSection'});
