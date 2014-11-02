@@ -104,7 +104,7 @@ var ReportSchema = new Schema({
 	
 	contracts: {
 		type: Schema.Types.ObjectId, ref: 'Contracts'
-	},
+	}
 
 
 //END TEMP-------------------------------------------------

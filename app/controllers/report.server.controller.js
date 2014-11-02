@@ -164,7 +164,7 @@ exports.submit_02 = function(req, res, callback) {
 		assignedActivity: async.apply(renderAssignedActivity.submit, req),
 		teachingEvaluation: async.apply(renderTeachingEvaluation.submit, req),
 		conferences: async.apply(renderConferences.submit, req),
-		contracts: async.apply(renderContracts.submit, req)
+		//contracts: async.apply(renderContracts.submit, req)
 	}, function(err, models) {
 		//console.log(require('util').inspect(req.body));
 		if (err) {
