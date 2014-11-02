@@ -119,7 +119,7 @@ exports.create = function(req, res) {
 						//console.log('conferences saved');
 					});
 					models.contracts.save(function(err) {
-						
+						console.log('contracts saved');
 					});
 					//get json to frontend
 					res.jsonp(report);
