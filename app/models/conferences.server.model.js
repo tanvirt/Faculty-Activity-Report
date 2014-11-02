@@ -25,6 +25,16 @@ var Conferences = new Schema({
 	where: {
 		type: String,
 		required: true
+	},
+	
+	user: {
+		type: Schema.ObjectId,
+		ref: 'User'
+	},
+
+	report: {
+		type: Schema.ObjectId,
+		ref: 'Report'
 	}
 
 }, {collection: Conferences});

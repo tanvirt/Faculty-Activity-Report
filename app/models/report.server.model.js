@@ -96,6 +96,10 @@ var ReportSchema = new Schema({
 
 	teachingEvaluation: {
 		type: Schema.Types.ObjectId, ref: 'TeachingEvaluation'
+	},
+	
+	conferences: {
+		type: Schema.Types.ObjectId, ref: 'Conferences'
 	}
 
 
