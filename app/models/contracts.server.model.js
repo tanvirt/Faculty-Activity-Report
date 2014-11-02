@@ -36,7 +36,10 @@ var contract = new Schema({
 		type: String,
 		required: true
 	},
-	fundingPortion: Number,
+	fundingPortion: {
+		type: Number,
+		default: 0
+	},
 	value: {
 		type: Number,
 		required: true
@@ -54,7 +57,8 @@ var Contracts = new Schema({
 	report: {
 		type: Schema.ObjectId,
 		ref: 'Report'
-	}	
+	},
+	fundingTotal: Number
 }, {collection:'Contracts'});
 
 mongoose.model('Contracts', Contracts);

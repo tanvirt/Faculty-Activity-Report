@@ -55,7 +55,7 @@ module.exports.submit = function(req, callback) {
 		return;
 
 	var arr = [];
-
+	var total = 0;
 	for(var i=0; i<req.body.Contracts.length; i++) {
 		var path = req.body.Contracts[i];
 		var subdoc = {
@@ -68,12 +68,16 @@ module.exports.submit = function(req, callback) {
 			fundingPortion: path.fundingPortion,
 			value: path.value
 		};
+		if(path.fundingPortion) {
+			total+=path.fundingPortion;
+		}
 		arr.push(subdoc);
 	}
 
 	var contract = new Contracts({
 		sub: arr,
-		user: req.user
+		user: req.user,
+		fundingTotal: total
 	});
 		
 	contract.save(function(err) {
