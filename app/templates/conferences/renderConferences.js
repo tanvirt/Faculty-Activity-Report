@@ -63,13 +63,13 @@ module.exports.submit = function(req, callback) {
 		arr.push(subdoc);
 	}
 
-	var c = new Conferences({
+	var conference = new Conferences({
 		sub: arr,
 		user: req.user
 	});
 		
-	c.save(function(err) {
-		callback(err, c);
+	conference.save(function(err) {
+		callback(err, conference);
 	});	
 };
 
