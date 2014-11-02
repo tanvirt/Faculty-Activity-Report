@@ -100,6 +100,10 @@ var ReportSchema = new Schema({
 	
 	conferences: {
 		type: Schema.Types.ObjectId, ref: 'Conferences'
+	},
+
+	graduateCommittee: {
+		type: Schema.Types.ObjectId, ref: 'GraduateCommittee'
 	}
 
 
