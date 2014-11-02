@@ -44,6 +44,7 @@ exports.create = function(req, res) {
 			report.membership = models.membership._id;
 			report.teachingEvaluation = models.teachingEvaluation._id;
 			report.conferences = models.conferences._id;
+			report.contracts = models.contracts._id;
 
 			report.save(function(err) {
 				if (err) {
@@ -67,6 +68,7 @@ exports.create = function(req, res) {
 					models.membership.report = report;
 					models.teachingEvaluation.report = report;
 					models.conferences.report = report;
+					models.contracts.report = report;
 					
 
 					//Update existing document
@@ -114,7 +116,10 @@ exports.create = function(req, res) {
 
 					});
 					models.conferences.save(function(err) {
-						console.log('conferences saved');
+						//console.log('conferences saved');
+					});
+					models.contracts.save(function(err) {
+						
 					});
 					//get json to frontend
 					res.jsonp(report);
@@ -191,6 +196,7 @@ exports.list = function(req, res) {
 	.populate('membership')
 	.populate('teachingEvaluation')
 	.populate('conferences')
+	.populate('contracts')
 
 	.exec(function(err, reports) {
 		if (err) {
@@ -222,6 +228,7 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('membership')
 	.populate('teachingEvaluation')
 	.populate('conferences')
+	.populate('contracts')
 
 	//.populate('teachingEvaluation')
 

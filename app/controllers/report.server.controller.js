@@ -61,7 +61,7 @@ exports.generate = function(req,res,next) {
 		async.apply(renderContribution.render, req),
 
 		async.apply(renderConferences.render, req),
-		renderContracts.render,
+		async.apply(renderContracts.render, req),
 		renderGovernance.render,
 		renderConsultationsOutsideUniversity.render,
 		renderEditorServiceReviewer.render,
@@ -141,7 +141,8 @@ exports.submit = function(req, res, next) {
 		async.apply(renderContribution.submit, req),
 		async.apply(renderInternational.submit, req),
 		async.apply(renderMembership.submit, req),
-		async.apply(renderConferences.submit, req)
+		async.apply(renderConferences.submit, req),
+		async.apply(renderContracts.submit, req)
 	], function(err, models) {
 		if (err) return res.status(500).send({ error: 'Submit Failed' });	
 		console.log(req.body);
@@ -162,7 +163,8 @@ exports.submit_02 = function(req, res, callback) {
 		membership: async.apply(renderMembership.submit, req),
 		assignedActivity: async.apply(renderAssignedActivity.submit, req),
 		teachingEvaluation: async.apply(renderTeachingEvaluation.submit, req),
-		conferences: async.apply(renderConferences.submit, req)
+		conferences: async.apply(renderConferences.submit, req),
+		contracts: async.apply(renderContracts.submit, req)
 	}, function(err, models) {
 		//console.log(require('util').inspect(req.body));
 		if (err) {

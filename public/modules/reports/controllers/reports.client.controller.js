@@ -48,7 +48,9 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 				
 				membership: this.membership,
 				
-				conferences: this.conferences
+				conferences: this.conferences,
+				
+				contracts: this.contracts
 
 			});
 

@@ -1,19 +1,18 @@
 'use strict';
 
-var renderModel = require('../../../app/templates/renderModel');
 var mongoose = require('mongoose');
+var modelClass = require('../modelClass');
 
 // Compile Schema into Model here
 var Contracts = mongoose.model('Contracts');
+var renderModel = new modelClass.RenderModel(Contracts, 'contracts/contracts.tex', 'contracts/na.tex');
 
 /*
 Populates the database with test data
 */
-function dummyObjects(Model) {
-	var objs = [];
-	
-	objs[0] = new Model({
-		title: 'New Project',
+renderModel.setDebugPopulate(false, {
+	sub: [{
+		title: 'Contract 1',
 		funded: 'externally',
 		PI: 'PI',
 		startDate: '02/13/2000',
@@ -21,41 +20,65 @@ function dummyObjects(Model) {
 		fundingAgency: 'NASA',
 		fundingPortion: 100000,
 		value: 200000
-	});
-
-	objs[1] = new Model({
-		title: 'Lame Project',
+	},
+	{
+		title: 'Contract 2',
+		funded: 'externally',
+		PI: 'co-PI',
+		startDate: 'October 2001',
+		endDate: 'December 2013',
+		fundingAgency: 'YOU',
+		fundingPortion: 5000,
+		value: 1000
+	},
+	{
+		title: 'Contract 3',
 		funded: 'not',
 		PI: 'co-PI',
 		startDate: '09/02/1990',
 		endDate: '12/18/2001',
 		fundingAgency: 'N/A',
-		value: 4000
-	});
+		value: 400
+	}]
+	// Methods Don't get called
+});
 
-	return objs;
-}
+renderModel.isDebugNull = false;
 
-/*
-rearrange data, pass in additional fields
-*/
-function passObj(objArray) {
-	var total = 0;
-	for(var i = 0; i !== objArray.length; i++) {
-		if(objArray[i].funded === 'externally') {
-			total+=objArray[i].fundingPortion;
-		}
+module.exports.render = function(req, callback) {
+	renderModel.render(req, callback);
+};
+
+
+module.exports.submit = function(req, callback) {
+	if (!req.body.Contracts)
+		return;
+
+	var arr = [];
+
+	for(var i=0; i<req.body.Contracts.length; i++) {
+		var path = req.body.Contracts[i];
+		var subdoc = {
+			title: path.title,
+			funded: path.funded,
+			PI: path.PI,
+			startDate: path.startDate,
+			endDate: path.endDate,
+			fundingAgency: path.fundingAgency,
+			fundingPortion: path.fundingPortion,
+			value: path.value
+		};
+		arr.push(subdoc);
 	}
 
-	return {'contracts': objArray, 'total': total};
-}
-
-/*
-Helper function that gets called in report.server.controller.js
-Output is pushed into a LaTex PDF there.
-*/
-module.exports.render = function(callback) {
-	renderModel.renderMultiple('contracts/contracts.tex', Contracts, {}, passObj, dummyObjects, function ( renderStr ) {
-		callback(null, renderStr);
+	var contract = new Contracts({
+		sub: arr,
+		user: req.user
 	});
+		
+	contract.save(function(err) {
+		callback(err, contract);
+	});	
 };
+
+
