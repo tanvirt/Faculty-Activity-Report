@@ -104,6 +104,10 @@ var ReportSchema = new Schema({
 
 	graduateCommittee: {
 		type: Schema.Types.ObjectId, ref: 'GraduateCommittee'
+	},
+
+	creativeWorks: {
+		type: Schema.Types.ObjectId, ref: 'CreativeWorks'
 	}
 
 

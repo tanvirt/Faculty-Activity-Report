@@ -45,6 +45,7 @@ exports.create = function(req, res) {
 			report.teachingEvaluation = models.teachingEvaluation._id;
 			report.conferences = models.conferences._id;
 			report.graduateCommittee = models.graduateCommittee._id;
+			report.creativeWorks = models.creativeWorks._id;
 
 			report.save(function(err) {
 				if (err) {
@@ -69,6 +70,7 @@ exports.create = function(req, res) {
 					models.teachingEvaluation.report = report;
 					models.conferences.report = report;
 					models.graduateCommittee.report = report;
+					models.creativeWorks.report = report;
 					
 
 					//Update existing document
@@ -119,6 +121,9 @@ exports.create = function(req, res) {
 						//console.log('conferences saved');
 					});
 					models.graduateCommittee.save(function(err) {
+
+					});
+					models.creativeWorks.save(function(err) {
 
 					});
 
@@ -198,6 +203,7 @@ exports.list = function(req, res) {
 	.populate('teachingEvaluation')
 	.populate('conferences')
 	.populate('graduateCommittee')
+	.populate('creativeWorks')
 
 	.exec(function(err, reports) {
 		if (err) {
@@ -230,6 +236,7 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('teachingEvaluation')
 	.populate('conferences')
 	.populate('graduateCommittee')
+	.populate('creativeWorks')
 
 	//.populate('teachingEvaluation')
 

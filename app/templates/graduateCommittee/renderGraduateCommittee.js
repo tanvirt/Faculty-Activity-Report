@@ -57,7 +57,6 @@ module.exports.render = function (req, callback) {
 		callback(null, renderStr);
 	});
 */
-	console.log('Here');
 	renderModel.render(req, callback);
 };
 
