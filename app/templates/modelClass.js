@@ -9,19 +9,22 @@ class that takes care of rendering the swig/debugging
 */
 function RenderModel( MongooseModel, renderFilePath, naFilePath ) {
 	//private field
-	this.Model = MongooseModel;
+	this._Model = MongooseModel;
 
 	//private field
-	this.renderFilePath = renderFilePath;
+	this._renderFilePath = renderFilePath;
 
 	//private field
-	this.naFilePath = naFilePath;
+	this._naFilePath = naFilePath;
 
 	//private field
+	this._debugJSON = null; 
+
+	//public field
+	this.renderFolderPath = './app/templates'; //by default
+
+	//public field
 	this.isDebugPopulate = false;
-
-	//private field
-	this.debugJSON = null; 
 
 	//public field
 	this.isDebugNull = false; 
@@ -34,7 +37,7 @@ Sets the debugging on for populating the pdf with dummy data, (if defined)
 */
 RenderModel.prototype.setDebugPopulate = function( isDebugPopulate, debugJSON ) {
 	this.isDebugPopulate = isDebugPopulate;
-	this.debugJSON = ( new this.Model( debugJSON ) ).toJSON();
+	this._debugJSON = ( new this._Model( debugJSON ) ).toJSON();
 };
 
 /*
@@ -46,7 +49,7 @@ Finds one document for the current user's report.
 */
 RenderModel.prototype._findOneModelByReport = function( req, cb ) {
 	//Model.findOne returns an object, so assign to findObj
-	this.Model.findOne({report: req.report}, function(err, obj) {
+	this._Model.findOne({report: req.report}, function(err, obj) {
 		cb( err, obj );
 	});
 };
@@ -63,7 +66,7 @@ Finds many documents for the current user's report
 RenderModel.prototype._findModelsByReport = function ( req, arrayToObj, cb ) {
 	//Model.find returns an array of objects! so reorganize into
 	//one object and assign
-	this.Model.find({report: req.report}, function(err, arrayOfObjs) {
+	this._Model.find({report: req.report}, function(err, arrayOfObjs) {
 		//if (err) return err;
 
 		var single_obj = null;
@@ -78,8 +81,8 @@ RenderModel.prototype._findModelsByReport = function ( req, arrayToObj, cb ) {
 /*
 Helper function that injects values into the latex.tex files
 */
-function renderSwig( filePath, json, cb ) {
-	require('swig').renderFile(require('path').join('./app/templates', filePath), json, function(err, output) {
+function renderSwig( folderPath, filePath, json, cb ) {
+	require('swig').renderFile(require('path').join(folderPath, filePath), json, function(err, output) {
 		/*
 		if (err) {
 			throw err;
@@ -108,17 +111,17 @@ RenderModel.prototype._render = function( obj, cb ) {
 		throw new Error('Error: isDebugPopulate and isDebugNull can not both be true.');
 	}
 
-	if (this.isDebugPopulate && this.debugJSON) {
-		console.log('\'Debugging Population\' on for ' + this.Model.modelName);
-		console.log(require('util').inspect(this.debugJSON));
-		console.log(require('util').inspect(obj));
-		renderSwig(this.renderFilePath, this.debugJSON, cb);
+	if (this.isDebugPopulate && this._debugJSON) {
+		//console.log('\'Debugging Population\' on for ' + this._Model.modelName);
+		//console.log(require('util').inspect(this.debugJSON));
+		//console.log(require('util').inspect(obj));
+		renderSwig(this.renderFolderPath, this._renderFilePath, this._debugJSON, cb);
 	} else if (this.isDebugNull || !obj) {
-		if (this.isDebugNull)
-			console.log('\'Debugging Null\' on for ' + this.Model.modelName);
-		renderSwig(this.naFilePath, null, cb);
+		//if (this.isDebugNull)
+			//console.log('\'Debugging Null\' on for ' + this._Model.modelName);
+		renderSwig(this.renderFolderPath, this._naFilePath, null, cb);
 	} else {
-		renderSwig(this.renderFilePath, obj, cb);
+		renderSwig(this.renderFolderPath, this._renderFilePath, obj, cb);
 	}
 };
 
