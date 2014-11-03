@@ -59,7 +59,7 @@ exports.generate = function(req,res,next) {
 		async.apply(renderGraduateCommittee.render, req),
 		async.apply(renderCreativeWorks.render, req),
 		async.apply(renderPatents.render, req),
-		async.apply(renderConsultationsOutsideUniversity.render, req),
+		
 
 		renderPublication.render,
 		async.apply(renderContribution.render, req),
@@ -67,13 +67,13 @@ exports.generate = function(req,res,next) {
 		async.apply(renderConferences.render, req),
 		renderContracts.render,
 		renderGovernance.render,
-		//renderConsultationsOutsideUniversity.render,
-	//	async.apply(renderConsultationsOutsideUniversity.render, req),
+		async.apply(renderConsultationsOutsideUniversity.render, req),
+
 		renderEditorServiceReviewer.render,
 		async.apply(renderMembership.render, req),
 		async.apply(renderInternational.render, req)
 	//	async.apply(renderHonors.render, req),
-		
+	//	async.apply(renderFurtherInformationSection.render, req)	
 	
 	], function(err, results) {
 		if (err) {
