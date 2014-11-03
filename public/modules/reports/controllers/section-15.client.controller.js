@@ -13,33 +13,22 @@ angular.module('reports').controller('Section15Controller', ['$scope', '$statePa
 
       $scope.grants = 
             [{
-               titleOfGrant:null,
-               fundingAgency:null,
-               PI:null,
-               startEnd:null,
-               value:null,
+               titleOfGrant:'',
+               fundingAgency:'',
+               PI:'',
+               startEnd:'',
+               value:'',
             }];
 
-        $scope.addGrants = function(){
-               $scope.grants.push({titleOfGrant: $scope.grants.titleOfGrant , fundingAgency: $scope.grants.fundingAgency, PI: $scope.grants.PI, value:$scope.grants.value, startEnd: $scope.grants.startEnd});
-               $scope.grants.titleOfGrant =null;
-               $scope.grants.fundingAgency =null;
-               $scope.grants.PI =null;
-               $scope.grants.value=null;
-               $scope.grants.startEnd=null;
-               $scope.hideTable = false;
 
-            };
-
-            
          //When the add grant button is pressed this function is called.
         $scope.addGrants = function(){
                $scope.grants.push({titleOfGrant: $scope.grants.titleOfGrant , fundingAgency: $scope.grants.fundingAgency, PI: $scope.grants.PI, value:$scope.grants.value, startEnd: $scope.grants.startEnd});
-               $scope.grants.titleOfGrant = null;
-               $scope.grants.fundingAgency = null;
-               $scope.grants.PI = null;
-               $scope.grants.value = null;
-               $scope.grants.startEnd = null;
+               $scope.grants.titleOfGrant = '';
+               $scope.grants.fundingAgency = '';
+               $scope.grants.PI = '';
+               $scope.grants.value = '';
+               $scope.grants.startEnd = '';
                $scope.hideTable = false;
             };
 
