@@ -50,18 +50,31 @@
 			});
 		}));
 
-		it('Should do some controller test', function() {
-			var springTeaching, springResearch, springService;
-			var summerTeaching, summerResearch, summerService;
-			var fallTeaching, fallTReseach, fallService;
+		it('Testing springUpdate() functionality if the spring total adds up to 100', function() {
+			scope.springTeaching = 50;
+			scope.springResearch = 40;
+			scope.springService = 10;
 
-			springTeaching = 50;
-			springResearch = 40;
-			springService = 10;
-
-			var springTotal = scope.springUpdate(springTeaching,springResearch,springService);
-			expect(springTotal).toBe(100);
+			scope.springUpdate();
+			expect(scope.springTotal).toBe(100);
 
 		});
+		it('Testing summerUpdate() functionality if the summer total adds up to 100', function() {
+			scope.summerTeaching = 10;
+			scope.summerResearch = 80;
+			scope.summerService = 10;
+
+			scope.summerUpdate()
+			expect(scope.summerTotal).toBe(100);
+		});
+		it('Testing fallUpdate() functionality if the fall total adds up to 100', function() {
+			scope.fallTeaching = 65;
+			scope.fallResearch = 25;
+			scope.fallService = 10;
+
+			scope.fallUpdate()
+			expect(scope.fallTotal).toBe(100);
+		});
+
 	});
 }());
