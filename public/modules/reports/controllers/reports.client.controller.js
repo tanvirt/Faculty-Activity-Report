@@ -86,14 +86,20 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 				conferences: this.conferencesArray,
 
 				contracts: this.contractsArray,
-
+				
+				consultationsOutsideUniversity: {
+					consultation: this.consultationsOutsideUniversity
+				}
+				
 				membership: {
 					info: this.membership
 				},
 
 				international: {
 					activities: this.international
-				}			
+				}
+
+
 
 			});
 
