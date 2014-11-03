@@ -28,13 +28,17 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 			var report = new Reports ({
 				reportName: this.reportName,
 
-				firstName: this.firstName,
-				middleName: this.middleName,
-				lastName: this.lastName,
+				name: {
+					firstName: this.firstName,
+					middleName: this.middleName,
+					lastName: this.lastName
+				},
 
 				tenure: this.tenure,
 
-				currentRank: this.currentRank,
+				currentRank: {
+					rank: this.currentRank
+				},
 
 				dateAppointed: this.dateAppointed,
 
