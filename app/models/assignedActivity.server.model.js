@@ -27,56 +27,56 @@ var AssignedActivity = new Schema({
 	springTeaching: {
 		type: Number,
 		//required: requiredStr('SpringTeaching'),
-		min: 0,
-		max: 100
+		//min: 0,
+		//max: 100
 	},
 	springResearch: {
 		type: Number,
 		//required: requiredStr('SpringResearch'),
-		min: 0,
-		max: 100
+		//min: 0,
+		//max: 100
 	},
 	springService: {
 		type: Number,
 		//required: requiredStr('SpringService'),
-		min: 0,
-		max: 100
+		//min: 0,
+		//max: 100
 	},
 	fallTeaching: {
 		type: Number,
 		//required: requiredStr('FallTeaching'),
-		min: 0,
-		max: 100
+		//min: 0,
+		//max: 100
 	},
 	fallResearch: {
 		type: Number,
 		//required: requiredStr('FallResearch'),
-		min: 0,
-		max: 100
+		//min: 0,
+		//max: 100
 	},
 	fallService: {
 		type: Number,
 		//required: requiredStr('FallService'),
-		min: 0,
-		max: 100
+		//min: 0,
+		//max: 100
 	},
 	summerTeaching: {
 		type: Number,
 		//required: requiredStr('SummerTeaching'),
-		min: 0,
-		max: 100
+		//min: 0,
+		//max: 100
 	},
 	summerResearch: {
 		type: Number,
 		//required: requiredStr('SummerResearch'),
-		min: 0,
-		max: 100
+		//min: 0,
+		//max: 100
 	},
 	summerService: {
 		type: Number,
 		//required: requiredStr('SummerService'),
-		min: 0,
-		max: 100
+		//min: 0,
+		//max: 100
 	},
 	
 	user: {

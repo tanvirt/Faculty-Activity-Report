@@ -19,6 +19,8 @@ exports.rCtrl = rCtrl;
 exports.create = function(req, res) {
 	rCtrl.submit_02(req, res, function(err, models) {
 		if (err) {
+
+			console.log(err);
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
@@ -49,6 +51,7 @@ exports.create = function(req, res) {
 
 			report.save(function(err) {
 				if (err) {
+					console.log(err);
 					return res.status(400).send({
 						message: errorHandler.getErrorMessage(err)
 					});
