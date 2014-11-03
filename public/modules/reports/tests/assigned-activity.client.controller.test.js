@@ -111,5 +111,60 @@
 
 			expect(scope.fallTotal).toBe('e');
 		});
+		it('testing springUpdate() with negative values', function(){
+			scope.springTeaching = -10;
+			scope.springResearch = -40;
+			scope.springService = -50;
+			scope.springUpdate();
+
+			expect(scope.springTotal).toBe(0);
+		});
+
+		it('testing summerUpdate() with negative values', function(){
+			scope.summerTeaching = -10;
+			scope.summerResearch = -40;
+			scope.summerService = -50;
+			scope.summerUpdate();
+
+			expect(scope.summerTotal).toBe(0);
+		});
+
+		it('testing fallUpdate() with negative values', function(){
+			scope.fallTeaching = -10;
+			scope.fallResearch = -40;
+			scope.fallService = -50;
+			scope.fallUpdate();
+
+			expect(scope.fallTotal).toBe(0);
+		});
+
+		it('testing springUpdate() with NON-NUMERICAL values', function(){
+			scope.springTeaching = [];
+			scope.springTeaching = {};
+			scope.springTeaching = '80';
+			scope.springUpdate();
+
+			expect(scope.springTotal).toBe('e');
+		});
+
+		it('testing summerUpdate() with NON-NUMERICAL values', function(){
+			scope.summerTeaching = [];
+			scope.summerTeaching = {};
+			scope.summerTeaching = '80';
+			scope.summerUpdate();
+
+			expect(scope.summerTotal).toBe('e');
+		});
+
+		it('testing fallUpdate() with NON-NUMERICAL values', function(){
+			scope.fallTeaching = [];
+			scope.fallTeaching = {};
+			scope.fallTeaching = '80';
+			scope.fallUpdate();
+
+			expect(scope.fallTotal).toBe('e');
+		});
+
+
 	});
 }());
