@@ -1,7 +1,7 @@
 <section>
 
 <div class="col-md-12" style="padding-top:20px">
-    <h3>1-5. Faculty Profile</h3>
+    <h3 id="profile" style="margin-top:-60px; padding-top:60px">1-5. Faculty Profile</h3>
      <hr>
 
     <form class="form-horizontal">
@@ -21,8 +21,8 @@
             
             <div class="form-group">
                 <label class="col-md-3 control-label" for="tenure">Tenure</label>
-                <div class="col-md-6 controls">
-                    <select class="form-control" id="tenure" data-ng-model="tenure">
+                <div class="col-sm-6 controls">
+                    <select class="form-control">
                       <option value="Tenured">Tenured</option>
                       <option value="Not Tenured">Not Tenured</option>
                     </select>
@@ -31,75 +31,8 @@
           
             <div class="form-group">
                 <label class="col-md-3 control-label" for="currentRank">Current Rank</label>
-                <div class="col-md-3 controls">
-                    <!-- todo needs and ng-repeat with the content from the backend-->
-                    <select data-ng-model="currentRank" id="currentRank" class="form-control">
-                        <option value="professor">
-                            Professor
-                        </option>
-                        <option value="associate professor">
-                            Associate Professor
-                        </option>
-                        <option value="assistant professor">
-                            Assistant Professor
-                        </option>
-                        <option value="faculty">
-                            Faculty
-                        </option>
-                        <option value="department head">
-                            Department head
-                        </option>
-                        <option value="chairperson">
-                            Chairperson
-                        </option>
-                        <option value="research professor">
-                            Research Professor
-                        </option>
-                    </select>
-                </div>
-                <div class="col-md-3 controls">
-                    <!-- todo needs and ng-repeat with the proper values from the backend -->
-                    <select class="form-control" data-ng-model="department" required>
-                        <option value="Agricultural and Biological Engineering">
-                            Agricultural and Biological Engineering
-                        </option>
-                        <option value="Agricultural and Biological Engineering">
-                            Agricultural and Biological Engineering
-                        </option>
-                        <option value="Biomedical Engineering">
-                            Biomedical Engineering
-                        </option>
-                        <option value="Chemical Engineering">
-                            Chemical Engineering
-                        </option>
-                        <option value="Computer and Informational Science and Engineering">
-                            Computer and Informational Science and Engineering
-                        </option>
-                        <option value="Electrical and Computer Engineering">
-                            Electrical and Computer Engineering
-                        </option>
-                        <option value="Industrial and Systems Engineering">
-                            Industrial and Systems Engineering
-                        </option>
-                        <option value="Mechanical and Aerospace Engineering">
-                            Mechanical and Aerospace Engineering
-                        </option>
-                        <option value="Materials Science and Engineering">
-                            Materials Science and Engineering
-                        </option>
-                        <option value="Finance Insurance and Real Estate">
-                            Finance Insurance and Real Estate
-                        </option>
-                        <option value="Information Systems and Operations Management">
-                            Information Systems and Operations Management
-                        </option>
-                        <option value="Management'">
-                            Management
-                        </option>
-                        <option value="Marketing">
-                            Marketing
-                        </option>
-                    </select>
+                <div class="col-md-6 controls">
+                    <input type="text" data-ng-model="currentRank" id="currentRank" class="form-control" placeholder="Professor" required>
                 </div>
             </div>
          
@@ -108,7 +41,6 @@
                 <div class="col-md-6 controls">
                     <input type="month" data-ng-model="dateAppointed" id="dateAppointed" class="form-control" required>
                 </div>
-
                 
             </div>
             
@@ -124,3 +56,4 @@
     </form>
 </div>
 </section>
+        
