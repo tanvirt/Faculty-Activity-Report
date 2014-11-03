@@ -76,6 +76,8 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 				graduateCommittee: this.graduateCommitteeArray,
 
 				creativeWorks: this.creativeWorksArray, //this is an array of objects
+
+				patents: this.patentsArray, //this is an array of objects
 				
 				contribution: {
 					info: this.contribution
