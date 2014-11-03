@@ -39,17 +39,16 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 				},
 
 				currentRank: {
-					rank: this.currentRank
-					//rank: this.rank,
-					//department: this.department
+					rank: this.currentRank,
+					department: this.department
 				},
 
 				dateAppointed: {
-					theDate: this.dateAppointed
+					date: this.dateAppointed
 				},
 
 				affiliateAppointments: {
-					app: this.affiliateAppointments
+					appointments: this.affiliateAppointments
 				},
 
 				assignedActivity: {
@@ -65,32 +64,34 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 
 					summerTeaching: this.summerTeaching,
 					summerResearch: this.summerResearch,
-					summerService: this.summerService,
+					summerService: this.summerService
 				},
 
 				teachingAdvising: {
-					info: this.teachingAdvising
+					advising: this.teachingAdvising
 				},
 
+				teachingEvaluation: this.teachingEvaluationArray,
+
+				graduateCommittee: this.graduateCommitteeArray,
+
+				creativeWorks: this.creativeWorksArray, //this is an array of objects
+				
 				contribution: {
 					info: this.contribution
 				},
-				
-				international: {
-					activities: this.international
-				},
-				
+
+				conferences: this.conferencesArray,
+
+				contracts: this.contractsArray,
+
 				membership: {
 					info: this.membership
 				},
-				
-				conferences: {
-					area: this.conferences//,
-					//presentation: this.someString1,
-					//title: this.someString2,
-					//date: this.someDate3,
-					//where: this.someString3
-				} 
+
+				international: {
+					activities: this.international
+				}			
 
 			});
 
