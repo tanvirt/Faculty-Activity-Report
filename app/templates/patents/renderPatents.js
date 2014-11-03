@@ -1,49 +1,72 @@
 'use strict';
 
-var renderModel = require('../../../app/templates/renderModel');
 var mongoose = require('mongoose');
+var modelClass = require('../modelClass');
 
 // Compile Schema into Model here
 var Patents = mongoose.model('Patents');
+var renderModel = new modelClass.RenderModel(Patents, 'patents/patents.tex', 'patents/na.tex');
 
-/*
-Populates the database with test data
-*/
-function dummyObjects(Model) {
-	var objs = [];
-	
-	objs[0] = new Model({
-		title: 'Best Work Ever',
+var is = require('is-js');
+
+renderModel.setDebugPopulate(false, {
+	sub: [{
+		title: 'Patent',
 		authors: ['Me', 'Myself', 'I'],
-		patentNumber: '020103',
-		date: '10/08/1994',
-		description: 'I wrote this work all by myself so you can\'t have it and I will take all the moneys and not you hahahahahahahahaha'
-	});
+		patentNumber: '1234',
+		date: '12/31/1999',
+		description: 'I saved the world'
+	},
+	{
+		title: 'Patent2',
+		authors: ['You', 'Me'],
+		patentNumber: '1234567',
+		date: '01/01/2000',
+		description: 'I saved the world again'
+	}]
+});
 
-	objs[1] = new Model({
-		title: 'Sequel',
-		authors: ['Me', 'You', 'Zeffron'],
-		patentNumber: '11111',
-		date: '04/16/2003',
-		description: 'We\'re All In This Together'
-	});
-
-	return objs;
-}
+renderModel.isDebugNull = false;
 
 /*
 rearrange data, pass in additional fields
-*/
+
 function passObj(objArray) {
-	return {'patents': objArray};
+	return {'works': objArray, 'len':objArray.length};
 }
+
+*/
 
 /*
 Helper function that gets called in report.server.controller.js
 Output is pushed into a LaTex PDF there.
 */
-module.exports.render = function(callback) {
-	renderModel.renderMultiple('patents/patents.tex', Patents, {}, passObj, dummyObjects, function ( renderStr ) {
-		callback(null, renderStr);
+module.exports.render = function(req, callback) {
+	renderModel.render(req, callback);
+};
+
+module.exports.submit = function(req, callback) {
+	if (is.empty(req.body.patents)) return callback(null, null);
+
+	var patent = new Patents({
+		sub: [],
+		user: req.user
+	});
+
+	for (var i=0; i<req.body.patents.length; i++) {
+		var path = req.body.patents[i];
+		var subdoc = {
+			title: path.title,
+			authors: path.authors,
+			patentNumber: path.patentNumber,
+			date: path.date,
+			description: path.description
+		};
+
+		patent.sub.push(subdoc);
+	}
+
+	patent.save(function(err) {
+		callback(err, patent);
 	});
 };

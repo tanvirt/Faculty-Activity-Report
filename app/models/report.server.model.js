@@ -112,6 +112,10 @@ var ReportSchema = new Schema({
 
 	creativeWorks: {
 		type: Schema.Types.ObjectId, ref: 'CreativeWorks'
+	},
+
+	patents: {
+		type: Schema.Types.ObjectId, ref: 'Patents'
 	}
 
 
