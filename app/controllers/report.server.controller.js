@@ -36,6 +36,9 @@ var renderConsultationsOutsideUniversity = require('../../app/templates/consulta
 var renderEditorServiceReviewer = require('../../app/templates/editorServiceReviewer/renderEditorServiceReviewer');
 var renderMembership = require('../../app/templates/membership/renderMembership');
 var renderInternational = require('../../app/templates/international/renderInternational');
+var renderHonors = require('../../app/templates/honors/renderHonors');
+var renderFurtherInformationSection = require('../../app/templates/furtherInformationSection/renderFurtherInformationSection');
+
 
 /*
 Generates the LaTex File into app/pdf directory
