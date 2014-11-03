@@ -62,6 +62,14 @@ exports.create = function(req, res) {
 				report.graduateCommittee = models.graduateCommittee._id;
 			if (models.creativeWorks)
 				report.creativeWorks = models.creativeWorks._id;
+			if (models.honors)
+				report.honors = models.honors._id;				
+			if (models.furtherInformationSection)
+				report.furtherInformationSection = models.furtherInformationSection._id;				
+			if (models.consultationsOutsideUniversity)
+				report.consultationsOutsideUniversity = models.consultationsOutsideUniversity._id;				
+				
+				
 
 			report.save(function(err) {
 				if (err) {
@@ -101,6 +109,12 @@ exports.create = function(req, res) {
 						models.graduateCommittee.report = report;
 					if (models.creativeWorks)
 						models.creativeWorks.report = report;
+					if (models.honors)
+						models.honors.report = report;					
+					if (models.furtherInformationSection)
+						models.furtherInformationSection.report = report;					
+					if (models.consultationsOutsideUniversity)
+						models.consultationsOutsideUniversity.report = report;					
 					
 
 					//Update existing document
@@ -196,6 +210,24 @@ exports.create = function(req, res) {
 						});
 					}
 
+					if (models.honors) {
+						models.honors.save(function(err) {
+
+						});
+					}
+
+					if (models.furtherInformationSection) {
+						models.furtherInformationSection.save(function(err) {
+
+						});
+					}
+
+					if (models.consultationsOutsideUniversity) {
+						models.consultationsOutsideUniversity.save(function(err) {
+
+						});
+					}
+					
 					//get json to frontend
 					res.jsonp(report);
 				}
@@ -273,6 +305,10 @@ exports.list = function(req, res) {
 	.populate('conferences')
 	.populate('graduateCommittee')
 	.populate('creativeWorks')
+	.populate('honors')
+	.populate('furtherInformationSection')
+	.populate('consultationsOutsideUniversity')
+
 
 	.exec(function(err, reports) {
 		if (err) {
@@ -306,7 +342,11 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('conferences')
 	.populate('graduateCommittee')
 	.populate('creativeWorks')
-
+	.populate('honors')
+	.populate('furtherInformationSection')
+	.populate('consultationsOutsideUniversity')
+	
+	
 	//.populate('teachingEvaluation')
 
 	.exec(function(err, report) {
