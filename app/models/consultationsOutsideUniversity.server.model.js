@@ -16,8 +16,17 @@ var consultationsOutsideUniversity = new Schema({
         //required: true,
         validate: [validateLocalStrategyProperty,
             'If no value is specified, please input "N/A"']
-    }
+    },
+    
+	user: {
+		type: Schema.ObjectId,
+		ref: 'User'
+	},
 
+	report: {
+		type: Schema.ObjectId,
+		ref: 'Report'
+	}
 
 }, {collection: 'consultationsOutsideUniversity'});
 
