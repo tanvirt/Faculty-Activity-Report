@@ -79,7 +79,7 @@ var ReportSchema = new Schema({
 	},
 
 	assignedActivity: {
-		type: Schema.Types.ObjectId, ref: 'assignedActivity'
+		type: Schema.Types.ObjectId, ref: 'AssignedActivity'
 	},
 
 	teachingAdvising: {
