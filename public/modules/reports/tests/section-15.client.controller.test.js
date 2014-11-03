@@ -50,9 +50,24 @@
 			});
 		}));
 
-		it('Should do some controller test', inject(function() {
-			// The test logic
-			// ...
+		it('testing addGrants() to initialize the form with the correct input', inject(function() {
+			
+			   scope.grants.titleOfGrant = 'The Grant';
+               scope.grants.fundingAgency = 'The Agency';
+               scope.grants.PI = 'Santiago';
+               scope.grants.value = 345;
+               scope.grants.startEnd = '';
+               //scope.hideTable = false;
+               
+               scope.addGrants();
+
+               expect(scope.grants.titleOfGrant).toBe('');
+               expect(scope.grants.fundingAgency).toBe('');
+               expect(scope.grants.PI).toBe('');
+               expect(scope.grants.value).toBe('');
+               expect(scope.grants.startEnd).toBe('');
+               //expect(scope.grants.hideTable).toBe(false);
+
 		}));
 	});
 }());
