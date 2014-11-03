@@ -51,13 +51,13 @@ module.exports.render = function(req, callback) {
 
 
 module.exports.submit = function(req, callback) {
-	if (!req.body.Contracts)
+	if (!req.body.contracts)
 		return;
 
 	var arr = [];
 	var total = 0;
-	for(var i=0; i<req.body.Contracts.length; i++) {
-		var path = req.body.Contracts[i];
+	for(var i=0; i<req.body.contracts.length; i++) {
+		var path = req.body.contracts[i];
 		var subdoc = {
 			title: path.title,
 			funded: path.funded,
