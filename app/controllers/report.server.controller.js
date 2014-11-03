@@ -70,7 +70,7 @@ exports.generate = function(req,res,next) {
 		renderEditorServiceReviewer.render,
 		async.apply(renderMembership.render, req),
 		async.apply(renderInternational.render, req)
-		async.apply(renderHonors.render, req),
+	//	async.apply(renderHonors.render, req),
 		
 	
 	], function(err, results) {
@@ -170,7 +170,7 @@ exports.submit_02 = function(req, res, callback) {
 		conferences: async.apply(renderConferences.submit, req),
 		graduateCommittee: async.apply(renderGraduateCommittee.submit, req),
 		creativeWorks: async.apply(renderCreativeWorks.submit, req)
-		honors: async.apply(renderHonors.submit, req),
+	//	honors: async.apply(renderHonors.submit, req),
 		
 	}, function(err, models) {
 		//console.log(require('util').inspect(req.body));
