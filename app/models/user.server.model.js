@@ -51,7 +51,7 @@ var UserSchema = new Schema({
 	username: {
 		type: String,
 		unique: 'testing error message',
-		//required: 'Please fill in a username',
+		required: 'Please fill in a username',
 		trim: true
 	},
 	password: {
@@ -63,8 +63,8 @@ var UserSchema = new Schema({
 		type: String
 	},
 	provider: {
-		type: String//,
-		//required: 'Provider is required'
+		type: String,
+		required: 'Provider is required'
 	},
 	providerData: {},
 	additionalProvidersData: {},

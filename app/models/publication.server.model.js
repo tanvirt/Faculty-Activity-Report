@@ -4,21 +4,21 @@ var mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
 	validator = require('validator');
 
-	/*
+	
 var validateDate = function(p) {
 	return validator.isDate(p);
-};	*/
+};	
 
 	
 var Publication = new Schema({
 	title: {
-		type: String//,
-		//required: 'please fill in title'
+		type: String,
+		required: 'please fill in title'
 	},
 	
 	authors: {
-		type: [String]//,
-		//required: 'please list author(s)'
+		type: [String],
+		required: 'please list author(s)'
 	},
 	
 	publicationInfo: {
@@ -38,7 +38,7 @@ var Publication = new Schema({
 	
 	year: {
 		type: Date,
-		//validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
+		validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
 	}
 
 }, {collection: 'Publication'});

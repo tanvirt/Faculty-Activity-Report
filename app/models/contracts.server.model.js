@@ -8,16 +8,16 @@ var validateDate = function(p) {
 	return validator.isDate(p);
 };	
 	
-var contract = new Schema({
+var subcontract = new Schema({
 	title: {
-		type: String//,
-		//required: true
+		type: String,
+		required: true
 	},
 	funded: {
 		type: String,
 		enum: ['externally', 'internally', 'pending', 'not'],
-		default: 'externally'//,
-		//required: true
+		default: 'externally',
+		required: true
 	},
 
 	PI: {
@@ -33,16 +33,17 @@ var contract = new Schema({
 		//validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
 	},
 	fundingAgency: {
-		type: String//,
-		//required: true
+		type: String,
+		required: true
 	},
 	fundingPortion: {
 		type: Number,
 		default: 0
 	},
 	value: {
-		type: Number
-	}	
+		type: Number,
+		required: true
+	}
 });
 
 
@@ -53,7 +54,7 @@ var Contracts = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User'
 	},
-	sub: [contract],
+	sub: [subcontract],
 	report: {
 		type: Schema.ObjectId,
 		ref: 'Report'

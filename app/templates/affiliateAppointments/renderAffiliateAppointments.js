@@ -8,6 +8,8 @@ var AffiliateApp = mongoose.model('affiliateAppointments');
 var modelClass = require('../modelClass');
 var renderModel = new modelClass.RenderModel( AffiliateApp, 'affiliateAppointments/affiliateAppointments.tex', 'affiliateAppointments/na.tex');
 
+var is = require('is-js');
+
 /*
 will explicitly populate the report with
 the data you provide
@@ -30,6 +32,8 @@ module.exports.render = function(req, callback) {
 	renderModel.render(req, callback);
 };
 module.exports.submit = function(req, callback) {
+	if(is.empty(req.body.affiliateAppointments)) return callback(null, null);
+
 	var affApp = new AffiliateApp({
 		app: req.body.affiliateAppointments.appointments,
 		user: req.user		

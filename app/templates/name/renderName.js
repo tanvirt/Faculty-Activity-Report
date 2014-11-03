@@ -6,6 +6,8 @@ var Name = mongoose.model('Name');
 var modelClass = require('../modelClass');
 var renderModel = new modelClass.RenderModel( Name, 'name/name.tex', 'name/na.tex');
 
+var is = require('is-js');
+
 /*
 will explicitly populate the report with
 the data you provide
@@ -36,6 +38,8 @@ saves it in the database.
 */
 module.exports.submit = function(req, callback) {
 	console.log(require('util').inspect(req.body));
+
+	if (is.empty(req.body.name)) return callback(null, null);
 
 	var name = new Name({
 		firstName: req.body.name.firstName,

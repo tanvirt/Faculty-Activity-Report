@@ -7,6 +7,8 @@ var modelClass = require('../modelClass');
 var teachingEvaluation = mongoose.model('TeachingEvaluation');
 var renderModel = new modelClass.RenderModel(teachingEvaluation, 'teachingEvaluation/teachingEvaluation.tex', 'teachingEvaluation/na.tex');
 
+var is = require('is-js');
+
 /*
 Populates the database with test data
 */
@@ -108,8 +110,7 @@ module.exports.render = function (req, callback) {
 
 
 module.exports.submit = function(req, callback) {
-	if (!req.body.teachingEvaluation)
-		return;
+	if (is.empty(req.body.teachingEvaluation)) return callback(null, null);
 
 	var arr = [];
 

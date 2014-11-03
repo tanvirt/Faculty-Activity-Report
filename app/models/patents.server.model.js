@@ -11,23 +11,23 @@ var validateDate = function(p) {
 	
 var Patents = new Schema({
 	title: {
-		type: String//,
-		//required: 'please fill in title'
+		type: String,
+		required: 'please fill in title'
 	},
 	
 	authors: {
-		type: [String]//,
-		//required: 'please list author(s)'
+		type: [String],
+		required: 'please list author(s)'
 	},
 	
 	patentNumber: {
-		type: String//,
-		//unique: 'testing error message'
+		type: String,
+		unique: 'testing error message'
 	},
 	
 	date: {
 		type: Date,
-		//validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
+		validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
 	},
 	
 	description: String

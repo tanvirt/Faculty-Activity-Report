@@ -16,26 +16,26 @@ var validateLocalStrategyDate = function(property) {
 var gcSub = new Schema({
 	role: {
 		type: String,
-		enum: ['Chair','Co-Chair','External','Member','Minor']//,
-		//required: true
+		enum: ['Chair','Co-Chair','External','Member','Minor'],
+		required: true
 	},
 	studentName: {
-		type: String//,
-		//required: true
+		type: String,
+		required: true
 	},
 	degree: {
 		type: String,
-		enum: ['M.S.','Ph.D.']//, //I have a feeling this will need to be expanded
-		//required: true
+		enum: ['M.S.','Ph.D.'], //I have a feeling this will need to be expanded
+		required: true
 	},
 	major: {
-		type: String//,
-		//required: true
+		type: String,
+		required: true
 	},
 	degreeDate: {
 		type: Date, 
 		validate: [validateLocalStrategyDate, 
-			'Date must be less than or equal to the current year and greator than or equal to 1980']
+		'Date must be less than or equal to the current year and greator than or equal to 1980']
 	}
 });
 

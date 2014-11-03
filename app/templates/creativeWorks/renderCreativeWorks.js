@@ -7,6 +7,8 @@ var modelClass = require('../modelClass');
 var CreativeWorks = mongoose.model('CreativeWorks');
 var renderModel = new modelClass.RenderModel(CreativeWorks, 'creativeWorks/creativeWorks.tex', 'creativeWorks/na.tex');
 
+var is = require('is-js');
+
 renderModel.setDebugPopulate(false, {
 	sub: [{
 		name: 'LaTeX',
@@ -51,8 +53,7 @@ module.exports.render = function(req, callback) {
 };
 
 module.exports.submit = function(req, callback) {
-	if (!req.body.creativeWorks)
-		return;
+	if (is.empty(req.body.creativeWorks)) return callback(null, null);
 
 	var creative = new CreativeWorks({
 		sub: [],

@@ -6,6 +6,9 @@ var Conferences = mongoose.model('Conferences');
 var modelClass = require('../modelClass');
 var renderModel = new modelClass.RenderModel( Conferences, 'conferences/conferences.tex', 'conferences/na.tex');
 
+var is = require('is-js');
+
+
 /*
 will explicitly populate the report with
 the data you provide
@@ -46,8 +49,7 @@ Gets the data from the frontend and
 saves it in the database.
 */
 module.exports.submit = function(req, callback) {
-	if (!req.body.conferences)
-		return;
+	if (is.empty(req.body.conferences)) return callback(null, null);
 
 	var arr = [];
 

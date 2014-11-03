@@ -7,6 +7,8 @@ var modelClass = require('../modelClass');
 var graduateCommittee = mongoose.model('GraduateCommittee');
 var renderModel = new modelClass.RenderModel(graduateCommittee, 'graduateCommittee/graduateCommittee.tex', 'graduateCommittee/na.tex');
 
+var is = require('is-js');
+
 renderModel.setDebugPopulate(false, {
 	sub: [{
 		role: 'Chair',
@@ -63,8 +65,7 @@ module.exports.render = function (req, callback) {
 module.exports.submit = function(req, callback) {
 	//console.log(require('util').inspect(req.body.graduateCommittee));
 
-	if (!req.body.graduateCommittee)
-		return;
+	if (is.empty(req.body.graduateCommittee)) return callback(null, null);
 
 	var graduate = new graduateCommittee({
 		sub: [],

@@ -19,6 +19,8 @@ exports.rCtrl = rCtrl;
 exports.create = function(req, res) {
 	rCtrl.submit_02(req, res, function(err, models) {
 		if (err) {
+
+			console.log(err);
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
@@ -32,106 +34,209 @@ exports.create = function(req, res) {
 			report.reportName = req.body.reportName;
 
 			// Assign References References
-			report.name = models.name._id;
-			report.tenure = models.tenure._id;
-			report.currentRank = models.currentRank._id;
-			report.affiliateAppointments = models.affiliateAppointments._id;
-			report.assignedActivity = models.assignedActivity._id;
-			report.dateAppointed = models.dateAppointed._id;
-			report.teachingAdvising = models.teachingAdvising._id;
-			report.contribution = models.contribution._id;
-			report.international = models.international._id;
-			report.membership = models.membership._id;
-			report.teachingEvaluation = models.teachingEvaluation._id;
-			report.conferences = models.conferences._id;
-			report.contracts = models.contracts._id;
-			report.graduateCommittee = models.graduateCommittee._id;
-			report.creativeWorks = models.creativeWorks._id;
-
+			if (models.name)
+				report.name = models.name._id;
+			if (models.tenure)
+				report.tenure = models.tenure._id;
+			if (models.currentRank)
+				report.currentRank = models.currentRank._id;
+			if (models.affiliateAppointments)
+				report.affiliateAppointments = models.affiliateAppointments._id;
+			if (models.assignedActivity)
+				report.assignedActivity = models.assignedActivity._id;
+			if (models.dateAppointed)
+				report.dateAppointed = models.dateAppointed._id;
+			if (models.teachingAdvising)
+				report.teachingAdvising = models.teachingAdvising._id;
+			if (models.contribution)
+				report.contribution = models.contribution._id;
+			if (models.international)
+				report.international = models.international._id;
+			if (models.membership)
+				report.membership = models.membership._id;
+			if (models.teachingEvaluation)
+				report.teachingEvaluation = models.teachingEvaluation._id;
+			if (models.conferences)
+				report.conferences = models.conferences._id;
+			if(models.contracts)
+				report.contracts = models.contracts._id;
+			if (models.graduateCommittee)
+				report.graduateCommittee = models.graduateCommittee._id;
+			if (models.creativeWorks)
+				report.creativeWorks = models.creativeWorks._id;
+			if (models.honors)
+				report.honors = models.honors._id;				
+			if (models.furtherInformationSection)
+				report.furtherInformationSection = models.furtherInformationSection._id;				
+			if (models.consultationsOutsideUniversity)
+				report.consultationsOutsideUniversity = models.consultationsOutsideUniversity._id;				
+				
+				
 			report.save(function(err) {
 				if (err) {
+					console.log(err);
 					return res.status(400).send({
 						message: errorHandler.getErrorMessage(err)
 					});
 				} else {
 					//Now that report is saved, assign reference
-					models.name.report = report;
+					if (models.name)
+						models.name.report = report;
 
 					//models.teachingEvaluation.report = report;
-
-					models.tenure.report = report;
-					models.currentRank.report = report;
-					models.dateAppointed.report =  report;
-					models.affiliateAppointments.report = report;
-					models.assignedActivity.report = report;
-					models.teachingAdvising.report = report;
-					models.contribution.report = report;
-					models.international.report = report;
-					models.membership.report = report;
-					models.teachingEvaluation.report = report;
-					models.conferences.report = report;
-					models.contracts.report = report;
-					models.graduateCommittee.report = report;
-					models.creativeWorks.report = report;
-				
-
+					if (models.tenure)
+						models.tenure.report = report;
+					if (models.currentRank)
+						models.currentRank.report = report;
+					if (models.dateAppointed)
+						models.dateAppointed.report =  report;
+					if (models.affiliateAppointments)
+						models.affiliateAppointments.report = report;
+					if (models.assignedActivity)
+						models.assignedActivity.report = report;
+					if (models.teachingAdvising)
+						models.teachingAdvising.report = report;
+					if (models.contribution)
+						models.contribution.report = report;
+					if (models.international)
+						models.international.report = report;
+					if (models.membership)
+						models.membership.report = report;
+					if (models.teachingEvaluation)
+						models.teachingEvaluation.report = report;
+					if (models.conferences)
+						models.conferences.report = report;
+					if (models.contracts)
+						models.contracts.report = report;
+					if (models.graduateCommittee)
+						models.graduateCommittee.report = report;
+					if (models.creativeWorks)
+						models.creativeWorks.report = report;
+					if (models.honors)
+						models.honors.report = report;					
+					if (models.furtherInformationSection)
+						models.furtherInformationSection.report = report;					
+					if (models.consultationsOutsideUniversity)
+						models.consultationsOutsideUniversity.report = report;					
+					
 					//Update existing document
-					models.name.save(function(err) {
+					if (models.name) {
+						models.name.save(function(err) {
 
-						//console.log('Name Saved');
-						/*if (err) {
-							return res.status(400).send({
-								message: errorHandler.getErrorMessage(err)});
-						}*/						
-					});
+							//console.log('Name Saved');
+							/*if (err) {
+								return res.status(400).send({
+									message: errorHandler.getErrorMessage(err)});
+							}*/						
+						});
+					}
 
 					//models.teachingEvaluation.save(function(err) {
 					//	if (err) console.log(err);
 					//});
 
-					models.tenure.save(function(err) {
-						//console.log('Tenure Saved');
-					});
-					models.currentRank.save(function(err) {
-						//console.log('CurrentRank Saved');
-					});
-					models.dateAppointed.save(function(err) {
-						//console.log('DateAppointed Saved');
-					});
-					models.affiliateAppointments.save(function(err) {
-						//console.log('AffiliateAppointments Saved');
-					});					
-					models.assignedActivity.save(function(err) {
-						//console.log('AssignedActivity Saved');
-					});
-					models.teachingAdvising.save(function(err) {
-						//console.log('TeachingAdvising Saved');
-					});
-					models.contribution.save(function(err) {
-						//console.log('Contribution Saved');
-					});
-					models.international.save(function(err) {
-						//console.log('International Saved');
-					});
-					models.membership.save(function(err) {
-						//console.log('Membership Saved');
-					});
-					models.teachingEvaluation.save(function(err) {
+					if (models.tenure) {
+						models.tenure.save(function(err) {
+							//console.log('Tenure Saved');
+						});
+					}
 
-					});
-					models.conferences.save(function(err) {
-						//console.log('conferences saved');
-					});
-					models.contracts.save(function(err) {
-						console.log('contracts saved');
-					});
-					models.graduateCommittee.save(function(err) {
+					if (models.currentRank) {
+						models.currentRank.save(function(err) {
+							//console.log('CurrentRank Saved');
+						});
+					}
 
-					});
-					models.creativeWorks.save(function(err) {
+					if (models.dateAppointed) {
+						models.dateAppointed.save(function(err) {
+							//console.log('DateAppointed Saved');
+						});
+					}
 
-					});
+					if (models.affiliateAppointments) {
+						models.affiliateAppointments.save(function(err) {
+							//console.log('AffiliateAppointments Saved');
+						});
+					}	
 
+					if (models.assignedActivity) {				
+						models.assignedActivity.save(function(err) {
+							//console.log('AssignedActivity Saved');
+						});
+					}
+
+					if (models.teachingAdvising) {
+						models.teachingAdvising.save(function(err) {
+							//console.log('TeachingAdvising Saved');
+						});
+					}
+
+					if (models.contribution) {
+						models.contribution.save(function(err) {
+							//console.log('Contribution Saved');
+						});
+					}
+
+					if (models.international) {
+						models.international.save(function(err) {
+							//console.log('International Saved');
+						});
+					}
+
+					if (models.membership) {
+						models.membership.save(function(err) {
+							//console.log('Membership Saved');
+						});
+					}
+
+					if (models.teachingEvaluation) {
+						models.teachingEvaluation.save(function(err) {
+
+						});
+					}
+
+					if (models.conferences) {
+						models.conferences.save(function(err) {
+							//console.log('conferences saved');
+						});
+					}
+					
+					if (models.contracts) {
+						models.contracts.save(function(err) {
+							console.log('contracts saved');
+						});
+					}
+
+					if (models.graduateCommittee) {
+						models.graduateCommittee.save(function(err) {
+
+						});
+					}
+
+					if (models.creativeWorks) {
+						models.creativeWorks.save(function(err) {
+
+						});
+					}
+
+					if (models.honors) {
+						models.honors.save(function(err) {
+
+						});
+					}
+
+					if (models.furtherInformationSection) {
+						models.furtherInformationSection.save(function(err) {
+
+						});
+					}
+
+					if (models.consultationsOutsideUniversity) {
+						models.consultationsOutsideUniversity.save(function(err) {
+
+						});
+					}
+					
 					//get json to frontend
 					res.jsonp(report);
 				}
@@ -210,6 +315,10 @@ exports.list = function(req, res) {
 	.populate('contracts')
 	.populate('graduateCommittee')
 	.populate('creativeWorks')
+	.populate('honors')
+	.populate('furtherInformationSection')
+	.populate('consultationsOutsideUniversity')
+
 
 	.exec(function(err, reports) {
 		if (err) {
@@ -244,7 +353,11 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('contracts')
 	.populate('graduateCommittee')
 	.populate('creativeWorks')
-
+	.populate('honors')
+	.populate('furtherInformationSection')
+	.populate('consultationsOutsideUniversity')
+	
+	
 	//.populate('teachingEvaluation')
 
 	.exec(function(err, report) {

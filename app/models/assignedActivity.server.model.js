@@ -20,61 +20,61 @@ var requiredStr = function(str) {
 var AssignedActivity = new Schema({
 	year: {
 		type: Number,
-		//required: true,
+		required: true,
 		validate: [validateLocalStrategyDate, 
 					'Date must be less than or equal to the current year and greator than or equal to 1980']
 	},
 	springTeaching: {
 		type: Number,
-		//required: requiredStr('SpringTeaching'),
+		required: requiredStr('SpringTeaching'),
 		min: 0,
 		max: 100
 	},
 	springResearch: {
 		type: Number,
-		//required: requiredStr('SpringResearch'),
+		required: requiredStr('SpringResearch'),
 		min: 0,
 		max: 100
 	},
 	springService: {
 		type: Number,
-		//required: requiredStr('SpringService'),
+		required: requiredStr('SpringService'),
 		min: 0,
 		max: 100
 	},
 	fallTeaching: {
 		type: Number,
-		//required: requiredStr('FallTeaching'),
+		required: requiredStr('FallTeaching'),
 		min: 0,
 		max: 100
 	},
 	fallResearch: {
 		type: Number,
-		//required: requiredStr('FallResearch'),
+		required: requiredStr('FallResearch'),
 		min: 0,
 		max: 100
 	},
 	fallService: {
 		type: Number,
-		//required: requiredStr('FallService'),
+		required: requiredStr('FallService'),
 		min: 0,
 		max: 100
 	},
 	summerTeaching: {
 		type: Number,
-		//required: requiredStr('SummerTeaching'),
+		required: requiredStr('SummerTeaching'),
 		min: 0,
 		max: 100
 	},
 	summerResearch: {
 		type: Number,
-		//required: requiredStr('SummerResearch'),
+		required: requiredStr('SummerResearch'),
 		min: 0,
 		max: 100
 	},
 	summerService: {
 		type: Number,
-		//required: requiredStr('SummerService'),
+		required: requiredStr('SummerService'),
 		min: 0,
 		max: 100
 	},
@@ -93,6 +93,7 @@ var AssignedActivity = new Schema({
 
 
 AssignedActivity.pre('save', function(next) {
+	
 	var err;
 
 	if (this.springTeaching + this.springResearch + this.springService !== 100) {
@@ -112,6 +113,7 @@ AssignedActivity.pre('save', function(next) {
 	} else {
 		next();
 	}
+	
 });
 
 mongoose.model('AssignedActivity', AssignedActivity);

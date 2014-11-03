@@ -8,6 +8,8 @@ var AssignedActivity = mongoose.model('AssignedActivity');
 var modelClass = require('../modelClass');
 var renderModel = new modelClass.RenderModel( AssignedActivity, 'assignedActivity/assignedActivity.tex', 'assignedActivity/na.tex');
 
+var is = require('is-js');
+
 /*
 will explicitly populate the report with
 the data you provide
@@ -33,7 +35,10 @@ module.exports.render = function(req, callback) {
 };
 
 module.exports.submit = function(req, callback) {
-	//console.log(require('util').inspect(req.body));
+	//console.log('Here1: ' + req.body.assignedActivity);
+	if(is.empty(req.body.assignedActivity)) {
+		return callback(null, null);
+	}
 
 	var act = new AssignedActivity({
 		springTeaching: req.body.assignedActivity.springTeaching, 

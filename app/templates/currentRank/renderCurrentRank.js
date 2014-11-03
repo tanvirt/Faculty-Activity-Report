@@ -7,6 +7,8 @@ var CurrentRank = mongoose.model('currentRank');
 var modelClass = require('../modelClass');
 var renderModel = new modelClass.RenderModel( CurrentRank, 'currentRank/currentRank.tex', 'currentRank/na.tex');
 
+var is = require('is-js');
+
 /*
 Populates the database with test data
 */
@@ -33,6 +35,8 @@ Gets the data from the frontend and
 saves it in the database.
 */
 module.exports.submit = function(req, callback) {
+	if (is.empty(req.body.currentRank)) return callback(null, null);
+
 	var currentRank = new CurrentRank({
 		rank: req.body.currentRank.rank,
 		department: req.body.currentRank.department,
