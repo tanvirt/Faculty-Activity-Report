@@ -25,12 +25,12 @@ var contract = new Schema({
 		enum: ['PI', 'co-PI', 'N/A']
 	},
 	startDate: {
-		type: String,
-		validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
+		type: Date,
+		//validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
 	},
 	endDate: {
-		type: String,
-		validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
+		type: Date,
+		//validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
 	},
 	fundingAgency: {
 		type: String//,
