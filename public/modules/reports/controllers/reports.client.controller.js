@@ -89,7 +89,7 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 				
 				consultationsOutsideUniversity: {
 					consultation: this.consultationsOutsideUniversity
-				}
+				},
 				
 				membership: {
 					info: this.membership
