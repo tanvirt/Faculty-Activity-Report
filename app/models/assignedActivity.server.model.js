@@ -21,8 +21,8 @@ var AssignedActivity = new Schema({
 	year: {
 		type: Number,
 		//required: true,
-		validate: [validateLocalStrategyDate, 
-					'Date must be less than or equal to the current year and greator than or equal to 1980']
+		//validate: [validateLocalStrategyDate, 
+		//			'Date must be less than or equal to the current year and greator than or equal to 1980']
 	},
 	springTeaching: {
 		type: Number,
@@ -93,6 +93,7 @@ var AssignedActivity = new Schema({
 
 
 AssignedActivity.pre('save', function(next) {
+	
 	var err;
 
 	if (this.springTeaching + this.springResearch + this.springService !== 100) {
@@ -112,6 +113,7 @@ AssignedActivity.pre('save', function(next) {
 	} else {
 		next();
 	}
+	
 });
 
 mongoose.model('AssignedActivity', AssignedActivity);

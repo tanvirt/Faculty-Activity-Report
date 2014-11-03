@@ -29,7 +29,7 @@ module.exports.render = function(req, callback) {
 };
 
 module.exports.submit = function(req, callback) {
-	if (!req.body.tenure) return;
+	if (!req.body.tenure) return callback(null, null);
 
 
 	var tenure = new Tenure({

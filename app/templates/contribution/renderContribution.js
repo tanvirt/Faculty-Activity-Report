@@ -31,7 +31,7 @@ module.exports.render = function(req, callback) {
 };
 
 module.exports.submit = function(req, callback) {
-	if (!req.body.contribution) return;
+	if (!req.body.contribution) return callback(null, null);
 
 	var contribution = new Contribution({
 		info: req.body.contribution.info,

@@ -63,8 +63,7 @@ module.exports.render = function (req, callback) {
 module.exports.submit = function(req, callback) {
 	//console.log(require('util').inspect(req.body.graduateCommittee));
 
-	if (!req.body.graduateCommittee)
-		return;
+	if (!req.body.graduateCommittee) return callback(null, null);
 
 	var graduate = new graduateCommittee({
 		sub: [],

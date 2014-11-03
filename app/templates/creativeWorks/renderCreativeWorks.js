@@ -51,8 +51,7 @@ module.exports.render = function(req, callback) {
 };
 
 module.exports.submit = function(req, callback) {
-	if (!req.body.creativeWorks)
-		return;
+	if (!req.body.creativeWorks) return callback(null, null);
 
 	var creative = new CreativeWorks({
 		sub: [],

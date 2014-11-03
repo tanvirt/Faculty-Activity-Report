@@ -33,9 +33,9 @@ var gcSub = new Schema({
 		//required: true
 	},
 	degreeDate: {
-		type: Date, 
-		validate: [validateLocalStrategyDate, 
-			'Date must be less than or equal to the current year and greator than or equal to 1980']
+		type: Date//, 
+		//validate: [validateLocalStrategyDate, 
+		//	'Date must be less than or equal to the current year and greator than or equal to 1980']
 	}
 });
 

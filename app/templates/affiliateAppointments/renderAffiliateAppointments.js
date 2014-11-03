@@ -30,7 +30,7 @@ module.exports.render = function(req, callback) {
 	renderModel.render(req, callback);
 };
 module.exports.submit = function(req, callback) {
-	if(!req.body.affiliateAppointments) return;
+	if(!req.body.affiliateAppointments) return callback(null, null);
 
 	var affApp = new AffiliateApp({
 		app: req.body.affiliateAppointments.appointments,

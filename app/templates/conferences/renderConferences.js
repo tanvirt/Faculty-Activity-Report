@@ -46,8 +46,7 @@ Gets the data from the frontend and
 saves it in the database.
 */
 module.exports.submit = function(req, callback) {
-	if (!req.body.conferences)
-		return;
+	if (!req.body.conferences) return callback(null, null);
 
 	var arr = [];
 

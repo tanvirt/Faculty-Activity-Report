@@ -108,8 +108,7 @@ module.exports.render = function (req, callback) {
 
 
 module.exports.submit = function(req, callback) {
-	if (!req.body.teachingEvaluation)
-		return;
+	if (!req.body.teachingEvaluation || !req.body.teachingEvaluation.length) return callback(null, null);
 
 	var arr = [];
 

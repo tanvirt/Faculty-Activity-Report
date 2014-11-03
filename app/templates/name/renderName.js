@@ -37,7 +37,7 @@ saves it in the database.
 module.exports.submit = function(req, callback) {
 	console.log(require('util').inspect(req.body));
 
-	if (!req.body.name) return;
+	if (!req.body.name) return callback(null, null);
 
 	var name = new Name({
 		firstName: req.body.name.firstName,

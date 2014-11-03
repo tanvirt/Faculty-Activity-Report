@@ -33,9 +33,10 @@ module.exports.render = function(req, callback) {
 };
 
 module.exports.submit = function(req, callback) {
-	//console.log(require('util').inspect(req.body));
-
-	if(!req.body.assignedActivity) return;
+	//console.log('Here1: ' + req.body.assignedActivity);
+	if(!req.body.assignedActivity || !req.body.assignedActivity.length) {
+		return callback(null, null);
+	}
 
 	var act = new AssignedActivity({
 		springTeaching: req.body.assignedActivity.springTeaching, 

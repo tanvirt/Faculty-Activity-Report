@@ -33,8 +33,7 @@ Gets the data from the frontend and
 saves it in the database.
 */
 module.exports.submit = function(req, callback) {
-	if (!req.body.teachingAdvising)
-		return;
+	if (!req.body.teachingAdvising) return callback(null, null);
 
 
 	var teachingAdvising = new TeachingAdvising({

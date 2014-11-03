@@ -29,7 +29,7 @@ module.exports.render = function(req, callback) {
 };
 
 module.exports.submit = function(req, callback) {
-	if (!req.body.dateAppointed) return;
+	if (!req.body.dateAppointed) return callback(null, null);
 
 	var dateApp = new DateAppointed({
 		theDate: req.body.dateAppointed.date,

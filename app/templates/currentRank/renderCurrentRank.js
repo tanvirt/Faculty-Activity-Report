@@ -33,7 +33,7 @@ Gets the data from the frontend and
 saves it in the database.
 */
 module.exports.submit = function(req, callback) {
-	if (!req.body.currentRank) return;
+	if (!req.body.currentRank) return callback(null, null);
 
 	var currentRank = new CurrentRank({
 		rank: req.body.currentRank.rank,
