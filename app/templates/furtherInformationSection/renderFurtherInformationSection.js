@@ -33,7 +33,6 @@ module.exports.render = function(req, callback) {
 };
 
 module.exports.submit = function(req, callback) {
-
 	if (is.empty(req.body.furtherInformationSection)) return callback(null, null);
 
 	var furtherInformationSection = new furtherInformationSection({

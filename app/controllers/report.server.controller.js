@@ -68,7 +68,7 @@ exports.generate = function(req,res,next) {
 		async.apply(renderConferences.render, req),
 		renderContracts.render,
 		renderGovernance.render,
-		renderConsultationsOutsideUniversity.render,
+		//renderConsultationsOutsideUniversity.render,
 	//	async.apply(renderConsultationsOutsideUniversity.render, req),
 		renderEditorServiceReviewer.render,
 		async.apply(renderMembership.render, req),
