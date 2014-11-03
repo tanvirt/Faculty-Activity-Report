@@ -4,19 +4,19 @@
 
 	{% if conference.area === 'International' %}
 	\subsection*{International}
-		{{conference.presentation}} at {{conference.title}} on {{conference.date | date('M d, Y') }}
+		{{conference.presentation}}:\textit{ {{- conference.title -}} } on {{conference.date | date('M d, Y') }} at {{conference.where}}
 	{% endif %}
 
 
 	{% if conference.area === 'State' %}
 	\subsection*{State}
-		{{conference.presentation}} at {{conference.title}} on {{conference.date | date('M d, Y') }}
+		{{conference.presentation}}:\textit{ {{- conference.title -}} } on {{conference.date | date('M d, Y') }} at {{conference.where}}
 	{% endif %}
 
 
 	{% if conference.area === 'Local' %}
 	\subsection*{Local}
-		{{conference.presentation}} at {{conference.title}} on {{conference.date | date('M d, Y') }}
+		{{conference.presentation}}:\textit{ {{- conference.title -}} } on {{conference.date | date('M d, Y') }} at {{conference.where}}
 	{% endif %}
 
 

@@ -53,9 +53,9 @@ exports.generate = function(req,res,next) {
 		async.apply(renderTeachingAdvising.render, req),
 		async.apply(renderAssignedActivity.render, req),
 		async.apply(renderTeachingEvaluation.render, req),
+		async.apply(renderGraduateCommittee.render, req),
+		async.apply(renderCreativeWorks.render, req),
 
-		renderGraduateCommittee.render,
-		renderCreativeWorks.render,
 		renderPatents.render,
 		renderPublication.render,
 		async.apply(renderContribution.render, req),
@@ -165,6 +165,8 @@ exports.submit_02 = function(req, res, callback) {
 		teachingEvaluation: async.apply(renderTeachingEvaluation.submit, req),
 		conferences: async.apply(renderConferences.submit, req),
 		//contracts: async.apply(renderContracts.submit, req)
+		graduateCommittee: async.apply(renderGraduateCommittee.submit, req),
+		creativeWorks: async.apply(renderCreativeWorks.submit, req)
 	}, function(err, models) {
 		//console.log(require('util').inspect(req.body));
 		if (err) {

@@ -17,13 +17,15 @@ describe('Creative Works Model Unit Tests:', function() {
 	beforeEach(function(done) {
 
 		work01 = new CreativeWorks({
-			name: 'Google',
-			description: 'Take Over the World!',
-			website: 'www.google.com',
-			date: '10/23/2000'
+			sub: [{
+				name: 'Google',
+				description: 'Take Over the World!',
+				website: 'www.google.com',
+				date: '10/23/2000',
+				jointEfforts: ['Hi', 'Hello', 'Bye']
+			}],
 		});
 
-		work01.jointEfforts.push('George', 'Gandalf', 'Rebecca');
 		done();
 	});
 
@@ -35,7 +37,7 @@ describe('Creative Works Model Unit Tests:', function() {
 		});
 
 		it('should fail to save with an invalid date', function(done) {
-			work01.date = 'NotADate';
+			work01.sub[0].date = 'NotADate';
 
 			return work01.save(function(err) {
 				should.exist(err);
@@ -44,7 +46,7 @@ describe('Creative Works Model Unit Tests:', function() {
 		});
 
 		it('should fail to save an invalid url', function(done) {
-			work01.website = 'NotAWeb';
+			work01.sub[0].website = 'NotAWeb';
 
 			return work01.save(function(err) {
 				should.exist(err);
@@ -56,7 +58,7 @@ describe('Creative Works Model Unit Tests:', function() {
 
 	describe('Field Array jointEfforts', function() {
 		it('should be of length 3', function(done) {
-			work01.jointEfforts.should.have.length(3);
+			work01.sub[0].jointEfforts.should.have.length(3);
 			done();
 		});
 	});

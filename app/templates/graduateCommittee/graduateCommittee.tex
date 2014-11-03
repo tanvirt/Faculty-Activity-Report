@@ -1,13 +1,13 @@
 \section{GRADUATE COMMITTEE ACTIVITIES}
 
-So far, I have served in {{ count[0] }} committees ({{ count[1] }} as Chair, {{ count[2] }} as Co-Chair, {{ count[3] }} External Member, {{ count[4] }} as Member and {{ count[5] }} as Minor).
+So far, I have served in {{ totalCount }} committees ({{ chairCount }} as Chair, {{ coChairCount }} as Co-Chair, {{ externalMemberCount }} External Member, {{ memberCount }} as Member and {{ minorCount }} as Minor).
 
 \begin{center}
   \begin{tabular}{llllll}
     Role & Student Name & Degree & Major & Degree Date\\
 	\hline
-	{% for committee in committees %}
-		{{ committee.role }} & {{ committee.studentName }} & {{ committee.degree }} & {{ committee.major }} & {{ (committee.degreeDate.getMonth() + "/" + committee.degreeDate.getDate() + "/" + committee.degreeDate.getFullYear()) }}\\
+	{% for committee in sub %}
+		{{ committee.role }} & {{ committee.studentName }} & {{ committee.degree }} & {{ committee.major }} & {{ (committee.getMonth() + "/" + committee.degreeDate.getDate() + "/" + committee.degreeDate.getFullYear()) }}\\
 	{% endfor %}
   \end{tabular}
 \end{center}
