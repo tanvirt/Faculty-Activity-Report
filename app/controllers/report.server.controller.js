@@ -177,7 +177,7 @@ exports.submit_02 = function(req, res, callback) {
 		graduateCommittee: async.apply(renderGraduateCommittee.submit, req),
 		creativeWorks: async.apply(renderCreativeWorks.submit, req),
 	//	honors: async.apply(renderHonors.submit, req),
-		async.apply(renderConsultationsOutsideUniversity.submit, req)
+		consultationsOutsideUniversity: async.apply(renderConsultationsOutsideUniversity.submit, req)
 		
 		
 	}, function(err, models) {
