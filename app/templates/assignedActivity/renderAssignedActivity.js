@@ -35,6 +35,8 @@ module.exports.render = function(req, callback) {
 module.exports.submit = function(req, callback) {
 	//console.log(require('util').inspect(req.body));
 
+	if(!req.body.assignedActivity) return;
+
 	var act = new AssignedActivity({
 		springTeaching: req.body.assignedActivity.springTeaching, 
 		springResearch: req.body.assignedActivity.springResearch, 

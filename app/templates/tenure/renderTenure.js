@@ -29,6 +29,9 @@ module.exports.render = function(req, callback) {
 };
 
 module.exports.submit = function(req, callback) {
+	if (!req.body.tenure) return;
+
+
 	var tenure = new Tenure({
 		tenure: req.body.tenure.tenure,
 		user: req.user		

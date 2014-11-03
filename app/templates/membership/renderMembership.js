@@ -31,6 +31,8 @@ module.exports.render = function(req, callback) {
 };
 
 module.exports.submit = function(req, callback) {
+	if (!req.body.membership) return;
+
 	var membership = new Membership({
 		info: req.body.membership.info,
 		user: req.user		

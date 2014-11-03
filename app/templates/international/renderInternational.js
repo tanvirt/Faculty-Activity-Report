@@ -31,6 +31,9 @@ module.exports.render = function(req, callback) {
 };
 
 module.exports.submit = function(req, callback) {
+
+	if (!req.body.international) return;
+
 	var international = new International({
 		activities: req.body.international.activities,
 		user: req.user		

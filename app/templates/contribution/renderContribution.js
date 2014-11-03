@@ -31,6 +31,8 @@ module.exports.render = function(req, callback) {
 };
 
 module.exports.submit = function(req, callback) {
+	if (!req.body.contribution) return;
+
 	var contribution = new Contribution({
 		info: req.body.contribution.info,
 		user: req.user		
