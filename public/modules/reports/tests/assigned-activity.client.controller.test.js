@@ -93,7 +93,7 @@
 			scope.springResearch = 80;
 			scope.springUpdate();
 
-			expect(scope.springTotal).toBe('e')
+			expect(scope.springTotal).toBe('e');
 		});
 		it('testing summerUpdate() to return an error if the sum is grater than 100', function(){
 			scope.summerTeaching = 80;
@@ -101,7 +101,7 @@
 			scope.summerResearch = 80;
 			scope.summerUpdate();
 
-			expect(scope.summerTotal).toBe('e')
+			expect(scope.summerTotal).toBe('e');
 		});
 		it('testing fallUpdate() to return an error if the sum is grater than 100', function(){
 			scope.fallTeaching = 80;
@@ -109,7 +109,7 @@
 			scope.fallResearch = 80;
 			scope.fallUpdate();
 
-			expect(scope.fallTotal).toBe('e')
-		})
+			expect(scope.fallTotal).toBe('e');
+		});
 	});
 }());
