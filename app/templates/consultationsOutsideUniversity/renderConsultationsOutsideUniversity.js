@@ -39,13 +39,13 @@ module.exports.submit = function(req, callback) {
 
 	if (is.empty(req.body.consultationsOutsideUniversity)) return callback(null, null);
 
-	var consultationsOutsideUniversity = new consultationsOutsideUniversity({
+	var consultations = new consultationsOutsideUniversity({
 		consultation: req.body.consultationsOutsideUniversity.consultation,
 		user: req.user
 	});
 
-	consultationsOutsideUniversity.save(function(err) {
-		callback(err, consultationsOutsideUniversity);
+	consultations.save(function(err) {
+		callback(err, consultations);
 	});
 };
 
