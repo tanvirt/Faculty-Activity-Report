@@ -3,10 +3,10 @@
 var mongoose = require('mongoose');
 
 // Compile Schema into Model here
-var Honors = mongoose.model('Honors');
+var honors = mongoose.model('honors');
 
 var modelClass = require('../modelClass');
-var renderModel = new modelClass.RenderModel( Honors, 'honors/honors.tex', 'honors/na.tex');
+var renderModel = new modelClass.RenderModel( honors, 'honors/honors.tex', 'honors/na.tex');
 
 var is = require('is-js');
 
@@ -36,7 +36,7 @@ module.exports.submit = function(req, callback) {
 
 	if (is.empty(req.body.honors)) return callback(null, null);
 
-	var honors = new Honors({
+	var honors = new honors({
 		info: req.body.honors.info,
 		user: req.user		
 	});
