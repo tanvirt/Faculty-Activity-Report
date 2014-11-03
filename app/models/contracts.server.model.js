@@ -8,7 +8,7 @@ var validateDate = function(p) {
 	return validator.isDate(p);
 };	
 	
-var Contracts = new Schema({
+var subcontract = new Schema({
 	title: {
 		type: String,
 		required: true
@@ -25,25 +25,41 @@ var Contracts = new Schema({
 		enum: ['PI', 'co-PI', 'N/A']
 	},
 	startDate: {
-		type: String,
-		validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
+		type: Date,
+		//validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
 	},
 	endDate: {
-		type: String,
-		validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
+		type: Date,
+		//validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
 	},
 	fundingAgency: {
 		type: String,
 		required: true
 	},
-	fundingPortion: Number,
+	fundingPortion: {
+		type: Number,
+		default: 0
+	},
 	value: {
 		type: Number,
 		required: true
 	}
+});
 
-	
-}, {collection: 'Contracts'});
 
+//Contents of schema will pull majority of content from outside data source, not from user
+//Overall mean is to be calculated on demand, not stored
+var Contracts = new Schema({
+	user: {			//multiple evaluations per user possible. Use this field to match with user
+		type: Schema.ObjectId,
+		ref: 'User'
+	},
+	sub: [subcontract],
+	report: {
+		type: Schema.ObjectId,
+		ref: 'Report'
+	},
+	fundingTotal: Number
+}, {collection:'Contracts'});
 
 mongoose.model('Contracts', Contracts);

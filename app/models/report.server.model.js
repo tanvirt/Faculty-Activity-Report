@@ -105,6 +105,10 @@ var ReportSchema = new Schema({
 	conferences: {
 		type: Schema.Types.ObjectId, ref: 'Conferences'
 	},
+	
+	contracts: {
+		type: Schema.Types.ObjectId, ref: 'Contracts'
+	},
 
 	graduateCommittee: {
 		type: Schema.Types.ObjectId, ref: 'GraduateCommittee'

@@ -58,6 +58,8 @@ exports.create = function(req, res) {
 				report.teachingEvaluation = models.teachingEvaluation._id;
 			if (models.conferences)
 				report.conferences = models.conferences._id;
+			if(models.contracts)
+				report.contracts = models.contracts._id;
 			if (models.graduateCommittee)
 				report.graduateCommittee = models.graduateCommittee._id;
 			if (models.creativeWorks)
@@ -72,7 +74,6 @@ exports.create = function(req, res) {
 				report.consultationsOutsideUniversity = models.consultationsOutsideUniversity._id;				
 				
 				
-
 			report.save(function(err) {
 				if (err) {
 					console.log(err);
@@ -107,6 +108,8 @@ exports.create = function(req, res) {
 						models.teachingEvaluation.report = report;
 					if (models.conferences)
 						models.conferences.report = report;
+					if (models.contracts)
+						models.contracts.report = report;
 					if (models.graduateCommittee)
 						models.graduateCommittee.report = report;
 					if (models.creativeWorks)
@@ -120,7 +123,6 @@ exports.create = function(req, res) {
 					if (models.consultationsOutsideUniversity)
 						models.consultationsOutsideUniversity.report = report;					
 					
-
 					//Update existing document
 					if (models.name) {
 						models.name.save(function(err) {
@@ -136,6 +138,7 @@ exports.create = function(req, res) {
 					//models.teachingEvaluation.save(function(err) {
 					//	if (err) console.log(err);
 					//});
+
 					if (models.tenure) {
 						models.tenure.save(function(err) {
 							//console.log('Tenure Saved');
@@ -199,6 +202,12 @@ exports.create = function(req, res) {
 					if (models.conferences) {
 						models.conferences.save(function(err) {
 							//console.log('conferences saved');
+						});
+					}
+					
+					if (models.contracts) {
+						models.contracts.save(function(err) {
+							console.log('contracts saved');
 						});
 					}
 
@@ -313,6 +322,7 @@ exports.list = function(req, res) {
 	.populate('membership')
 	.populate('teachingEvaluation')
 	.populate('conferences')
+	.populate('contracts')
 	.populate('graduateCommittee')
 	.populate('creativeWorks')
 	.populate('patents')
@@ -351,6 +361,7 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('membership')
 	.populate('teachingEvaluation')
 	.populate('conferences')
+	.populate('contracts')
 	.populate('graduateCommittee')
 	.populate('creativeWorks')
 	.populate('patents')
