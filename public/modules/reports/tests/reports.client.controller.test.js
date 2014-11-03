@@ -112,7 +112,7 @@
 			expect(scope.report).toEqualData(sampleReport);
 		}));
 
-		/*TODO fix this test
+
 		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Reports) {
 			// Create a sample Report object
 			var sampleReportPostData = new Reports({
@@ -173,7 +173,7 @@
 
 			// Test URL redirection after the Report was created
 			//expect($location.path()).toBe('/reports/' + sampleReportResponse._id);
-		}));*/
+		}));
 
 		it('$scope.update() should update a valid Report', inject(function(Reports) {
 			// Define a sample Report put data
