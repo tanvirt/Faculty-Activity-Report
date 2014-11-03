@@ -8,7 +8,7 @@ var conference = new Schema({
 	area: {
 		type: String,
 		enum: ['International', 'State', 'Local'],
-		required: 'please select one'
+		//required: 'please select one'
 	},
 	presentation: {
 		type: String,
@@ -16,15 +16,15 @@ var conference = new Schema({
 	},
 	title: {
 		type: String,
-		required: 'please fill in title'
+		//required: 'please fill in title'
 	},
 	date: {
 		type: Date,
-		required: true
+		//required: true
 	},
 	where: {
 		type: String,
-		required: true
+		//required: true
 	},
 	
 	user: {

@@ -7,12 +7,12 @@ var Governance = new Schema({
 	
 	subsection: {
 		type: String,
-		enum: ['Department Committee Memberships', 'Other'], //need more options for this one
-		required: true
+		enum: ['Department Committee Memberships', 'Other']//, //need more options for this one
+		//required: true
 	},
 	committee: {
-		type: String,
-		required: true
+		type: String//,
+		//required: true
 	}
 
 }, {collection: Governance});

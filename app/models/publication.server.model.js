@@ -12,13 +12,13 @@ var validateDate = function(p) {
 	
 var Publication = new Schema({
 	title: {
-		type: String,
-		required: 'please fill in title'
+		type: String//,
+		//required: 'please fill in title'
 	},
 	
 	authors: {
-		type: [String],
-		required: 'please list author(s)'
+		type: [String]//,
+		//required: 'please list author(s)'
 	},
 	
 	publicationInfo: {
@@ -27,6 +27,7 @@ var Publication = new Schema({
 	
 	section: {
 		type: String,
+		default: 'Book',
 		enum: ['Books, Sole Author', 'Books, Co-authored', 'Books, Edited', 'Books, Contributor', 'Monographs', 'Refereed Publications'],
 		required: 'please select an option',
 	},
