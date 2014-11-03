@@ -116,6 +116,10 @@ var ReportSchema = new Schema({
 
 	patents: {
 		type: Schema.Types.ObjectId, ref: 'Patents'
+	},
+	
+	consultationsOutsideUniversity: {
+		type: Schema.Types.ObjectId, ref: 'consultationsOutsideUniversity'
 	}
 
 
