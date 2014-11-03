@@ -148,7 +148,7 @@ exports.submit = function(req, res, next) {
 		async.apply(renderInternational.submit, req),
 		async.apply(renderMembership.submit, req),
 		async.apply(renderConferences.submit, req),
-		async.apply(renderContracts.submit, req)
+		async.apply(renderContracts.submit, req),
 		async.apply(renderConsultationsOutsideUniversity.submit, req)
 		
 
