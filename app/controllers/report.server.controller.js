@@ -68,8 +68,8 @@ exports.generate = function(req,res,next) {
 		async.apply(renderConferences.render, req),
 		renderContracts.render,
 		renderGovernance.render,
-	//	renderConsultationsOutsideUniversity.render,
-		async.apply(renderConsultationsOutsideUniversity.render, req),
+		renderConsultationsOutsideUniversity.render,
+	//	async.apply(renderConsultationsOutsideUniversity.render, req),
 		renderEditorServiceReviewer.render,
 		async.apply(renderMembership.render, req),
 		async.apply(renderInternational.render, req)
