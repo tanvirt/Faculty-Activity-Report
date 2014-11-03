@@ -168,6 +168,13 @@ app.directive('profile', function(){
     };
 });
 
+app.directive('navbar', function(){
+    return {
+      restrict: 'E',
+      templateUrl: 'modules/reports/views/navbar.client.view.html'
+    };
+});
+
 app.directive('assignedActivity', function(){
     return {
       restrict: 'E',
