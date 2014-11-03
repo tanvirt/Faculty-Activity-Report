@@ -34,25 +34,63 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 					lastName: this.lastName
 				},
 
-				tenure: this.tenure,
+				tenure: {
+					tenure: this.tenure
+				},
 
 				currentRank: {
 					rank: this.currentRank
+					//rank: this.rank,
+					//department: this.department
 				},
 
-				dateAppointed: this.dateAppointed,
+				dateAppointed: {
+					theDate: this.dateAppointed
+				},
 
-				affiliateAppointments: this.affiliateAppointments,
+				affiliateAppointments: {
+					app: this.affiliateAppointments
+				},
 
-				teachingAdvising: this.teachingAdvising,
+				assignedActivity: {
+					year: this.year,
 
-				contribution: this.contribution,
+					springTeaching: this.springTeaching,
+					springResearch: this.springResearch,
+					springService: this.springService,
+
+					fallTeaching: this.fallTeaching,
+					fallResearch: this.fallResearch,
+					fallService: this.fallService,
+
+					summerTeaching: this.summerTeaching,
+					summerResearch: this.summerResearch,
+					summerService: this.summerService,
+				},
+
+				teachingAdvising: {
+					info: this.teachingAdvising
+				},
+
+				contribution: {
+					info: this.contribution
+				},
 				
-				international: this.international,
+				international: {
+					activities: this.international
+				},
 				
-				membership: this.membership,
+				membership: {
+					info: this.membership
+				},
 				
-				conferences: this.conferences
+				conferences: {
+					area: this.conferences//,
+					//presentation: this.someString1,
+					//title: this.someString2,
+					//date: this.someDate3,
+					//where: this.someString3
+				} 
 
 			});
 
