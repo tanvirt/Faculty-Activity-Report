@@ -8,6 +8,8 @@ var Membership = mongoose.model('Membership');
 var modelClass = require('../modelClass');
 var renderModel = new modelClass.RenderModel( Membership, 'membership/membership.tex', 'membership/na.tex');
 
+var is = require('is-js');
+
 /*
 will explicitly populate the report with
 the data you provide
@@ -31,7 +33,7 @@ module.exports.render = function(req, callback) {
 };
 
 module.exports.submit = function(req, callback) {
-	if (!req.body.membership) return callback(null, null);
+	if (is.empty(req.body.membership)) return callback(null, null);
 
 	var membership = new Membership({
 		info: req.body.membership.info,

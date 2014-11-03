@@ -7,6 +7,8 @@ var Tenure = mongoose.model('Tenure');
 var modelClass = require('../modelClass');
 var renderModel = new modelClass.RenderModel( Tenure, 'tenure/tenure.tex', 'tenure/na.tex');
 
+var is = require('is-js');
+
 /*
 Populates the database with test data
 */
@@ -29,7 +31,7 @@ module.exports.render = function(req, callback) {
 };
 
 module.exports.submit = function(req, callback) {
-	if (!req.body.tenure) return callback(null, null);
+	if (is.empty(req.body.tenure)) return callback(null, null);
 
 
 	var tenure = new Tenure({

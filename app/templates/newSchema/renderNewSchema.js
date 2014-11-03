@@ -6,6 +6,8 @@ var NewSchema = mongoose.model('NewSchema');
 var modelClass = require('../modelClass');
 var renderModel = new modelClass.RenderModel( NewSchema, 'newSchema/newSchema.tex', 'newSchema/na.tex');
 
+var is = require('is-js');
+
 /*
 will explicitly populate the report with
 the data you provide
@@ -50,7 +52,7 @@ Gets the data from the frontend and
 saves it in the database.
 */
 module.exports.submit = function(req, callback) {
-	if (!req.body) return callback(null, null);
+	if (is.empty(req.body)) return callback(null, null);
 
 	var schem = new NewSchema({
 		section: req.body.section,

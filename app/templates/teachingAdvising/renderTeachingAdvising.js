@@ -6,6 +6,8 @@ var TeachingAdvising = mongoose.model('TeachingAdvising');
 var modelClass = require('../modelClass');
 var renderModel = new modelClass.RenderModel( TeachingAdvising, 'teachingAdvising/teachingAdvising.tex', 'teachingAdvising/na.tex');
 
+var is = require('is-js');
+
 /*
 will explicitly populate the report with
 the data you provide
@@ -33,7 +35,7 @@ Gets the data from the frontend and
 saves it in the database.
 */
 module.exports.submit = function(req, callback) {
-	if (!req.body.teachingAdvising) return callback(null, null);
+	if (is.empty(req.body.teachingAdvising)) return callback(null, null);
 
 
 	var teachingAdvising = new TeachingAdvising({

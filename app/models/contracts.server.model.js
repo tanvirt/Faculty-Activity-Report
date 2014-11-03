@@ -10,14 +10,14 @@ var validateDate = function(p) {
 	
 var Contracts = new Schema({
 	title: {
-		type: String//,
-		//required: true
+		type: String,
+		required: true
 	},
 	funded: {
 		type: String,
 		enum: ['externally', 'internally', 'pending', 'not'],
-		default: 'externally'//,
-		//required: true
+		default: 'externally',
+		required: true
 	},
 
 	PI: {
@@ -33,13 +33,13 @@ var Contracts = new Schema({
 		validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
 	},
 	fundingAgency: {
-		type: String//,
-		//required: true
+		type: String,
+		required: true
 	},
 	fundingPortion: Number,
 	value: {
-		type: Number//,
-		//required: true
+		type: Number,
+		required: true
 	}
 
 	

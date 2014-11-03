@@ -15,7 +15,7 @@ var furtherInformationSection = new Schema({
 	user: {
         type: Schema.ObjectId,
         ref: 'User'
-        },
+    },
         
     report: {
         type: Schema.ObjectId,

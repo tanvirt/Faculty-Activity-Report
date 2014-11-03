@@ -6,6 +6,8 @@ var DateAppointed = mongoose.model('DateAppointed');
 var modelClass = require('../modelClass');
 var renderModel = new modelClass.RenderModel( DateAppointed, 'dateAppointed/dateAppointed.tex', 'dateAppointed/na.tex');
 
+var is = require('is-js');
+
 /*
 will explicitly populate the report with
 the data you provide
@@ -29,7 +31,7 @@ module.exports.render = function(req, callback) {
 };
 
 module.exports.submit = function(req, callback) {
-	if (!req.body.dateAppointed) return callback(null, null);
+	if (is.empty(req.body.dateAppointed)) return callback(null, null);
 
 	var dateApp = new DateAppointed({
 		theDate: req.body.dateAppointed.date,

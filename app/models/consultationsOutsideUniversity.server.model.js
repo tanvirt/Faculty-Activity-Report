@@ -13,7 +13,7 @@ var consultationsOutsideUniversity = new Schema({
     consultation: { //default input is N/A
         type: String,
         default: 'N/A',
-        //required: true,
+        required: true,
         validate: [validateLocalStrategyProperty,
             'If no value is specified, please input "N/A"']
     },

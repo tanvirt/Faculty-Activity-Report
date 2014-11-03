@@ -7,12 +7,12 @@ var EditorServiceReviewer = new Schema({
 	
 	position: {
 		type: String,
-		enum: ['editor', 'service', 'reviewer']//,
-		//required: true
+		enum: ['editor', 'service', 'reviewer'],
+		required: true
 	},
 	object: {
-		type: String//,
-		//required: true
+		type: String,
+		required: true
 	}
 
 }, {collection: EditorServiceReviewer});

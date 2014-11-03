@@ -13,7 +13,7 @@ var ReportSchema = new Schema({
 	reportName: {
 		type: String,
 		default: '',
-		//required: 'Please fill Report name',
+		required: 'Please fill Report name',
 		trim: true
 	},
 

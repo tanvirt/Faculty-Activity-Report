@@ -8,6 +8,8 @@ var Contribution = mongoose.model('Contribution');
 var modelClass = require('../modelClass');
 var renderModel = new modelClass.RenderModel( Contribution, 'contribution/contribution.tex', 'contribution/na.tex');
 
+var is = require('is-js');
+
 /*
 will explicitly populate the report with
 the data you provide
@@ -31,7 +33,7 @@ module.exports.render = function(req, callback) {
 };
 
 module.exports.submit = function(req, callback) {
-	if (!req.body.contribution) return callback(null, null);
+	if (is.empty(req.body.contribution)) return callback(null, null);
 
 	var contribution = new Contribution({
 		info: req.body.contribution.info,

@@ -8,6 +8,8 @@ var International = mongoose.model('International');
 var modelClass = require('../modelClass');
 var renderModel = new modelClass.RenderModel( International, 'international/international.tex', 'international/na.tex');
 
+var is = require('is-js');
+
 /*
 will explicitly populate the report with
 the data you provide
@@ -32,7 +34,7 @@ module.exports.render = function(req, callback) {
 
 module.exports.submit = function(req, callback) {
 
-	if (!req.body.international) return callback(null, null);
+	if (is.empty(req.body.international)) return callback(null, null);
 
 	var international = new International({
 		activities: req.body.international.activities,

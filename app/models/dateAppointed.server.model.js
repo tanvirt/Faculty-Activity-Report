@@ -33,8 +33,8 @@ var DateAppointed = new Schema({
     }
 	*/
 	theDate: {
-		type: Date//,
-		//required: true
+		type: Date,
+		required: true
 	},
 	user: {
 		type: Schema.ObjectId,

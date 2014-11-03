@@ -6,13 +6,13 @@ var Schema = mongoose.Schema;
 
 var NewSchema = new Schema({
 	section: {
-		type: String//,
-		//required: 'please title your section'
+		type: String,
+		required: 'please title your section'
 	},
 	
 	desc: {
-		type: String//,
-		//required: true
+		type: String,
+		required: true
 	},
 	user: {
 		type: Schema.ObjectId,
