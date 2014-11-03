@@ -58,23 +58,22 @@ exports.generate = function(req,res,next) {
 		async.apply(renderTeachingEvaluation.render, req),
 		async.apply(renderGraduateCommittee.render, req),
 		async.apply(renderCreativeWorks.render, req),
-		async.apply(renderConsultationsOutsideUniversity.render, req),
+		async.apply(renderPatents.render, req),
+		
 
-
-		renderPatents.render,
 		renderPublication.render,
 		async.apply(renderContribution.render, req),
 
 		async.apply(renderConferences.render, req),
 		async.apply(renderContracts.render, req),
 		renderGovernance.render,
-		renderConsultationsOutsideUniversity.render,
-	//	async.apply(renderConsultationsOutsideUniversity.render, req),
+		async.apply(renderConsultationsOutsideUniversity.render, req),
+
 		renderEditorServiceReviewer.render,
 		async.apply(renderMembership.render, req),
 		async.apply(renderInternational.render, req)
 	//	async.apply(renderHonors.render, req),
-		
+	//	async.apply(renderFurtherInformationSection.render, req)	
 	
 	], function(err, results) {
 		if (err) {
@@ -177,6 +176,7 @@ exports.submit_02 = function(req, res, callback) {
 		contracts: async.apply(renderContracts.submit, req),
 		graduateCommittee: async.apply(renderGraduateCommittee.submit, req),
 		creativeWorks: async.apply(renderCreativeWorks.submit, req),
+		patents: async.apply(renderPatents.submit, req),
 	//	honors: async.apply(renderHonors.submit, req),
 		consultationsOutsideUniversity: async.apply(renderConsultationsOutsideUniversity.submit, req)
 		

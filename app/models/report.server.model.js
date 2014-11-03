@@ -116,6 +116,22 @@ var ReportSchema = new Schema({
 
 	creativeWorks: {
 		type: Schema.Types.ObjectId, ref: 'CreativeWorks'
+	},
+
+	patents: {
+		type: Schema.Types.ObjectId, ref: 'Patents'
+	},
+
+	honors: {
+		type: Schema.Types.ObjectId, ref: 'honors'
+	},	
+
+	furtherInformationSection: {
+		type: Schema.Types.ObjectId, ref: 'furtherInformationSection'
+	},	
+
+	consultationsOutsideUniversity: {
+		type: Schema.Types.ObjectId, ref: 'consultationsOutsideUniversity'
 	}
 
 

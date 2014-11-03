@@ -12,19 +12,22 @@ var patent1, patent2;
 describe('Patents Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		patent1 = new Patents({
-			title: 'New',
-			authors: ['Me', 'Myself', 'I'],
-			patentNumber: '1234',
-			date: '10/07/2014',
-			description: 'I wrote this book thingy all by myself and it is mine and you cannot have it hahahahahahahaha'
+			sub: [{
+				title: 'New',
+				authors: ['Me', 'Myself', 'I'],
+				patentNumber: '1234',
+				date: '10/07/2014',
+				description: 'I wrote this book thingy all by myself and it is mine and you cannot have it hahahahahahahaha'
+			}],
 		});
-		
 		patent2 = new Patents({
-			title: 'Two',
-			authors: ['One'],
-			patentNumber: '55555',
-			date: '02/13/1992',
-			description: 'lalalalalala'
+			sub: [{
+				title: 'Two',
+				authors: ['One'],
+				patentNumber: '55555',
+				date: '02/13/1992',
+				description: 'lalalalalala'
+			}],
 		});
 		
 		done();
@@ -38,7 +41,7 @@ describe('Patents Model Unit Tests:', function() {
 		});
 		
 		it('should fail to save without title', function(done) {
-			patent1.title = '';
+			patent1.sub[0].title = '';
 			return patent1.save(function(err) {
 				should.exist(err);
 				done();
@@ -46,9 +49,9 @@ describe('Patents Model Unit Tests:', function() {
 		});
 		
 		it('should fail to save a patent with the same patent number', function(done) {
-			patent1.patentNumber = '010101';
+			patent1.sub[0].patentNumber = '010101';
 			patent1.save();
-			patent2.patentNumber = '010101';
+			patent2.sub[0].patentNumber = '010101';
 			return patent2.save(function(err) {
 				should.exist(err);
 				done();
@@ -56,7 +59,7 @@ describe('Patents Model Unit Tests:', function() {
 		});
 	
 		it('should fail to save without authors', function(done) {
-			patent1.authors = [];
+			patent1.sub[0].authors = [];
 			return patent1.save(function(err) {
 				should.exist(err);
 				done();
@@ -64,7 +67,7 @@ describe('Patents Model Unit Tests:', function() {
 		});
 		
 		it('should fail to save with an invalid date', function(done) {
-			patent1.date = 'yunno, that one day. It rained.';
+			patent1.sub[0].date = 'yunno, that one day. It rained.';
 			return patent1.save(function(err) {
 				should.exist(err);
 				done();

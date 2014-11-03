@@ -64,6 +64,8 @@ exports.create = function(req, res) {
 				report.graduateCommittee = models.graduateCommittee._id;
 			if (models.creativeWorks)
 				report.creativeWorks = models.creativeWorks._id;
+			if (models.patents)
+				report.patents = models.patents._id;
 			if (models.honors)
 				report.honors = models.honors._id;				
 			if (models.furtherInformationSection)
@@ -112,6 +114,8 @@ exports.create = function(req, res) {
 						models.graduateCommittee.report = report;
 					if (models.creativeWorks)
 						models.creativeWorks.report = report;
+					if (models.patents)
+						models.patents.report = report;
 					if (models.honors)
 						models.honors.report = report;					
 					if (models.furtherInformationSection)
@@ -219,6 +223,12 @@ exports.create = function(req, res) {
 						});
 					}
 
+					if (models.patents) {
+						models.patents.save(function(err) {
+
+						});
+					}
+
 					if (models.honors) {
 						models.honors.save(function(err) {
 
@@ -315,6 +325,7 @@ exports.list = function(req, res) {
 	.populate('contracts')
 	.populate('graduateCommittee')
 	.populate('creativeWorks')
+	.populate('patents')
 	.populate('honors')
 	.populate('furtherInformationSection')
 	.populate('consultationsOutsideUniversity')
@@ -353,6 +364,7 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('contracts')
 	.populate('graduateCommittee')
 	.populate('creativeWorks')
+	.populate('patents')
 	.populate('honors')
 	.populate('furtherInformationSection')
 	.populate('consultationsOutsideUniversity')
