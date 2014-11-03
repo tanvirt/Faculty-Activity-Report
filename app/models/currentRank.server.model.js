@@ -15,7 +15,7 @@ var currentRank = new Schema({
         type: String,
         enum: ['professor', 'associate professor', 'assistant professor', 'faculty', 'department head',
             'chairperson', 'research professor'],
-        required: true
+        //required: true
     },
 
     department: { //more departments need to be added, most can be found at http://www.ufl.edu/academics/colleges/
@@ -25,7 +25,7 @@ var currentRank = new Schema({
             'Computer and Informational Science and Engineering', 'Electrical and Computer Engineering',
             'Industrial and Systems Engineering', 'Mechanical and Aerospace Engineering', 'Materials Science and Engineering',
         'Finance Insurance and Real Estate', 'Information Systems and Operations Management', 'Management', 'Marketing'],
-        required: true
+        //required: true
     },
 	
 	user: {

@@ -13,7 +13,7 @@ var affiliateAppointments = new Schema({
     app: { //default input is None
         type: String,
         default: 'None',
-        required: true,
+        //required: true,
  //       validate: [validateLocalStrategyProperty,
    //         'If no value is specified, please input "None"']
     },

@@ -32,8 +32,8 @@ var validateLocalStrategyDate = function(property) {
 
 var section = new Schema({
 	course: {
-		type: String,
-		required: true
+		type: String//,
+		//required: true
 	},
 	required: {
 		type: Boolean,
@@ -41,18 +41,18 @@ var section = new Schema({
 	},
 	year: {
 		type: Number,
-		required: true,
+		//required: true,
 		min: 1980,
 		max: new Date().getFullYear()
 	},
 	semester: {
 		type: String,
-		enum: ['spring', 'fall', 'summer'],
-		required: true
+		enum: ['spring', 'fall', 'summer']//,
+		//required: true
 	},
 	enrolled: {
-		type: Number,
-		required: true,
+		type: Number//,
+		//required: true,
 	},
 	highScore: {
 		type: Number,
@@ -63,12 +63,12 @@ var section = new Schema({
 		default: 1,
 	},
 	responses: {
-		type: Number,
-		required: true,
+		type: Number//,
+		//required: true,
 	},
 	teacherMean: {	
 		type: [Number],
-		required: true,
+		//required: true,
 		default: [1, 1, 1, 
 				  1, 1, 1, 
 				  1, 1, 1],
@@ -76,7 +76,7 @@ var section = new Schema({
 	},
 	departmentMean: {
 		type: [Number],
-		required: true,
+		//required: true,
 		default: [1, 1, 1, 
 				  1, 1, 1, 
 				  1, 1, 1],
@@ -84,7 +84,7 @@ var section = new Schema({
 	},
 	collegeMean: {
 		type: [Number],
-		required: true,
+		//required: true,
 		default: [1, 1, 1, 
 				  1, 1, 1, 
 				  1, 1, 1],

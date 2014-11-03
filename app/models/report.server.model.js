@@ -13,7 +13,7 @@ var ReportSchema = new Schema({
 	reportName: {
 		type: String,
 		default: '',
-		required: 'Please fill Report name',
+		//required: 'Please fill Report name',
 		trim: true
 	},
 
@@ -76,6 +76,10 @@ var ReportSchema = new Schema({
 
 	affiliateAppointments: {
 		type: Schema.Types.ObjectId, ref: 'affiliateAppointments'
+	},
+
+	assignedActivity: {
+		type: Schema.Types.ObjectId, ref: 'AssignedActivity'
 	},
 
 	teachingAdvising: {

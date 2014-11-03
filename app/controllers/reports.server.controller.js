@@ -44,7 +44,7 @@ exports.create = function(req, res) {
 			report.membership = models.membership._id;
 			report.teachingEvaluation = models.teachingEvaluation._id;
 			report.conferences = models.conferences._id;
-			//report.contracts = models.contracts._id;
+			report.contracts = models.contracts._id;
 			report.graduateCommittee = models.graduateCommittee._id;
 			report.creativeWorks = models.creativeWorks._id;
 
@@ -70,7 +70,7 @@ exports.create = function(req, res) {
 					models.membership.report = report;
 					models.teachingEvaluation.report = report;
 					models.conferences.report = report;
-					//models.contracts.report = report;
+					models.contracts.report = report;
 					models.graduateCommittee.report = report;
 					models.creativeWorks.report = report;
 				
@@ -122,9 +122,9 @@ exports.create = function(req, res) {
 					models.conferences.save(function(err) {
 						//console.log('conferences saved');
 					});
-				/*	models.contracts.save(function(err) {
+					models.contracts.save(function(err) {
 						console.log('contracts saved');
-					});*/
+					});
 					models.graduateCommittee.save(function(err) {
 
 					});

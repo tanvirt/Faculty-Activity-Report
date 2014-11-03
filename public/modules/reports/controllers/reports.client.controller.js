@@ -28,29 +28,70 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 			var report = new Reports ({
 				reportName: this.reportName,
 
-				firstName: this.firstName,
-				middleName: this.middleName,
-				lastName: this.lastName,
+				name: {
+					firstName: this.firstName,
+					middleName: this.middleName,
+					lastName: this.lastName
+				},
 
-				tenure: this.tenure,
+				tenure: {
+					tenure: this.tenure
+				},
 
-				currentRank: this.currentRank,
+				currentRank: {
+					rank: this.currentRank,
+					department: this.department
+				},
 
-				dateAppointed: this.dateAppointed,
+				dateAppointed: {
+					date: this.dateAppointed
+				},
 
-				affiliateAppointments: this.affiliateAppointments,
+				affiliateAppointments: {
+					appointments: this.affiliateAppointments
+				},
 
-				teachingAdvising: this.teachingAdvising,
+				assignedActivity: {
+					year: this.year,
 
-				contribution: this.contribution,
+					springTeaching: this.springTeaching,
+					springResearch: this.springResearch,
+					springService: this.springService,
+
+					fallTeaching: this.fallTeaching,
+					fallResearch: this.fallResearch,
+					fallService: this.fallService,
+
+					summerTeaching: this.summerTeaching,
+					summerResearch: this.summerResearch,
+					summerService: this.summerService
+				},
+
+				teachingAdvising: {
+					advising: this.teachingAdvising
+				},
+
+				teachingEvaluation: this.teachingEvaluationArray,
+
+				graduateCommittee: this.graduateCommitteeArray,
+
+				creativeWorks: this.creativeWorksArray, //this is an array of objects
 				
-				international: this.international,
-				
-				membership: this.membership,
-				
-				conferences: this.conferences,
-				
-				contracts: this.contracts
+				contribution: {
+					info: this.contribution
+				},
+
+				conferences: this.conferencesArray,
+
+				contracts: this.contractsArray,
+
+				membership: {
+					info: this.membership
+				},
+
+				international: {
+					activities: this.international
+				}			
 
 			});
 
