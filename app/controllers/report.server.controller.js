@@ -36,6 +36,9 @@ var renderConsultationsOutsideUniversity = require('../../app/templates/consulta
 var renderEditorServiceReviewer = require('../../app/templates/editorServiceReviewer/renderEditorServiceReviewer');
 var renderMembership = require('../../app/templates/membership/renderMembership');
 var renderInternational = require('../../app/templates/international/renderInternational');
+var renderHonors = require('../../app/templates/honors/renderHonors');
+var renderFurtherInformationSection = require('../../app/templates/furtherInformationSection/renderFurtherInformationSection');
+
 
 /*
 Generates the LaTex File into app/pdf directory
@@ -56,6 +59,8 @@ exports.generate = function(req,res,next) {
 		async.apply(renderGraduateCommittee.render, req),
 		async.apply(renderCreativeWorks.render, req),
 
+
+
 		renderPatents.render,
 		renderPublication.render,
 		async.apply(renderContribution.render, req),
@@ -64,9 +69,11 @@ exports.generate = function(req,res,next) {
 		renderContracts.render,
 		renderGovernance.render,
 		renderConsultationsOutsideUniversity.render,
+	//	async.apply(renderConsultationsOutsideUniversity.render, req),
 		renderEditorServiceReviewer.render,
 		async.apply(renderMembership.render, req),
 		async.apply(renderInternational.render, req)
+	//	async.apply(renderHonors.render, req),
 		
 	
 	], function(err, results) {
@@ -141,7 +148,11 @@ exports.submit = function(req, res, next) {
 		async.apply(renderContribution.submit, req),
 		async.apply(renderInternational.submit, req),
 		async.apply(renderMembership.submit, req),
-		async.apply(renderConferences.submit, req)
+		async.apply(renderConferences.submit, req),
+	//	async.apply(renderConsultationsOutsideUniversity.submit, req)
+		
+		
+		
 	], function(err, models) {
 		if (err) return res.status(500).send({ error: 'Submit Failed' });	
 		console.log(req.body);
@@ -165,6 +176,10 @@ exports.submit_02 = function(req, res, callback) {
 		conferences: async.apply(renderConferences.submit, req),
 		graduateCommittee: async.apply(renderGraduateCommittee.submit, req),
 		creativeWorks: async.apply(renderCreativeWorks.submit, req)
+	//	honors: async.apply(renderHonors.submit, req),
+	//	async.apply(renderConsultationsOutsideUniversity.submit, req),
+		
+		
 	}, function(err, models) {
 		//console.log(require('util').inspect(req.body));
 		if (err) {
