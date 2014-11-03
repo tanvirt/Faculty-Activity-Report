@@ -29,8 +29,8 @@ module.exports = {
 
 
 				'public/lib/tinymce/tinymce.min.js',
-				'public/lib/angular-ui-tinymce/src/tinymce.js'//,
-				//'public/lib/angular-scroll/angular-scroll.js'
+				'public/lib/angular-ui-tinymce/src/tinymce.js'
+
 
 			]
 		},

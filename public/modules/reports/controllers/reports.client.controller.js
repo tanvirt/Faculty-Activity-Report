@@ -34,25 +34,64 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 					lastName: this.lastName
 				},
 
-				tenure: this.tenure,
-
-				currentRank: {
-					rank: this.currentRank
+				tenure: {
+					tenure: this.tenure
 				},
 
-				dateAppointed: this.dateAppointed,
+				currentRank: {
+					rank: this.currentRank,
+					department: this.department
+				},
 
-				affiliateAppointments: this.affiliateAppointments,
+				dateAppointed: {
+					date: this.dateAppointed
+				},
 
-				teachingAdvising: this.teachingAdvising,
+				affiliateAppointments: {
+					appointments: this.affiliateAppointments
+				},
 
-				contribution: this.contribution,
+				assignedActivity: {
+					year: this.year,
+
+					springTeaching: this.springTeaching,
+					springResearch: this.springResearch,
+					springService: this.springService,
+
+					fallTeaching: this.fallTeaching,
+					fallResearch: this.fallResearch,
+					fallService: this.fallService,
+
+					summerTeaching: this.summerTeaching,
+					summerResearch: this.summerResearch,
+					summerService: this.summerService
+				},
+
+				teachingAdvising: {
+					advising: this.teachingAdvising
+				},
+
+				teachingEvaluation: this.teachingEvaluationArray,
+
+				graduateCommittee: this.graduateCommitteeArray,
+
+				creativeWorks: this.creativeWorksArray, //this is an array of objects
 				
-				international: this.international,
-				
-				membership: this.membership,
-				
-				conferences: this.conferences
+				contribution: {
+					info: this.contribution
+				},
+
+				conferences: this.conferencesArray,
+
+				contracts: this.contractsArray,
+
+				membership: {
+					info: this.membership
+				},
+
+				international: {
+					activities: this.international
+				}			
 
 			});
 
@@ -126,13 +165,6 @@ app.directive('profile', function(){
     return {
       restrict: 'E',
       templateUrl: 'modules/reports/views/profile.client.view.html'
-    };
-});
-
-app.directive('navbar', function(){
-	return {
-      restrict: 'E',
-      templateUrl: 'modules/reports/views/navbar.client.view.html'
     };
 });
 

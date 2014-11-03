@@ -1,24 +1,15 @@
-<style>
-#sectionContainer {
-    min-width: 950px;
-    position: relative;
-    margin:75px 0 0 225px;
-}
-</style>
-
-<section id="sectionContainer" data-ng-controller="ReportsController">
-        <navbar></navbar>
-        
+<section data-ng-controller="ReportsController">
         <div class="page-header">
             <h1>New Report</h1>
         </div>
+
 
         <div class="col-md-1"></div>
         <div class="col-md-10" style="padding-bottom: 50px">
             <form class="form-horizontal" data-ng-submit="create()" novalidate>
                 
                 <!-- FORM NAME -->
-                <div class="col-md-10" style="padding-top:20px">
+                <div class="col-md-12" style="padding-top:20px">
                 <div class="form-group">
                     <label class="control-label" for="name">Report Name</label>
                     <div class="controls">
@@ -34,6 +25,7 @@
                     <strong data-ng-bind="error"></strong>
                 </div>
                 </div>
+
 
             <!-- The directives below are defined in the reports.client.controller.js file. -->
             <!-- They will be moved to a new directory: modules/reports/directives at a later time -->
