@@ -2,8 +2,17 @@
 
 angular.module('reports').controller('AssignedActivityController', ['$scope',
 	function($scope) {
-        $scope.springUpdate = function()
+        $scope.springUpdate = function(springTeaching, springResearch, springService)
         {
+            springTeaching = ( $scope.springTeaching > 0 && $scope.springTeaching < 100) ?
+                                $scope.springTeaching : 0;
+            springResearch = ( $scope.springResearch > 0 && $scope.springResearch < 100) ?
+                                $scope.springResearch : 0;
+            springService = ( $scope.springService > 0 && $scope.springService < 100) ?
+                                $scope.springService : 0;
+
+
+
             $scope.springTotal = $scope.springTeaching + $scope.springResearch + $scope.springService;
         };
 
@@ -16,7 +25,7 @@ angular.module('reports').controller('AssignedActivityController', ['$scope',
         {
             $scope.fallTotal = $scope.fallTeaching + $scope.fallResearch + $scope.fallService;
         };
-        $scope.initTable = function(){
+        /*$scope.initTable = function(){
             //Spring values
             $scope.springTeaching = 0;
             $scope.springResearch = 0;
@@ -34,6 +43,6 @@ angular.module('reports').controller('AssignedActivityController', ['$scope',
             $scope.springTotal = 0;
             $scope.summerTotal = 0;
             $scope.fallTotal = 0;
-        };
+        };*/
 	}
 ]);

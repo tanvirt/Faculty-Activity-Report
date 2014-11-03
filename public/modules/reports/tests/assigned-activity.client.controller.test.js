@@ -50,9 +50,18 @@
 			});
 		}));
 
-		it('Should do some controller test', inject(function() {
-			// The test logic
-			// ...
-		}));
+		it('Should do some controller test', function() {
+			var springTeaching, springResearch, springService;
+			var summerTeaching, summerResearch, summerService;
+			var fallTeaching, fallTReseach, fallService;
+
+			springTeaching = 50;
+			springResearch = 40;
+			springService = 10;
+
+			var springTotal = scope.springUpdate(springTeaching,springResearch,springService);
+			expect(springTotal).toBe(100);
+
+		});
 	});
 }());
