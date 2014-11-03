@@ -58,7 +58,7 @@ exports.generate = function(req,res,next) {
 		async.apply(renderTeachingEvaluation.render, req),
 		async.apply(renderGraduateCommittee.render, req),
 		async.apply(renderCreativeWorks.render, req),
-
+		async.apply(renderConsultationsOutsideUniversity.render, req),
 
 
 		renderPatents.render,
@@ -149,7 +149,7 @@ exports.submit = function(req, res, next) {
 		async.apply(renderInternational.submit, req),
 		async.apply(renderMembership.submit, req),
 		async.apply(renderConferences.submit, req),
-	//	async.apply(renderConsultationsOutsideUniversity.submit, req)
+		async.apply(renderConsultationsOutsideUniversity.submit, req)
 		
 		
 		
@@ -175,9 +175,9 @@ exports.submit_02 = function(req, res, callback) {
 		teachingEvaluation: async.apply(renderTeachingEvaluation.submit, req),
 		conferences: async.apply(renderConferences.submit, req),
 		graduateCommittee: async.apply(renderGraduateCommittee.submit, req),
-		creativeWorks: async.apply(renderCreativeWorks.submit, req)
+		creativeWorks: async.apply(renderCreativeWorks.submit, req),
 	//	honors: async.apply(renderHonors.submit, req),
-	//	async.apply(renderConsultationsOutsideUniversity.submit, req),
+		async.apply(renderConsultationsOutsideUniversity.submit, req)
 		
 		
 	}, function(err, models) {
