@@ -1,4 +1,3 @@
-
 'use strict';
 
 var mongoose = require('mongoose');
@@ -16,7 +15,7 @@ will explicitly populate the report with
 the data you provide
 */
 renderModel.setDebugPopulate( false, {
-  info: 'I received the following honors...'
+	info: 'I received the following honors...'
 });
 
 /*
@@ -30,22 +29,19 @@ render function that finds the obj in the database
 and converts it into latex.
 */
 module.exports.render = function(req, callback) {
-  renderModel.render(req, callback);
+	renderModel.render(req, callback);
 };
 
 module.exports.submit = function(req, callback) {
 
-  if (is.empty(req.body.honors)) return callback(null, null);
-  
-  var honors = new Honors({
-    info: req.body.honors.info,
-    user: req.user
-  });
-  
-honors.save(function(err) {
-  callback(err, honors);
-  });
-  
+	if (is.empty(req.body.honors)) return callback(null, null);
+
+	var honors = new Honors({
+		info: req.body.honors.info,
+		user: req.user		
+	});
+
+	honors.save(function(err) {
+		callback(err, honors);
+	});
 };
-
-
