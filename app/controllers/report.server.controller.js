@@ -38,7 +38,7 @@ var renderMembership = require('../../app/templates/membership/renderMembership'
 var renderInternational = require('../../app/templates/international/renderInternational');
 var renderHonors = require('../../app/templates/honors/renderHonors');
 var renderFurtherInformationSection = require('../../app/templates/furtherInformationSection/renderFurtherInformationSection');
-//var renderServiceToSchools = require('../../app/templates/furtherInformationSection/renderServiceToSchools');
+var renderServiceToSchools = require('../../app/templates/furtherInformationSection/renderServiceToSchools');
 
 /*
 Generates the LaTex File into app/pdf directory
@@ -72,9 +72,9 @@ exports.generate = function(req,res,next) {
 		renderEditorServiceReviewer.render,
 		async.apply(renderMembership.render, req),
 		async.apply(renderInternational.render, req)//,
-	//	async.apply(renderServiceToSchools.render, req),
-	//	async.apply(renderHonors.render, req),
-	//	async.apply(renderFurtherInformationSection.render, req)	
+		async.apply(renderServiceToSchools.render, req),
+		async.apply(renderHonors.render, req),
+		async.apply(renderFurtherInformationSection.render, req)	
 	
 	], function(err, results) {
 		if (err) {
@@ -178,9 +178,9 @@ exports.submit_02 = function(req, res, callback) {
 		graduateCommittee: async.apply(renderGraduateCommittee.submit, req),
 		creativeWorks: async.apply(renderCreativeWorks.submit, req),
 		patents: async.apply(renderPatents.submit, req),
-	//	honors: async.apply(renderHonors.submit, req),
-	//	furtherInformationSection: async.apply(renderFurtherInformationSection.submit, req),
-	//	serviceToSchools: async.apply(renderServiceToSchools.submit, req),
+		honors: async.apply(renderHonors.submit, req),
+		furtherInformationSection: async.apply(renderFurtherInformationSection.submit, req),
+		serviceToSchools: async.apply(renderServiceToSchools.submit, req),
 		consultationsOutsideUniversity: async.apply(renderConsultationsOutsideUniversity.submit, req)
 		
 		
