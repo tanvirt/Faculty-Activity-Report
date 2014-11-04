@@ -39,13 +39,13 @@ module.exports.submit = function(req, callback) {
 
 	if (is.empty(req.body.serviceToSchools)) return callback(null, null);
 
-	var service = new serviceToSchools({
+	var services = new serviceToSchools({
 		service: req.body.serviceToSchools.service,
 		user: req.user
 	});
 
-	service.save(function(err) {
-		callback(err, service);
+	services.save(function(err) {
+		callback(err, services);
 	});
 };
 
