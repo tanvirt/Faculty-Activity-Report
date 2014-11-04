@@ -35,12 +35,12 @@ module.exports.render = function(req, callback) {
 module.exports.submit = function(req, callback) {
 	if (is.empty(req.body.furtherInformationSection)) return callback(null, null);
 
-	var furtherInformationSection = new furtherInformationSection({
+	var furtherInfo = new furtherInformationSection({
 		info: req.body.furtherInformationSection.info,
 		user: req.user		
 	});
 
-	furtherInformationSection.save(function(err) {
-		callback(err, furtherInformationSection);
+	furtherInfo.save(function(err) {
+		callback(err, furtherInfo);
 	});
 };

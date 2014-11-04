@@ -92,6 +92,18 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 					consultation: this.consultationsOutsideUniversity
 				},
 				
+				honors: {
+					info: this.honors
+				},
+				
+				furtherInformationSection: {
+					info: this.furtherInformationSection
+				},
+				
+				serviceToSchools: {
+					service: this.serviceToSchools
+				},
+				
 				membership: {
 					info: this.membership
 				},
