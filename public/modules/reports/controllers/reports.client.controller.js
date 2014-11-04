@@ -7,6 +7,7 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 	function($scope, $http, $stateParams, $location, Authentication, Reports ) {
 		
 		//custom tinymce textarea
+		
 		$scope.tinymceOptions = {
 			    theme: 'modern',
 			    plugins: [
@@ -18,7 +19,7 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 			    ],
 			    toolbar1: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist',
 		};
-
+		
 		$scope.authentication = Authentication;
 		
 		
