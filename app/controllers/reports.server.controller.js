@@ -13,6 +13,16 @@ var rCtrl = require('./report');
 //make available to routes
 exports.rCtrl = rCtrl;
 
+
+exports.blank = function(req, res, next) {
+	var report = new Report();
+	report.save(function(err) {
+		if (err) return next(err);
+		req.report = report;
+		next();
+	});
+};
+
 /**
  * Create a Report
  */
@@ -345,7 +355,7 @@ exports.list = function(req, res) {
 /**
  * Report middleware
  */
-exports.reportByID = function(req, res, next, id) { 
+exports.reportByID = function(req, res, next, id) {
 	Report.findById(id)
 	.populate('user', 'displayName')
 

@@ -138,7 +138,7 @@ exports.testGenerate = function(req, res, next) {
 
 exports.submit = function(req, res, next) {
 	async.parallel([
-		async.apply(renderName.submit, req),
+		//async.apply(renderName.submit, req),
 		async.apply(renderTenure.submit, req),
 		async.apply(renderCurrentRank.submit, req),
 		async.apply(renderAffiliateAppointments.submit, req),
@@ -161,7 +161,7 @@ exports.submit = function(req, res, next) {
 
 exports.submit_02 = function(req, res, callback) {
 	async.parallel({		
-		name: async.apply(renderName.submit, req),
+		//name: async.apply(renderName.submit, req),
 		tenure: async.apply(renderTenure.submit, req),
 		currentRank: async.apply(renderCurrentRank.submit, req),
 		affiliateAppointments: async.apply(renderAffiliateAppointments.submit, req),

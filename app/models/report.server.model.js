@@ -12,8 +12,8 @@ var mongoose = require('mongoose'),
 var ReportSchema = new Schema({
 	reportName: {
 		type: String,
-		default: '',
-		required: 'Please fill Report name',
+		default: 'MyReportName',
+		//required: 'Please fill Report name',
 		trim: true
 	},
 
@@ -133,7 +133,6 @@ var ReportSchema = new Schema({
 	consultationsOutsideUniversity: {
 		type: Schema.Types.ObjectId, ref: 'consultationsOutsideUniversity'
 	}
-
 
 //END TEMP-------------------------------------------------
 
