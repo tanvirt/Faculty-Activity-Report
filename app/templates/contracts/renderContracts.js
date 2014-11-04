@@ -51,8 +51,7 @@ module.exports.render = function(req, callback) {
 
 
 module.exports.submit = function(req, callback) {
-	if (!req.body.contracts)
-		return;
+	if (!req.body.contracts) return callback(null, null);
 
 	var arr = [];
 	var total = 0;
