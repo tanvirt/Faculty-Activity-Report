@@ -39,7 +39,7 @@ module.exports.submit = function(req, callback) {
 
 	if (is.empty(req.body.serviceToSchools)) return callback(null, null);
 
-	var service = new cserviceToSchools({
+	var service = new serviceToSchools({
 		service: req.body.serviceToSchools.service,
 		user: req.user
 	});
