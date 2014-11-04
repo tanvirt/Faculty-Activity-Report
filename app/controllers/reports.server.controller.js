@@ -72,7 +72,8 @@ exports.create = function(req, res) {
 				report.furtherInformationSection = models.furtherInformationSection._id;				
 			if (models.consultationsOutsideUniversity)
 				report.consultationsOutsideUniversity = models.consultationsOutsideUniversity._id;				
-				
+			if (models.serviceToSchools)
+				report.serviceToSchools = models.serviceToSchools._id;	
 				
 			report.save(function(err) {
 				if (err) {
@@ -121,7 +122,11 @@ exports.create = function(req, res) {
 					if (models.furtherInformationSection)
 						models.furtherInformationSection.report = report;					
 					if (models.consultationsOutsideUniversity)
-						models.consultationsOutsideUniversity.report = report;					
+						models.consultationsOutsideUniversity.report = report;	
+					if (models.serviceToSchools)
+						models.serviceToSchools.report = report;						
+						
+						
 					
 					//Update existing document
 					if (models.name) {
@@ -246,6 +251,14 @@ exports.create = function(req, res) {
 
 						});
 					}
+					
+					if (models.serviceToSchools) {
+						models.serviceToSchools.save(function(err) {
+
+						});
+					}
+					
+					
 					
 					//get json to frontend
 					res.jsonp(report);
