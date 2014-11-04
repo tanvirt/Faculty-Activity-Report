@@ -36,12 +36,12 @@ module.exports.submit = function(req, callback) {
 
 	if (is.empty(req.body.honors)) return callback(null, null);
 
-	var honors = new honors({
+	var honor = new honors({
 		info: req.body.honors.info,
 		user: req.user		
 	});
 
-	honors.save(function(err) {
-		callback(err, honors);
+	honor.save(function(err) {
+		callback(err, honor);
 	});
 };
