@@ -13,8 +13,8 @@ var currentRank = new Schema({
 
     rank: { //more ranks need to be added, not sure where to find a list
         type: String,
-        enum: ['professor', 'associate professor', 'assistant professor', 'faculty', 'department head',
-            'chairperson', 'research professor'],
+        enum: ['Professor', 'Associate Professor', 'Assistant professor', 'Faculty', 'Department Head',
+            'Chairperson', 'Research Professor'],
         required: true
     },
 
