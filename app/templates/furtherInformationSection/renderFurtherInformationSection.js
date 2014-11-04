@@ -36,7 +36,7 @@ module.exports.submit = function(req, callback) {
 	if (is.empty(req.body.furtherInformationSection)) return callback(null, null);
 
 	var furtherInfo = new furtherInformationSection({
-		info: req.body.furtherInfo.info,
+		info: req.body.furtherInformationSection.info,
 		user: req.user		
 	});
 
