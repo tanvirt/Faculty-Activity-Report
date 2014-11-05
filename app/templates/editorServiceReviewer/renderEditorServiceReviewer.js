@@ -40,7 +40,7 @@ module.exports.submit = function(req, callback) {
 	if (is.empty(req.body.editorServiceReviewer)) return callback(null, null);
 
 	var esr = new EditorServiceReviewer({
-		firstName: req.body.editorServiceReviewer.info,
+		info: req.body.editorServiceReviewer.info,
 		user: req.user
 	});
 
