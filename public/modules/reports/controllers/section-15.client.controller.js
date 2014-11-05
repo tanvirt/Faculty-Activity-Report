@@ -12,27 +12,42 @@ angular.module('reports').controller('Section15Controller', ['$scope', '$statePa
       $scope.hideTable = true;
 
       $scope.grants = 
-            [{
-               titleOfGrant:'',
-               fundingAgency:'',
-               PI:'',
-               startEnd:'',
-               value:'',
-            }];
+            [];
+      //var e = 'error';
+      //var titleOfGrant = $scope.grants.titleOfGrant;
+
+         var total = 0; 
+
+         $scope.total = total;
+      
+   
 
 
          //When the add grant button is pressed this function is called.
-        $scope.addGrants = function(){
-               $scope.grants.push({titleOfGrant: $scope.grants.titleOfGrant , fundingAgency: $scope.grants.fundingAgency, PI: $scope.grants.PI, value:$scope.grants.value, startEnd: $scope.grants.startEnd});
-               $scope.grants.titleOfGrant = '';
+        $scope.addGrants = function()
+        {
+               $scope.grants.push({
+                  titleOfGrant: $scope.grants.titleOfGrant, 
+                  fundingAgency: $scope.grants.fundingAgency, 
+                  PI: $scope.grants.PI,  
+                  startDate: $scope.grants.startDate,
+                  endDate: $scope.grants.endDate,
+                  value: $scope.grants.value, 
+                  fundingPortion: $scope.grants.fundingPortion});
+               total = total + $scope.grants.fundingPortion;
+               $scope.total = total;
+
+
+               $scope.grants.titleOfGrant = ''; 
                $scope.grants.fundingAgency = '';
                $scope.grants.PI = '';
+               $scope.grants.startDate = '';
+               $scope.grants.endDate = '';
                $scope.grants.value = '';
-               $scope.grants.startEnd = '';
+               $scope.grants.fundingPortion = '';
                $scope.hideTable = false;
             };
-
-       /*
+    /*   
       //Function to look for changes that are happening in the Grants object.
       $scope.$watch('grants.titleOfGrant',function(){$scope.test();});
       $scope.$watch('grants.fundingAgency',function() {$scope.test();});
@@ -47,8 +62,6 @@ angular.module('reports').controller('Section15Controller', ['$scope', '$statePa
          if($scope.grants.value <= 0 || !$scope.grants.titleOfGrant.length||!$scope.grants.fundingAgency.length||!$scope.grants.PI.length||!$scope.grants.startEnd.length){
             $scope.incomplete = true;
          }
-      */
-
-
-	}
+      }; */
+   }
 ]);

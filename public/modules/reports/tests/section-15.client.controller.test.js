@@ -61,10 +61,10 @@
                
                scope.addGrants();
 
-               expect(scope.grants.titleOfGrant).toBe('');
-               expect(scope.grants.fundingAgency).toBe('');
-               expect(scope.grants.PI).toBe('');
-               expect(scope.grants.value).toBe('');
+               expect(scope.grants.titleOfGrant).toBe('The Grant');
+               expect(scope.grants.fundingAgency).toBe('The Agency');
+               expect(scope.grants.PI).toBe('Santiago');
+               expect(scope.grants.value).toBe(345);
                expect(scope.grants.startEnd).toBe('');
                //expect(scope.grants.hideTable).toBe(false);
 

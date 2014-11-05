@@ -17,36 +17,51 @@
                <input type="text" ng-model="grants.PI" class="form-control" ng-model-instant  id="privateInve" placeholder="PI">
             </div>
             <div class="form-group">
-               <label for="startEnd">Start Date</label>
-               <input type="date" ng-model="grants.startEnd" class="form-control" ng-model-instant  id="startEnd">
+               <label for="startDate">Start Date</label>
+               <input type="date" ng-model="grants.startDate" class="form-control" ng-model-instant  id="startDate">
             </div>
             <div class="form-group">
+               <label for="endDate">End Date</label>
+               <input type="date" ng-model="grants.endDate" class="form-control" ng-model-instant  id="endDate">
+            </div>
+             <div class="form-group">
                <label for="value">Value</label>
                <input type="number" ng-model="grants.value" class="form-control" ng-model-instant id="value" placeholder="How Much?">
             </div>
+            <div class="form-group">
+               <label for="fundingPortion">Funding Portion</label>
+               <input type="number" ng-model="grants.fundingPortion" class="form-control" ng-model-instant  id="fundingPortion" placeholder ="How Much?">
+            </div>
             <div style="padding-bottom:10px">
-            <button class="btn btn-success btn-xs" ng-click="addGrants()" ng-disabled="incomplete"> 
+            <button class="btn btn-success btn-s" ng-click="addGrants()" ng-disabled="incomplete"> 
             <span class="glyphicon glyphicon-save"> </span> Add Grants
             </button>
             </div>
-      </div>
-
-      <div class="col-md-12">
+     </div> 
+     <div class="col-md-12">
             <table class="table table-bordered" ng-hide = "hideTable">
                 <tr>
                      <th>Title of Grant</th>
                      <th>Funding Agency</th>
                      <th>PI</th>
-                     <th>Start-End</th>
+                     <th>Start Date</th>
+                     <th>End Date</th>
+                     <th>Value</th>
                      <th>Funding Portion</th>
                 </tr>
                  <tr ng-repeat="grant in grants">
                      <td> {{grant.titleOfGrant}}     </td>
                      <td> {{grant.fundingAgency}}    </td>
                      <td> {{grant.PI}}               </td>
-                     <td> {{grant.startEnd}}         </td>
+                     <td> {{grant.startDate}}         </td>
+                     <td> {{grant.endDate}}         </td>
                      <td> {{grant.value | currency}} </td>
+                     <td> {{grant.fundingPortion | currency}} </td>
                   </tr>
-            </table>
+        </div>
+          <div class="col-md-2">
+            <table class="table table-bordered" ng-hide = "hideTable">
+              <th>Total Funding Proportion</th>
+              <td>{{total| currency }}</td>
           </div>
 </section>
