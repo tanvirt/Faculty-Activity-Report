@@ -114,6 +114,10 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 				
 				governance: {
 					govStr: this.governance
+				},
+				
+				editorServiceReviewer: {
+					info: this.editorServiceReviewer
 				}
 
 

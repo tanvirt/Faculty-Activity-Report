@@ -136,6 +136,10 @@ var ReportSchema = new Schema({
 	
 	governance: {
 		type: Schema.Types.ObjectId, ref: 'Governance'
+	},
+	
+	editorServiceReviewer: {
+		type: Schema.Types.ObjectId, ref: 'EditorServiceReviewer'
 	}
 
 

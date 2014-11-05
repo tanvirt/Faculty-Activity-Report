@@ -74,8 +74,10 @@ exports.create = function(req, res) {
 				report.consultationsOutsideUniversity = models.consultationsOutsideUniversity._id;				
 			if (models.serviceToSchools)
 				report.serviceToSchools = models.serviceToSchools._id;
-			if(models.governance)
+			if (models.governance)
 				report.governance = models.governance._id;
+			if (models.editorServiceReviewer)
+				report.editorServiceReviewer = models.editorServiceReviewer._id;
 				
 			report.save(function(err) {
 				if (err) {
@@ -129,6 +131,8 @@ exports.create = function(req, res) {
 						models.serviceToSchools.report = report;						
 					if (models.governance)
 						models.governance.report = report;
+					if (models.editorServiceReviewer) 
+						models.editorServiceReviewer.report = report;
 						
 					
 					//Update existing document
@@ -263,6 +267,12 @@ exports.create = function(req, res) {
 					
 					if (models.governance) {
 						models.governance.save(function(err) {
+						
+						});
+					}
+					
+					if (models.editorServiceReviewer) {
+						models.editorServiceReviewer.save(function(err) {
 						
 						});
 					}

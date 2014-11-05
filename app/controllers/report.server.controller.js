@@ -69,7 +69,7 @@ exports.generate = function(req,res,next) {
 		async.apply(renderGovernance.render, req),
 		async.apply(renderConsultationsOutsideUniversity.render, req),
 
-		renderEditorServiceReviewer.render,
+		async.apply(renderEditorServiceReviewer.render, req),
 		async.apply(renderMembership.render, req),
 		async.apply(renderInternational.render, req),
 		async.apply(renderServiceToSchools.render, req),
@@ -151,8 +151,8 @@ exports.submit = function(req, res, next) {
 		async.apply(renderConferences.submit, req),
 		async.apply(renderContracts.submit, req),
 		async.apply(renderConsultationsOutsideUniversity.submit, req),
-		async.apply(renderGovernance.submit, req)
-		
+		async.apply(renderGovernance.submit, req),
+		async.apply(renderEditorServiceReviewer.submit, req)		
 
 	], function(err, models) {
 		if (err) return res.status(500).send({ error: 'Submit Failed' });	
@@ -183,7 +183,8 @@ exports.submit_02 = function(req, res, callback) {
 		furtherInformationSection: async.apply(renderFurtherInformationSection.submit, req),
 		serviceToSchools: async.apply(renderServiceToSchools.submit, req),
 		consultationsOutsideUniversity: async.apply(renderConsultationsOutsideUniversity.submit, req),
-		governance: async.apply(renderGovernance.submit, req)
+		governance: async.apply(renderGovernance.submit, req),
+		editorServiceReviewer: async.apply(renderEditorServiceReviewer.submit, req)
 		
 		
 	}, function(err, models) {
