@@ -1,5 +1,6 @@
 Faculty Activity Report
 ================================
+####[Current Release v0.1](https://github.com/tanvirt/Faculty-Activity-Report/releases/tag/v0.1)
 **CEN3031**
 ###Collaborators
 *Front End*
