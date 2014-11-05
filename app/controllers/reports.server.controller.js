@@ -16,6 +16,9 @@ exports.rCtrl = rCtrl;
 
 exports.blank = function(req, res, next) {
 	var report = new Report();
+
+	report.reportName = req.body.reportName;
+
 	report.save(function(err) {
 		if (err) return next(err);
 		req.report = report;

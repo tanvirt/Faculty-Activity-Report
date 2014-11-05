@@ -7,6 +7,7 @@ module.exports = function(app) {
 
 	//todo: require authorization
 	app.route('/reports/:reportId/name')
+		.get(users.requiresLogin, name.readFromReport)
 		.post(users.requiresLogin, name.create);
 
 	app.route('/reports/:reportId/name/:nameId')
