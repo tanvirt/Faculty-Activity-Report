@@ -31,25 +31,3 @@ and converts it into latex.
 module.exports.render = function(req, callback) {
 	renderModel.render(req, callback);
 };
-
-/*
-Gets the data from the frontend and
-saves it in the database.
-*/
-module.exports.submit = function(req, callback) {
-	console.log(require('util').inspect(req.body));
-
-	if (is.empty(req.body.name)) return callback(null, null);
-
-	var name = new Name({
-		firstName: req.body.name.firstName,
-		middleName: req.body.name.middleName,
-		lastName: req.body.name.lastName,
-		user: req.user
-	});
-
-	name.save(function(err) {
-		callback(err, name);
-	});
-};
-
