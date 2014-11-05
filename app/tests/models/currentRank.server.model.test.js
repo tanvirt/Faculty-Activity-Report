@@ -8,6 +8,7 @@ var should = require('should'),
 /**
  * Globals
  */
+ /*
 var rank01;
 describe('currentRank Model Unit Tests:', function() {
     beforeEach(function(done) {
@@ -54,3 +55,4 @@ describe('currentRank Model Unit Tests:', function() {
         done();
     });
 });
+*/
