@@ -110,6 +110,10 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 
 				international: {
 					activities: this.international
+				},
+				
+				governance: {
+					govStr: this.governance
 				}
 
 
