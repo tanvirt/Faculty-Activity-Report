@@ -85,7 +85,12 @@ exports.create = function(req, res) {
 				report.furtherInformationSection = models.furtherInformationSection._id;				
 			if (models.consultationsOutsideUniversity)
 				report.consultationsOutsideUniversity = models.consultationsOutsideUniversity._id;				
-				
+			if (models.serviceToSchools)
+				report.serviceToSchools = models.serviceToSchools._id;
+			if (models.governance)
+				report.governance = models.governance._id;
+			if (models.editorServiceReviewer)
+				report.editorServiceReviewer = models.editorServiceReviewer._id;
 				
 			report.save(function(err) {
 				if (err) {
@@ -134,7 +139,14 @@ exports.create = function(req, res) {
 					if (models.furtherInformationSection)
 						models.furtherInformationSection.report = report;					
 					if (models.consultationsOutsideUniversity)
-						models.consultationsOutsideUniversity.report = report;					
+						models.consultationsOutsideUniversity.report = report;	
+					if (models.serviceToSchools)
+						models.serviceToSchools.report = report;						
+					if (models.governance)
+						models.governance.report = report;
+					if (models.editorServiceReviewer) 
+						models.editorServiceReviewer.report = report;
+						
 					
 					//Update existing document
 					if (models.name) {
@@ -220,7 +232,7 @@ exports.create = function(req, res) {
 					
 					if (models.contracts) {
 						models.contracts.save(function(err) {
-							console.log('contracts saved');
+							//console.log('contracts saved');
 						});
 					}
 
@@ -259,6 +271,26 @@ exports.create = function(req, res) {
 
 						});
 					}
+					
+					if (models.serviceToSchools) {
+						models.serviceToSchools.save(function(err) {
+
+						});
+					}
+					
+					if (models.governance) {
+						models.governance.save(function(err) {
+						
+						});
+					}
+					
+					if (models.editorServiceReviewer) {
+						models.editorServiceReviewer.save(function(err) {
+						
+						});
+					}
+					
+					
 					
 					//get json to frontend
 					res.jsonp(report);
@@ -342,6 +374,7 @@ exports.list = function(req, res) {
 	.populate('honors')
 	.populate('furtherInformationSection')
 	.populate('consultationsOutsideUniversity')
+	.populate('governance')
 
 
 	.exec(function(err, reports) {
@@ -381,6 +414,7 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('honors')
 	.populate('furtherInformationSection')
 	.populate('consultationsOutsideUniversity')
+	.populate('governance')
 	
 	
 	//.populate('teachingEvaluation')

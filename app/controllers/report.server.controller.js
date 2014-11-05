@@ -38,7 +38,7 @@ var renderMembership = require('../../app/templates/membership/renderMembership'
 var renderInternational = require('../../app/templates/international/renderInternational');
 var renderHonors = require('../../app/templates/honors/renderHonors');
 var renderFurtherInformationSection = require('../../app/templates/furtherInformationSection/renderFurtherInformationSection');
-
+var renderServiceToSchools = require('../../app/templates/serviceToSchools/renderServiceToSchools');
 
 /*
 Generates the LaTex File into app/pdf directory
@@ -66,14 +66,15 @@ exports.generate = function(req,res,next) {
 
 		async.apply(renderConferences.render, req),
 		async.apply(renderContracts.render, req),
-		renderGovernance.render,
+		async.apply(renderGovernance.render, req),
 		async.apply(renderConsultationsOutsideUniversity.render, req),
 
-		renderEditorServiceReviewer.render,
+		async.apply(renderEditorServiceReviewer.render, req),
 		async.apply(renderMembership.render, req),
-		async.apply(renderInternational.render, req)
-	//	async.apply(renderHonors.render, req),
-	//	async.apply(renderFurtherInformationSection.render, req)	
+		async.apply(renderInternational.render, req),
+		async.apply(renderServiceToSchools.render, req),
+		async.apply(renderHonors.render, req),
+		async.apply(renderFurtherInformationSection.render, req)	
 	
 	], function(err, results) {
 		if (err) {
@@ -149,8 +150,9 @@ exports.submit = function(req, res, next) {
 		async.apply(renderMembership.submit, req),
 		async.apply(renderConferences.submit, req),
 		async.apply(renderContracts.submit, req),
-		async.apply(renderConsultationsOutsideUniversity.submit, req)
-		
+		async.apply(renderConsultationsOutsideUniversity.submit, req),
+		async.apply(renderGovernance.submit, req),
+		async.apply(renderEditorServiceReviewer.submit, req)		
 
 	], function(err, models) {
 		if (err) return res.status(500).send({ error: 'Submit Failed' });	
@@ -177,8 +179,12 @@ exports.submit_02 = function(req, res, callback) {
 		graduateCommittee: async.apply(renderGraduateCommittee.submit, req),
 		creativeWorks: async.apply(renderCreativeWorks.submit, req),
 		patents: async.apply(renderPatents.submit, req),
-	//	honors: async.apply(renderHonors.submit, req),
-		consultationsOutsideUniversity: async.apply(renderConsultationsOutsideUniversity.submit, req)
+		honors: async.apply(renderHonors.submit, req),
+		furtherInformationSection: async.apply(renderFurtherInformationSection.submit, req),
+		serviceToSchools: async.apply(renderServiceToSchools.submit, req),
+		consultationsOutsideUniversity: async.apply(renderConsultationsOutsideUniversity.submit, req),
+		governance: async.apply(renderGovernance.submit, req),
+		editorServiceReviewer: async.apply(renderEditorServiceReviewer.submit, req)
 		
 		
 	}, function(err, models) {

@@ -5,14 +5,18 @@ var Schema = mongoose.Schema;
 
 var Governance = new Schema({
 	
-	subsection: {
-		type: String,
-		enum: ['Department Committee Memberships', 'Other'], //need more options for this one
-		required: true
+	govStr: {
+		type: String
 	},
-	committee: {
-		type: String,
-		required: true
+	
+	user: {
+		type: Schema.ObjectId,
+		ref: 'User'
+	},
+
+	report: {
+		type: Schema.ObjectId,
+		ref: 'Report'
 	}
 
 }, {collection: Governance});

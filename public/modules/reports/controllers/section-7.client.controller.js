@@ -3,6 +3,7 @@
 angular.module('reports').controller('Section7Controller', ['$scope', '$stateParams', '$location', 'Authentication',
 	function($scope, $stateParams, $location, Authentication, Reports ) {
 		$scope.authentication = Authentication;
+		
 		//custom tinymce textarea
 		$scope.tinymceOptions = {
 			    theme: 'modern',
@@ -15,7 +16,6 @@ angular.module('reports').controller('Section7Controller', ['$scope', '$statePar
 			    ],
 			    toolbar1: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist',
 		};
-
 		
 	}
 ]);

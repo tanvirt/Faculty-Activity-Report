@@ -7,6 +7,7 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 	function($scope, $http, $stateParams, $location, Authentication, Reports ) {
 		
 		//custom tinymce textarea
+		
 		$scope.tinymceOptions = {
 			    theme: 'modern',
 			    plugins: [
@@ -18,7 +19,7 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 			    ],
 			    toolbar1: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist',
 		};
-
+		
 		$scope.authentication = Authentication;
 		
 		
@@ -91,12 +92,32 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 					consultation: this.consultationsOutsideUniversity
 				},
 				
+				honors: {
+					info: this.honors
+				},
+				
+				furtherInformationSection: {
+					info: this.furtherInformationSection
+				},
+				
+				serviceToSchools: {
+					service: this.serviceToSchools
+				},
+				
 				membership: {
 					info: this.membership
 				},
 
 				international: {
 					activities: this.international
+				},
+				
+				governance: {
+					govStr: this.governance
+				},
+				
+				editorServiceReviewer: {
+					info: this.editorServiceReviewer
 				}
 
 

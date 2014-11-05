@@ -1,10 +1,10 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var Governance = mongoose.model('Governance');
+var serviceToSchools = mongoose.model('serviceToSchools');
 
 var modelClass = require('../modelClass');
-var renderModel = new modelClass.RenderModel( Governance, 'governance/governance.tex', 'governance/na.tex');
+var renderModel = new modelClass.RenderModel(serviceToSchools, 'serviceToSchools/serviceToSchools.tex', 'serviceToSchools/na.tex');
 
 var is = require('is-js');
 
@@ -13,7 +13,7 @@ will explicitly populate the report with
 the data you provide
 */
 renderModel.setDebugPopulate( false, {
-	govStr: 'Debug String'
+	service: 'Service to schools goes here...'
 });
 
 /*
@@ -37,15 +37,15 @@ saves it in the database.
 module.exports.submit = function(req, callback) {
 	console.log(require('util').inspect(req.body));
 
-	if (is.empty(req.body.governance)) return callback(null, null);
+	if (is.empty(req.body.serviceToSchools)) return callback(null, null);
 
-	var gov = new Governance({
-		govStr: req.body.governance.govStr,
+	var services = new serviceToSchools({
+		service: req.body.serviceToSchools.service,
 		user: req.user
 	});
 
-	gov.save(function(err) {
-		callback(err, gov);
+	services.save(function(err) {
+		callback(err, services);
 	});
 };
 
