@@ -132,6 +132,14 @@ var ReportSchema = new Schema({
 
 	consultationsOutsideUniversity: {
 		type: Schema.Types.ObjectId, ref: 'consultationsOutsideUniversity'
+	},
+	
+	governance: {
+		type: Schema.Types.ObjectId, ref: 'Governance'
+	},
+	
+	editorServiceReviewer: {
+		type: Schema.Types.ObjectId, ref: 'EditorServiceReviewer'
 	}
 
 

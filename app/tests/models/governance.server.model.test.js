@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var should = require('should'),
+	assert = require('assert'),
 	mongoose = require('mongoose'),
 	Governance = mongoose.model('Governance');
 
@@ -12,8 +13,7 @@ var gov1;
 describe('Governance Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		gov1 = new Governance({
-			subsection: 'Other',
-			committee: 'member of the Kids Next Door club'
+			//govStr: 'this is a random string of stuff'
 		});
 				
 		done();
@@ -26,6 +26,12 @@ describe('Governance Model Unit Tests:', function() {
 			done();
 		});
 		
+		it('should set info to N/A if nothing given', function(done) {
+			assert.equal(gov1.govStr, 'N/A');
+			done();
+		});
+		
+		/*
 		it('should fail to save without subsection', function(done) {
 			gov1.subsection = '';
 			return gov1.save(function(err) {
@@ -48,7 +54,7 @@ describe('Governance Model Unit Tests:', function() {
 				should.exist(err);
 				done();
 			});
-		});
+		});*/
 	});
 	afterEach(function(done) {
         Governance.remove().exec();
