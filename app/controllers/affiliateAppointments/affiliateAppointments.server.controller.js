@@ -38,8 +38,6 @@ exports.update = function(req, res, callback) {
 		});
 	}
 
-	console.log(req.profile.affiliateAppointments);
-
 	AffiliateAppointments.findById(req.profile.affiliateAppointments, function(err, model) {
 		if (err) {
 			res.status(400);
@@ -47,8 +45,6 @@ exports.update = function(req, res, callback) {
 				err: 'Finding Failed'
 			});
 		}
-
-		console.log(require('util').inspect(req.body.affiliateAppointments));
 
 		var affiliateAppointments = _.extend(model, req.body.affiliateAppointments);
 		affiliateAppointments.save(function(err) {
