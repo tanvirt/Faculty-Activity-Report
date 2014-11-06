@@ -34,7 +34,7 @@ module.exports.submit = function(req, callback) {
 	if (is.empty(req.body.dateAppointed)) return callback(null, null);
 
 	var dateApp = new DateAppointed({
-		theDate: req.body.dateAppointed.date,
+		date: req.body.dateAppointed.date,
 		user: req.user		
 	});
 

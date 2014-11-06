@@ -6,7 +6,7 @@ module.exports = function(app) {
 
 	// Reports Routes
 	app.route('/reports')
-		.get(reports.blank, reports.list)
+		.get(reports.list)
 		.post(users.requiresLogin, reports.create);
 
 	app.route('/reports/:reportId')

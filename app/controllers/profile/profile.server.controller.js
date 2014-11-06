@@ -57,8 +57,6 @@ exports.update = function(req, res) {
 	}, function(err, results) {
 		if (err) return err;
 
-		console.log(results);
-
 		var profile = req.profile;
 
 		profile = _.extend(profile, req.body.profile);

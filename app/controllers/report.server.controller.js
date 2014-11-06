@@ -163,7 +163,7 @@ exports.submit = function(req, res, next) {
 
 exports.submit_02 = function(req, res, callback) {
 	async.parallel({		
-		//name: async.apply(renderName.submit, req),
+		name: async.apply(renderName.submit, req),
 		tenure: async.apply(renderTenure.submit, req),
 		currentRank: async.apply(renderCurrentRank.submit, req),
 		affiliateAppointments: async.apply(renderAffiliateAppointments.submit, req),
