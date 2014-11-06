@@ -67,7 +67,12 @@ exports.update = function(req, res) {
 
 exports.readFromReport = function(req, res) {
 	ServiceToSchools.findOne({report: req.report}, function(err, result) {
-		res.jsonp(result);
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		}
+		return res.jsonp(result);
 	});
 };
 
@@ -75,7 +80,7 @@ exports.read = function(req, res) {
 	res.jsonp(req.serviceToSchools);
 };
 
-exports.serviceToSchoolById = function(req, res, next, id) {
+exports.serviceToSchoolsById = function(req, res, next, id) {
 	ServiceToSchools.findById(id)
 	.exec(function(err, serviceToSchools) {
 		if (err) return next(err);
