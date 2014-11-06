@@ -6,11 +6,11 @@ var Profile = mongoose.model('Profile');
 
 var nameCtrl = require('../../controllers/name/name');
 var tenureCtrl = require('../../controllers/tenure/tenure');
+var currentRankCtrl = require('../../controllers/currentRank/currentRank');
+var dateAppointedCtrl = require('../../controllers/dateAppointed/dateAppointed');
+var affiliateAppointmentsCtrl = require('../../controllers/affiliateAppointments/affiliateAppointments');
 
 var async = require('async');
-
-var path = require('path');
-var join = path.join;
 	
 var errorHandler = require('../errors');
 var is = require('is-js');
@@ -21,28 +21,61 @@ Gets the data from the frontend andk
 saves it in the database.
 */
 exports.create = function(req, res) {
-	async.parallel([
-		async.apply(nameCtrl.createJSON, req, res),
-		async.apply(tenureCtrl.createJSON, req, res)
-	], function(results) {
-		console.log(results);
-		res.jsonp(results);
-	});
+	async.parallel({
+		name: async.apply(nameCtrl.create, req, res),
+		tenure: async.apply(tenureCtrl.create, req, res),
+		currentRank: async.apply(currentRankCtrl.create, req, res),
+		dateAppointed: async.apply(dateAppointedCtrl.create, req, res),
+		affiliateAppointments: async.apply(affiliateAppointmentsCtrl.create, req, res)
+	}, function(err, models) {
+		if (err) return err;
+
+		var profile = new Profile({
+			name: models.name._id,
+			tenure: models.tenure._id,
+			currentRank: models.currentRank._id,
+			dateAppointed: models.dateAppointed._id,
+			affiliateAppointments: models.affiliateAppointments._id,
+
+			user: req.user,
+			report: req.report
+		});
+
+		profile.save(function(err) {
+			res.jsonp(profile);
+		});
+	});	
 };
 
 exports.update = function(req, res) {
-	async.parallel([
-		async.apply(nameCtrl.updateJSON, req, res),
-		async.apply(tenureCtrl.updateJSON, req, res)
-	], function(results) {
-		res.jsonp(results.join(''));
+	async.parallel({
+		name: async.apply(nameCtrl.update, req, res),
+		tenure: async.apply(tenureCtrl.update, req, res),
+		currentRank: async.apply(currentRankCtrl.update, req, res),
+		dateAppointed: async.apply(dateAppointedCtrl.update, req, res),
+		affiliateAppointments: async.apply(affiliateAppointmentsCtrl.update, req, res)
+	}, function(err, results) {
+		if (err) return err;
+
+		console.log(results);
+
+		var profile = req.profile;
+
+		profile = _.extend(profile, req.body.profile);
+
+		profile.save(function(err) {
+			res.jsonp(profile);
+		});
 	});
 };
 
-exports.readFromReport = function(req, res) {
+exports.read = function(req, res) {
 	Profile.findOne({report: req.report})
 	.populate('name')
 	.populate('tenure')
+	.populate('currentRank')
+	.populate('dateAppointed')
+	.populate('affiliateAppointments')
 	.exec(function(err, profile) {
 		if (err) {
 			return res.status(400).send({
@@ -51,26 +84,6 @@ exports.readFromReport = function(req, res) {
 		} else {
 			res.jsonp(profile);
 		}
-	});
-
-
-	/*
-	async.parallel([
-		async.apply(name.readFromReportJSON, req, res),
-		async.apply(tenure.readFromReportJSON, req, res)
-	], function(err, results) {
-		if (err) return res.status(500).send({error: 'Profile Read failed'});
-		res.jsonp(results.join(''));
-	});
-*/
-};
-
-exports.read = function(req, res) {
-	async.parallel([
-		async.apply(nameCtrl.readJSON, req, res),
-		async.apply(tenureCtrl.readJSON, req, res)
-	], function(results) {
-		res.jsonp(results.join(''));
 	});
 };
 

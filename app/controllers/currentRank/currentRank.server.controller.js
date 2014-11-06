@@ -3,46 +3,14 @@
 var mongoose = require('mongoose');
 var CurrentRank = mongoose.model('currentRank');
 
-var modelClass = require('../../templates/modelClass');
-var renderModel = new modelClass.RenderModel( CurrentRank, 'currentRank/currentRank.tex', 'currentRank/na.tex');
-
 var errorHandler = require('../errors');
-
 var is = require('is-js');
-
 var _ = require('lodash');
 
-/*
-will explicitly populate the report with
-the data you provide
-*/
-renderModel.setDebugPopulate( false, {
-	rank: 'faculty'
-});
-
-/*
-will explicitly print the N/A latex
-to the screen for debugging purposes
-*/
-renderModel.isDebugNull = false;
-
-/*
-render function that finds the obj in the database
-and converts it into latex.
-*/
-exports.render = function(req, callback) {
-	renderModel.render(req, callback);
-};
-
-/*
-Gets the data from the frontend and
-saves it in the database.
-*/
-exports.create = function(req, res) {
-	console.log(require('util').inspect(req.report));
-
+exports.create = function(req, res, callback) {
 	if (is.empty(req.body.currentRank)) {
-		return res.jsonp({
+		res.status(400);
+		return callback({
 			err: 'Post (create): Does not exist',
 			message: 'req.body.currentRank did not get send to backend',
 			changes: 'No CurrentRank Created'
@@ -57,58 +25,33 @@ exports.create = function(req, res) {
 	});
 
 	currentRank.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			//req.report.currentRank = currentRank;
-			//req.report.save();
-			res.jsonp(currentRank);
-		}
+		//req.report.currentRank = currentRank;
+		//req.report.save();
+		callback(err, currentRank);
 	});
 };
 
-exports.update = function(req, res) {
+exports.update = function(req, res, callback) {
 	if (is.empty(req.body.currentRank)) {
-		return res.jsonp({
+		res.status(400);
+		return callback({
 			err: 'Put (update): Does not exist',
 			message: 'req.body.currentRank did not get send to backend',
 			changes: 'No Changes Made'
 		});
 	}
 
-	var currentRank = req.currentRank;
-
-	currentRank = _.extend(currentRank, req.body.currentRank);
-
-	currentRank.save(function(err) {
+	CurrentRank.findById(req.profile.currentRank, function(err, model) {
 		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
+			res.status(400);
+			return callback({
+				err: 'Finding Failed'
 			});
-		} else {
-			res.jsonp(currentRank);
 		}
-	});
-};
 
-exports.read = function(req, res) {
-	res.jsonp(req.currentRank);
-};
-
-exports.readCurrentRank = function(req, res) {
-	CurrentRank.findOne({report: req.report}, function(err, result) {
-		res.jsonp(result);
-	});
-};
-
-exports.currentRankById = function(req, res, next, id) {
-	CurrentRank.findById(id)
-	.exec(function(err, currentRank) {
-		if (err) return next(err);
-		if (!currentRank) return next(new Error('Failed to load CurrentRank ' + id));
-		req.currentRank = currentRank;
-		next();
+		var currentRank = _.extend(model, req.body.currentRank);
+		currentRank.save(function(err) {
+			callback(err, currentRank);
+		});
 	});
 };

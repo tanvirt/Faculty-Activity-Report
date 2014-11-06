@@ -32,7 +32,7 @@ var DateAppointed = new Schema({
             'Date must be less than or equal to the current year and greater than or equal to 1900']
     }
 	*/
-	theDate: {
+	date: {
 		type: Date,
 		required: true
 	},

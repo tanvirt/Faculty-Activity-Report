@@ -7,11 +7,10 @@ module.exports = function(app) {
 
 	//todo: require authorization
 	app.route('/reports/:reportId/profile')
-		.get(users.requiresLogin, profile.readFromReport)
+		.get(users.requiresLogin, profile.read)
 		.post(users.requiresLogin, profile.create);
 
 	app.route('/reports/:reportId/profile/:profileId')
-		.get(profile.read)
 		.put(users.requiresLogin, profile.update);
 
 	// Finish by binding the Name middleware

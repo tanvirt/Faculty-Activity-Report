@@ -4,18 +4,13 @@ var mongoose = require('mongoose');
 var AffiliateAppointments = mongoose.model('affiliateAppointments');
 
 var errorHandler = require('../errors');
-
 var is = require('is-js');
-
 var _ = require('lodash');
 
-/*
-Gets the data from the frontend and
-saves it in the database.
-*/
-exports.create = function(req, res) {
+exports.create = function(req, res, callback) {
 	if (is.empty(req.body.affiliateAppointments)) {
-		return res.jsonp({
+		res.status(400);
+		return callback({
 			err: 'Post (create): Does not exist',
 			message: 'req.body.affiliateAppointments did not get send to backend',
 			changes: 'No AffiliateAppointments Created'
@@ -23,64 +18,41 @@ exports.create = function(req, res) {
 	}
 
 	var affiliateAppointments = new AffiliateAppointments({
-		app: req.body.affiliateAppointments.appointments,
+		app: req.body.affiliateAppointments.app,
 		user: req.user,
 		report: req.report
 	});
 
 	affiliateAppointments.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			//req.report.affiliateAppointments = affiliateAppointments;
-			//req.report.save();
-			res.jsonp(affiliateAppointments);
-		}
+		callback(err, affiliateAppointments);
 	});
 };
 
-exports.update = function(req, res) {
+exports.update = function(req, res, callback) {
 	if (is.empty(req.body.affiliateAppointments)) {
-		return res.jsonp({
+		res.status(400);
+		return callback({
 			err: 'Put (update): Does not exist',
 			message: 'req.body.affiliateAppointments did not get send to backend',
 			changes: 'No Changes Made'
 		});
 	}
 
-	var affiliateAppointments = req.affiliateAppointments;
+	console.log(req.profile.affiliateAppointments);
 
-	affiliateAppointments = _.extend(affiliateAppointments, req.body.affiliateAppointments);
-
-	affiliateAppointments.save(function(err) {
+	AffiliateAppointments.findById(req.profile.affiliateAppointments, function(err, model) {
 		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
+			res.status(400);
+			return callback({
+				err: 'Finding Failed'
 			});
-		} else {
-			res.jsonp(affiliateAppointments);
 		}
-	});
-};
 
-exports.readFromReport = function(req, res) {
-	AffiliateAppointments.findOne({report: req.report}, function(err, result) {
-		res.jsonp(result);
-	});
-};
+		console.log(require('util').inspect(req.body.affiliateAppointments));
 
-exports.read = function(req, res) {
-	res.jsonp(req.affiliateAppointments);
-};
-
-exports.affiliateAppointmentsById = function(req, res, next, id) {
-	AffiliateAppointments.findById(id)
-	.exec(function(err, affiliateAppointments) {
-		if (err) return next(err);
-		if (!affiliateAppointments) return next(new Error('Failed to load AffiliateAppointments ' + id));
-		req.affiliateAppointments = affiliateAppointments;
-		next();
+		var affiliateAppointments = _.extend(model, req.body.affiliateAppointments);
+		affiliateAppointments.save(function(err) {
+			callback(err, affiliateAppointments);
+		});
 	});
 };
