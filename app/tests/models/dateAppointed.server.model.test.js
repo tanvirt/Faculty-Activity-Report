@@ -12,7 +12,6 @@ var date01;
 describe('DateAppointed Model Unit Tests:', function() {
     beforeEach(function(done) {
         date01 = new DateAppointed({
-            //month: 'January',
             theDate: '2/2/2010'
 
         });
