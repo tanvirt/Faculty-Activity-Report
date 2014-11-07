@@ -12,7 +12,11 @@ var validateWebsite = function(p) {
 	return validator.isURL(p);
 };
 
-var cwSub = new Schema({
+var CreativeWorks = new Schema({
+	user: {
+		type: Schema.ObjectId,
+		ref: 'User'
+	},
 	name: {
 		type: String,
 		require: true
@@ -34,15 +38,7 @@ var cwSub = new Schema({
 	date: {
 		type: String,
 		validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
-	}
-});
-
-var CreativeWorks = new Schema({
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
 	},
-	sub: [cwSub],
 	report: {
 		type: Schema.ObjectId,
 		ref: 'Report'
