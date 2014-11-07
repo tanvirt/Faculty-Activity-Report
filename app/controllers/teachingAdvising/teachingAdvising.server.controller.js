@@ -18,7 +18,7 @@ saves it in the database.
 */
 
 exports.create = function(req, res) {
-	if (is.empty(req.body.TeachingAdvising)) {
+	if (is.empty(req.body.teachingAdvising)) {
 		return res.jsonp({
 			err: 'Post (create): Does not exist',
 			message: 'req.body.teachingAdvising did not get sent to backend',
@@ -39,8 +39,8 @@ exports.create = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			//req.report.teachingAdvising = teachingAdvising;
-			//req.report.save();
+			req.report.teachingAdvising = teachingAdvising;
+			req.report.save();
 			res.jsonp(teachingAdvising);
 		}
 	});
