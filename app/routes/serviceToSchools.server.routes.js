@@ -13,6 +13,6 @@ module.exports = function(app) {
 		.get(serviceToSchools.read)
 		.put(users.requiresLogin, serviceToSchools.update);
 
-	// Finish by binding the Name middleware
+	// Finish by binding the middleware
 	app.param('serviceToSchoolsId', serviceToSchools.serviceToSchoolsById);
 };
