@@ -8,7 +8,7 @@ var CreativeWorks = mongoose.model('CreativeWorks');
 var renderModel = new modelClass.RenderModel(CreativeWorks, 'creativeWorks/creativeWorks.tex', 'creativeWorks/na.tex');
 
 var is = require('is-js');
-
+/*
 renderModel.setDebugPopulate(false, {
 	sub: [{
 		name: 'LaTeX',
@@ -32,7 +32,7 @@ renderModel.setDebugPopulate(false, {
 		jointEfforts: ['George', 'Gandalf', 'Rebecca', 'Aragorn']
 	}]
 });
-
+*/
 renderModel.isDebugNull = false;
 
 /*
@@ -53,7 +53,7 @@ module.exports.render = function(req, callback) {
 };
 
 module.exports.submit = function(req, callback) {
-	if (is.empty(req.body.creativeWorks)) return callback(null, null);
+	/*if (is.empty(req.body.creativeWorks)) return callback(null, null);
 
 	var creative = new CreativeWorks({
 		sub: [],
@@ -76,4 +76,6 @@ module.exports.submit = function(req, callback) {
 	creative.save(function(err) {
 		callback(err, creative);
 	});
+*/
+	callback(null, null);
 };
