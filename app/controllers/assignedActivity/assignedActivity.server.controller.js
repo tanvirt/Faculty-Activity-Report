@@ -4,18 +4,8 @@ var mongoose = require('mongoose');
 var AssignedActivity = mongoose.model('AssignedActivity');
 
 var errorHandler = require('../errors');
-
 var is = require('is-js');
-
-var path = require('path');
-var join = path.join;
-
 var _ = require('lodash');
-
-/*
-Gets the data from the frontend and
-saves it in the database.
-*/
 
 exports.create = function(req, res) {
 	if (is.empty(req.body.assignedActivity)) {
@@ -51,8 +41,8 @@ exports.create = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			//req.report.assignedActivity = assignedActivity;
-			//req.report.save();
+			req.report.assignedActivity = assignedActivity;
+			req.report.save();
 			res.jsonp(assignedActivity);
 		}
 	});

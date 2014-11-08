@@ -13,16 +13,16 @@ var rCtrl = require('./report');
 //make available to routes
 exports.rCtrl = rCtrl;
 
-
-exports.blank = function(req, res, next) {
+exports.createBlank = function(req, res) {
 	var report = new Report();
 
+	report.user = req.user;
 	report.reportName = req.body.reportName;
 
 	report.save(function(err) {
-		if (err) return next(err);
+		if (err) return res.jsonp(err);
 		req.report = report;
-		next();
+		res.jsonp(report);
 	});
 };
 
@@ -40,8 +40,6 @@ exports.create = function(req, res) {
 		} else {
 			var report = new Report();
 			report.user = req.user;
-
-			console.log(require('util').inspect(req.body));
 
 			// Assign Prev values
 			report.reportName = req.body.reportName;
