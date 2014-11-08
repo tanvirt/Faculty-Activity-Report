@@ -1,59 +1,123 @@
 <style>
-#sectionContainer {
-    min-width: 950px;
-    position: relative;
-    margin:75px 0 0 225px;
+.navi{
+    max-height:450px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* Let's get this party started */
+}
+
+.navi::-webkit-scrollbar {
+    width: 2px;
+    direction: rtl;
+}
+ 
+/* Track */
+.navi::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+ 
+/* Handle */
+.navi::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.5); 
 }
 </style>
-<navbar></navbar>
-<section id="sectionContainer" data-ng-controller="ReportsController">
-    
 
-    <div class="page-header">
-        <h1>New Report</h1>
-    </div>
+<section data-ng-controller="NavigationController">
+<div class="page-header">
+    <h1>New Report</h1>
+</div>
+    <div class="tabbable tabs-left">
+    <ul class="nav nav-tabs navi">
+        <li ng-class="getTabClass(1)" ng-click="setActiveTab(1)"><a href="" data-toggle="tab">   Profile<i class="glyphicon glyphicon-ok"></i></a></li>
+
+        <li ng-class="getTabClass(6)" ng-click="setActiveTab(6)"><a href="" data-toggle="tab"> Assigned Activity</a></li>
+
+        <li ng-class="getTabClass(7)" ng-click="setActiveTab(7)"><a href="" data-toggle="tab">Teaching, Advising and/or Instructional Accomplishments</a></li>
+
+        <li ng-class="getTabClass(10)" ng-click="setActiveTab(10)"><a href="" data-toggle="tab">Contribution To Discipline/Research Narrative</a></li>
+
+        <li ng-class="getTabClass(11)" ng-click="setActiveTab(11)"><a href="" data-toggle="tab">Creative Works or Activities</a></li>
+
+        <li ng-class="getTabClass(12)" ng-click="setActiveTab(12)"><a href="" data-toggle="tab">Patents and Copyrights</a></li>
         
-    <div class="col-md-10" style="padding-bottom: 50px">
-        <form class="form-horizontal" data-ng-submit="create()" novalidate>
-                
-            <!-- FORM NAME -->
-            <div class="col-md-12" style="padding-top:20px">
-                <div class="form-group">
-                    <label class="control-label" for="name">Report Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="reportName" id="reportName" class="form-control" placeholder="Name" required>
-                    </div>
-                </div>
+        <li ng-class="getTabClass(13)" ng-click="setActiveTab(13)"><a href="" data-toggle="tab">Publications </a></li>
+        
+        <li ng-class="getTabClass(14)" ng-click="setActiveTab(14)"><a href="" data-toggle="tab">Lectures, Speeches or Posters</a></li>
 
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
+        <li ng-class="getTabClass(15)" ng-click="setActiveTab(15)"><a href="" data-toggle="tab">Contracts and Grants </a></li>
 
-                <div data-ng-show="error" class="text-danger col-md-offset-3 col-md-6">
-                    <strong data-ng-bind="error"></strong>
-                </div>
-            </div>
+        <li ng-class="getTabClass(16)" ng-click="setActiveTab(16)"><a href="" data-toggle="tab">University Governance and Service </a></li>
 
-            <!-- The directives below are defined in the reports.client.controller.js file. -->
-            <!-- They will be moved to a new directory: modules/reports/directives at a later time -->
-            <profile></profile>
-        </form> 
+        <li ng-class="getTabClass(17)" ng-click="setActiveTab(17)"><a href="" data-toggle="tab"> Consulations Outside the University </a></li>
+
+        <li ng-class="getTabClass(18)" ng-click="setActiveTab(18)"><a href="" data-toggle="tab"> Editor of a Scholarly Journal, Service on an Editorial Advisory Board or Reviewer For a Scholarly Journal </a></li>
+
+        <li ng-class="getTabClass(19)" ng-click="setActiveTab(19)"><a href="" data-toggle="tab">International Activities </a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div ng-class="getTabPaneClass(1)" id="section1-5">    
+            <div ng-include="'modules/reports/views/profile.client.view.html'"></div>
+        </div>       
+
+        <div ng-class="getTabPaneClass(6)" id="section6">
+            <div ng-include="'modules/reports/views/assigned-activity.client.view.html'"></div>
+        </div>
+
+        <div ng-class="getTabPaneClass(7)" id="section7">     
+            <div ng-include="'modules/reports/views/section-7.client.view.html'"></div>
+        </div>
+
+        <div ng-class="getTabPaneClass(10)" id="section10">     
+            <div ng-include="'modules/reports/views/section-10.client.view.html'"></div>
+        </div>  
+
+        <div ng-class="getTabPaneClass(11)" id="section11">     
+            <div ng-include="'modules/reports/views/section-11.client.view.html'"></div>
+        </div>   
+
+        <div ng-class="getTabPaneClass(12)" id="section12">     
+            <div ng-include="'modules/reports/views/section-12.client.view.html'"></div>
+        </div>
+
+        <div ng-class="getTabPaneClass(13)" id="section13">     
+            <div ng-include="'modules/reports/views/section-13.client.view.html'"></div>
+        </div> 
+
+        <div ng-class="getTabPaneClass(14)" id="section14">     
+            <div ng-include="'modules/reports/views/section-14.client.view.html'"></div>
+        </div> 
+
+        <div ng-class="getTabPaneClass(15)" id="section15">     
+            <div ng-include="'modules/reports/views/section-15.client.view.html'"></div>
+        </div> 
+
+        <div ng-class="getTabPaneClass(16)" id="section16">     
+            <div ng-include="'modules/reports/views/section-16.client.view.html'"></div>
+        </div>
+
+        <div ng-class="getTabPaneClass(17)" id="section17">     
+            <div ng-include="'modules/reports/views/section-17.client.view.html'"></div>
+        </div> 
+
+        <div ng-class="getTabPaneClass(18)" id="section18">     
+            <div ng-include="'modules/reports/views/section-18.client.view.html'"></div>
+        </div>
+
+        <div ng-class="getTabPaneClass(19)" id="section19">     
+            <div ng-include="'modules/reports/views/section-19.client.view.html'"></div>
+        </div>   
+
     </div>
+    </div>
+
 </section>
 
-<div class="col-md-2"></div>
 
-<div class="col-md-10">
-    <assigned-activity></assigned-activity>
-    <section7></section7>
-    <section10></section10>
-    <section11></section11>
-    <section12></section12>
-    <section13></section13>
-    <section14></section14>
-    <section15></section15>
-    <section16></section16>
-    <section17></section17>
-    <section18></section18>
-    <section19></section19>
-</div>
+
+
+

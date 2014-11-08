@@ -1,11 +1,20 @@
-/*angular.module('reports').controller('AssignedActivityController', ['$scope',
-	function($scope) {
+'use strict';
 
+angular.module('reports').controller('ProfileController', ['$scope', '$stateParams', '$location', 'Authentication',
+	function($scope, $stateParams, $location, Authentication, Reports ) {
+		$scope.authentication = Authentication;
+		
+				// Update existing Report
+		$scope.update = function() {
+			var report = $scope.report;
 
+			report.$update(function() {
+				$location.path('reports/' + report._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+		
+	}
+]);
 
-app.directive('profile', function(){
-    return {
-      restrict: 'E',
-      templateUrl: 'modules/reports/views/profile.client.view.html'
-    };
-});*/

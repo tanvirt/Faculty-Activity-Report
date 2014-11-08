@@ -1,10 +1,7 @@
-<section>
-
-<div class="col-md-12" style="padding-top:20px">
-    <h3 id="profile">1-5. Faculty Profile</h3>
-     <hr>
-
-    <form class="form-horizontal">
+<section class="col-md-10" data-ng-controller="ReportsController">
+    <h3>Faculty Profile</h3>
+    <hr>
+    <form class="form-horizontal" data-ng-submit="create()" novalidate>
         <fieldset>
             <div class="form-group">
                 <label class="col-md-3 control-label" for="name">Name</label>
@@ -17,6 +14,7 @@
                 <div class="col-md-3 controls">
                     <input type="text" data-ng-model="lastName" id="lastName" class="form-control" placeholder="Last" required>
                 </div>
+                <div class="col-md-1"></div>
             </div>
             
             <div class="form-group">
@@ -27,13 +25,14 @@
                       <option value="Not Tenured">Not Tenured</option>
                     </select>
                 </div>
+                <div class="col-md-1"></div>
             </div>
           
             <div class="form-group">
                 <label class="col-md-3 control-label" for="currentRank">Current Rank</label>
                 <div class="col-md-4 controls">
                     <!-- todo needs and ng-repeat with the content from the backend-->
-                    <select data-ng-model="currentRank" id="currentRank" class="form-control">
+                    <select data-ng-model="currentRank" id="currentRank" class="form-control" required>
                         <option value="Professor">
                             Professor
                         </option>
@@ -57,9 +56,10 @@
                         </option>
                     </select>
                 </div>
+
                 <div class="col-md-4 controls">
                     <!-- todo needs and ng-repeat with the proper values from the backend -->
-                    <select class="form-control" data-ng-model="department" required>
+                    <select class="form-control" id= "department" data-ng-model="department" required>
                         <option value="Agricultural and Biological Engineering">
                             Agricultural and Biological Engineering
                         </option>
@@ -101,6 +101,7 @@
                         </option>
                     </select>
                 </div>
+                <div class="col-md-1"></div>
             </div>
          
             <div class="form-group">
@@ -108,8 +109,7 @@
                 <div class="col-md-8 controls">
                     <input type="month" data-ng-model="dateAppointed" id="dateAppointed" class="form-control" required>
                 </div>
-
-                
+                <div class="col-md-1"></div>  
             </div>
             
             <div class="form-group">
@@ -117,10 +117,15 @@
                 <div class="col-md-8 controls">
                     <input type="text" data-ng-model="affiliateAppointments" id="affiliateAppointments" class="form-control" placeholder="Affiliate Appointments" required>
                 </div>
+                <div class="col-md-1"></div>
             </div>
 
-        
-        </fieldset>
+            <div class="form-group">
+                <div data-ng-show="error" class="text-danger col-md-offset-3">
+                    <strong data-ng-bind="error"></strong>
+                </div>
+                <button type="submit" class="col-md-offset-9 btn btn-primary">Save</button>
+            </div> 
+        </fieldset>  
     </form>
-</div>
 </section>
