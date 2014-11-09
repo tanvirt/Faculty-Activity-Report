@@ -13,7 +13,7 @@ var should = require('should'),
  * Globals
  */
  var fileCreated = false;
-
+/*
 describe('Report Controller Tests:', function() {
 	beforeEach(function(done) {
 
@@ -72,3 +72,4 @@ describe('Report Controller Tests:', function() {
 		done(); 
 	});
 });
+*/

@@ -58,9 +58,9 @@ describe('AssignedActivity Controller Tests', function() {
 			user: user
 		});
 
-		aa.save(function(err) {
-			done();
-		});
+		aa.save();
+
+		done();
 	});
 
 	describe('Testing the GET methods', function() {
