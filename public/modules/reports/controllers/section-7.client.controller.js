@@ -2,8 +2,7 @@
 
 angular.module('reports').controller('Section7Controller', ['$scope', '$stateParams', '$location', 'Authentication',
 	function($scope, $stateParams, $location, Authentication, Reports ) {
-		$scope.authentication = Authentication;
-		
+
 		//custom tinymce textarea
 		$scope.tinymceOptions = {
 			    theme: 'modern',
@@ -19,4 +18,3 @@ angular.module('reports').controller('Section7Controller', ['$scope', '$statePar
 		
 	}
 ]);
-
