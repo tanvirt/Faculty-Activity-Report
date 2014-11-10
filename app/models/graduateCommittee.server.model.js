@@ -43,7 +43,6 @@ gcSub.methods.getMonth = function() {
 	return this.degreeDate.getMonth() + 1;
 };
 
-//The count of each role will be calculated on demand by using the MongoDB count command
 var graduateCommittee = new Schema({
 	user: {			//multiple evaluations per user possible. Use this field to match with user
 		type: Schema.ObjectId,

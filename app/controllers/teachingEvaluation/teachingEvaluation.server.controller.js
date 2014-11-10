@@ -36,9 +36,9 @@ exports.create = function(req, res) {
 			semester: path.semester,
 			enrolled: path.enrolled,
 			responses: path.responses,
-			teacherMean: path.teacherMean,//[1,2,3,1,2,3,1,2,3],  //Figure out array.
-			departmentMean: path.departmentMean,//[2,3,4,2,3,4,2,3,4],
-			collegeMean: path.collegeMean//[4,4,4,4,4,4,4,4,4],
+			teacherMean: path.teacherMean,
+			departmentMean: path.departmentMean,
+			collegeMean: path.collegeMean
 		};
 		sections.push(subdoc);
 	}
@@ -87,7 +87,7 @@ exports.update = function(req, res) {
 };
 
 exports.readFromReport = function(req, res) {
-	TeachingEvaluation.findOne({report: req.report}, function(err, result) { //TODO: Figure out multiple evaluations
+	TeachingEvaluation.findOne({report: req.report}, function(err, result) { //One Teaching Evaluation holds all individual evaluations for the report
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
