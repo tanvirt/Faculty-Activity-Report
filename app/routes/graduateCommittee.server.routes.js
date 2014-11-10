@@ -14,5 +14,5 @@ module.exports = function(app) {
 		.put(users.requiresLogin, graduateCommittee.update);
 
 	// Finish by binding the middleware
-	app.param('graduateCommitteeId', graduateCommittee.graduateCommitteenById);
+	app.param('graduateCommitteeId', graduateCommittee.graduateCommitteeById);
 };

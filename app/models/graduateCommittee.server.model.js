@@ -44,7 +44,7 @@ gcSub.methods.getMonth = function() {
 };
 
 var graduateCommittee = new Schema({
-	user: {			//multiple evaluations per user possible. Use this field to match with user
+	user: {			
 		type: Schema.ObjectId,
 		ref: 'User'
 	},
