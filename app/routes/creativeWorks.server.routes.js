@@ -11,7 +11,7 @@ module.exports = function(app) {
 		.post(users.requiresLogin, creativeWorks.create);
 
 	app.route('/reports/:reportId/creativeWorks/:creativeWorksId')
-		.get(creativeWorks.read)
+		.get(users.requiresLogin, creativeWorks.read)
 		.put(users.requiresLogin, creativeWorks.update);
 
 	// Finish by binding the creativeWorks middleware
