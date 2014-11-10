@@ -14,6 +14,6 @@ module.exports = function(app) {
 		.get(teachingAdvising.read)
 		.put(users.requiresLogin, teachingAdvising.update);
 
-	// Finish by binding the AssignedActivity middleware
-	app.param('teachingAdvising', teachingAdvising.teachingAdvisingById);
+	// Finish by binding the TeachingAdvising middleware
+	app.param('teachingAdvisingId', teachingAdvising.teachingAdvisingById);
 };

@@ -87,8 +87,11 @@ describe('TeachingAdvising Controller Tests', function() {
 						.end(function(err, res) {
 							should.not.exist(err);
 
-							res.body.should.be.an.Object;						
+							res.body.should.be.an.Object.and.have.property('info', advising.info);						
 
+							res.body.should.have.property('_id', advising.id);
+						  	res.body.should.have.property('user', user.id);
+						  	res.body.should.have.property('report', report.id);
 						  	done();
 						});
 				});
