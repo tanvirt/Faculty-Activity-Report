@@ -8,7 +8,13 @@ var validateDate = function(p) {
 	return validator.isDate(p);
 };	
 	
-var subcontract = new Schema({
+//Contents of schema will pull majority of content from outside data source, not from user
+//Overall mean is to be calculated on demand, not stored
+var Contracts = new Schema({
+	user: {			//multiple evaluations per user possible. Use this field to match with user
+		type: Schema.ObjectId,
+		ref: 'User'
+	},
 	title: {
 		type: String,
 		required: true
@@ -19,18 +25,17 @@ var subcontract = new Schema({
 		default: 'externally',
 		required: true
 	},
-
 	PI: {
 		type: String,
 		enum: ['PI', 'co-PI', 'N/A']
 	},
 	startDate: {
 		type: Date,
-		//validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
+		validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
 	},
 	endDate: {
 		type: Date,
-		//validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
+		validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
 	},
 	fundingAgency: {
 		type: String,
@@ -43,18 +48,7 @@ var subcontract = new Schema({
 	value: {
 		type: Number,
 		required: true
-	}
-});
-
-
-//Contents of schema will pull majority of content from outside data source, not from user
-//Overall mean is to be calculated on demand, not stored
-var Contracts = new Schema({
-	user: {			//multiple evaluations per user possible. Use this field to match with user
-		type: Schema.ObjectId,
-		ref: 'User'
 	},
-	sub: [subcontract],
 	report: {
 		type: Schema.ObjectId,
 		ref: 'Report'
