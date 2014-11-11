@@ -6,7 +6,8 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors'),
 	Report = mongoose.model('Report'),
-	_ = require('lodash');
+	_ = require('lodash'),
+	u = require('underscore');
 
 //load in functions from previous controller
 var rCtrl = require('./report');
@@ -349,7 +350,14 @@ exports.delete = function(req, res) {
  * List of Reports
  */
 exports.list = function(req, res) { 
-	Report.find()
+
+	var s_param = {user: req.user};
+
+	if (u.contains(req.user.roles, 'admin')) {
+		s_param = {};
+	}
+
+	Report.find(s_param)
 	.sort('-created')
 	.populate('user', 'displayName')
 
@@ -429,8 +437,9 @@ exports.reportByID = function(req, res, next, id) {
  * Report authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.report.user.id !== req.user.id) {
+	if (req.report.user.id !== req.user.id || req.user.type.contains('admin')) {
 		return res.status(403).send('User is not authorized');
 	}
+
 	next();
 };
