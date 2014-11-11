@@ -17,14 +17,6 @@ var async = require('async');
 
 var user, report, advising;
 
-function removeIds(id) {
-	delete id._id;
-	delete id.report;
-	delete id.user;
-
-	return id;
-}
-
 describe('TeachingAdvising Controller Tests', function() {
 	beforeEach(function(done) {
 
@@ -212,7 +204,9 @@ describe('TeachingAdvising Controller Tests', function() {
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
 				  	.send({
-				  		advising: 'teaching other stuff'
+				  		teachingAdvising: {
+				  			info: 'teaching other stuff'
+				  		}
 				  	})
 				  	.expect('Content-Type', /json/)
 				  	.expect(200)

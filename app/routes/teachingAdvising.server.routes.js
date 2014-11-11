@@ -11,7 +11,7 @@ module.exports = function(app) {
 		.post(users.requiresLogin, teachingAdvising.create);
 
 	app.route('/reports/:reportId/teachingAdvising/:teachingAdvisingId')
-		.get(teachingAdvising.read)
+		.get(users.requiresLogin, teachingAdvising.read)
 		.put(users.requiresLogin, teachingAdvising.update);
 
 	// Finish by binding the TeachingAdvising middleware
