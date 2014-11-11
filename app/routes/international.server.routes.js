@@ -14,6 +14,6 @@ module.exports = function(app) {
 		.get(international.read)
 		.put(users.requiresLogin, international.update);
 
-	// Finish by binding the AssignedActivity middleware
-	app.param('international', international.internationalById);
+	// Finish by binding the International middleware
+	app.param('internationalId', international.internationalById);
 };
