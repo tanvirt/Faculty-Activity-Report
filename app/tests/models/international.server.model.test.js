@@ -25,14 +25,6 @@ describe('International Model Unit Tests:', function() {
 			done();
 		});	
 		
-		/*it('should fail to save if the field is empty', function(done) {
-            international.activities = '';
-            return international.save(function(err) {
-                should.exist(err);
-                done();
-            });
-        });*/
-		
 	});
 
 	afterEach(function(done) {

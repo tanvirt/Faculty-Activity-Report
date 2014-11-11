@@ -14,6 +14,6 @@ module.exports = function(app) {
 		.get(membership.read)
 		.put(users.requiresLogin, membership.update);
 
-	// Finish by binding the AssignedActivity middleware
-	app.param('membership', membership.membershipById);
+	// Finish by binding the Membership middleware
+	app.param('membershipId', membership.membershipById);
 };
