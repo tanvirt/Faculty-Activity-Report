@@ -14,6 +14,11 @@ angular.module('reports').controller('ProfileController', ['$scope', '$statePara
 				$scope.error = errorResponse.data.message;
 			});
 		};
+		$scope.findOne = function() {
+			$scope.report = Reports.get({
+				reportId: $stateParams.reportId
+			});
+		};
 		
 	}
 ]);
