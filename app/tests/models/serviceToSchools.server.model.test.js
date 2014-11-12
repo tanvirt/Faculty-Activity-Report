@@ -5,27 +5,32 @@ var should = require('should'),
 	mongoose = require('mongoose'),
 	serviceToSchools = mongoose.model('serviceToSchools');
 
-var serviceToSchools;
+var s;
 
 describe('serviceToSchools Model Unit Tests:', function() {
 	beforeEach(function(done) {
-		serviceToSchools = new serviceToSchools({
+		s = new serviceToSchools({
 			//service: 'I did stuff for the school'
 		});
 		done();
 	});
 	
 	describe('Method Save', function() {
-		it('should save without problems', function(done) {
-			serviceToSchools.save(done);
+		it('should save without problems with nothing given', function(done) {
+			s.save(done);
 		});
 
-/*
+
 		it('should set service to N/A if nothing given', function(done) {
-			assert.equal(serviceToSchools.service, 'N/A');
+			assert.equal(s.service, 'N/A');
 			done();
 		});	
-*/		
+		
+		it('should save without problems when info is given', function(done) {
+			s.service = 'I did service for the school. I am very saintly.';
+			s.save(done);
+		});
+		
 		
 		/*it('should fail to save if the field is empty', function(done) {
             serviceToSchools.service = '';
