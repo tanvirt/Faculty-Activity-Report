@@ -11,7 +11,7 @@ module.exports = function(app) {
 		.post(users.requiresLogin, membership.create);
 
 	app.route('/reports/:reportId/membership/:membershipId')
-		.get(membership.read)
+		.get(users.requiresLogin, membership.read)
 		.put(users.requiresLogin, membership.update);
 
 	// Finish by binding the Membership middleware
