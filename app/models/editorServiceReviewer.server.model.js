@@ -6,7 +6,8 @@ var Schema = mongoose.Schema;
 var EditorServiceReviewer = new Schema({
 	
 	info: {
-		type: String
+		type: String,
+		default: 'N/A'
 	},
 	user: {
 		type: Schema.ObjectId,

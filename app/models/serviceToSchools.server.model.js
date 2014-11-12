@@ -13,7 +13,8 @@ var validateLocalStrategyProperty = function(property) {
 var serviceToSchools = new Schema({
 
     service: { 
-        type: String
+        type: String,
+		default: 'N/A'
         //required: true,
        /* validate: [validateLocalStrategyProperty,
             'If no value is specified, please input "N/A"'] */
