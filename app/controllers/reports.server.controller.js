@@ -436,7 +436,7 @@ exports.reportByID = function(req, res, next, id) {
  * Report authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.report.user.id !== req.user.id || req.user.type.contains('admin')) {
+	if (req.report.user.id !== req.user.id || u.contains(req.user.roles, 'admin')) {
 		return res.status(403).send('User is not authorized');
 	}
 
