@@ -332,7 +332,6 @@ exports.update = function(req, res) {
  * Delete an Report
  */
 exports.delete = function(req, res) {
-	console.log('Backend Removed');
 	var report = req.report;
 
 	report.remove(function(err) {

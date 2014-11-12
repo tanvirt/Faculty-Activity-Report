@@ -6,7 +6,7 @@ var should = require('should');
 
 var request = require('supertest');
 
-var	pofileCtrl = require('../../controllers/profile/profile');
+var	profileCtrl = require('../../controllers/profile/profile');
 
 var mongoose = require('mongoose');
 var AssignedActivity = mongoose.model('Profile');
