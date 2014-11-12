@@ -11,7 +11,7 @@ module.exports = function(app) {
 		.post(users.requiresLogin, international.create);
 
 	app.route('/reports/:reportId/international/:internationalId')
-		.get(international.read)
+		.get(users.requiresLogin, international.read)
 		.put(users.requiresLogin, international.update);
 
 	// Finish by binding the International middleware

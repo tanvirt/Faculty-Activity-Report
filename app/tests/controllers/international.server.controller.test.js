@@ -7,19 +7,19 @@ var app = require('../../../server');
 var should = require('should');
 var request = require('supertest');
 
-var	teachingAdvising = require('../../controllers/teachingAdvising/teachingAdvising');
+var	international = require('../../controllers/international/international');
 
 var mongoose = require('mongoose');
-var TeachingAdvising = mongoose.model('TeachingAdvising');
+var International = mongoose.model('International');
 
 var User = mongoose.model('User');
 var Report = mongoose.model('Report');
 
 var async = require('async');
 
-var user, report, advising;
+var user, report, activity;
 
-describe('TeachingAdvising Controller Tests', function() {
+describe('International Controller Tests', function() {
 	beforeEach(function(done) {
 
 		user = new User({
@@ -40,30 +40,30 @@ describe('TeachingAdvising Controller Tests', function() {
 
 		report.save();
 
-		advising = new TeachingAdvising({
-			info: 'I am teaching some courses and advising some people',
+		activity = new International({
+			activities: 'I did stuff in other countries',
 
 			report: report,
 			user: user
 		});
 
-		advising.save();
+		activity.save();
 		
 		done();
 	});
 
 	describe('Testing the GET methods', function() {
 
-		it('should fail to get a teachingAdvising if not logged in', function(done) {
+		it('should fail to get an international if not logged in', function(done) {
 			request(app)
-			  .get('/reports/' + report.id + '/teachingAdvising')
+			  .get('/reports/' + report.id + '/international')
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
 			  .end(done);
 		});
 
-		it('should be able to get a teachingAdvising associated with its report id', function(done) {
+		it('should be able to get an international associated with its report id', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -73,7 +73,7 @@ describe('TeachingAdvising Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-						.get('/reports/' + report.id + '/teachingAdvising')
+						.get('/reports/' + report.id + '/international')
 						.set('cookie', res.headers['set-cookie'])
 						.set('Accept', 'application/json')
 						.expect('Content-Type', /json/)
@@ -81,9 +81,9 @@ describe('TeachingAdvising Controller Tests', function() {
 						.end(function(err, res) {
 							should.not.exist(err);
 
-							res.body.should.be.an.Object.and.have.property('info', advising.info);						
+							res.body.should.be.an.Object.and.have.property('activities', activity.activities);						
 
-							res.body.should.have.property('_id', advising.id);
+							res.body.should.have.property('_id', activity.id);
 						  	res.body.should.have.property('user', user.id);
 						  	res.body.should.have.property('report', report.id);
 						  	done();
@@ -91,16 +91,16 @@ describe('TeachingAdvising Controller Tests', function() {
 				});
 		});
 
-		it('should fail to get a specific teachingAdvising if not logged in', function(done) {
+		it('should fail to get a specific international if not logged in', function(done) {
 			request(app)
-			  .get('/reports/' + report.id + '/teachingAdvising/' + advising.id)
+			  .get('/reports/' + report.id + '/international/' + activity.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
 			  .end(done);
 		});
 
-		it('should be able to get a specific teachingAdvising based on its id', function(done) {
+		it('should be able to get a specific international based on its id', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -110,7 +110,7 @@ describe('TeachingAdvising Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					  .get('/reports/' + report.id + '/teachingAdvising/' + advising.id)
+					  .get('/reports/' + report.id + '/international/' + activity.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .expect('Content-Type', /json/)
@@ -120,7 +120,7 @@ describe('TeachingAdvising Controller Tests', function() {
 
 					  	res.body.should.be.an.Object;
 
-					  	res.body.should.have.property('_id', advising.id);
+					  	res.body.should.have.property('_id', activity.id);
 					  	res.body.should.have.property('user', user.id);
 					  	res.body.should.have.property('report', report.id);
 
@@ -133,23 +133,23 @@ describe('TeachingAdvising Controller Tests', function() {
 
 	describe('Testing the POST methods', function() {
 
-		var advisingObj = {
-			teachingAdvising: {
-			    advising:'teaching stuff'
+		var internationalObj = {
+			international: {
+			    activities:'I did so much stuff in other countries'
 		 	}
 		};
 
-		it('should fail to create a teachingAdvising if not logged in', function(done) {
+		it('should fail to create an international if not logged in', function(done) {
 			request(app)
-			  .post('/reports/' + report.id + '/teachingAdvising')
+			  .post('/reports/' + report.id + '/international')
 			  .set('Accept', 'application/json')
-			  .send(advisingObj)
+			  .send(internationalObj)
 			  .expect('Content-Type', /json/)
 			  .expect(401)
 			  .end(done);
 		});
 
-		it('should be able to create a new teachingAdvising', function(done) {
+		it('should be able to create a new international', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -159,16 +159,16 @@ describe('TeachingAdvising Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					  .post('/reports/' + report.id + '/teachingAdvising')
+					  .post('/reports/' + report.id + '/international')
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
-					  .send(advisingObj)
+					  .send(internationalObj)
 					  .expect('Content-Type', /json/)
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
 
-					  	res.body.should.have.property('info', advisingObj.teachingAdvising.advising);
+					  	res.body.should.have.property('activities', internationalObj.international.activities);
 
 					  	res.body.should.have.property('_id');
 					  	res.body.should.have.property('user');
@@ -183,16 +183,16 @@ describe('TeachingAdvising Controller Tests', function() {
 
 	describe('Testing the PUT methods', function() {
 
-		it('should fail to update a specific teachingAdvising if not logged in', function(done) {
+		it('should fail to update a specific international if not logged in', function(done) {
 			request(app)
-			  .put('/reports/' + report.id + '/teachingAdvising/' + advising.id)
+			  .put('/reports/' + report.id + '/international/' + activity.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
 			  .end(done);
 		});
 
-		it('should be able to update a specific teachingAdvising', function(done) {
+		it('should be able to update a specific international', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -202,12 +202,12 @@ describe('TeachingAdvising Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					.put('/reports/' + report.id + '/teachingAdvising/' + advising.id)
+					.put('/reports/' + report.id + '/international/' + activity.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
 				  	.send({
-				  		teachingAdvising: {
-				  			info: 'teaching other stuff'
+				  		international: {
+				  			activities: 'doing other stuff in other countries'
 				  		}
 				  	})
 				  	.expect('Content-Type', /json/)
@@ -215,9 +215,9 @@ describe('TeachingAdvising Controller Tests', function() {
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
 
-					  	res.body.should.be.an.Object.and.have.property('info', 'teaching other stuff');
+					  	res.body.should.be.an.Object.and.have.property('activities', 'doing other stuff in other countries');
 
-					  	res.body.should.have.property('_id', advising.id);
+					  	res.body.should.have.property('_id', activity.id);
 					  	res.body.should.have.property('user', user.id);
 					  	res.body.should.have.property('report', report.id);
 
@@ -231,7 +231,7 @@ describe('TeachingAdvising Controller Tests', function() {
 	});
 
 	afterEach(function(done) {
-		TeachingAdvising.remove().exec();
+		International.remove().exec();
 		User.remove().exec();
 		Report.remove().exec();
 		done();

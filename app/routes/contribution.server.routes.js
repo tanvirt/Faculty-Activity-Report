@@ -11,7 +11,7 @@ module.exports = function(app) {
 		.post(users.requiresLogin, contribution.create);
 
 	app.route('/reports/:reportId/contribution/:contributionId')
-		.get(contribution.read)
+		.get(users.requiresLogin, contribution.read)
 		.put(users.requiresLogin, contribution.update);
 
 	// Finish by binding the Contribution middleware
