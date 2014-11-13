@@ -27,7 +27,7 @@ exports.create = function(req, res) {
 	}
 
 	var consultationsOutsideUniversity = new ConsultationsOutsideUniversity({
-		info: req.body.consultationsOutsideUniversity.info,
+		consultation: req.body.consultationsOutsideUniversity.info,
 
 		user: req.user,
 		report: req.report
