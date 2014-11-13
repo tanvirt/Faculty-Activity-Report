@@ -90,6 +90,8 @@ exports.create = function(req, res) {
 				report.governance = models.governance._id;
 			if (models.editorServiceReviewer)
 				report.editorServiceReviewer = models.editorServiceReviewer._id;
+			if (models.publication)
+				report.publication = models.publication._id;
 				
 			report.save(function(err) {
 				if (err) {
@@ -145,6 +147,8 @@ exports.create = function(req, res) {
 						models.governance.report = report;
 					if (models.editorServiceReviewer) 
 						models.editorServiceReviewer.report = report;
+					if (models.publication)
+						models.publication.report = report;
 						
 					
 					//Update existing document
@@ -288,7 +292,11 @@ exports.create = function(req, res) {
 						
 						});
 					}
-					
+					if (models.publication) {
+						models.publication.save(function(err) {
+							
+						});
+					}
 					
 					
 					//get json to frontend
@@ -381,6 +389,7 @@ exports.list = function(req, res) {
 	.populate('furtherInformationSection')
 	.populate('consultationsOutsideUniversity')
 	.populate('governance')
+	.populate('publication')
 
 
 	.exec(function(err, reports) {
@@ -421,6 +430,7 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('furtherInformationSection')
 	.populate('consultationsOutsideUniversity')
 	.populate('governance')
+	.populate('publication')
 	
 	
 	//.populate('teachingEvaluation')

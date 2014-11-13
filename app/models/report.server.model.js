@@ -140,6 +140,10 @@ var ReportSchema = new Schema({
 	
 	editorServiceReviewer: {
 		type: Schema.Types.ObjectId, ref: 'EditorServiceReviewer'
+	},
+
+	publication: {
+		type: Schema.Types.ObjectId, ref: 'Publication'
 	}
 
 //END TEMP-------------------------------------------------

@@ -1,59 +1,47 @@
 'use strict';
 
-var renderModel = require('../../../app/templates/renderModel');
 var mongoose = require('mongoose');
 
 // Compile Schema into Model here
 var Publication = mongoose.model('Publication');
 
-/*
-Populates the database with test data
-*/
-function dummyObjects(Model) {
-	var objs = [];
-	
-	objs[0] = new Model({
-		title: 'Best Work Ever',
-		authors: ['Me', 'Myself', 'I'],
-		publicationInfo: '(nonsense that makes this MLA)',
-		year: '10/08/1994',
-		section: 'Books, Contributor',
-		subsection: 'Cool Ones'
-	});
+var modelClass = require('../modelClass');
+var renderModel = new modelClass.RenderModel( Publication, 'publication/publication.tex', 'publication/na.tex');
 
-	objs[1] = new Model({
-		title: 'We\'re All In This Together',
-		authors: ['Me', 'You', 'Zeffron'],
-		PublicationInfo: '11111',
-		year: '04/16/2003',
-		section: 'Books, Edited',
-		subsection: 'Cool Ones'
-	});
-	
-	objs[2] = new Model({
-		title: 'La Sequel',
-		authors: ['One', 'Two'],
-		PublicationInfo: 'abd-22',
-		year: 'August 1990',
-		section: 'Books, Co-authored'
-	});
-
-	return objs;
-}
+var is = require('is-js');
 
 /*
-rearrange data, pass in additional fields
+will explicitly populate the report with
+the data you provide
 */
-function passObj(objArray) {
-	return {'publications': objArray};
-}
+renderModel.setDebugPopulate( false, {
+	info: 'I published stuff'
+});
 
 /*
-Helper function that gets called in report.server.controller.js
-Output is pushed into a LaTex PDF there.
+will explicitly print the N/A latex
+to the screen for debugging purposes
 */
-module.exports.render = function(callback) {
-	renderModel.renderMultiple('publication/publication.tex', Publication, {}, passObj, dummyObjects, function ( renderStr ) {
-		callback(null, renderStr);
+renderModel.isDebugNull = false;
+
+/*
+render function that finds the obj in the database
+and converts it into latex.
+*/
+module.exports.render = function(req, callback) {
+	renderModel.render(req, callback);
+};
+
+module.exports.submit = function(req, callback) {
+
+	if (is.empty(req.body.publication)) return callback(null, null);
+
+	var publication = new Publication({
+		info: req.body.publication.info,
+		user: req.user		
+	});
+
+	publication.save(function(err) {
+		callback(err, publication);
 	});
 };
