@@ -195,7 +195,7 @@ exports.create = function(req, res) {
 
 					if (models.teachingAdvising) {
 						models.teachingAdvising.save(function(err) {
-							//console.log('TeachingAdvising Saved');
+							//console.log('teachingAdvising Saved');
 						});
 					}
 

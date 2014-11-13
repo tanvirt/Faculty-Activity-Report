@@ -5,19 +5,19 @@ var app = require('../../../server');
 var should = require('should');
 var request = require('supertest');
 
-var	editorServiceReviewer = require('../../controllers/editorServiceReviewer/editorServiceReviewer');
+var	governance = require('../../controllers/governance/governance');
 
 var mongoose = require('mongoose');
-var EditorServiceReviewer = mongoose.model('EditorServiceReviewer');
+var Governance = mongoose.model('Governance');
 
 var User = mongoose.model('User');
 var Report = mongoose.model('Report');
 
 var async = require('async');
 
-var user, report, esr;
+var user, report, gov;
 
-describe('EditorServiceReviewer Controller Tests', function() {
+describe('Governance Controller Tests', function() {
 	beforeEach(function(done) {
 
 		user = new User({
@@ -38,30 +38,30 @@ describe('EditorServiceReviewer Controller Tests', function() {
 
 		report.save();
 
-		esr = new EditorServiceReviewer({
-			info: 'editing and servicing and reviewing',
+		gov = new Governance({
+			govStr: 'editing and servicing and reviewing',
 
 			report: report,
 			user: user
 		});
 
-		esr.save();
+		gov.save();
 		
 		done();
 	});
 
 	describe('Testing the GET methods', function() {
 
-		it('should fail to get a editorServiceReviewer if not logged in', function(done) {
+		it('should fail to get a governance if not logged in', function(done) {
 			request(app)
-			  .get('/reports/' + report.id + '/editorServiceReviewer')
+			  .get('/reports/' + report.id + '/governance')
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
 			  .end(done);
 		});
 
-		it('should be able to get a editorServiceReviewer associated with its report id', function(done) {
+		it('should be able to get a governance associated with its report id', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -71,7 +71,7 @@ describe('EditorServiceReviewer Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-						.get('/reports/' + report.id + '/editorServiceReviewer')
+						.get('/reports/' + report.id + '/governance')
 						.set('cookie', res.headers['set-cookie'])
 						.set('Accept', 'application/json')
 						.expect('Content-Type', /json/)
@@ -79,9 +79,9 @@ describe('EditorServiceReviewer Controller Tests', function() {
 						.end(function(err, res) {
 							should.not.exist(err);
 
-							res.body.should.be.an.Object.and.have.property('info', esr.info);						
+							res.body.should.be.an.Object.and.have.property('govStr', gov.govStr);						
 
-							res.body.should.have.property('_id', esr.id);
+							res.body.should.have.property('_id', gov.id);
 						  	res.body.should.have.property('user', user.id);
 						  	res.body.should.have.property('report', report.id);
 						  	done();
@@ -89,16 +89,16 @@ describe('EditorServiceReviewer Controller Tests', function() {
 				});
 		});
 
-		it('should fail to get a specific editorServiceReviewer if not logged in', function(done) {
+		it('should fail to get a specific governance if not logged in', function(done) {
 			request(app)
-			  .get('/reports/' + report.id + '/editorServiceReviewer/' + esr.id)
+			  .get('/reports/' + report.id + '/governance/' + gov.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
 			  .end(done);
 		});
 
-		it('should be able to get a specific editorServiceReviewer based on its id', function(done) {
+		it('should be able to get a specific governance based on its id', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -108,7 +108,7 @@ describe('EditorServiceReviewer Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					  .get('/reports/' + report.id + '/editorServiceReviewer/' + esr.id)
+					  .get('/reports/' + report.id + '/governance/' + gov.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .expect('Content-Type', /json/)
@@ -118,7 +118,7 @@ describe('EditorServiceReviewer Controller Tests', function() {
 
 					  	res.body.should.be.an.Object;
 
-					  	res.body.should.have.property('_id', esr.id);
+					  	res.body.should.have.property('_id', gov.id);
 					  	res.body.should.have.property('user', user.id);
 					  	res.body.should.have.property('report', report.id);
 
@@ -131,23 +131,23 @@ describe('EditorServiceReviewer Controller Tests', function() {
 
 	describe('Testing the POST methods', function() {
 
-		var esrObj = {
-			editorServiceReviewer: {
-			    info:'new editing stuff'
+		var govObj = {
+			governance: {
+			    govStr:'new editing stuff'
 		 	}
 		};
 
-		it('should fail to create a editorServiceReviewer if not logged in', function(done) {
+		it('should fail to create a governance if not logged in', function(done) {
 			request(app)
-			  .post('/reports/' + report.id + '/editorServiceReviewer')
+			  .post('/reports/' + report.id + '/governance')
 			  .set('Accept', 'application/json')
-			  .send(esrObj)
+			  .send(govObj)
 			  .expect('Content-Type', /json/)
 			  .expect(401)
 			  .end(done);
 		});
 
-		it('should be able to create a new editorServiceReviewer', function(done) {
+		it('should be able to create a new governance', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -157,16 +157,16 @@ describe('EditorServiceReviewer Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					  .post('/reports/' + report.id + '/editorServiceReviewer')
+					  .post('/reports/' + report.id + '/governance')
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
-					  .send(esrObj)
+					  .send(govObj)
 					  .expect('Content-Type', /json/)
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
 
-					  	res.body.should.have.property('info', esrObj.editorServiceReviewer.info);
+					  	res.body.should.have.property('govStr', govObj.governance.govStr);
 
 					  	res.body.should.have.property('_id');
 					  	res.body.should.have.property('user');
@@ -181,16 +181,16 @@ describe('EditorServiceReviewer Controller Tests', function() {
 
 	describe('Testing the PUT methods', function() {
 
-		it('should fail to update a specific editorServiceReviewer if not logged in', function(done) {
+		it('should fail to update a specific governance if not logged in', function(done) {
 			request(app)
-			  .put('/reports/' + report.id + '/editorServiceReviewer/' + esr.id)
+			  .put('/reports/' + report.id + '/governance/' + gov.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
 			  .end(done);
 		});
 
-		it('should be able to update a specific editorServiceReviewer', function(done) {
+		it('should be able to update a specific governance', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -200,12 +200,12 @@ describe('EditorServiceReviewer Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					.put('/reports/' + report.id + '/editorServiceReviewer/' + esr.id)
+					.put('/reports/' + report.id + '/governance/' + gov.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
 				  	.send({
-				  		editorServiceReviewer: {
-				  			info: 'editing other stuff'
+				  		governance: {
+				  			govStr: 'editing other stuff'
 				  		}
 				  	})
 				  	.expect('Content-Type', /json/)
@@ -213,9 +213,9 @@ describe('EditorServiceReviewer Controller Tests', function() {
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
 
-					  	res.body.should.be.an.Object.and.have.property('info', 'editing other stuff');
+					  	res.body.should.be.an.Object.and.have.property('govStr', 'editing other stuff');
 
-					  	res.body.should.have.property('_id', esr.id);
+					  	res.body.should.have.property('_id', gov.id);
 					  	res.body.should.have.property('user', user.id);
 					  	res.body.should.have.property('report', report.id);
 
@@ -229,7 +229,7 @@ describe('EditorServiceReviewer Controller Tests', function() {
 	});
 
 	afterEach(function(done) {
-		EditorServiceReviewer.remove().exec();
+		Governance.remove().exec();
 		User.remove().exec();
 		Report.remove().exec();
 		done();
