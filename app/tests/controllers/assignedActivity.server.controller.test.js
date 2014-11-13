@@ -1,5 +1,7 @@
 'use strict';
 
+/*jshint expr: true*/
+
 var app = require('../../../server');
 
 var should = require('should');

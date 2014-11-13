@@ -1,5 +1,7 @@
 'use strict';
 
+/*jshint expr: true*/
+
 var mongoose = require('mongoose');
 var Governance = mongoose.model('Governance');
 
