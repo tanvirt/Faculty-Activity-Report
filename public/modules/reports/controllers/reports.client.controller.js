@@ -54,7 +54,7 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 				},
 
 				teachingAdvising: {
-					advising: this.teachingAdvising
+					info: this.teachingAdvising
 				},
 
 				teachingEvaluation: this.teachingEvaluationArray,

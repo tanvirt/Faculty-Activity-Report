@@ -27,7 +27,7 @@ exports.create = function(req, res) {
 	}
 
 	var teachingAdvising = new TeachingAdvising({
-		info: req.body.teachingAdvising.advising,
+		info: req.body.teachingAdvising.info,
 
 		user: req.user,
 		report: req.report
