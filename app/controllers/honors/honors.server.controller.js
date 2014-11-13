@@ -22,7 +22,7 @@ exports.create = function(req, res) {
 		return res.jsonp({
 			err: 'Post (create): Does not exist',
 			message: 'req.body.honors did not get sent to backend',
-			changes: 'No International Created'
+			changes: 'No ConsultationsOutsideUniversity Created'
 		});
 	}
 
