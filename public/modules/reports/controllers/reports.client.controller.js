@@ -103,6 +103,10 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 				
 				editorServiceReviewer: {
 					info: this.editorServiceReviewer
+				},
+
+				publication: {
+					info: this.publication
 				}
 
 

@@ -60,8 +60,7 @@ exports.generate = function(req,res,next) {
 		async.apply(renderCreativeWorks.render, req),
 		async.apply(renderPatents.render, req),
 		
-
-		renderPublication.render,
+		async.apply(renderPublication.render, req),
 		async.apply(renderContribution.render, req),
 
 		async.apply(renderConferences.render, req),
@@ -152,7 +151,8 @@ exports.submit = function(req, res, next) {
 		async.apply(renderContracts.submit, req),
 		async.apply(renderConsultationsOutsideUniversity.submit, req),
 		async.apply(renderGovernance.submit, req),
-		async.apply(renderEditorServiceReviewer.submit, req)		
+		async.apply(renderEditorServiceReviewer.submit, req),
+		//async.apply(renderPublication.submit, req)	
 
 	], function(err, models) {
 		if (err) return res.status(500).send({ error: 'Submit Failed' });	
@@ -184,7 +184,8 @@ exports.submit_02 = function(req, res, callback) {
 		serviceToSchools: async.apply(renderServiceToSchools.submit, req),
 		consultationsOutsideUniversity: async.apply(renderConsultationsOutsideUniversity.submit, req),
 		governance: async.apply(renderGovernance.submit, req),
-		editorServiceReviewer: async.apply(renderEditorServiceReviewer.submit, req)
+		editorServiceReviewer: async.apply(renderEditorServiceReviewer.submit, req),
+		//publication: async.apply(renderPublication.submit, req)
 		
 		
 	}, function(err, models) {
