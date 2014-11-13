@@ -135,7 +135,7 @@ describe('TeachingAdvising Controller Tests', function() {
 
 		var advisingObj = {
 			teachingAdvising: {
-			    advising:'teaching stuff'
+			    info:'teaching stuff'
 		 	}
 		};
 
@@ -168,7 +168,7 @@ describe('TeachingAdvising Controller Tests', function() {
 					  .end(function(err, res) {
 					  	should.not.exist(err);
 
-					  	res.body.should.have.property('info', advisingObj.teachingAdvising.advising);
+					  	res.body.should.have.property('info', advisingObj.teachingAdvising.info);
 
 					  	res.body.should.have.property('_id');
 					  	res.body.should.have.property('user');
