@@ -73,7 +73,7 @@ exports.createNew = function(req, res) {
 
 	var name = new Name({
 		firstName: 'MyFirstName',
-		middleName: 'MyMiddleName',
+		middleName: 'M',
 		lastName: 'MyLastName',
 
 		report: report,
@@ -81,20 +81,32 @@ exports.createNew = function(req, res) {
 	});
 
 	var tenure = new Tenure({
-		tenure: 'Not Tenured'
+		tenure: 'Not Tenured',
+
+		report: report,
+		user: req.user
 	});
 
 	var currentRank = new CurrentRank({
 		rank: 'Professor',
-		department: 'Agricultural and Biological Engineering'
+		department: 'Agricultural and Biological Engineering',
+
+		report: report,
+		user: req.user
 	});
 
 	var dateAppointed = new DateAppointed({
-		date: 'October 1993'
+		date: 'October 1993',
+
+		report: report,
+		user: req.user
 	});
 
 	var affiliateAppointments = new AffiliateAppointments({
-		app: 'My AffiliateAppointments'
+		app: 'My AffiliateAppointments',
+
+		report: report,
+		user: req.user
 	});
 
 	var profile = new Profile({
@@ -108,11 +120,17 @@ exports.createNew = function(req, res) {
 		user: req.user
 	});
 
-	report.name = name.id;
-	report.tenure = tenure.id;
-	report.currentRank = currentRank.id;
-	report.dateAppointed = dateAppointed.id;
-	report.affiliateAppointments = affiliateAppointments.id;
+	name.save();
+	tenure.save();
+	currentRank.save();
+	dateAppointed.save();
+	affiliateAppointments.save();
+
+	report.name = name._id;
+	report.tenure = tenure._id;
+	report.currentRank = currentRank._id;
+	report.dateAppointed = dateAppointed._id;
+	report.affiliateAppointments = affiliateAppointments._id;
 
 	report.save(function(err) {
 		if (err) return res.jsonp(err);
