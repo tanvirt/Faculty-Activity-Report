@@ -12,10 +12,49 @@ var join = path.join;
 
 var _ = require('lodash');
 
-/*
-Gets the data from the frontend and
-saves it in the database.
-*/
+var node_xj = require('xls-to-json');
+
+exports.viewCtrl = function(req, res) {
+	res.render('report/upload', {
+		title: 'excel'
+	});
+};
+
+exports.createExcel = function(req, res) {
+	console.log('Body: ' + require('util').inspect(req.files));
+	//console.log(require('util').inspect(req));
+	
+	/*
+	node_xj({
+		input: req.files,  
+   		output: 'output.json'
+    	//sheet: "sheetname",  
+	}, function(err, result) {
+	    if(err) {
+	      console.error(err);
+	    } else {
+	      console.log(result);
+	    }
+  	});*/
+res.jsonp(req.files);
+
+};
+
+exports.updateExcel = function(req, res) {
+	node_xj({
+		input: req.teachingEvaluation.excel,  
+   		output: 'output.json'
+    	//sheet: "sheetname",  
+	}, function(err, result) {
+	    if(err) {
+	      console.error(err);
+	    } else {
+	      console.log(result);
+	    }
+  	});
+};
+
+
 
 exports.create = function(req, res) {
 	//For now, this will work like other sections until excel parser is done
@@ -36,7 +75,7 @@ exports.create = function(req, res) {
 		teacherMean: req.body.teachingEvaluation.teacherMean,
 		departmentMean: req.body.teachingEvaluation.departmentMean,
 		collegeMean: req.body.teachingEvaluation.collegeMean,
-		
+
 		user: req.user,
 		report: req.report
 	});

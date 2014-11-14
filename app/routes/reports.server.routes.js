@@ -25,6 +25,9 @@ module.exports = function(app) {
 		.get(users.requiresLogin, reports.hasAuthorization, 
 			reports.generateLatex, reports.getLatex);
 
+	app.route('/upload')
+		.get(reports.viewCtrl);
+
 	// Finish by binding the Report middleware
 	app.param('reportId', reports.reportByID);
 };

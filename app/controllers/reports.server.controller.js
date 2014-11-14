@@ -13,6 +13,12 @@ var mongoose = require('mongoose'),
 
 var headerFooter = require('../templates/headerFooter/renderHeaderFooter');
 
+exports.viewCtrl = function(req, res) {
+	res.render('report/upload', {
+		title: 'excel'
+	});
+};
+
 exports.generateLatex = function(req, res, next) {
 	headerFooter.renderSections(req, function(err, latex) {
 		if (err) return res.jsonp(err);
