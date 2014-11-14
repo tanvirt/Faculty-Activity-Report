@@ -9,8 +9,9 @@ module.exports = function(app) {
 		.get(users.requiresLogin, reports.list)
 		.post(users.requiresLogin, reports.create);
 
-	app.route('/reports/createBlank')
-		.post(users.requiresLogin, reports.createBlank);	
+	app.route('/reports/createNew')
+		.get(users.requiresLogin, reports.getNew)
+		.post(users.requiresLogin, reports.createNew);	
 
 	app.route('/reports/:reportId')
 		.get(reports.read)

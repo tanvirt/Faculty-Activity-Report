@@ -52,11 +52,64 @@ exports.download = function(req, res) {
 	res.sendfile('./public/modules/reports/pdf/' + req.report._id + '.pdf');
 };
 
-exports.createBlank = function(req, res) {
+var Profile = mongoose.model('Profile');
+
+var Name = mongoose.model('Name');
+var Tenure = mongoose.model('Tenure');
+var CurrentRank = mongoose.model('CurrentRank');
+var DateAppointed = mongoose.model('DateAppointed');
+var AffiliateAppointments = mongoose.model('AffiliateAppointments');
+
+exports.getNew = function(req, res) {
+	console.log(require('util').inspect(req.report));
+	res.jsonp(req.report);
+};
+
+exports.createNew = function(req, res) {
 	var report = new Report();
 
 	report.user = req.user;
 	report.reportName = req.body.reportName;
+
+	var name = new Name({
+		firstName: 'MyFirstName',
+		middleName: 'MyMiddleName',
+		lastName: 'MyLastName',
+
+		report: report,
+		user: req.user
+	});
+
+	var tenure = new Tenure({
+		tenure: 'Not Tenured'
+	});
+
+	var currentRank = new CurrentRank({
+		rank: 'Professor',
+		department: 'Agricultural and Biological Engineering'
+	});
+
+	var dateAppointed = new DateAppointed({
+		date: 'October 1993'
+	});
+
+	var affiliateAppointments = new AffiliateAppointments({
+		app: 'My AffiliateAppointments'
+	});
+
+	var profile = new Profile({
+		name: name,
+		tenure: tenure,
+		currentRank: currentRank,
+		dateAppointed: dateAppointed,
+		affiliateAppointments: affiliateAppointments
+	});
+
+	report.name = name.id;
+	report.tenure = tenure.id;
+	report.currentRank = currentRank.id;
+	report.dateAppointed = dateAppointed.id;
+	report.affiliateAppointments = affiliateAppointments.id;
 
 	report.save(function(err) {
 		if (err) return res.jsonp(err);
