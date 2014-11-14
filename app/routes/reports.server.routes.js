@@ -10,8 +10,7 @@ module.exports = function(app) {
 		.post(users.requiresLogin, reports.create);
 
 	app.route('/reports/createNew')
-		.get(users.requiresLogin, reports.getNew)
-		.post(users.requiresLogin, reports.createNew);	
+		.get(users.requiresLogin, reports.createNew);
 
 	app.route('/reports/:reportId')
 		.get(reports.read)
