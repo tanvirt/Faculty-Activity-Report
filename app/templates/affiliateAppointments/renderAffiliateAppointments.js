@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 
 // Compile Schema into Model here
-var AffiliateApp = mongoose.model('affiliateAppointments');
+var AffiliateApp = mongoose.model('AffiliateAppointments');
 
 var modelClass = require('../modelClass');
 var renderModel = new modelClass.RenderModel( AffiliateApp, 'affiliateAppointments/affiliateAppointments.tex', 'affiliateAppointments/na.tex');

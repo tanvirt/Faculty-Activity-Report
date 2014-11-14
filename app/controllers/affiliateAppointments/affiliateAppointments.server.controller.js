@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var AffiliateAppointments = mongoose.model('affiliateAppointments');
+var AffiliateAppointments = mongoose.model('AffiliateAppointments');
 
 var errorHandler = require('../errors');
 var is = require('is-js');

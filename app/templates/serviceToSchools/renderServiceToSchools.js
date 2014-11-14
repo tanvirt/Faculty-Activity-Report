@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var serviceToSchools = mongoose.model('serviceToSchools');
+var serviceToSchools = mongoose.model('ServiceToSchools');
 
 var modelClass = require('../modelClass');
 var renderModel = new modelClass.RenderModel(serviceToSchools, 'serviceToSchools/serviceToSchools.tex', 'serviceToSchools/na.tex');

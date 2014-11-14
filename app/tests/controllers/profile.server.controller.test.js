@@ -18,9 +18,9 @@ var Report = mongoose.model('Report');
 
 var Name = mongoose.model('Name');
 var Tenure = mongoose.model('Tenure');
-var CurrentRank = mongoose.model('currentRank');
+var CurrentRank = mongoose.model('CurrentRank');
 var DateAppointed = mongoose.model('DateAppointed');
-var AffiliateAppointments = mongoose.model('affiliateAppointments');
+var AffiliateAppointments = mongoose.model('AffiliateAppointments');
 
 var Profile = mongoose.model('Profile');
 

@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 
 // Compile Schema into Model here
-var furtherInformationSection = mongoose.model('furtherInformationSection');
+var furtherInformationSection = mongoose.model('FurtherInformationSection');
 
 var modelClass = require('../modelClass');
 var renderModel = new modelClass.RenderModel( furtherInformationSection, 'furtherInformationSection/furtherInformationSection.tex', 'furtherInformationSection/na.tex');

@@ -4,7 +4,7 @@
  */
 var should = require('should'),
     mongoose = require('mongoose'),
-    currentRank = mongoose.model('currentRank');
+    currentRank = mongoose.model('CurrentRank');
 /**
  * Globals
  */

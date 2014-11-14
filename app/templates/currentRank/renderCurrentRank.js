@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 
 // Compile Schema into Model here
-var CurrentRank = mongoose.model('currentRank');
+var CurrentRank = mongoose.model('CurrentRank');
 var modelClass = require('../modelClass');
 var renderModel = new modelClass.RenderModel( CurrentRank, 'currentRank/currentRank.tex', 'currentRank/na.tex');
 

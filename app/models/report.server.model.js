@@ -67,7 +67,7 @@ var ReportSchema = new Schema({
 	},
 
 	currentRank: {
-		type: Schema.Types.ObjectId, ref: 'currentRank'
+		type: Schema.Types.ObjectId, ref: 'CurrentRank'
 	},
 
 	dateAppointed: {
@@ -75,7 +75,7 @@ var ReportSchema = new Schema({
 	},
 
 	affiliateAppointments: {
-		type: Schema.Types.ObjectId, ref: 'affiliateAppointments'
+		type: Schema.Types.ObjectId, ref: 'AffiliateAppointments'
 	},
 
 	assignedActivity: {
@@ -123,15 +123,15 @@ var ReportSchema = new Schema({
 	},
 
 	honors: {
-		type: Schema.Types.ObjectId, ref: 'honors'
+		type: Schema.Types.ObjectId, ref: 'Honors'
 	},	
 
 	furtherInformationSection: {
-		type: Schema.Types.ObjectId, ref: 'furtherInformationSection'
+		type: Schema.Types.ObjectId, ref: 'FurtherInformationSection'
 	},	
 
 	consultationsOutsideUniversity: {
-		type: Schema.Types.ObjectId, ref: 'consultationsOutsideUniversity'
+		type: Schema.Types.ObjectId, ref: 'ConsultationsOutsideUniversity'
 	},
 	
 	governance: {
@@ -144,6 +144,10 @@ var ReportSchema = new Schema({
 
 	publication: {
 		type: Schema.Types.ObjectId, ref: 'Publication'
+	},
+
+	serviceToSchools: {
+		type: Schema.Types.ObjectId, ref: 'ServiceToSchools'
 	}
 
 //END TEMP-------------------------------------------------

@@ -30,6 +30,6 @@ var serviceToSchools = new Schema({
 		ref: 'Report'
 	}
 
-}, {collection: 'serviceToSchools'});
+}, {collection: 'ServiceToSchools'});
 
-mongoose.model('serviceToSchools', serviceToSchools);
+mongoose.model('ServiceToSchools', serviceToSchools);

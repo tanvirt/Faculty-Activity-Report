@@ -3,7 +3,7 @@
 var should = require('should'),
 	assert = require('assert'),
 	mongoose = require('mongoose'),
-	serviceToSchools = mongoose.model('serviceToSchools');
+	serviceToSchools = mongoose.model('ServiceToSchools');
 
 var s;
 

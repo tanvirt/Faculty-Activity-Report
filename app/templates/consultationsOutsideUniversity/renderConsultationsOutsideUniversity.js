@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var consultationsOutsideUniversity = mongoose.model('consultationsOutsideUniversity');
+var consultationsOutsideUniversity = mongoose.model('ConsultationsOutsideUniversity');
 
 var modelClass = require('../modelClass');
 var renderModel = new modelClass.RenderModel(consultationsOutsideUniversity, 'consultationsOutsideUniversity/consultationsOutsideUniversity.tex', 'consultationsOutsideUniversity/na.tex');

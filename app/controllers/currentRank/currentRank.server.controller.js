@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var CurrentRank = mongoose.model('currentRank');
+var CurrentRank = mongoose.model('CurrentRank');
 
 var errorHandler = require('../errors');
 var is = require('is-js');

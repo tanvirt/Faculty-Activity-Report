@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var ServiceToSchools = mongoose.model('serviceToSchools');
+var ServiceToSchools = mongoose.model('ServiceToSchools');
 
 var errorHandler = require('../errors');
 

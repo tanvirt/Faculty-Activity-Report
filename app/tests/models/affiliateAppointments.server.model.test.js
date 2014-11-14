@@ -4,7 +4,7 @@
  */
 var should = require('should'),
     mongoose = require('mongoose'),
-    affiliateAppointments = mongoose.model('affiliateAppointments');
+    affiliateAppointments = mongoose.model('AffiliateAppointments');
 /**
  * Globals
  */

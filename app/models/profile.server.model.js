@@ -14,7 +14,7 @@ var profile = new Schema({
 	},
 
 	currentRank: {
-		type: Schema.Types.ObjectId, ref: 'currentRank'
+		type: Schema.Types.ObjectId, ref: 'CurrentRank'
 	},
 
 	dateAppointed: {
@@ -22,7 +22,7 @@ var profile = new Schema({
 	},
 
 	affiliateAppointments: {
-		type: Schema.Types.ObjectId, ref: 'affiliateAppointments'
+		type: Schema.Types.ObjectId, ref: 'AffiliateAppointments'
 	},
     
 	user: {

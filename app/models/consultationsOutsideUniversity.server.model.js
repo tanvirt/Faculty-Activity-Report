@@ -28,6 +28,6 @@ var consultationsOutsideUniversity = new Schema({
 		ref: 'Report'
 	}
 
-}, {collection: 'consultationsOutsideUniversity'});
+}, {collection: 'ConsultationsOutsideUniversity'});
 
-mongoose.model('consultationsOutsideUniversity', consultationsOutsideUniversity);
+mongoose.model('ConsultationsOutsideUniversity', consultationsOutsideUniversity);

@@ -26,6 +26,6 @@ var affiliateAppointments = new Schema({
 		ref: 'Report'
 	}
 
-}, {collection: 'affiliateAppointments'});
+}, {collection: 'AffiliateAppointments'});
 
-mongoose.model('affiliateAppointments', affiliateAppointments);
+mongoose.model('AffiliateAppointments', affiliateAppointments);
