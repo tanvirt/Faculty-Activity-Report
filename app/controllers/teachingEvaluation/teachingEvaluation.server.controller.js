@@ -21,7 +21,7 @@ exports.viewCtrl = function(req, res) {
 };
 
 exports.createExcel = function(req, res) {
-	console.log('Body: ' + require('util').inspect(req.files));
+	console.log('Body: ' + require('util').inspect(req.files.excel.file));
 	//console.log(require('util').inspect(req));
 	
 	/*
@@ -36,7 +36,7 @@ exports.createExcel = function(req, res) {
 	      console.log(result);
 	    }
   	});*/
-res.jsonp(req.files);
+	res.jsonp('hi');
 
 };
 
