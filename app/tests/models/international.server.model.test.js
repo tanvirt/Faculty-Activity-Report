@@ -10,20 +10,25 @@ var international;
 describe('International Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		international = new International({
-			//activities: 'I did stuff in other countries'
+		
 		});
 		done();
 	});
 	
 	describe('Method Save', function() {
-		it('should save without problems', function(done) {
-			international.save(done);
+		it('should be able to save without problems if no activities given', function(done) {
+			international.save();
+			done();
 		});
-
 		it('should set activities to N/A if nothing given', function(done) {
 			assert.equal(international.activities, 'N/A');
 			done();
-		});	
+		});
+		it('should be able to save without problems if activities is given', function(done) {
+			international.activities = 'I went to some other countries';
+			international.save();
+			done();
+		});
 		
 	});
 
