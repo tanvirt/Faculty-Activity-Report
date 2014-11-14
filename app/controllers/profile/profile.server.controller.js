@@ -47,6 +47,25 @@ exports.create = function(req, res) {
 	});	
 };
 
+exports.readFromId = function(req, res) {
+	/*Profile.findOne({report: req.report})
+	.populate('name')
+	.populate('tenure')
+	.populate('currentRank')
+	.populate('dateAppointed')
+	.populate('affiliateAppointments')
+	.exec(function(err, profile) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(profile);
+		}
+	});*/
+	res.jsonp(req.profile);
+};
+
 exports.update = function(req, res) {
 	async.parallel({
 		name: async.apply(nameCtrl.update, req, res),

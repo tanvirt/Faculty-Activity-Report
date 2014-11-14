@@ -11,6 +11,7 @@ module.exports = function(app) {
 		.post(users.requiresLogin, profile.create);
 
 	app.route('/reports/:reportId/profile/:profileId')
+		.get(users.requiresLogin, profile.readFromId)
 		.put(users.requiresLogin, profile.update);
 
 	// Finish by binding the Name middleware
