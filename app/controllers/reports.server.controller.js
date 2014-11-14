@@ -126,11 +126,15 @@ exports.createNew = function(req, res) {
 	dateAppointed.save();
 	affiliateAppointments.save();
 
+	profile.save();
+
 	report.name = name._id;
 	report.tenure = tenure._id;
 	report.currentRank = currentRank._id;
 	report.dateAppointed = dateAppointed._id;
 	report.affiliateAppointments = affiliateAppointments._id;
+
+	report.profile = profile._id;
 
 	report.save(function(err) {
 		if (err) return res.jsonp(err);
@@ -212,6 +216,8 @@ exports.list = function(req, res) {
 	.sort('-created')
 	.populate('user', 'displayName')
 
+	.populate('profile')
+
 	.populate('name')
 	.populate('tenure')
 	.populate('currentRank')
@@ -252,6 +258,8 @@ exports.list = function(req, res) {
 exports.reportByID = function(req, res, next, id) {
 	Report.findById(id)
 	.populate('user', 'displayName')
+
+	.populate('profile')
 
 	.populate('name')
 	.populate('tenure')
