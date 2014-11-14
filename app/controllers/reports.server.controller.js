@@ -102,7 +102,10 @@ exports.createNew = function(req, res) {
 		tenure: tenure,
 		currentRank: currentRank,
 		dateAppointed: dateAppointed,
-		affiliateAppointments: affiliateAppointments
+		affiliateAppointments: affiliateAppointments,
+
+		report: report,
+		user: req.user
 	});
 
 	report.name = name.id;
