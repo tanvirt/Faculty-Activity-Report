@@ -8,7 +8,8 @@ module.exports = function(grunt) {
 		clientViews: ['public/modules/**/views/**/*.html'],
 		clientJS: ['public/js/*.js', 'public/modules/**/*.js'],
 		clientCSS: ['public/modules/**/*.css'],
-		mochaTests: ['app/tests/**/*.js']
+		//mochaTests: ['app/tests/**/*.js']
+		mochaTests: ['app/tests/controllers/teachingEvaluation.server.controller.test.js']
 	};
 
 	// Project Configuration
@@ -166,5 +167,5 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', ['lint', 'loadConfig', 'ngmin', 'uglify', 'cssmin']);
 
 	// Test task.
-	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+	grunt.registerTask('test', ['env:test', 'mochaTest']);//['env:test', 'mochaTest', 'karma:unit']);
 };

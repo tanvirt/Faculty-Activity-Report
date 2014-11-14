@@ -26,25 +26,17 @@ exports.create = function(req, res) {
 			changes: 'No TeachingEvaluation Created'
 		});
 	}
-	
-	var sections = [];
-	for(var iii=0; iii < req.body.teachingEvaluation.length; iii++){
-		var path = req.body.teachingEvaluation[iii];
-		var subdoc = {
-			course: path.course,
-			year: path.year,
-			semester: path.semester,
-			enrolled: path.enrolled,
-			responses: path.responses,
-			teacherMean: path.teacherMean,
-			departmentMean: path.departmentMean,
-			collegeMean: path.collegeMean
-		};
-		sections.push(subdoc);
-	}
-	
+		
 	var teachingEvaluation = new TeachingEvaluation({
-		sub: sections,
+		course: req.body.teachingEvaluation.course,
+		year: req.body.teachingEvaluation.year,
+		semester: req.body.teachingEvaluation.semester,
+		enrolled: req.body.teachingEvaluation.enrolled,
+		responses: req.body.teachingEvaluation.responses,
+		teacherMean: req.body.teachingEvaluation.teacherMean,
+		departmentMean: req.body.teachingEvaluation.departmentMean,
+		collegeMean: req.body.teachingEvaluation.collegeMean,
+		
 		user: req.user,
 		report: req.report
 	});

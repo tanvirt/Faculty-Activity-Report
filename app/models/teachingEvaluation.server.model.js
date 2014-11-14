@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
  * A Validation function for local mean properties
  */
 var validateLocalStrategyMean = function(property) {
-	if(property.length !== 9)
+	if(!property || property.length !== 9)
 		return false;
 	for(var i = 0; i < 9; i++)
 	{
@@ -26,12 +26,18 @@ var validateLocalStrategyMean = function(property) {
 */
 
 var validateLocalStrategyDate = function(property) {
-	return new Date().getFullYear() >= property && 1980 <= property;
+	return !property || new Date().getFullYear() >= property && 1980 <= property;
 };
 
 
-var section = new Schema({
-	course: {
+//Contents of schema will pull majority of content from outside data source, not from user
+//Overall mean is to be calculated on demand, not stored
+var teachingEvaluation = new Schema({
+	user: {			//multiple evaluations per user possible. Use this field to match with user
+		type: Schema.ObjectId,
+		ref: 'User'
+	},
+		course: {
 		type: String,
 		required: true
 	},
@@ -89,10 +95,14 @@ var section = new Schema({
 				  1, 1, 1, 
 				  1, 1, 1],
 		validate: [validateLocalStrategyMean, 'Array Length must equal number of questions (9)']
-	}
-});
+	},
+	report: {
+		type: Schema.ObjectId,
+		ref: 'Report'
+	}	
+}, {collection:'TeachingEvaluation'});
 
-section.methods.findTotalMean = function findTotalMean() {
+teachingEvaluation.methods.findTotalMean = function findTotalMean() {
 	var totalArr = [0,0,0];
 	for(var i = 0; i < 9; i++) {
 		totalArr[0] += this.teacherMean[i];
@@ -102,19 +112,5 @@ section.methods.findTotalMean = function findTotalMean() {
 	for(i = 0; i < 3; i++) totalArr[i] = (Math.round((totalArr[i]/9)*100))/100;
 	return totalArr;
 };
-
-//Contents of schema will pull majority of content from outside data source, not from user
-//Overall mean is to be calculated on demand, not stored
-var teachingEvaluation = new Schema({
-	user: {			//multiple evaluations per user possible. Use this field to match with user
-		type: Schema.ObjectId,
-		ref: 'User'
-	},
-	sub: [section],
-	report: {
-		type: Schema.ObjectId,
-		ref: 'Report'
-	}	
-}, {collection:'TeachingEvaluation'});
 
 mongoose.model('TeachingEvaluation', teachingEvaluation);

@@ -10,7 +10,7 @@ module.exports = function(app) {
 		.post(users.requiresLogin, teachingEvaluation.create);
 
 	app.route('/reports/:reportId/teachingEvaluation/:teachingEvaluationId')
-		.get(teachingEvaluation.read)
+		.get(users.requiresLogin, teachingEvaluation.read)
 		.put(users.requiresLogin, teachingEvaluation.update);
 
 	// Finish by binding the middleware
