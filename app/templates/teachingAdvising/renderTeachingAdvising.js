@@ -37,7 +37,6 @@ saves it in the database.
 module.exports.submit = function(req, callback) {
 	if (is.empty(req.body.teachingAdvising)) return callback(null, null);
 
-
 	var teachingAdvising = new TeachingAdvising({
 		info: req.body.teachingAdvising.advising,
 		user: req.user

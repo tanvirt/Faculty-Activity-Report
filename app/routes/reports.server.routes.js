@@ -18,7 +18,12 @@ module.exports = function(app) {
 		.delete(users.requiresLogin, reports.hasAuthorization, reports.delete);
 
 	app.route('/reportdownload/:reportId')
-		.get(users.requiresLogin, reports.hasAuthorization, reports.rCtrl.generate, reports.rCtrl.download);
+		.get(users.requiresLogin, reports.hasAuthorization, 
+			 reports.generateLatex, reports.generatePDF, reports.download);
+
+	app.route('/reportdownload/:reportId/latex')
+		.get(users.requiresLogin, reports.hasAuthorization, 
+			reports.generateLatex, reports.getLatex);
 
 	// Finish by binding the Report middleware
 	app.param('reportId', reports.reportByID);

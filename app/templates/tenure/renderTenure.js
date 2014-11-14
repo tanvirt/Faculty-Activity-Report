@@ -33,7 +33,6 @@ module.exports.render = function(req, callback) {
 module.exports.submit = function(req, callback) {
 	if (is.empty(req.body.tenure)) return callback(null, null);
 
-
 	var tenure = new Tenure({
 		tenure: req.body.tenure.tenure,
 		user: req.user		

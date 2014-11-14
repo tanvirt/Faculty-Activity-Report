@@ -35,8 +35,6 @@ Gets the data from the frontend and
 saves it in the database.
 */
 module.exports.submit = function(req, callback) {
-	console.log(require('util').inspect(req.body));
-
 	if (is.empty(req.body.consultationsOutsideUniversity)) return callback(null, null);
 
 	var consultations = new consultationsOutsideUniversity({

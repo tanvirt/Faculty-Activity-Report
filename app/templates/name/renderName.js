@@ -33,8 +33,6 @@ module.exports.render = function(req, callback) {
 };
 
 module.exports.submit = function(req, callback) {
-	console.log(require('util').inspect(req.body));
-
 	if (is.empty(req.body.name)) return callback(null, null);
 
 	var name = new Name({
