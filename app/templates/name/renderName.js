@@ -8,6 +8,9 @@ var renderModel = new modelClass.RenderModel( Name, 'name/name.tex', 'name/na.te
 
 var is = require('is-js');
 
+var defaultData = require('../default.json');
+var _ = require('underscore');
+
 /*
 will explicitly populate the report with
 the data you provide
@@ -44,5 +47,15 @@ module.exports.submit = function(req, callback) {
 
 	name.save(function(err) {
 		callback(err, name);
+	});
+};
+
+module.exports.createDefaultData = function(report, user, cb) {
+	var save = _.extend(defaultData.name, {report: report, user: user});
+
+	var name = new Name(save);
+		
+	name.save(function(err) {
+		cb(err, name);
 	});
 };

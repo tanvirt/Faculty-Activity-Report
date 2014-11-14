@@ -10,20 +10,11 @@ var renderModel = new modelClass.RenderModel(Patents, 'patents/patents.tex', 'pa
 var is = require('is-js');
 
 renderModel.setDebugPopulate(false, {
-	sub: [{
-		title: 'Patent',
-		authors: ['Me', 'Myself', 'I'],
-		patentNumber: '1234',
-		date: '12/31/1999',
-		description: 'I saved the world'
-	},
-	{
-		title: 'Patent2',
-		authors: ['You', 'Me'],
-		patentNumber: '1234567',
-		date: '01/01/2000',
-		description: 'I saved the world again'
-	}]
+	title: 'Patent',
+	authors: ['Me', 'Myself', 'I'],
+	patentNumber: '1234',
+	date: '12/31/1999',
+	description: 'I saved the world'
 });
 
 renderModel.isDebugNull = false;
@@ -46,7 +37,7 @@ module.exports.render = function(req, callback) {
 };
 
 module.exports.submit = function(req, callback) {
-	if (is.empty(req.body.patents)) return callback(null, null);
+/*	if (is.empty(req.body.patents)) return callback(null, null);
 
 	var patent = new Patents({
 		sub: [],
@@ -69,4 +60,9 @@ module.exports.submit = function(req, callback) {
 	patent.save(function(err) {
 		callback(err, patent);
 	});
+*/
+};
+
+module.exports.createDefaultData = function(report, user, cb) {
+	renderModel.createDefaultData(report, user, cb);
 };

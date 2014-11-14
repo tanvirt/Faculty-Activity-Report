@@ -9,7 +9,8 @@ var mongoose = require('mongoose'),
 	_ = require('lodash'),
 	u = require('underscore'),
 	latex = require('latex'),
-	fs = require('fs');
+	fs = require('fs'),
+	async = require('async');
 
 var headerFooter = require('../templates/headerFooter/renderHeaderFooter');
 
@@ -52,6 +53,8 @@ exports.download = function(req, res) {
 	res.sendfile('./public/modules/reports/pdf/' + req.report._id + '.pdf');
 };
 
+var inc = require('../templates/includes.js');
+
 var Profile = mongoose.model('Profile');
 
 var Name = mongoose.model('Name');
@@ -65,12 +68,114 @@ exports.getNew = function(req, res) {
 	res.jsonp(req.report);
 };
 
+var renderName 								= require('../templates/name/renderName');
+var renderTenure 							= require('../templates/tenure/renderTenure');
+var renderDateAppointed 					= require('../templates/dateAppointed/renderDateAppointed');
+var renderAssignedActivity					= require('../templates/assignedActivity/renderAssignedActivity');
+var renderTeachingAdvising					= require('../templates/teachingAdvising/renderTeachingAdvising');
+var renderTeachingEvaluation 				= require('../templates/teachingEvaluation/renderTeachingEvaluation');
+var renderGraduateCommittee					= require('../templates/graduateCommittee/renderGraduateCommittee');
+var renderCurrentRank 						= require('../templates/currentRank/renderCurrentRank');
+var renderCreativeWorks						= require('../templates/creativeWorks/renderCreativeWorks');
+var renderContribution 						= require('../templates/contribution/renderContribution');
+var renderPatents 							= require('../templates/patents/renderPatents');
+var renderContracts 						= require('../templates/contracts/renderContracts');
+var renderAffiliateAppointments				= require('../templates/affiliateAppointments/renderAffiliateAppointments');
+var renderPublication 						= require('../templates/publication/renderPublication');
+var renderConferences 						= require('../templates/conferences/renderConferences');
+var renderGovernance 						= require('../templates/governance/renderGovernance');
+var renderConsultationsOutsideUniversity 	= require('../templates/consultationsOutsideUniversity/renderConsultationsOutsideUniversity');
+var renderEditorServiceReviewer 			= require('../templates/editorServiceReviewer/renderEditorServiceReviewer');
+var renderMembership 						= require('../templates/membership/renderMembership');
+var renderInternational						= require('../templates/international/renderInternational');
+var renderHonors 							= require('../templates/honors/renderHonors');
+var renderFurtherInformationSection 		= require('../templates/furtherInformationSection/renderFurtherInformationSection');
+var renderServiceToSchools 					= require('../templates/serviceToSchools/renderServiceToSchools');
+
 exports.createNew = function(req, res) {
 	var report = new Report();
 
 	report.user = req.user;
 	report.reportName = req.body.reportName;
 
+	async.parallel({
+		
+		name: async.apply(renderName.createDefaultData, report, req.user),
+		//tenure: async.apply(renderTenure.createDefaultData, report, req.user),
+		//currentRank: async.apply(renderCurrentRank.createDefaultData, report, req.user),
+		//affiliateAppointments: async.apply(renderAffiliateAppointments.createDefaultData, report, req.user),
+		//dateAppointed: async.apply(renderDateAppointed.createDefaultData, report, req.user),
+		//teachingAdvising: async.apply(renderTeachingAdvising.createDefaultData, report, req.user),
+		//assignedActivity: async.apply(renderAssignedActivity.createDefaultData, report, req.user),
+		//teachingEvaluation: async.apply(renderTeachingEvaluation.createDefaultData, report, req.user),
+		//graduateCommittee: async.apply(renderGraduateCommittee.createDefaultData, report, req.user),
+		//creativeWorks: async.apply(renderCreativeWorks.createDefaultData, report, req.user),
+		//patents: async.apply(renderPatents.createDefaultData, report, req.user)//,
+		/*publication: async.apply(renderPublication.createDefaultData, report, req.user),
+		contribution: async.apply(renderContribution.createDefaultData, report, req.user),
+		conferences: async.apply(renderConferences.createDefaultData, report, req.user),
+		contracts: async.apply(renderContracts.createDefaultData, report, req.user),
+		governance: async.apply(renderGovernance.createDefaultData, report, req.user),
+		consultationsOutsideUniversity: async.apply(renderConsultationsOutsideUniversity.createDefaultData, report, req.user),
+		editorServiceReviewer: async.apply(renderEditorServiceReviewer.createDefaultData, report, req.user),
+		membership: async.apply(renderMembership.createDefaultData, report, req.user),
+		international: async.apply(renderInternational.createDefaultData, report, req.user),
+		serviceToSchools: async.apply(renderServiceToSchools.createDefaultData, report, req.user),
+		honors: async.apply(renderHonors.createDefaultData, report, req.user),
+		furtherInformationSection: async.apply(renderFurtherInformationSection.createDefaultData, report, req.user)	*/
+	}, function(err, models) {
+		console.log(require('util').inspect(models));
+		if (err) {
+			return res.jsonp({
+				title: 'Error',
+				message: err
+			});
+		}
+
+		report.name = models.name._id;
+		//report.tenure = models.tenure._id;
+		//report.currentRank = models.currentRank._id;
+		//report.affiliateAppointments = models.affiliateAppointments._id;
+		//report.dateAppointed = models.dateAppointed._id;
+		//report.teachingAdvising = models.teachingAdvising._id;
+		//report.assignedActivity = models.assignedActivity._id;
+		//report.teachingEvaluation = models.teachingEvaluation._id;
+		//report.graduateCommittee = models.graduateCommittee._id;
+		//report.creativeWorks = models.creativeWorks._id;
+		//report.patents = models.patents._id;
+		/*report.publication = models.publication._id;
+		report.contribution = models.contribution._id;
+		report.conferences = models.conferences._id;
+		report.contracts = models.contracts._id;
+		report.governance = models.governance._id;
+		report.consultationsOutsideUniversity = models.consultationsOutsideUniversity._id;
+		report.editorServiceReviewer = models.editorServiceReviewer._id;
+		report.membership = models.membership._id;
+		report.international = models.international._id;
+		report.serviceToSchools = models.serviceToSchools._id;
+		report.honors = models.honors._id;
+		report.furtherInformationSection = models.furtherInformationSection._id;*/
+
+		report.save(function(err) {
+			if (err) return res.jsonp(err);
+			req.report = report;
+			res.jsonp(report);
+		});
+	});
+
+/*
+	renderName.createDefaultData(report, req.user, function(err, model) {
+		report.name = model._id;
+
+		report.save(function(err) {
+			if (err) return res.jsonp(err);
+			req.report = report;
+			res.jsonp(report);
+		});
+	});
+*/
+
+/*
 	var name = new Name({
 		firstName: 'MyFirstName',
 		middleName: 'M',
@@ -141,6 +246,7 @@ exports.createNew = function(req, res) {
 		req.report = report;
 		res.jsonp(report);
 	});
+*/
 };
 
 /**

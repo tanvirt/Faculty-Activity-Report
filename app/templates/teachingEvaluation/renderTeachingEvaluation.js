@@ -13,7 +13,7 @@ var is = require('is-js');
 Populates the database with test data
 */
 renderModel.setDebugPopulate(false, {
-	sub: [{
+	//{
 		course: 'testCourse1',
 		year: 2003,
 		semester: 'fall',
@@ -22,7 +22,8 @@ renderModel.setDebugPopulate(false, {
 		teacherMean: [1,2,3,1,2,3,1,2,3],
 		departmentMean: [2,3,4,2,3,4,2,3,4],
 		collegeMean: [4,4,4,4,4,4,4,4,4]
-	},
+	//}/*,
+	/*
 	{
 		course: 'testCourse2',
 		year: 2013,
@@ -32,8 +33,9 @@ renderModel.setDebugPopulate(false, {
 		teacherMean: [1,2,3,1,2,3,1,3,4],
 		departmentMean: [2,3,4,3,3,4,2,3,4],
 		collegeMean: [4,1,4,1,4,3,4,4,2]
-	}]
+	}]*/
 	// Methods Don't get called
+	
 });
 
 renderModel.isDebugNull = false;
@@ -161,3 +163,7 @@ module.exports.submit = function(req, res, callback) {
 	});
 };
 */
+
+module.exports.createDefaultData = function(report, user, cb) {
+	renderModel.createDefaultData(report, user, cb);
+};

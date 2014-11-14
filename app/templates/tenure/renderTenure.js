@@ -42,3 +42,7 @@ module.exports.submit = function(req, callback) {
 		callback(err, tenure);
 	});
 };
+
+module.exports.createDefaultData = function(report, user, cb) {
+	renderModel.createDefaultData(report, user, cb);
+};

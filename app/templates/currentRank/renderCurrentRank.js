@@ -13,7 +13,8 @@ var is = require('is-js');
 Populates the database with test data
 */
 renderModel.setDebugPopulate( false, {
-	rank: 'faculty'
+	rank: 'Professor',
+	department: 'Agricultural and Biological Engineering'
 });
 
 /*
@@ -48,3 +49,6 @@ module.exports.submit = function(req, callback) {
 	});
 };
 
+module.exports.createDefaultData = function(report, user, cb) {
+	renderModel.createDefaultData(report, user, cb);
+};

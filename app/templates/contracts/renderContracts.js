@@ -11,7 +11,7 @@ var renderModel = new modelClass.RenderModel(Contracts, 'contracts/contracts.tex
 Populates the database with test data
 */
 renderModel.setDebugPopulate(false, {
-	sub: [{
+	//sub: [{
 		title: 'Contract 1',
 		funded: 'externally',
 		PI: 'PI',
@@ -20,7 +20,7 @@ renderModel.setDebugPopulate(false, {
 		fundingAgency: 'NASA',
 		fundingPortion: 100000,
 		value: 200000
-	},
+	/*},
 	{
 		title: 'Contract 2',
 		funded: 'externally',
@@ -39,7 +39,7 @@ renderModel.setDebugPopulate(false, {
 		endDate: '12/18/2001',
 		fundingAgency: 'N/A',
 		value: 400
-	}]
+	}]*/
 	// Methods Don't get called
 });
 
@@ -83,6 +83,10 @@ module.exports.submit = function(req, callback) {
 		callback(err, contract);
 	});*/
 	return callback(null, null);	
+};
+
+module.exports.createDefaultData = function(report, user, cb) {
+	renderModel.createDefaultData(report, user, cb);
 };
 
 

@@ -44,3 +44,7 @@ module.exports.submit = function(req, callback) {
 		callback(err, contribution);
 	});
 };
+
+module.exports.createDefaultData = function(report, user, cb) {
+	renderModel.createDefaultData(report, user, cb);
+};

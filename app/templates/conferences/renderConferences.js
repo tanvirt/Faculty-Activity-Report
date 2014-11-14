@@ -75,3 +75,7 @@ module.exports.submit = function(req, callback) {
 	});	
 };
 
+module.exports.createDefaultData = function(report, user, cb) {
+	renderModel.createDefaultData(report, user, cb);
+};
+
