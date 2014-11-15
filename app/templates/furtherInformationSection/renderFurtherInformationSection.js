@@ -3,12 +3,15 @@
 var mongoose = require('mongoose');
 
 // Compile Schema into Model here
-var furtherInformationSection = mongoose.model('FurtherInformationSection');
+var FurtherInformationSection = mongoose.model('FurtherInformationSection');
 
 var modelClass = require('../modelClass');
-var renderModel = new modelClass.RenderModel( furtherInformationSection, 'furtherInformationSection/furtherInformationSection.tex', 'furtherInformationSection/na.tex');
+var renderModel = new modelClass.RenderModel( FurtherInformationSection, 'furtherInformationSection/furtherInformationSection.tex', 'furtherInformationSection/na.tex');
 
 var is = require('is-js');
+
+var defaultData = require('../default.json');
+var _ = require('underscore');
 
 /*
 will explicitly populate the report with
@@ -35,12 +38,25 @@ module.exports.render = function(req, callback) {
 module.exports.submit = function(req, callback) {
 	if (is.empty(req.body.furtherInformationSection)) return callback(null, null);
 
-	var furtherInfo = new furtherInformationSection({
+	var furtherInfo = new FurtherInformationSection({
 		info: req.body.furtherInformationSection.info,
 		user: req.user		
 	});
 
 	furtherInfo.save(function(err) {
 		callback(err, furtherInfo);
+	});
+};
+
+module.exports.createDefaultData = function(report, user, cb) {
+	var save = _.extend(defaultData.furtherInformationSection, {
+		report: report,
+		user: user
+	});
+
+	var furtherInformationSection = new FurtherInformationSection(save);
+
+	furtherInformationSection.save(function(err) {
+		cb(err, furtherInformationSection);
 	});
 };

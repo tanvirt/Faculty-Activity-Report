@@ -4,40 +4,20 @@ var mongoose = require('mongoose');
 var modelClass = require('../modelClass');
 
 // Compile Schema into Model here
-var graduateCommittee = mongoose.model('GraduateCommittee');
-var renderModel = new modelClass.RenderModel(graduateCommittee, 'graduateCommittee/graduateCommittee.tex', 'graduateCommittee/na.tex');
+var GraduateCommittee = mongoose.model('GraduateCommittee');
+var renderModel = new modelClass.RenderModel(GraduateCommittee, 'graduateCommittee/graduateCommittee.tex', 'graduateCommittee/na.tex');
 
 var is = require('is-js');
 
+var defaultData = require('../default.json');
+var _ = require('underscore');
+
 renderModel.setDebugPopulate(false, {
-	sub: [{
-		role: 'Chair',
-		studentName: 'studentTestName01',
-		degree: 'M.S.',
-		major: 'Computer Science',
-		degreeDate: '10/10/1990'
-	},
-	{
-		role: 'External',
-		studentName: 'studentTestName02',
-		degree: 'Ph.D.',
-		major: 'Computer Engineering',
-		degreeDate: '11/11/1991'
-	},
-	{
-		role: 'Member',
-		studentName: 'studentTestName03',
-		degree: 'M.S.',
-		major: 'Cooking',
-		degreeDate: '12/12/1992'
-	},
-	{
-		role: 'Member',
-		studentName: 'studentTestName04',
-		degree: 'Ph.D.',
-		major: 'Computer Science',
-		degreeDate: '10/11/1992'
-	}]
+	role: 'Chair',
+	studentName: 'studentTestName01',
+	degree: 'M.S.',
+	major: 'Computer Science',
+	degreeDate: '10/10/1990'
 });
 
 renderModel.isDebugNull = false;
@@ -67,7 +47,7 @@ module.exports.submit = function(req, callback) {
 
 	if (is.empty(req.body.graduateCommittee)) return callback(null, null);
 
-	var graduate = new graduateCommittee({
+	var graduate = new GraduateCommittee({
 		sub: [],
 		user: req.user
 	});
@@ -105,3 +85,15 @@ module.exports.submit = function(req, callback) {
 */
 };
 
+module.exports.createDefaultData = function(report, user, cb) {
+	var save = _.extend(defaultData.graduateCommittee, {
+		report: report,
+		user: user
+	});
+
+	var graduateCommittee = new GraduateCommittee(save);
+
+	graduateCommittee.save(function(err) {
+		cb(err, graduateCommittee);
+	});
+};

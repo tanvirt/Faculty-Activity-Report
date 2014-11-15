@@ -17,20 +17,11 @@ describe('Graduate Committee Model Unit Tests:', function() {
 	beforeEach(function(done) {
 	
 		committee01 = new GraduateCommittee({
-			sub: [{
-				role: 'Chair',
-				studentName: 'studentTestName',
-				degree: 'M.S.',
-				major: 'Computer Science',
-				degreeDate: '10/10/1990'
-			},
-			{
-				role: 'Chair',
-				studentName: 'studentTestName',
-				degree: 'M.S.',
-				major: 'Computer Science',
-				degreeDate: '10/10/1990'
-			}]
+			role: 'Chair',
+			studentName: 'studentTestName',
+			degree: 'M.S.',
+			major: 'Computer Science',
+			degreeDate: '10/10/1990'
 		});
 
 		done();
@@ -49,7 +40,7 @@ describe('Graduate Committee Model Unit Tests:', function() {
 		});
 
 		it('should fail to save a date that is beyond the present year', function(done) {
-			committee01.sub[0].degreeDate.setFullYear(Date.getFullYear + 10);
+			committee01.degreeDate.setFullYear(Date.getFullYear + 10);
 			return committee01.save(function(err) {
 				should.exist(err);
 				done();
@@ -57,7 +48,7 @@ describe('Graduate Committee Model Unit Tests:', function() {
 		});
 
 		it('should fail to save a year that is below 1980', function(done) {
-			committee01.sub[0].degreeDate.setFullYear(1800);
+			committee01.degreeDate.setFullYear(1800);
 			return committee01.save(function(err) {
 				should.exist(err);
 				done();
@@ -65,7 +56,7 @@ describe('Graduate Committee Model Unit Tests:', function() {
 		});
 
 		it('should fail to save if degree is not valid', function(done) {
-			committee01.sub[0].degree = 'AAA';
+			committee01.degree = 'AAA';
 			return committee01.save(function(err) {
 				should.exist(err);
 				done();

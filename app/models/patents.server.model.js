@@ -8,7 +8,11 @@ var validateDate = function(p) {
 	return validator.isDate(p);
 };
 
-var pSub = new Schema({
+var Patents = new Schema({
+	user: {
+		type: Schema.ObjectId,
+		ref: 'User'
+	},
 	title: {
 		type: String,
 		required: 'please fill in title'
@@ -31,15 +35,7 @@ var pSub = new Schema({
 
 	description: {
 		type: String
-	}
-});
-
-var Patents = new Schema({
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
 	},
-	sub: [pSub],
 	report: {
 		type: Schema.ObjectId,
 		ref: 'Report'
