@@ -21,7 +21,7 @@ var pSub = new Schema({
 
 	patentNumber: {
 		type: String,
-		unique: 'testing error message'
+		//unique: 'testing error message'
 	},
 
 	date: {
