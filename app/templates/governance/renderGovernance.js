@@ -8,6 +8,9 @@ var renderModel = new modelClass.RenderModel( Governance, 'governance/governance
 
 var is = require('is-js');
 
+var defaultData = require('../default.json');
+var _ = require('underscore');
+
 /*
 will explicitly populate the report with
 the data you provide
@@ -44,6 +47,19 @@ module.exports.submit = function(req, callback) {
 
 	gov.save(function(err) {
 		callback(err, gov);
+	});
+};
+
+module.exports.createDefaultData = function(report, user, cb) {
+	var save = _.extend(defaultData.governance, {
+		report: report,
+		user: user
+	});
+
+	var governance = new Governance(save);
+
+	governance.save(function(err) {
+		cb(err, governance);
 	});
 };
 

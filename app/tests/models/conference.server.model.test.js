@@ -12,20 +12,11 @@ var con1;
 describe('Conferences Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		con1 = new Conferences({
-			sub: [{
-				title: 'Hall of the Mountain King',
-				area: 'State',
-				presentation: 'Speech',
-				where: 'Jaxonville, FL',
-				date: 'January 2000'
-			},
-			{
-				title: 'Hall of the Mountain King',
-				area: 'State',
-				presentation: 'Speech',
-				where: 'Jaxonville, FL',
-				date: 'January 2000'
-			}]
+			title: 'Hall of the Mountain King',
+			area: 'State',
+			presentation: 'Speech',
+			where: 'Jaxonville, FL',
+			date: 'January 2000'		
 		});
 				
 		done();
@@ -39,7 +30,7 @@ describe('Conferences Model Unit Tests:', function() {
 		});
 		
 		it('should fail to save without title', function(done) {
-			con1.sub[0].title = '';
+			con1.title = '';
 			return con1.save(function(err) {
 				should.exist(err);
 				done();
@@ -47,7 +38,7 @@ describe('Conferences Model Unit Tests:', function() {
 		});
 	
 		it('should fail to save without area', function(done) {
-			con1.sub[0].area = '';
+			con1.area = '';
 			return con1.save(function(err) {
 				should.exist(err);
 				done();
@@ -55,7 +46,7 @@ describe('Conferences Model Unit Tests:', function() {
 		});
 		
 		it('should fail to save with invalid area', function(done) {
-			con1.sub[0].area = 'Over the Rainbow';
+			con1.area = 'Over the Rainbow';
 			return con1.save(function(err) {
 				should.exist(err);
 				done();
@@ -63,7 +54,7 @@ describe('Conferences Model Unit Tests:', function() {
 		});
 		
 		it('Should fail to save without presentation', function(done) {
-			con1.sub[0].presentation = '';
+			con1.presentation = '';
 			return con1.save(function(err) {
 				should.exist(err);
 				done();
@@ -71,7 +62,7 @@ describe('Conferences Model Unit Tests:', function() {
 		});
 		
 		it('Should fail to save with invalid presentation', function(done) {
-			con1.sub[0].presentation = 'Macaroni Art';
+			con1.presentation = 'Macaroni Art';
 			return con1.save(function(err) {
 				should.exist(err);
 				done();
@@ -79,7 +70,7 @@ describe('Conferences Model Unit Tests:', function() {
 		});
 		
 		it('should fail to save without where', function(done) {
-			con1.sub[0].where = '';
+			con1.where = '';
 			return con1.save(function(err) {
 				should.exist(err);
 				done();
@@ -87,7 +78,7 @@ describe('Conferences Model Unit Tests:', function() {
 		});
 		
 		it('should fail to save without date', function(done) {
-			con1.sub[0].date = '';
+			con1.date = '';
 			return con1.save(function(err) {
 				should.exist(err);
 				done();
@@ -95,7 +86,7 @@ describe('Conferences Model Unit Tests:', function() {
 		});
 		
 		it('should fail to save with an invalid date', function(done) {
-			con1.sub[0].date = 'yunno, that one day. It rained.';
+			con1.date = 'yunno, that one day. It rained.';
 			return con1.save(function(err) {
 				should.exist(err);
 				done();

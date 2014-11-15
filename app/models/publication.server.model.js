@@ -1,14 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-	Schema = mongoose.Schema,
-	validator = require('validator');
-
-	
-var validateDate = function(p) {
-	return validator.isDate(p);
-};	
-
+	Schema = mongoose.Schema;
 	
 var Publication = new Schema({
 	info: {

@@ -25,6 +25,10 @@ var ReportSchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User'
 	},
+	profile: {
+		type: Schema.ObjectId,
+		ref: 'Profile'
+	},
 
 	//TEMPORARY FIELDS FOR REPORT SECTIONS------------------------------------------------
 	/*

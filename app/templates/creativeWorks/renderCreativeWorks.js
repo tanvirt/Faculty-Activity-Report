@@ -8,15 +8,18 @@ var CreativeWorks = mongoose.model('CreativeWorks');
 var renderModel = new modelClass.RenderModel(CreativeWorks, 'creativeWorks/creativeWorks.tex', 'creativeWorks/na.tex');
 
 var is = require('is-js');
-/*
+
+var defaultData = require('../default.json');
+var _ = require('underscore');
+
 renderModel.setDebugPopulate(false, {
-	sub: [{
+	//sub: [{
 		name: 'LaTeX',
 		description: 'a high-quality typesetting system',
 		website: 'http://www.latex-project.org',
 		date: '10/20/1984',
 		jointEfforts: ['George', 'Gandalf', 'Rebecca']
-	},
+	/*},
 	{
 		name: 'Amazon',
 		description: 'an American international electronic commerce company',
@@ -30,9 +33,9 @@ renderModel.setDebugPopulate(false, {
 		website: 'http://www.microsoft.com/',
 		date: '4/04/1975',
 		jointEfforts: ['George', 'Gandalf', 'Rebecca', 'Aragorn']
-	}]
+	}]*/
 });
-*/
+
 renderModel.isDebugNull = false;
 
 /*
@@ -78,4 +81,17 @@ module.exports.submit = function(req, callback) {
 	});
 */
 	callback(null, null);
+};
+
+module.exports.createDefaultData = function(report, user, cb) {
+	var save = _.extend(defaultData.creativeWorks, {
+		report: report,
+		user: user
+	});
+
+	var creativeWorks = new CreativeWorks(save);
+
+	creativeWorks.save(function(err) {
+		cb(err, creativeWorks);
+	});
 };

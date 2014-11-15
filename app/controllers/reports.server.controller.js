@@ -6,10 +6,12 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors'),
 	Report = mongoose.model('Report'),
+	Profile = mongoose.model('Profile'),
 	_ = require('lodash'),
 	u = require('underscore'),
 	latex = require('latex'),
-	fs = require('fs');
+	fs = require('fs'),
+	async = require('async');
 
 var headerFooter = require('../templates/headerFooter/renderHeaderFooter');
 
@@ -66,13 +68,25 @@ exports.download = function(req, res) {
 	res.download('./public/modules/reports/pdf/' + req.report._id + '.pdf');
 };
 
-exports.createBlank = function(req, res) {
-	var report = new Report();
+exports.getNew = function(req, res) {
+	console.log(require('util').inspect(req.report));
+	res.jsonp(req.report);
+};
 
-	report.user = req.user;
-	report.reportName = req.body.reportName;
+exports.createNew = function(req, res) {
+	var report = new Report({
+		reportName: req.body.reportName,
+		user: req.user
+	});
+	
+	var profile = new Profile({
+		report: report,
+		user: req.user
+	});
 
-	report.save(function(err) {
+	report.profile = profile;
+
+	headerFooter.defaultValues(report, profile, req.user, function(err) {
 		if (err) return res.jsonp(err);
 		req.report = report;
 		res.jsonp(report);
@@ -152,6 +166,8 @@ exports.list = function(req, res) {
 	.sort('-created')
 	.populate('user', 'displayName')
 
+	.populate('profile')
+
 	.populate('name')
 	.populate('tenure')
 	.populate('currentRank')
@@ -173,6 +189,8 @@ exports.list = function(req, res) {
 	.populate('consultationsOutsideUniversity')
 	.populate('governance')
 	.populate('publication')
+	.populate('editorServiceReviewer')
+	.populate('serviceToSchools')
 
 
 	.exec(function(err, reports) {
@@ -193,6 +211,8 @@ exports.reportByID = function(req, res, next, id) {
 	Report.findById(id)
 	.populate('user', 'displayName')
 
+	.populate('profile')
+
 	.populate('name')
 	.populate('tenure')
 	.populate('currentRank')
@@ -214,6 +234,8 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('consultationsOutsideUniversity')
 	.populate('governance')
 	.populate('publication')
+	.populate('editorServiceReviewer')
+	.populate('serviceToSchools')
 	
 	
 	.exec(function(err, report) {

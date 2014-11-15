@@ -1,9 +1,10 @@
 'use strict';
 
-angular.module('reports').controller('ProfileController', ['$scope', '$stateParams', '$location', 'Authentication',
-	function($scope, $stateParams, $location, Authentication, Reports ) {
+angular.module('reports').controller('ProfileController', ['$http', '$scope', '$stateParams', '$location', 'Authentication',
+	function($scope, $http, $stateParams, $location, Authentication, Reports ) {
 		$scope.authentication = Authentication;
 		
+
 				// Update existing Report
 		$scope.update = function() {
 			var report = $scope.report;
@@ -19,6 +20,8 @@ angular.module('reports').controller('ProfileController', ['$scope', '$statePara
 				reportId: $stateParams.reportId
 			});
 		};
+
+		
 		
 	}
 ]);
