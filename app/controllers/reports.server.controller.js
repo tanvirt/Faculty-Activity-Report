@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors'),
 	Report = mongoose.model('Report'),
+	Profile = mongoose.model('Profile'),
 	_ = require('lodash'),
 	u = require('underscore'),
 	latex = require('latex'),
@@ -53,28 +54,25 @@ exports.download = function(req, res) {
 	res.sendfile('./public/modules/reports/pdf/' + req.report._id + '.pdf');
 };
 
-var inc = require('../templates/includes.js');
-
-var Profile = mongoose.model('Profile');
-
-var Name = mongoose.model('Name');
-var Tenure = mongoose.model('Tenure');
-var CurrentRank = mongoose.model('CurrentRank');
-var DateAppointed = mongoose.model('DateAppointed');
-var AffiliateAppointments = mongoose.model('AffiliateAppointments');
-
 exports.getNew = function(req, res) {
 	console.log(require('util').inspect(req.report));
 	res.jsonp(req.report);
 };
 
 exports.createNew = function(req, res) {
-	var report = new Report();
+	var report = new Report({
+		reportName: req.body.reportName,
+		user: req.user
+	});
+	
+	var profile = new Profile({
+		report: report,
+		user: req.user
+	});
 
-	report.user = req.user;
-	report.reportName = req.body.reportName;
+	report.profile = profile;
 
-	headerFooter.defaultValues(report, req.user, function(err) {
+	headerFooter.defaultValues(report, profile, req.user, function(err) {
 		if (err) return res.jsonp(err);
 		req.report = report;
 		res.jsonp(report);

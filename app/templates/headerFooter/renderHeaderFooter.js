@@ -75,7 +75,7 @@ exports.renderSections = function(req, cb) {
 	});
 };
 
-exports.defaultValues = function(report, user, cb) {
+exports.defaultValues = function(report, profile, user, cb) {
 	async.parallel({	
 		name: async.apply(renderName.createDefaultData, report, user),
 		tenure: async.apply(renderTenure.createDefaultData, report, user),
@@ -108,6 +108,12 @@ exports.defaultValues = function(report, user, cb) {
 			});
 		}
 
+		profile.name = models.name._id;
+		profile.tenure = models.tenure._id;
+		profile.dateAppointed = models.dateAppointed._id;
+		profile.currentRank = models.currentRank._id;
+		profile.affiliateAppointments = models.affiliateAppointments._id;
+
 		report.name = models.name._id;
 		report.tenure = models.tenure._id;
 		report.currentRank = models.currentRank._id;
@@ -132,6 +138,10 @@ exports.defaultValues = function(report, user, cb) {
 		report.honors = models.honors._id;
 		report.furtherInformationSection = models.furtherInformationSection._id;
 
-		report.save(cb);
+		report.save(function(err) {
+			profile.save(function(err) {
+				cb(err);
+			});
+		});
 	});
 };
