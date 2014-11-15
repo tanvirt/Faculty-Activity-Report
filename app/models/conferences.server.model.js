@@ -3,8 +3,13 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var conference = new Schema({
-	
+//Contents of schema will pull majority of content from outside data source, not from user
+//Overall mean is to be calculated on demand, not stored
+var Conferences = new Schema({
+	user: {			//multiple evaluations per user possible. Use this field to match with user
+		type: Schema.ObjectId,
+		ref: 'User'
+	},
 	area: {
 		type: String,
 		enum: ['International', 'State', 'Local'],
@@ -26,27 +31,6 @@ var conference = new Schema({
 		type: String,
 		required: true
 	},
-	
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
-	},
-
-	report: {
-		type: Schema.ObjectId,
-		ref: 'Report'
-	}
-
-});
-
-//Contents of schema will pull majority of content from outside data source, not from user
-//Overall mean is to be calculated on demand, not stored
-var Conferences = new Schema({
-	user: {			//multiple evaluations per user possible. Use this field to match with user
-		type: Schema.ObjectId,
-		ref: 'User'
-	},
-	sub: [conference],
 	report: {
 		type: Schema.ObjectId,
 		ref: 'Report'

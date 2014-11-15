@@ -9,7 +9,8 @@ var mongoose = require('mongoose'),
 	_ = require('lodash'),
 	u = require('underscore'),
 	latex = require('latex'),
-	fs = require('fs');
+	fs = require('fs'),
+	async = require('async');
 
 var headerFooter = require('../templates/headerFooter/renderHeaderFooter');
 
@@ -52,6 +53,8 @@ exports.download = function(req, res) {
 	res.sendfile('./public/modules/reports/pdf/' + req.report._id + '.pdf');
 };
 
+var inc = require('../templates/includes.js');
+
 var Profile = mongoose.model('Profile');
 
 var Name = mongoose.model('Name');
@@ -71,72 +74,7 @@ exports.createNew = function(req, res) {
 	report.user = req.user;
 	report.reportName = req.body.reportName;
 
-	var name = new Name({
-		firstName: 'MyFirstName',
-		middleName: 'M',
-		lastName: 'MyLastName',
-
-		report: report,
-		user: req.user
-	});
-
-	var tenure = new Tenure({
-		tenure: 'Not Tenured',
-
-		report: report,
-		user: req.user
-	});
-
-	var currentRank = new CurrentRank({
-		rank: 'Professor',
-		department: 'Agricultural and Biological Engineering',
-
-		report: report,
-		user: req.user
-	});
-
-	var dateAppointed = new DateAppointed({
-		date: 'October 1993',
-
-		report: report,
-		user: req.user
-	});
-
-	var affiliateAppointments = new AffiliateAppointments({
-		app: 'My AffiliateAppointments',
-
-		report: report,
-		user: req.user
-	});
-
-	var profile = new Profile({
-		name: name,
-		tenure: tenure,
-		currentRank: currentRank,
-		dateAppointed: dateAppointed,
-		affiliateAppointments: affiliateAppointments,
-
-		report: report,
-		user: req.user
-	});
-
-	name.save();
-	tenure.save();
-	currentRank.save();
-	dateAppointed.save();
-	affiliateAppointments.save();
-
-	profile.save();
-
-	report.name = name._id;
-	report.tenure = tenure._id;
-	report.currentRank = currentRank._id;
-	report.dateAppointed = dateAppointed._id;
-	report.affiliateAppointments = affiliateAppointments._id;
-
-	report.profile = profile._id;
-
-	report.save(function(err) {
+	headerFooter.defaultValues(report, req.user, function(err) {
 		if (err) return res.jsonp(err);
 		req.report = report;
 		res.jsonp(report);
@@ -239,6 +177,8 @@ exports.list = function(req, res) {
 	.populate('consultationsOutsideUniversity')
 	.populate('governance')
 	.populate('publication')
+	.populate('editorServiceReviewer')
+	.populate('serviceToSchools')
 
 
 	.exec(function(err, reports) {
@@ -282,6 +222,8 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('consultationsOutsideUniversity')
 	.populate('governance')
 	.populate('publication')
+	.populate('editorServiceReviewer')
+	.populate('serviceToSchools')
 	
 	
 	.exec(function(err, report) {

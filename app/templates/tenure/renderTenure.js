@@ -9,6 +9,9 @@ var renderModel = new modelClass.RenderModel( Tenure, 'tenure/tenure.tex', 'tenu
 
 var is = require('is-js');
 
+var defaultData = require('../default.json');
+var _ = require('underscore');
+
 /*
 Populates the database with test data
 */
@@ -40,5 +43,18 @@ module.exports.submit = function(req, callback) {
 
 	tenure.save(function(err) {
 		callback(err, tenure);
+	});
+};
+
+module.exports.createDefaultData = function(report, user, cb) {
+	var save = _.extend(defaultData.tenure, {
+		report: report,
+		user: user
+	});
+
+	var tenure = new Tenure(save);
+
+	tenure.save(function(err) {
+		cb(err, tenure);
 	});
 };

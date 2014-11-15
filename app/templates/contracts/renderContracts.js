@@ -7,11 +7,14 @@ var modelClass = require('../modelClass');
 var Contracts = mongoose.model('Contracts');
 var renderModel = new modelClass.RenderModel(Contracts, 'contracts/contracts.tex', 'contracts/na.tex');
 
+var defaultData = require('../default.json');
+var _ = require('underscore');
+
 /*
 Populates the database with test data
 */
 renderModel.setDebugPopulate(false, {
-	sub: [{
+	//sub: [{
 		title: 'Contract 1',
 		funded: 'externally',
 		PI: 'PI',
@@ -20,7 +23,7 @@ renderModel.setDebugPopulate(false, {
 		fundingAgency: 'NASA',
 		fundingPortion: 100000,
 		value: 200000
-	},
+	/*},
 	{
 		title: 'Contract 2',
 		funded: 'externally',
@@ -39,7 +42,7 @@ renderModel.setDebugPopulate(false, {
 		endDate: '12/18/2001',
 		fundingAgency: 'N/A',
 		value: 400
-	}]
+	}]*/
 	// Methods Don't get called
 });
 
@@ -83,6 +86,19 @@ module.exports.submit = function(req, callback) {
 		callback(err, contract);
 	});*/
 	return callback(null, null);	
+};
+
+module.exports.createDefaultData = function(report, user, cb) {
+	var save = _.extend(defaultData.contracts, {
+		report: report,
+		user: user
+	});
+
+	var contracts = new Contracts(save);
+
+	contracts.save(function(err) {
+		cb(err, contracts);
+	});
 };
 
 
