@@ -26,8 +26,6 @@ exports.create = function(req, res, callback) {
 	});
 
 	name.save(function(err) {
-		//req.report.name = name;
-		//req.report.save();
 		callback(err, name);
 	});
 };
@@ -44,10 +42,7 @@ exports.update = function(req, res, callback) {
 
 	Name.findById(req.profile.name, function(err, model) {
 		if (err) {
-			res.status(400);
-			return callback({
-				err: 'Finding Failed'
-			});
+			return callback(null, null);
 		}
 
 		var name = _.extend(model, req.body.name);
