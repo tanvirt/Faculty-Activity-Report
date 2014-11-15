@@ -73,18 +73,8 @@ module.exports.submit = function(req, callback) {
 
 module.exports.createDefaultData = function(report, user, cb) {
 	var save = _.extend(defaultData.assignedActivity, {
-		year: 2000,
-		springTeaching: 20, 
-		springResearch: 40, 
-		springService: 40,
-
-		summerTeaching: 30, 
-		summerResearch: 60, 
-		summerService: 10,
-
-		fallTeaching: 70, 
-		fallResearch: 15, 
-		fallService: 15
+		report: report,
+		user: user
 	});
 
 	var assignedActivity = new AssignedActivity(save);

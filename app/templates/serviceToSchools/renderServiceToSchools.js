@@ -1,12 +1,15 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var serviceToSchools = mongoose.model('ServiceToSchools');
+var ServiceToSchools = mongoose.model('ServiceToSchools');
 
 var modelClass = require('../modelClass');
-var renderModel = new modelClass.RenderModel(serviceToSchools, 'serviceToSchools/serviceToSchools.tex', 'serviceToSchools/na.tex');
+var renderModel = new modelClass.RenderModel(ServiceToSchools, 'serviceToSchools/serviceToSchools.tex', 'serviceToSchools/na.tex');
 
 var is = require('is-js');
+
+var defaultData = require('../default.json');
+var _ = require('underscore');
 
 /*
 will explicitly populate the report with
@@ -37,7 +40,7 @@ saves it in the database.
 module.exports.submit = function(req, callback) {
 	if (is.empty(req.body.serviceToSchools)) return callback(null, null);
 
-	var services = new serviceToSchools({
+	var services = new ServiceToSchools({
 		service: req.body.serviceToSchools.service,
 		user: req.user
 	});
@@ -48,6 +51,15 @@ module.exports.submit = function(req, callback) {
 };
 
 module.exports.createDefaultData = function(report, user, cb) {
-	renderModel.createDefaultData(report, user, cb);
+	var save = _.extend(defaultData.serviceToSchools, {
+		report: report,
+		user: user
+	});
+
+	var serviceToSchools = new ServiceToSchools(save);
+
+	serviceToSchools.save(function(err) {
+		cb(err, serviceToSchools);
+	});
 };
 

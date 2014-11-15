@@ -8,26 +8,19 @@ var renderModel = new modelClass.RenderModel( Conferences, 'conferences/conferen
 
 var is = require('is-js');
 
+var defaultData = require('../default.json');
+var _ = require('underscore');
 
 /*
 will explicitly populate the report with
 the data you provide
 */
 renderModel.setDebugPopulate( false, {
-	sub: [{
-		area: 'State',
-		presentation: 'Poster',
-		title: 'Test Conference Data',
-		date: 'October 12, 2001',
-		where: 'Somewhere. Earth.'
-	},
-	{
-		area: 'International',
-		presentation: 'Speech',
-		title: 'Test Conference Data 2',
-		date: '9/01/2000',
-		where: 'Mars'
-	}]
+	area: 'State',
+	presentation: 'Poster',
+	title: 'Test Conference Data',
+	date: 'October 12, 2001',
+	where: 'Somewhere. Earth.'
 });
 
 /*
@@ -76,6 +69,15 @@ module.exports.submit = function(req, callback) {
 };
 
 module.exports.createDefaultData = function(report, user, cb) {
-	renderModel.createDefaultData(report, user, cb);
+	var save = _.extend(defaultData.conferences, {
+		report: report,
+		user: user
+	});
+
+	var conferences = new Conferences(save);
+
+	conferences.save(function(err) {
+		cb(err, conferences);
+	});
 };
 

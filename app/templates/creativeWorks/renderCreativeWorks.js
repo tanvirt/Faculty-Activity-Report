@@ -9,6 +9,9 @@ var renderModel = new modelClass.RenderModel(CreativeWorks, 'creativeWorks/creat
 
 var is = require('is-js');
 
+var defaultData = require('../default.json');
+var _ = require('underscore');
+
 renderModel.setDebugPopulate(false, {
 	//sub: [{
 		name: 'LaTeX',
@@ -81,5 +84,14 @@ module.exports.submit = function(req, callback) {
 };
 
 module.exports.createDefaultData = function(report, user, cb) {
-	renderModel.createDefaultData(report, user, cb);
+	var save = _.extend(defaultData.creativeWorks, {
+		report: report,
+		user: user
+	});
+
+	var creativeWorks = new CreativeWorks(save);
+
+	creativeWorks.save(function(err) {
+		cb(err, creativeWorks);
+	});
 };

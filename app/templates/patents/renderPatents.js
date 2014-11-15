@@ -9,6 +9,9 @@ var renderModel = new modelClass.RenderModel(Patents, 'patents/patents.tex', 'pa
 
 var is = require('is-js');
 
+var defaultData = require('../default.json');
+var _ = require('underscore');
+
 renderModel.setDebugPopulate(false, {
 	title: 'Patent',
 	authors: ['Me', 'Myself', 'I'],
@@ -64,5 +67,14 @@ module.exports.submit = function(req, callback) {
 };
 
 module.exports.createDefaultData = function(report, user, cb) {
-	renderModel.createDefaultData(report, user, cb);
+	var save = _.extend(defaultData.patents, {
+		report: report,
+		user: user
+	});
+
+	var patents = new Patents(save);
+
+	patents.save(function(err) {
+		cb(err, patents);
+	});
 };

@@ -8,6 +8,9 @@ var renderModel = new modelClass.RenderModel( NewSchema, 'newSchema/newSchema.te
 
 var is = require('is-js');
 
+var defaultData = require('../default.json');
+var _ = require('underscore');
+
 /*
 will explicitly populate the report with
 the data you provide
@@ -66,6 +69,15 @@ module.exports.submit = function(req, callback) {
 };
 
 module.exports.createDefaultData = function(report, user, cb) {
-	renderModel.createDefaultData(report, user, cb);
+	var save = _.extend(defaultData.newSchema, {
+		report: report,
+		user: user
+	});
+
+	var newSchema = new NewSchema(save);
+
+	newSchema.save(function(err) {
+		cb(err, newSchema);
+	});
 };
 

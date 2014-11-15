@@ -10,6 +10,9 @@ var renderModel = new modelClass.RenderModel( Contribution, 'contribution/contri
 
 var is = require('is-js');
 
+var defaultData = require('../default.json');
+var _ = require('underscore');
+
 /*
 will explicitly populate the report with
 the data you provide
@@ -46,5 +49,14 @@ module.exports.submit = function(req, callback) {
 };
 
 module.exports.createDefaultData = function(report, user, cb) {
-	renderModel.createDefaultData(report, user, cb);
+	var save = _.extend(defaultData.contribution, {
+		report: report,
+		user: user
+	});
+
+	var contribution = new Contribution(save);
+
+	contribution.save(function(err) {
+		cb(err, contribution);
+	});
 };

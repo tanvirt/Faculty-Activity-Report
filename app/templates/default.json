@@ -7,5 +7,131 @@
 
 	"affiliateAppointments": {
 		"app": "whatevs, bro"
-	}
+	},
+
+	"conferences": {
+		"area": "State",
+		"presentation": "Poster",
+		"title": "Test Conference Data",
+		"date": "October 12, 2001",
+		"where": "Somewhere. Earth."
+	},
+
+	"consultationsOutsideUniversity": {
+		"consultation": "Consultations outside the university go here..."
+	},
+
+	"contracts": {
+		"title": "Contract 1",
+		"funded": "externally",
+		"PI": "PI",
+		"startDate": "02/13/2000",
+		"endDate": "08/05/2019",
+		"fundingAgency": "NASA",
+		"fundingPortion": "100000",
+		"value": "200000"
+	},
+
+	"contribution": {
+		"info": "I made the following contributions..."
+	},
+
+	"creativeWorks": {
+		"name": "Latex",
+		"description": "a high-quality typesetting system",
+		"website": "http://www.latex-project.org",
+		"date":"10/20/1984",
+		"jointEfforts": ["George", "Gandalf", "Rebecca"]
+	},
+
+	"currentRank": {
+    	"rank":"Professor",
+    	"department":"Agricultural and Biological Engineering"
+  	},
+
+  	"dateAppointed" : {
+   		"date":"October 1993"
+  	},
+
+  	"editorServiceReviwer": {
+  		"info": "debug string"
+  	},
+
+  	"furtherInformationSection": {
+    	"info":"This is my Further Information string"
+  	},
+
+  	"governance": {
+  		"govStr":"This is my governance"
+  	},
+
+  	"graduateCommittee": {
+  		"role":"Chair",
+	    "studentName":"Gordan Ramsey",
+	    "degree":"M.S.",
+	    "major":"Culinary Arts",
+	    "degreeDate":"1/05/1993"
+	},
+
+	"honors": {
+    	"info":"This is my Honors string"
+  	},
+
+	"international": {
+    	"activities":"This is my international activity"
+  	},
+
+  	"membership": {
+    	"info":"This is my membership string"
+  	},
+
+  	"patents": {
+		"title": "Patent",
+		"authors": ["Me", "Myself", "I"],
+		"patentNumber": "1234",
+		"date": "12/31/1999",
+		"description": "I saved the world"
+  	},
+
+  	"publications": {
+  		"info": "This is my info"
+  	},
+
+  	"serviceToSchools": {
+  		"service": "Service to schools goes here..."
+  	},
+
+  	"teachingAdvising": {
+    	"info":"My Teaching Advising Here"
+  	},
+
+  	"teachingEvaluation": {
+	    "course":"testCourse1",
+	    "year":"2003",
+	    "semester":"fall",
+	    "enrolled":"100",
+	    "responses":"30",
+	    "teacherMean":["1","2","3","1","2","3","1","2","3"],
+	    "departmentMean":["2","3","4","2","3","4","2","3","4"],
+	    "collegeMean":["4","4","4","4","4","4","4","4","4"]
+  	},
+
+  	"tenure": {
+    	"tenure":"Tenured"
+  	},
+
+  	"assignedActivity": {
+	    "year":"1993",
+	    "springTeaching":"30",
+	    "springResearch":"30",
+	    "springService":"40",
+	 
+	    "fallTeaching":"30",
+	    "fallResearch":"30",
+	    "fallService":"40",
+	 
+	    "summerTeaching":"30",
+	    "summerResearch":"30",
+	    "summerService":"40"
+  	}
 }

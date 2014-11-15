@@ -7,6 +7,9 @@ var modelClass = require('../modelClass');
 var Contracts = mongoose.model('Contracts');
 var renderModel = new modelClass.RenderModel(Contracts, 'contracts/contracts.tex', 'contracts/na.tex');
 
+var defaultData = require('../default.json');
+var _ = require('underscore');
+
 /*
 Populates the database with test data
 */
@@ -86,7 +89,16 @@ module.exports.submit = function(req, callback) {
 };
 
 module.exports.createDefaultData = function(report, user, cb) {
-	renderModel.createDefaultData(report, user, cb);
+	var save = _.extend(defaultData.contracts, {
+		report: report,
+		user: user
+	});
+
+	var contracts = new Contracts(save);
+
+	contracts.save(function(err) {
+		cb(err, contracts);
+	});
 };
 
 

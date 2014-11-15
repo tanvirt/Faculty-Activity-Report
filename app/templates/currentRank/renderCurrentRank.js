@@ -9,6 +9,9 @@ var renderModel = new modelClass.RenderModel( CurrentRank, 'currentRank/currentR
 
 var is = require('is-js');
 
+var defaultData = require('../default.json');
+var _ = require('underscore');
+
 /*
 Populates the database with test data
 */
@@ -50,5 +53,14 @@ module.exports.submit = function(req, callback) {
 };
 
 module.exports.createDefaultData = function(report, user, cb) {
-	renderModel.createDefaultData(report, user, cb);
+	var save = _.extend(defaultData.currentRank, {
+		report: report,
+		user: user
+	});
+
+	var currentRank = new CurrentRank(save);
+
+	currentRank.save(function(err) {
+		cb(err, currentRank);
+	});
 };
