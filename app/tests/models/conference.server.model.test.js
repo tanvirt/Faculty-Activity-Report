@@ -5,6 +5,7 @@
  */
 var should = require('should'),
 	mongoose = require('mongoose'),
+	assert = require('assert'),
 	Conferences = mongoose.model('Conferences');
 
 var con1;
@@ -12,11 +13,13 @@ var con1;
 describe('Conferences Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		con1 = new Conferences({
+			/*
 			title: 'Hall of the Mountain King',
 			area: 'State',
 			presentation: 'Speech',
 			where: 'Jaxonville, FL',
-			date: 'January 2000'		
+			date: 'January 2000'
+			*/
 		});
 				
 		done();
@@ -24,11 +27,20 @@ describe('Conferences Model Unit Tests:', function() {
 
 	describe('Method Save', function() {
 		
-		it('should be able to save without problems', function(done) {
+		it('should be able to save without problems if no info given', function(done) {
 			con1.save();
 			done();
 		});
-		
+		it('should set info to N/A if nothing given', function(done) {
+			assert.equal(con1.info, 'N/A');
+			done();
+		});
+		it('should be able to save without problems if info is given', function(done) {
+			con1.info = 'lol conferences';
+			con1.save();
+			done();
+		});
+		/*
 		it('should fail to save without title', function(done) {
 			con1.title = '';
 			return con1.save(function(err) {
@@ -92,6 +104,7 @@ describe('Conferences Model Unit Tests:', function() {
 				done();
 			});
 		});
+		*/
 	
 	});
 	afterEach(function(done) {

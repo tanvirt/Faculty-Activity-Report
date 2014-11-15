@@ -10,6 +10,11 @@ var Conferences = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User'
 	},
+	info: {
+		type: String,
+		default: 'N/A'
+	},
+	/*
 	area: {
 		type: String,
 		enum: ['International', 'State', 'Local'],
@@ -30,7 +35,7 @@ var Conferences = new Schema({
 	where: {
 		type: String,
 		required: true
-	},
+	},*/
 	report: {
 		type: Schema.ObjectId,
 		ref: 'Report'
