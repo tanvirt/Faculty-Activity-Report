@@ -41,28 +41,73 @@ function render(input, cb) {
 
 exports.renderSections = function(req, cb) {
 	async.parallel([
+		// Section 1, Name
 		async.apply(renderName.render, req),
+
+		// Section 2, Tenure
 		async.apply(renderTenure.render, req),
+
+		// Section 3, Current Rank
 		async.apply(renderCurrentRank.render, req),
-		async.apply(renderAffiliateAppointments.render, req),
+
+		// Section 4, Date Appointed To This Rank
 		async.apply(renderDateAppointed.render, req),
-		async.apply(renderTeachingAdvising.render, req),
+
+		// Section 5, Affiliate Appointments
+		async.apply(renderAffiliateAppointments.render, req),
+
+		// Section 6, Assigned Activity
 		async.apply(renderAssignedActivity.render, req),
+
+		// Section 7, Teaching, Advising And/Or Instructional Accomplishments
+		async.apply(renderTeachingAdvising.render, req),
+		
+		// Section 8, Teaching Evaluations
 		async.apply(renderTeachingEvaluation.render, req),
+
+		// Section 9, Graduate Committee Activities
 		async.apply(renderGraduateCommittee.render, req),
-		async.apply(renderCreativeWorks.render, req),
-		async.apply(renderPatents.render, req),
-		async.apply(renderPublication.render, req),
+
+		// Section 10, Contribution To Discipline/Research Narrative
 		async.apply(renderContribution.render, req),
+
+		// Section 11, Creative Works Or Activities
+		async.apply(renderCreativeWorks.render, req),
+
+		// Section 12, Patents and Copyrights
+		async.apply(renderPatents.render, req),
+
+		// Section 13, Publications
+		async.apply(renderPublication.render, req),
+
+		// Section 14, Lectures, Speeches Or Posters Presented At Professional Conferences/Meetings
 		async.apply(renderConferences.render, req),
+
+		// Section 15, Contracts And Grants Since Last Promotion Or During The Last Five Years
 		async.apply(renderContracts.render, req),
+
+		// Section 16, University Governance And Service
 		async.apply(renderGovernance.render, req),
+
+		// Section 17, Consultations Outside The University
 		async.apply(renderConsultationsOutsideUniversity.render, req),
+
+		// Section 18, Editor Of A Scholarly Journal, Service On An Editorial Advisory Board Or Reviewer For A Scholarly Journal
 		async.apply(renderEditorServiceReviewer.render, req),
-		async.apply(renderMembership.render, req),
+
+		// Section 19, International Activities
 		async.apply(renderInternational.render, req),
+
+		// Section 20, Service To Schools
 		async.apply(renderServiceToSchools.render, req),
+
+		// Section 21, Membership and Activites In the Profession
+		async.apply(renderMembership.render, req),
+		
+		// Section 22, Honors
 		async.apply(renderHonors.render, req),
+
+		// Section 23, The Further Information Section
 		async.apply(renderFurtherInformationSection.render, req)	
 	], function(err, results) {
 		if (err) {
