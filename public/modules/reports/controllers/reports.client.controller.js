@@ -10,8 +10,7 @@ app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$statePar
 		
 		// Create new Report
 		$scope.create = function() {
-			console.log($scope);
-			$http.get('/reports/createNew',
+			$http.post('/reports/createNew',
 			{
 				reportName: $scope.reportName
 			}).
