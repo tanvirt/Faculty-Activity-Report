@@ -10,8 +10,13 @@ app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$statePar
 		
 		// Create new Report
 		$scope.create = function() {
-			$http.get('/reports/createNew', { cache: 'true' }).
+			console.log('Here!');
+			$http.get('/reports/createNew').
 				success(function(data, status, headers, config) {
+					console.log(data);
+					console.log(status);
+					console.log(headers);
+					console.log(config);
 					$rootScope.report = data;
 					$location.path('reports/' + data._id + '/edit');
 				}).
