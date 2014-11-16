@@ -10,7 +10,7 @@ module.exports = function(app) {
 		.get(users.requiresLogin, editorServiceReviewer.readFromReport)
 		.post(users.requiresLogin, editorServiceReviewer.create);
 
-	app.route('/reports/:reportId/editorServiceReviewer/:editorServiceReviewerId')
+	app.route('/editorServiceReviewer/:editorServiceReviewerId')
 		.get(users.requiresLogin, editorServiceReviewer.read)
 		.put(users.requiresLogin, editorServiceReviewer.update);
 

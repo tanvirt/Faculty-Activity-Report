@@ -93,7 +93,7 @@ describe('Contribution Controller Tests', function() {
 
 		it('should fail to get a specific contribution if not logged in', function(done) {
 			request(app)
-			  .get('/reports/' + report.id + '/contribution/' + c1.id)
+			  .get('/contribution/' + c1.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
@@ -110,7 +110,7 @@ describe('Contribution Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					  .get('/reports/' + report.id + '/contribution/' + c1.id)
+					  .get('/contribution/' + c1.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .expect('Content-Type', /json/)
@@ -185,7 +185,7 @@ describe('Contribution Controller Tests', function() {
 
 		it('should fail to update a specific contribution if not logged in', function(done) {
 			request(app)
-			  .put('/reports/' + report.id + '/contribution/' + c1.id)
+			  .put('/contribution/' + c1.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
@@ -202,7 +202,7 @@ describe('Contribution Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					.put('/reports/' + report.id + '/contribution/' + c1.id)
+					.put('/contribution/' + c1.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
 				  	.send({

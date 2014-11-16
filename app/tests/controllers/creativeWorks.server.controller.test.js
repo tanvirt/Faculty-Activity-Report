@@ -123,7 +123,7 @@ describe('CreativeWorks Controller Tests', function() {
 
 		it('should fail to be able to get a specific creativeWorks if not logged in', function(done) {
 			request(app)
-			  .get('/reports/' + report.id + '/creativeWorks/' + cw1.id)
+			  .get('/creativeWorks/' + cw1.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
@@ -140,7 +140,7 @@ describe('CreativeWorks Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					  .get('/reports/' + report.id + '/creativeWorks/' + cw1.id)
+					  .get('/creativeWorks/' + cw1.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .expect('Content-Type', /json/)
@@ -219,7 +219,7 @@ describe('CreativeWorks Controller Tests', function() {
 
 		it('should fail to be able to update a specific creativeWorks if not logged in', function(done) {
 			request(app)
-			  .put('/reports/' + report.id + '/creativeWorks/' + cw1.id)
+			  .put('/creativeWorks/' + cw1.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
@@ -236,7 +236,7 @@ describe('CreativeWorks Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					.put('/reports/' + report.id + '/creativeWorks/' + cw1.id)
+					.put('/creativeWorks/' + cw1.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
 				  	.send({

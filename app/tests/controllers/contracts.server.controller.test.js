@@ -132,7 +132,7 @@ describe('Contracts Controller Tests', function() {
 
 		it('should fail to be able to get a specific contracts if not logged in', function(done) {
 			request(app)
-			  .get('/reports/' + report.id + '/contracts/' + c1.id)
+			  .get('/contracts/' + c1.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
@@ -149,7 +149,7 @@ describe('Contracts Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					  .get('/reports/' + report.id + '/contracts/' + c1.id)
+					  .get('/contracts/' + c1.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .expect('Content-Type', /json/)
@@ -232,7 +232,7 @@ describe('Contracts Controller Tests', function() {
 
 		it('should fail to be able to update a specific contracts if not logged in', function(done) {
 			request(app)
-			  .put('/reports/' + report.id + '/contracts/' + c1.id)
+			  .put('/contracts/' + c1.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
@@ -249,7 +249,7 @@ describe('Contracts Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					.put('/reports/' + report.id + '/contracts/' + c1.id)
+					.put('/contracts/' + c1.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
 				  	.send({

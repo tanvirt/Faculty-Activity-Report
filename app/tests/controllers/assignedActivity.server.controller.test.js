@@ -119,7 +119,7 @@ describe('AssignedActivity Controller Tests', function() {
 
 		it('should fail to be able to get a specific assignedActivity if not logged in', function(done) {
 			request(app)
-			  .get('/reports/' + report.id + '/assignedActivity/' + aa.id)
+			  .get('/assignedActivity/' + aa.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
@@ -136,7 +136,7 @@ describe('AssignedActivity Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					  .get('/reports/' + report.id + '/assignedActivity/' + aa.id)
+					  .get('/assignedActivity/' + aa.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .expect('Content-Type', /json/)
@@ -245,7 +245,7 @@ describe('AssignedActivity Controller Tests', function() {
 
 		it('should fail to be able to update a specific assignedActivity if not logged in', function(done) {
 			request(app)
-			  .put('/reports/' + report.id + '/assignedActivity/' + aa.id)
+			  .put('/assignedActivity/' + aa.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
@@ -262,7 +262,7 @@ describe('AssignedActivity Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					.put('/reports/' + report.id + '/assignedActivity/' + aa.id)
+					.put('/assignedActivity/' + aa.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
 				  	.send({

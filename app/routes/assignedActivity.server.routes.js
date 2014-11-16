@@ -9,7 +9,7 @@ module.exports = function(app) {
 		.get(users.requiresLogin, assignedActivity.readFromReport)
 		.post(users.requiresLogin, assignedActivity.create);
 
-	app.route('/reports/:reportId/assignedActivity/:assignedActivityId')
+	app.route('/assignedActivity/:assignedActivityId')
 		.get(users.requiresLogin, assignedActivity.read)
 		.put(users.requiresLogin, assignedActivity.update);
 

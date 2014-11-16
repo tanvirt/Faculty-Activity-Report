@@ -47,6 +47,8 @@ exports.create = function(req, res) {
 };
 
 exports.update = function(req, res) {
+	console.log(require('util').inspect(req.body));
+	
 	if (is.empty(req.body.creativeWorks)) {
 		res.status(400);
 		return res.jsonp({

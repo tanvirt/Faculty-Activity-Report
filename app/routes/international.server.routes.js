@@ -10,7 +10,7 @@ module.exports = function(app) {
 		.get(users.requiresLogin, international.readFromReport)
 		.post(users.requiresLogin, international.create);
 
-	app.route('/reports/:reportId/international/:internationalId')
+	app.route('/international/:internationalId')
 		.get(users.requiresLogin, international.read)
 		.put(users.requiresLogin, international.update);
 

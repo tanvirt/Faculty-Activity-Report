@@ -34,6 +34,8 @@ exports.create = function(req, res) {
 	});
 
 	publication.save(function(err) {
+		console.log(require('util').inspect(req.body));
+		
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

@@ -93,7 +93,7 @@ describe('International Controller Tests', function() {
 
 		it('should fail to get a specific international if not logged in', function(done) {
 			request(app)
-			  .get('/reports/' + report.id + '/international/' + activity.id)
+			  .get('/international/' + activity.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
@@ -110,7 +110,7 @@ describe('International Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					  .get('/reports/' + report.id + '/international/' + activity.id)
+					  .get('/international/' + activity.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .expect('Content-Type', /json/)
@@ -185,7 +185,7 @@ describe('International Controller Tests', function() {
 
 		it('should fail to update a specific international if not logged in', function(done) {
 			request(app)
-			  .put('/reports/' + report.id + '/international/' + activity.id)
+			  .put('/international/' + activity.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
@@ -202,7 +202,7 @@ describe('International Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					.put('/reports/' + report.id + '/international/' + activity.id)
+					.put('/international/' + activity.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
 				  	.send({

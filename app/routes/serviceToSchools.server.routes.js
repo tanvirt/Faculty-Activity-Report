@@ -9,7 +9,7 @@ module.exports = function(app) {
 		.get(users.requiresLogin, serviceToSchools.readFromReport)
 		.post(users.requiresLogin, serviceToSchools.create);
 
-	app.route('/reports/:reportId/serviceToSchools/:serviceToSchoolsId')
+	app.route('/serviceToSchools/:serviceToSchoolsId')
 		.get(serviceToSchools.read)
 		.put(users.requiresLogin, serviceToSchools.update);
 

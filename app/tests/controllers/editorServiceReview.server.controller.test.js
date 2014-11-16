@@ -93,7 +93,7 @@ describe('EditorServiceReviewer Controller Tests', function() {
 
 		it('should fail to get a specific editorServiceReviewer if not logged in', function(done) {
 			request(app)
-			  .get('/reports/' + report.id + '/editorServiceReviewer/' + esr.id)
+			  .get('/editorServiceReviewer/' + esr.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
@@ -110,7 +110,7 @@ describe('EditorServiceReviewer Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					  .get('/reports/' + report.id + '/editorServiceReviewer/' + esr.id)
+					  .get('/editorServiceReviewer/' + esr.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .expect('Content-Type', /json/)
@@ -185,7 +185,7 @@ describe('EditorServiceReviewer Controller Tests', function() {
 
 		it('should fail to update a specific editorServiceReviewer if not logged in', function(done) {
 			request(app)
-			  .put('/reports/' + report.id + '/editorServiceReviewer/' + esr.id)
+			  .put('/editorServiceReviewer/' + esr.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
@@ -202,7 +202,7 @@ describe('EditorServiceReviewer Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					.put('/reports/' + report.id + '/editorServiceReviewer/' + esr.id)
+					.put('/editorServiceReviewer/' + esr.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
 				  	.send({

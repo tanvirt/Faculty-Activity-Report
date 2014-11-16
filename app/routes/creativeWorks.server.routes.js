@@ -10,7 +10,7 @@ module.exports = function(app) {
 		.get(users.requiresLogin, creativeWorks.readFromReport)
 		.post(users.requiresLogin, creativeWorks.create);
 
-	app.route('/reports/:reportId/creativeWorks/:creativeWorksId')
+	app.route('/creativeWorks/:creativeWorksId')
 		.get(users.requiresLogin, creativeWorks.read)
 		.put(users.requiresLogin, creativeWorks.update);
 

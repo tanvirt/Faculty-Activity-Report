@@ -10,7 +10,7 @@ module.exports = function(app) {
 		.get(users.requiresLogin, publication.readFromReport)
 		.post(users.requiresLogin, publication.create);
 
-	app.route('/reports/:reportId/publication/:publicationId')
+	app.route('/publication/:publicationId')
 		.get(users.requiresLogin, publication.read)
 		.put(users.requiresLogin, publication.update);
 

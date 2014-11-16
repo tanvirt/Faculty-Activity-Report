@@ -9,7 +9,7 @@ module.exports = function(app) {
 		.get(users.requiresLogin, graduateCommittee.readFromReport)
 		.post(users.requiresLogin, graduateCommittee.create);
 
-	app.route('/reports/:reportId/graduateCommittee/:graduateCommitteeId')
+	app.route('/graduateCommittee/:graduateCommitteeId')
 		.get(graduateCommittee.read)
 		.put(users.requiresLogin, graduateCommittee.update);
 

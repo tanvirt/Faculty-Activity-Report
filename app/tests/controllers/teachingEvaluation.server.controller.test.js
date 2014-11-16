@@ -111,7 +111,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 
 		it('should fail to be able to get a specific teachingEvaluation if not logged in', function(done) {
 			request(app)
-			  .get('/reports/' + report.id + '/teachingEvaluation/' + te.id)
+			  .get('/teachingEvaluation/' + te.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
@@ -128,7 +128,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					  .get('/reports/' + report.id + '/teachingEvaluation/' + te.id)
+					  .get('/teachingEvaluation/' + te.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .expect('Content-Type', /json/)
@@ -228,7 +228,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 
 		it('should fail to be able to update a specific teachingEvaluation if not logged in', function(done) {
 			request(app)
-			  .put('/reports/' + report.id + '/teachingEvaluation/' + te.id)
+			  .put('/teachingEvaluation/' + te.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
@@ -245,7 +245,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					.put('/reports/' + report.id + '/teachingEvaluation/' + te.id)
+					.put('/teachingEvaluation/' + te.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
 				  	.send({
