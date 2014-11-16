@@ -53,7 +53,8 @@ angular.module('reports').controller('AssignedActivityController', ['$http', '$s
                 }).
                 error(function(data, status, headers, config) {
                     alert('There was an error Saving!');
-                });
+                }
+            );
         };
 
 
