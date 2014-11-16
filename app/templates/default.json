@@ -5,6 +5,19 @@
 		"lastName": "Poodle"
 	},
 
+	"tenure": {
+    	"tenure":"Tenured"
+  	},
+
+  	"currentRank": {
+    	"rank":"Professor",
+    	"department":"Agricultural and Biological Engineering"
+  	},
+
+  	"dateAppointed" : {
+   		"date":"October 1993"
+  	},
+
 	"affiliateAppointments": {
 		"app": "whatevs, bro"
 	},
@@ -44,14 +57,7 @@
 		"jointEfforts": ["George", "Gandalf", "Rebecca"]
 	},
 
-	"currentRank": {
-    	"rank":"Professor",
-    	"department":"Agricultural and Biological Engineering"
-  	},
-
-  	"dateAppointed" : {
-   		"date":"October 1993"
-  	},
+	
 
   	"editorServiceReviwer": {
   		"info": "debug string"
@@ -114,11 +120,7 @@
 	    "teacherMean":["1","2","3","1","2","3","1","2","3","3"],
 	    "departmentMean":["2","3","4","2","3","4","2","3","4","3"],
 	    "collegeMean":["4","4","4","4","4","4","4","4","4","3"]
-  	},
-
-  	"tenure": {
-    	"tenure":"Tenured"
-  	},
+  	}, 	
 
   	"assignedActivity": {
 	    "year":"1993",

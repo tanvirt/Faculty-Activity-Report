@@ -3,16 +3,16 @@
 // Reports controller
 var app = angular.module('reports');
 
-app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Reports',
-	function($scope, $http, $stateParams, $location, Authentication, Reports ) {
+app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$stateParams', '$location', 'Authentication', 'Reports',
+	function($scope, $rootScope, $http, $stateParams, $location, Authentication, Reports ) {
 		$scope.authentication = Authentication;
 		
 		
 		// Create new Report
 		$scope.create = function() {
-			console.log('ReportsController create called');
-			$http.get('/reports/createNew').
+			$http.get('/reports/createNew', { cache: 'true' }).
 				success(function(data, status, headers, config) {
+					$rootScope.report = data;
 					$location.path('reports/' + data._id + '/edit');
 				}).
 				error(function(data, status, headers, config) {

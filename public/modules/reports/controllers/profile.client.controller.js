@@ -1,18 +1,21 @@
 'use strict';
 
-angular.module('reports').controller('ProfileController', ['$http', '$scope', '$stateParams', '$location', 'Authentication',
-	function($scope, $http, $stateParams, $location, Authentication ) {
+angular.module('reports').controller('ProfileController', ['$http', '$scope', '$rootScope', '$stateParams', '$location', 'Authentication',
+	function($http, $scope, $rootScope, $stateParams, $location, Authentication ) {
 		$scope.authentication = Authentication;
-		
-				// Update existing Report
-		$scope.update = function() {
-			console.log('Here');
-			console.log($scope.report.profile);
-			//$http.put('/profile/' + $scope.report.profile._id).
-		};
 
-		$scope.findOne = function() {
-			
+		$scope.data = {};
+		
+		// Update existing Report
+		$scope.update = function() {
+			$http.put('/profile/' + $rootScope.report.profile, $scope.data).
+				success(function(data, status, headers, config) {
+					console.log('Saved!');
+				}).
+				error(function(data, status, headers, config) {
+					console.log('There was an error!');
+				});
+
 		};
 	}
 ]);
