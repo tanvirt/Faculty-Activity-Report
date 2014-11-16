@@ -1,7 +1,56 @@
 'use strict';
 
-angular.module('reports').controller('AssignedActivityController', ['$scope',
-	function($scope) {
+angular.module('reports').controller('AssignedActivityController', ['$http', '$scope', '$location', 'Authentication', 'IDs',
+    function($http, $scope, $location, Authentication, IDs) {
+
+
+        IDs.get().then(function(data)
+        {
+            $scope.IDdata = data;
+            $scope.year = data.assignedActivity.year;
+            $scope.springTeaching = data.assignedActivity.springTeaching;
+            $scope.springResearch = data.assignedActivity.springResearch;
+            $scope.springService = data.assignedActivity.springService;
+
+            $scope.fallTeaching = data.assignedActivity.fallTeaching;
+            $scope.fallResearch = data.assignedActivity.fallResearch;
+            $scope.fallService = data.assignedActivity.fallService;
+
+            $scope.summerTeaching = data.assignedActivity.summerTeaching;
+            $scope.summerResearch = data.assignedActivity.summerResearch;
+            $scope.summerService = data.assignedActivity.summerService;
+        });
+
+        $scope.update = function()
+        {
+            $http.put('/assignedActivity/' + $scope.IDdata.assignedActivity._id, {
+
+                assignedActivity:{
+                    year:1993,
+                    springTeaching: $scope.springTeaching,
+                    springResearch: $scope.springResearch,
+                    springService: $scope.springService,
+
+                    fallTeaching: $scope.fallTeaching,
+                    fallResearch: $scope.fallResearch,
+                    fallService: $scope.fallService,
+
+                    summerTeaching: $scope.summerTeaching,
+                    summerResearch: $scope.summerResearch,
+                    summerService: $scope.summerService
+
+                }}).
+                success(function(data, status, headers, config) {
+                    alert('Saved!');
+                }).
+                error(function(data, status, headers, config) {
+                    alert('There was an error Saving!');
+                });
+        };
+
+
+
+
         $scope.springUpdate = function()
         {
             var springTeaching, springResearch, springService;

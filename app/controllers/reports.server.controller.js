@@ -74,6 +74,7 @@ exports.getNew = function(req, res) {
 };
 
 exports.createNew = function(req, res) {
+	console.log(req.body);
 	var report = new Report({
 		reportName: req.body.reportName,
 		user: req.user

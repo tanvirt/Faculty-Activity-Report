@@ -27,6 +27,7 @@ angular.module('reports').controller('ProfileController', ['$http', '$scope', '$
 		// Update existing Report
 		$scope.update = function() {
 			$http.put('/profile/' + $scope.IDdata.profile._id, {
+
 				name: {
 					firstName: $scope.firstName,
 					middleName: $scope.middleName,
@@ -34,7 +35,7 @@ angular.module('reports').controller('ProfileController', ['$http', '$scope', '$
 				},
 				tenure: {
 					tenure: $scope.tenure
-				}, 
+				},
 				currentRank: {
 					rank: $scope.rank,
 					department: $scope.department
