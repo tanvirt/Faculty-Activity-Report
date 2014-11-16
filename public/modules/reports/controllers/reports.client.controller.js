@@ -10,118 +10,14 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 		
 		// Create new Report
 		$scope.create = function() {
-			// Create new Report object
-			var report = new Reports ({
-				reportName: this.reportName,
-
-				name: {
-					firstName: this.firstName,
-					middleName: this.middleName,
-					lastName: this.lastName
-				},
-
-				tenure: {
-					tenure: this.tenure
-				},
-
-				currentRank: {
-					rank: this.currentRank,
-					department: this.department
-				},
-
-				dateAppointed: {
-					date: this.dateAppointed
-				},
-
-				affiliateAppointments: {
-					appointments: this.affiliateAppointments
-				},
-
-				assignedActivity: {
-					year: this.year,
-
-					springTeaching: this.springTeaching,
-					springResearch: this.springResearch,
-					springService: this.springService,
-
-					fallTeaching: this.fallTeaching,
-					fallResearch: this.fallResearch,
-					fallService: this.fallService,
-
-					summerTeaching: this.summerTeaching,
-					summerResearch: this.summerResearch,
-					summerService: this.summerService
-				},
-
-				teachingAdvising: {
-					info: this.teachingAdvising
-				},
-
-				teachingEvaluation: this.teachingEvaluationArray,
-
-				graduateCommittee: this.graduateCommitteeArray,
-
-				creativeWorks: this.creativeWorksArray, //this is an array of objects
-
-				patents: this.patentsArray, //this is an array of objects
-				
-				contribution: {
-					info: this.contribution
-				},
-
-				conferences: this.conferencesArray,
-
-				contracts: this.contractsArray,
-				
-				consultationsOutsideUniversity: {
-					consultation: this.consultationsOutsideUniversity
-				},
-				
-				honors: {
-					info: this.honors
-				},
-				
-				furtherInformationSection: {
-					info: this.furtherInformationSection
-				},
-				
-				serviceToSchools: {
-					service: this.serviceToSchools
-				},
-				
-				membership: {
-					info: this.membership
-				},
-
-				international: {
-					activities: this.international
-				},
-				
-				governance: {
-					govStr: this.governance
-				},
-				
-				editorServiceReviewer: {
-					info: this.editorServiceReviewer
-				},
-
-				publication: {
-					info: this.publication
-				}
-
-
-
-			});
-
-			// Redirect after save
-			report.$save(function(response) {
-				$location.path('reports/' + response._id);
-
-				// Clear form fields
-				$scope.reportName = '';
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
+			console.log('ReportsController create called');
+			$http.get('/reports/createNew').
+				success(function(data, status, headers, config) {
+					$location.path('reports/' + data._id + '/edit');
+				}).
+				error(function(data, status, headers, config) {
+					console.log('Error in Profile');
+				});
 		};
 
 		// Remove existing Report

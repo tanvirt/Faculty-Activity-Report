@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('reports').controller('NavigationController', ['$scope', '$stateParams', '$location', 'Authentication',
-	function($scope, $stateParams, $location, Authentication, Reports ) {
+	function($scope, $stateParams, $location, Authentication) {
 		$scope.authentication = Authentication;
 
 		$scope.tinymceOptions = {
@@ -27,7 +27,7 @@ angular.module('reports').controller('NavigationController', ['$scope', '$stateP
 		};
 
 		$scope.getTabPaneClass = function (tabNum) {
-		return 'tab-pane ' + tabClasses[tabNum];
+			return 'tab-pane ' + tabClasses[tabNum];
 		};
 
 		$scope.setActiveTab = function (tabNum) {
