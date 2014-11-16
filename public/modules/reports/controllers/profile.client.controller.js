@@ -5,7 +5,7 @@ angular.module('reports').controller('ProfileController', ['$http', '$scope', '$
 		$scope.authentication = Authentication;
 
 		IDs.get().then(function(data) {
-			var tmp = new Date(data.dateAppointed.date).toDateString();
+			$scope.IDdata = data;
 
 			$scope.firstName = data.name.firstName;
 			$scope.middleName = data.name.middleName;
@@ -26,33 +26,31 @@ angular.module('reports').controller('ProfileController', ['$http', '$scope', '$
 
 		// Update existing Report
 		$scope.update = function() {
-			IDs.get().then(function(data) {
-				$http.put('/profile/' + data.profile._id, {
-					name: {
-						firstName: $scope.firstName,
-						middleName: $scope.middleName,
-						lastName: $scope.lastName
-					},
-					tenure: {
-						tenure: $scope.tenure
-					}, 
-					currentRank: {
-						rank: $scope.rank,
-						department: $scope.department
-					},
-					dateAppointed: {
-						date: $scope.date
-					},
-					affiliateAppointments: {
-						app: $scope.app
-					}
-				}).
-				success(function(data, status, headers, config) {
-					console.log('Saved!');
-				}).
-				error(function(data, status, headers, config) {
-					console.log('There was an error!');
-				});
+			$http.put('/profile/' + $scope.IDdata.profile._id, {
+				name: {
+					firstName: $scope.firstName,
+					middleName: $scope.middleName,
+					lastName: $scope.lastName
+				},
+				tenure: {
+					tenure: $scope.tenure
+				}, 
+				currentRank: {
+					rank: $scope.rank,
+					department: $scope.department
+				},
+				dateAppointed: {
+					date: $scope.date
+				},
+				affiliateAppointments: {
+					app: $scope.app
+				}
+			}).
+			success(function(data, status, headers, config) {
+				alert('Saved!');
+			}).
+			error(function(data, status, headers, config) {
+				alert('There was an error Saving!');
 			});
 		};
 	}
