@@ -10,18 +10,12 @@ app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$statePar
 		
 		// Create new Report
 		$scope.create = function() {
-			console.log('Here!');
 			$http.get('/reports/createNew').
 				success(function(data, status, headers, config) {
-					console.log(data);
-					console.log(status);
-					console.log(headers);
-					console.log(config);
-					$rootScope.report = data;
 					$location.path('reports/' + data._id + '/edit');
 				}).
 				error(function(data, status, headers, config) {
-					console.log('Error in Profile');
+					console.log('Error in Reports');
 				});
 		};
 

@@ -6,21 +6,21 @@
             <div class="form-group">
                 <label class="col-md-3 control-label" for="name">Name</label>
                 <div class="col-md-3 controls">
-                    <input type="text" data-ng-model="data.name.firstName" id="firstName" class="form-control" placeholder="First" required>
+                    <input type="text" data-ng-model="firstName" id="firstName" class="form-control" placeholder="First" required>
                 </div>
                 <div class="col-md-2 controls">
-                    <input type="text" data-ng-model="data.name.middleName" id="middleName" class="form-control" placeholder="M." required>
+                    <input type="text" data-ng-model="middleName" id="middleName" class="form-control" placeholder="M." required>
                 </div>
                 <div class="col-md-3 controls">
-                    <input type="text" data-ng-model="data.name.lastName" id="lastName" class="form-control" placeholder="Last" required>
+                    <input type="text" data-ng-model="lastName" id="lastName" class="form-control" placeholder="Last" required>
                 </div>
                 <div class="col-md-1"></div>
             </div>
-            
+           
             <div class="form-group">
                 <label class="col-md-3 control-label" for="tenure">Tenure</label>
                 <div class="col-md-8 controls">
-                    <select class="form-control" id="tenure" data-ng-model="data.tenure.tenure">
+                    <select class="form-control" id="tenure" data-ng-model="tenure">
                       <option value="Tenured">Tenured</option>
                       <option value="Not Tenured">Not Tenured</option>
                     </select>
@@ -31,8 +31,7 @@
             <div class="form-group">
                 <label class="col-md-3 control-label" for="currentRank">Current Rank</label>
                 <div class="col-md-4 controls">
-                    <!-- todo needs and ng-repeat with the content from the backend-->
-                    <select data-ng-model="data.currentRank.rank" id="currentRank" class="form-control" required>
+                    <select data-ng-model="rank" id="currentRank" class="form-control" required>
                         <option value="Professor">
                             Professor
                         </option>
@@ -58,8 +57,7 @@
                 </div>
 
                 <div class="col-md-4 controls">
-                    <!-- todo needs and ng-repeat with the proper values from the backend -->
-                    <select class="form-control" id= "department" data-ng-model="data.currentRank.department" required>
+                    <select class="form-control" id= "department" data-ng-model="department" required>
                         <option value="Agricultural and Biological Engineering">
                             Agricultural and Biological Engineering
                         </option>
@@ -107,7 +105,7 @@
             <div class="form-group">
                 <label class="col-md-3 control-label" for="dateAppointed">Date Appointed to this Rank</label>
                 <div class="col-md-8 controls">
-                    <input type="month" data-ng-model="data.dateAppointed.date" id="dateAppointed" class="form-control" required>
+                    <input type="month" data-ng-model="date" id="dateAppointed" class="form-control" required>
                 </div>
                 <div class="col-md-1"></div>  
             </div>
@@ -115,7 +113,7 @@
             <div class="form-group">
                 <label class="col-md-3 control-label" for="affiliateAppointments">Affiliate Appointments</label>
                 <div class="col-md-8 controls">
-                    <input type="text" data-ng-model="date.affiliateAppointments.app" id="affiliateAppointments" class="form-control" placeholder="Affiliate Appointments" required>
+                    <input type="text" data-ng-model="app" id="affiliateAppointments" class="form-control" placeholder="Affiliate Appointments" required>
                 </div>
                 <div class="col-md-1"></div>
             </div>

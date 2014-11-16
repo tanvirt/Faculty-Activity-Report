@@ -12,3 +12,26 @@ angular.module('reports').factory('Reports', ['$resource',
 		});
 	}
 ]);
+
+angular.module('reports').factory('IDs', ['$q', '$http', '$stateParams',
+	function($q, $http, $stateParams) {
+		return {
+			get: function() {
+				if ($stateParams.reportId) {
+					var defer = $q.defer();
+					$http.get('/reports/' + $stateParams.reportId).
+						success(function(data, status, headers, config) {
+							defer.resolve(data);
+						}).
+						error(function(data, status, headers, config) {
+							console.log('There was an error in getting report');
+						});
+
+						return defer.promise;
+				} else {
+					console.log('No reportId specified in stateParams');
+				}
+			}
+		};
+	}
+]);
