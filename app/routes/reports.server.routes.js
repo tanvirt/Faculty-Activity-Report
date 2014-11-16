@@ -3,6 +3,7 @@
 module.exports = function(app) {
 	var users = require('../../app/controllers/users');
 	var reports = require('../../app/controllers/reports');
+	var teachingEvaluation = require('../../app/controllers/teachingEvaluation/teachingEvaluation');
 
 	// Reports Routes
 	app.route('/reports')
@@ -19,11 +20,19 @@ module.exports = function(app) {
 
 	app.route('/reportdownload/:reportId')
 		.get(users.requiresLogin, reports.hasAuthorization, 
-			 reports.generateLatex, reports.generatePDF, reports.download);
+			 reports.generateLatex, reports.generatePDF, reports.viewPDF);
+		
 
 	app.route('/reportdownload/:reportId/latex')
 		.get(users.requiresLogin, reports.hasAuthorization, 
 			reports.generateLatex, reports.getLatex);
+
+	app.route('/upload')
+		.get(reports.viewCtrl)
+		.post(teachingEvaluation.getExcel, teachingEvaluation.saveExcel);
+
+	app.route('/reportdownload/:reportId/download')
+		.get(users.requiresLogin, reports.hasAuthorization, reports.download);
 
 	// Finish by binding the Report middleware
 	app.param('reportId', reports.reportByID);

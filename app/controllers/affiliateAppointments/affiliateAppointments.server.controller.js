@@ -30,12 +30,7 @@ exports.create = function(req, res, callback) {
 
 exports.update = function(req, res, callback) {
 	if (is.empty(req.body.affiliateAppointments)) {
-		res.status(400);
-		return callback({
-			err: 'Put (update): Does not exist',
-			message: 'req.body.affiliateAppointments did not get send to backend',
-			changes: 'No Changes Made'
-		});
+		return callback(null, null);
 	}
 
 	AffiliateAppointments.findById(req.profile.affiliateAppointments, function(err, model) {

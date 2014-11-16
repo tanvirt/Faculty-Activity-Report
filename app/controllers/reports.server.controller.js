@@ -15,6 +15,16 @@ var mongoose = require('mongoose'),
 
 var headerFooter = require('../templates/headerFooter/renderHeaderFooter');
 
+exports.viewCtrl = function(req, res) {
+	res.render('report/upload', {
+		title: 'excel'
+	});
+};
+
+exports.completed = function(req, res) {
+	res.jsonp('Yay');
+};
+
 exports.generateLatex = function(req, res, next) {
 	headerFooter.renderSections(req, function(err, latex) {
 		if (err) return res.jsonp(err);
@@ -50,8 +60,12 @@ exports.getPDF = function(req, res) {
 	res.jsonp(req.entirePDF);
 };
 
-exports.download = function(req, res) {
+exports.viewPDF = function(req, res) {
 	res.sendfile('./public/modules/reports/pdf/' + req.report._id + '.pdf');
+};
+
+exports.download = function(req, res) {
+	res.download('./public/modules/reports/pdf/' + req.report._id + '.pdf');
 };
 
 exports.getNew = function(req, res) {

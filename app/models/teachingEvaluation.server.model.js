@@ -10,13 +10,20 @@ var mongoose = require('mongoose'),
  * A Validation function for local mean properties
  */
 var validateLocalStrategyMean = function(property) {
-	if(!property || property.length !== 9)
-		return false;
-	for(var i = 0; i < 9; i++)
-	{
-		if((property[i] < this.lowScore) || (property[i] > this.highScore))
-			return false;
+	if (!property) {
+		return true;
 	}
+
+	if (property.length !== 10) {
+		return false;
+	}
+
+	for (var i=0; i<property.length; i++) {
+		if (property[i] < 1 || property[i] > 5) {
+			return false;
+		}
+	}
+	
 	
 	return true;
 };
@@ -37,28 +44,24 @@ var teachingEvaluation = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User'
 	},
-		course: {
-		type: String,
-		required: true
+	course: {
+		type: String
 	},
 	required: {
-		type: Boolean,
-		default: false
+		type: Boolean
 	},
 	year: {
 		type: Number,
-		required: true,
 		min: 1980,
 		max: new Date().getFullYear()
 	},
 	semester: {
 		type: String,
 		enum: ['spring', 'fall', 'summer'],
-		required: true
+		default: 'spring'
 	},
 	enrolled: {
 		type: Number,
-		required: true
 	},
 	highScore: {
 		type: Number,
@@ -70,31 +73,27 @@ var teachingEvaluation = new Schema({
 	},
 	responses: {
 		type: Number,
-		required: true,
 	},
 	teacherMean: {	
 		type: [Number],
-		required: true,
 		default: [1, 1, 1, 
 				  1, 1, 1, 
-				  1, 1, 1],
-		validate: [validateLocalStrategyMean, 'Array Length must equal number of questions (9)']
+				  1, 1, 1, 1],
+		validate: [validateLocalStrategyMean, 'Array Length must equal number of questions (10)']
 	},
 	departmentMean: {
 		type: [Number],
-		required: true,
 		default: [1, 1, 1, 
 				  1, 1, 1, 
-				  1, 1, 1],
-		validate: [validateLocalStrategyMean, 'Array Length must equal number of questions (9)']
+				  1, 1, 1, 1],
+		validate: [validateLocalStrategyMean, 'Array Length must equal number of questions (10)']
 	},
 	collegeMean: {
 		type: [Number],
-		required: true,
 		default: [1, 1, 1, 
 				  1, 1, 1, 
-				  1, 1, 1],
-		validate: [validateLocalStrategyMean, 'Array Length must equal number of questions (9)']
+				  1, 1, 1, 1],
+		validate: [validateLocalStrategyMean, 'Array Length must equal number of questions (10)']
 	},
 	report: {
 		type: Schema.ObjectId,

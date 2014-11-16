@@ -32,11 +32,7 @@ exports.create = function(req, res, callback) {
 
 exports.update = function(req, res, callback) {
 	if (is.empty(req.body.tenure)) {
-		return callback({
-			err: 'Put (update): Does not exist',
-			message: 'req.body.tenure did not get send to backend',
-			changes: 'No Changes Made'
-		});
+		return callback(null, null);
 	}
 
 	Tenure.findById(req.profile.tenure, function(err, model) {

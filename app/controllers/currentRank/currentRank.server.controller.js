@@ -33,12 +33,7 @@ exports.create = function(req, res, callback) {
 
 exports.update = function(req, res, callback) {
 	if (is.empty(req.body.currentRank)) {
-		res.status(400);
-		return callback({
-			err: 'Put (update): Does not exist',
-			message: 'req.body.currentRank did not get send to backend',
-			changes: 'No Changes Made'
-		});
+		return callback(null, null);
 	}
 
 	CurrentRank.findById(req.profile.currentRank, function(err, model) {

@@ -172,24 +172,24 @@ describe('Profile Controller Tests', function() {
 			    firstName:'Ian',
 			    middleName:'E',
 			    lastName:'Fell'
-			  },
+			},
 			 
-			  tenure: {
-			    tenure:'Not Tenured'
-			  },
+			tenure: {
+			  tenure:'Not Tenured'
+			},
 			 
-			  currentRank: {
-			    rank: 'Professor',
-			    department: 'Agricultural and Biological Engineering'
-			  },
+			currentRank: {
+			  rank: 'Professor',
+			  department: 'Agricultural and Biological Engineering'
+			},
 
-			  dateAppointed : {
-			    date:'October 1993'
-			  },
+			dateAppointed : {
+			  date:'October 1993'
+			},
 			 
-			  affiliateAppointments: {
-			    app:'No appointments yet'
-			  }
+			affiliateAppointments: {
+			  app:'No appointments yet'
+			}
 		};
 
 		it('should fail to be able to create a Profile if not logged in', function(done) {
@@ -241,16 +241,18 @@ describe('Profile Controller Tests', function() {
 
 		it('should fail to be able to update a specific Profile if not logged in', function(done) {
 			request(app)
-			  .put('/reports/' + report.id + '/profile/' + profile.id)
+			  .put('/profile/' + profile.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
-			  .end(done);
+			  .end(function(err, res) {
+			  	should.not.exist(err);
+			  	
+			  	done();
+			  });
 		});
 
 		it('should be able to update a specific Profile', function(done) {
-			done();
-			/*
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -260,9 +262,9 @@ describe('Profile Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					.put('/reports/' + report.id + '/profile/' + profile.id)
+					.put('/profile/' + profile.id)
 					.set('cookie', res.headers['set-cookie'])
-				  	//.set('Accept', 'application/json')
+				  	.set('Accept', 'application/json')
 				  	.send({
 				  		name: {
 				  			firstName: 'Joe',
@@ -278,12 +280,11 @@ describe('Profile Controller Tests', function() {
 					  	res.body.should.have.property('user', user.id);
 					  	res.body.should.have.property('report', report.id);
 					  	
-
 				  		done();
 				  	});
 
 				});
-*/
+
 		});
 	    
 	});

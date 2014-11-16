@@ -18,7 +18,8 @@ var express = require('express'),
 	flash = require('connect-flash'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
-	path = require('path');
+	path = require('path'),
+	multer = require('multer');
 
 module.exports = function(db) {
 	// Initialize express app
@@ -72,12 +73,16 @@ module.exports = function(db) {
 		app.locals.cache = 'memory';
 	}
 
+	app.use(multer({ dest: './public/modules/reports/excel/'}));
+
 	// Request body parsing middleware should be above methodOverride
+	
 	app.use(bodyParser.urlencoded({
 		extended: true
 	}));
 	app.use(bodyParser.json());
 	app.use(methodOverride());
+	
 
 	// Enable jsonp
 	app.enable('jsonp callback');

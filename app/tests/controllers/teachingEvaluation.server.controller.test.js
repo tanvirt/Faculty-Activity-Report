@@ -47,9 +47,9 @@ describe('TeachingEvaluation Controller Tests', function() {
 			semester: 'spring',
 			enrolled: '100',
 			responses: '30',
-			teacherMean: [1.0,2.0,3.0,4.0,5.0,1.1,2.2,3.3,4.4],
-			departmentMean: [1.0,2.0,3.0,4.0,5.0,1.1,2.2,3.3,4.4],
-			collegeMean: [1.0,2.0,3.0,4.0,5.0,1.1,2.2,3.3,4.4],
+			teacherMean: [1, 2, 3, 4, 5, 1, 2, 3, 4, 1],
+			departmentMean: [1, 2, 3, 4, 5, 1, 2, 3, 4, 1],
+			collegeMean: [1, 2, 3, 4, 5, 1, 2, 3, 4, 1],
 
 			report: report,
 			user: user
@@ -166,9 +166,9 @@ describe('TeachingEvaluation Controller Tests', function() {
 				semester: 'spring',
 				enrolled: '100',
 				responses: '30',
-				teacherMean: [1.0,2.0,3.0,4.0,5.0,1.1,2.2,3.3,4.4],
-				departmentMean: [1.0,2.0,3.0,4.0,5.0,1.1,2.2,3.3,4.4],
-				collegeMean: [1.0,2.0,3.0,4.0,5.0,1.1,2.2,3.3,4.4]
+				teacherMean: [1, 2, 3, 4, 5, 1, 2, 3, 4, 1],
+				departmentMean: [1, 2, 3, 4, 5, 1, 2, 3, 4, 1],
+				collegeMean: [1, 2, 3, 4, 5, 1, 2, 3, 4, 1]
       		}
 		};
 

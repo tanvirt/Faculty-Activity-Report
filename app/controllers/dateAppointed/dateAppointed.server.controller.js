@@ -30,12 +30,7 @@ exports.create = function(req, res, callback) {
 
 exports.update = function(req, res, callback) {
 	if (is.empty(req.body.dateAppointed)) {
-		res.status(400);
-		return callback({
-			err: 'Put (update): Does not exist',
-			message: 'req.body.dateAppointed did not get send to backend',
-			changes: 'No Changes Made'
-		});
+		return callback(null, null);
 	}
 
 	DateAppointed.findById(req.profile.dateAppointed, function(err, model) {

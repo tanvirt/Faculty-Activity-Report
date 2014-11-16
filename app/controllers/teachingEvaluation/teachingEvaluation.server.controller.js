@@ -12,10 +12,109 @@ var join = path.join;
 
 var _ = require('lodash');
 
-/*
-Gets the data from the frontend and
-saves it in the database.
-*/
+var cv2json = require('convert-json');
+
+var u = require('underscore');
+
+exports.viewCtrl = function(req, res) {
+	res.render('report/upload', {
+		title: 'excel'
+	});
+};
+
+exports.getExcel = function(req, res, next) {
+	if (req.files.excel) {
+
+		cv2json.xlsx(req.files.excel.path, {}, function(err, result) {
+			if (err) {
+				res.jsonp({
+					title: 'error',
+					message: err
+				});
+			} else {
+				req.excel = result;
+				next();
+			}
+		});
+
+	} else {
+		res.jsonp('No file uploaded');
+	}
+};
+
+function getDictionary(key) {
+	return {
+		course: 'D' + key,
+		enrolled: 'H' + key,
+		responses: 'I' + key,
+		tm1: 'AL' + key,
+		tm2: 'AN' + key,
+		tm3: 'AP' + key,
+		tm4: 'AR' + key,
+		tm5: 'AT' + key,
+		tm6: 'AV' + key,
+		tm7: 'AX' + key,
+		tm8: 'AZ' + key,
+		tm9: 'BB' + key,
+		tm10: 'BD' + key
+	};
+}
+
+function parseAndSave(obj, key) {
+	var d = getDictionary(key);
+
+	return {
+		course: obj[d.course].v,
+		enrolled: obj[d.enrolled].v,
+		responses: obj[d.responses].v,
+		teacherMean: [
+			obj[d.tm1].v,
+			obj[d.tm2].v,
+			obj[d.tm3].v,
+			obj[d.tm4].v,
+			obj[d.tm5].v,
+			obj[d.tm6].v,
+			obj[d.tm7].v,
+			obj[d.tm8].v,
+			obj[d.tm9].v//,
+			//obj[d.tm10].v
+		]
+	};
+}
+
+exports.saveExcel = function(req, res) {
+	if (req.excel) {
+		var obj = req.excel.Sheets.sheet1;
+
+		var i = 2;
+
+		do {
+			var key = 'A' + i;
+
+			if (obj.hasOwnProperty(key)) {
+				var json = parseAndSave(obj, i);
+
+				var teachingEvaluation = new TeachingEvaluation(u.extend(json, {
+					user: req.user,
+					report: req.report
+				}));
+
+				teachingEvaluation.save();
+
+				i++;
+			} else {
+				break;
+			}
+
+		} while(true);
+
+		res.jsonp('Saved');
+	} else {
+		res.jsonp('No excel to save');
+	}
+};
+
+
 
 exports.create = function(req, res) {
 	//For now, this will work like other sections until excel parser is done
@@ -36,7 +135,7 @@ exports.create = function(req, res) {
 		teacherMean: req.body.teachingEvaluation.teacherMean,
 		departmentMean: req.body.teachingEvaluation.departmentMean,
 		collegeMean: req.body.teachingEvaluation.collegeMean,
-		
+
 		user: req.user,
 		report: req.report
 	});
