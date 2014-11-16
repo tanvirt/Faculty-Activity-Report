@@ -29,7 +29,7 @@ module.exports = function(app) {
 
 	app.route('/upload')
 		.get(reports.viewCtrl)
-		.post(teachingEvaluation.createExcel);
+		.post(teachingEvaluation.getExcel, teachingEvaluation.saveExcel);
 
 	app.route('/reportdownload/:reportId/download')
 		.get(users.requiresLogin, reports.hasAuthorization, reports.download);
