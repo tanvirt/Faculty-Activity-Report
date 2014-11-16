@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('reports').controller('ProfileController', ['$http', '$scope', '$rootScope', '$stateParams', '$location', 'Authentication', 'IDs',
-	function($http, $scope, $rootScope, $stateParams, $location, Authentication, IDs ) {
+angular.module('reports').controller('ProfileController', ['$http', '$scope', '$location', 'Authentication', 'IDs',
+	function($http, $scope, $location, Authentication, IDs ) {
 		$scope.authentication = Authentication;
 
 		IDs.get().then(function(data) {
