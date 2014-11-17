@@ -9,10 +9,10 @@ module.exports = function(app) {
 		.get(users.requiresLogin, furtherInformationSection.readFromReport)
 		.post(users.requiresLogin, furtherInformationSection.create);
 
-	app.route('/furtherInformationSection/:assignedActivityId')
+	app.route('/furtherInformationSection/:furtherInformationSectionId')
 		.get(users.requiresLogin, furtherInformationSection.read)
 		.put(users.requiresLogin, furtherInformationSection.update);
 
 	// Finish by binding the FurtherInformationSection middleware
-	app.param('assignedActivityId', furtherInformationSection.furtherInformationSectionById);
+	app.param('furtherInformationSectionId', furtherInformationSection.furtherInformationSectionById);
 };
