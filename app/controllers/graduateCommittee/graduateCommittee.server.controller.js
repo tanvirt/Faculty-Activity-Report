@@ -91,8 +91,7 @@ exports.update = function(req, res) {
 };
 
 exports.readFromReport = function(req, res) {
-	//One Graduate Committee holds the entire chart of committees for the report
-	GraduateCommittee.findOne({report: req.report}, function(err, result) { 
+	GraduateCommittee.find({report: req.report}, function(err, result) { //Returns an array
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

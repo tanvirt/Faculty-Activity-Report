@@ -10,7 +10,7 @@ module.exports = function(app) {
 		.post(users.requiresLogin, graduateCommittee.create);
 
 	app.route('/graduateCommittee/:graduateCommitteeId')
-		.get(graduateCommittee.read)
+		.get(users.requiresLogin, graduateCommittee.read)
 		.put(users.requiresLogin, graduateCommittee.update);
 
 	// Finish by binding the middleware
