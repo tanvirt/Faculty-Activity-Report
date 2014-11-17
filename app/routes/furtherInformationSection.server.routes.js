@@ -13,6 +13,6 @@ module.exports = function(app) {
 		.get(users.requiresLogin, furtherInformationSection.read)
 		.put(users.requiresLogin, furtherInformationSection.update);
 
-	// Finish by binding the FurtherInformationSection middleware
+	// Finish by binding the FurtherInfoSection middleware
 	app.param('furtherInformationSectionId', furtherInformationSection.furtherInformationSectionById);
 };
