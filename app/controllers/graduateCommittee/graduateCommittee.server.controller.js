@@ -27,30 +27,20 @@ exports.create = function(req, res) {
 		});
 	}
 	
-	var sections = [];
-	for (var iii = 0; iii < req.body.graduateCommittee.length; iii++) {
-		var path = req.body.graduateCommittee[iii];
-		var subdoc = {
-			role: path.role,
-			studentName: path.studentName,
-			degree: path.degree,
-			major: path.major,
-			degreeDate: path.degreeDate
-		};
-		sections.push(subdoc);
-	}
-	
 	var graduateCommittee = new GraduateCommittee({
-		sub: sections,
-		user: req.user,
-		report: req.report
-	});
+			role: req.body.graduateCommittee.role,
+			studentName: req.body.graduateCommittee.studentName,
+			degree: req.body.graduateCommittee.degree,
+			major: req.body.graduateCommittee.major,
+			degreeDate: req.body.graduateCommittee.degreeDate, 
+			
+			user: req.user,
+			report: req.report
+		});
 	
-	for (iii = 0; iii < req.body.graduateCommittee.length; iii++)
-		graduateCommittee.incrementCount(iii);
+	//for (iii = 0; iii < req.body.graduateCommittee.length; iii++)
+	//	graduateCommittee.incrementCount(iii);
 
-		
-		
 	graduateCommittee.save(function(err) {
 		if (err) {
 			return res.status(400).send({

@@ -187,7 +187,7 @@ describe('Graduate Committee Controller Tests', function() {
 				studentName: 'studentTestNamePost',
 				degree: 'Ph.D.',
 				major: 'Computer Science Post',
-				degreeDate: '09/09/1999' //This is bugged
+				degreeDate: '09/09/1999'
       		}
 		};
 
@@ -221,12 +221,14 @@ describe('Graduate Committee Controller Tests', function() {
 					  .end(function(err, res) {
 					  	should.not.exist(err);
 
-						res.body.should.be.an.Object.and.have.property('role', teObj.graduateCommittee.role);
+						res.body.should.be.an.Object.and.have.property('role', gcObj.graduateCommittee.role);
 
 						res.body.should.have.property('studentName', gcObj.graduateCommittee.studentName);
 						res.body.should.have.property('degree', gcObj.graduateCommittee.degree);
 						res.body.should.have.property('major', gcObj.graduateCommittee.major);
-						res.body.should.have.property('degreeDate', gcObj.graduateCommittee.degreeDate.toJSON());
+						
+						var testDate = new Date(gcObj.graduateCommittee.degreeDate); //Date formats weird with JSON
+						res.body.should.have.property('degreeDate', testDate.toJSON());
 
 					  	res.body.should.have.property('_id');
 						
