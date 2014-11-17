@@ -33,16 +33,6 @@ var renderHonors 							= require('../honors/renderHonors');
 var renderFurtherInformationSection 		= require('../furtherInformationSection/renderFurtherInformationSection');
 var renderServiceToSchools 					= require('../serviceToSchools/renderServiceToSchools');
 
-function render(input, cb) {
-	
-	console.log('in: ' + input);
-	swig.renderFile('./app/templates/headerFooter/headerFooter.tex', {
-		results: input.join('')
-	}, cb);
-	
-
-}
-
 exports.renderSections = function(req, cb) {
 	async.parallel([
 		// Section 1, Name
@@ -122,7 +112,7 @@ exports.renderSections = function(req, cb) {
 		var latexStr = 
 		'\\documentclass{article}' +
 		'\\begin{document}' +
-		'\\title{COLLEGE OF ENGINEERING\newline Annual Activities Report}' +
+		'\\title{COLLEGE OF ENGINEERING\\newline Annual Activities Report}' +
 		'\\date{}' +
 		'\\maketitle'+
 		results.join('') +
