@@ -100,9 +100,7 @@ module.exports.render = function(req, callback) {
 */
 
 module.exports.render = function (req, callback) {
-	renderModel.renderMultiple( req, function ( err, renderStr ) {
-		callback(err, renderStr);
-	});
+	renderModel.renderMultiple( req, callback);
 };
 /*
 module.exports.submit = function(req, callback) {

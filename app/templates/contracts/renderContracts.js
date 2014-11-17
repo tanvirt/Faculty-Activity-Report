@@ -49,7 +49,7 @@ renderModel.setDebugPopulate(false, {
 renderModel.isDebugNull = false;
 
 module.exports.render = function(req, callback) {
-	renderModel.render(req, callback);
+	renderModel.renderMultiple(req, callback);
 };
 
 
