@@ -34,9 +34,13 @@ var renderFurtherInformationSection 		= require('../furtherInformationSection/re
 var renderServiceToSchools 					= require('../serviceToSchools/renderServiceToSchools');
 
 function render(input, cb) {
+	
+	console.log('in: ' + input);
 	swig.renderFile('./app/templates/headerFooter/headerFooter.tex', {
 		results: input.join('')
 	}, cb);
+	
+
 }
 
 exports.renderSections = function(req, cb) {
@@ -109,14 +113,30 @@ exports.renderSections = function(req, cb) {
 
 		// Section 23, The Further Information Section
 		async.apply(renderFurtherInformationSection.render, req)	
+		
 	], function(err, results) {
 		if (err) {
 			return cb(err, null);
 		}
 
-		render(results, function(err, output) {
-			cb(err, output);
-		});
+		var latexStr = 
+		'\\documentclass{article}' +
+		'\\begin{document}' +
+		'\\title{COLLEGE OF ENGINEERING\newline Annual Activities Report}' +
+		'\\date{}' +
+		'\\maketitle'+
+		results.join('') +
+		'\\vspace{2in}' +
+		'\\begin{center}' +
+		'Signature' +
+		'\\line(1,0){200}' +
+		'\\hspace{2em}' +
+		'Date' +
+		'\\line(1,0){50}' +
+		'\\end{center}' +
+		'\\end{document}';
+
+		cb(null, latexStr);
 	});
 };
 

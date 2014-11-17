@@ -79,11 +79,11 @@ module.exports.render = function (req, callback) {
 */
 
 
-
+/*
 module.exports.render = function(req, callback) {
 	renderModel.render(req, callback);
 };
-
+*/
 /*
 module.exports.render = function(req, callback) {
 	
@@ -99,21 +99,12 @@ module.exports.render = function(req, callback) {
 };
 */
 
-
-/*
-function passObj(objArray)
-{
-	return {'evaluation': objArray, 'sum': objArray.findTotalMean()};
-}
-
 module.exports.render = function (req, callback) {
-	renderModel.renderMultiple( 'teachingEvaluation/teachingEvaluation.tex', teachingEvaluation, { }, passObj,dummyObject, function ( renderStr ) {
-		callback(null, renderStr);
+	renderModel.renderMultiple( req, function ( err, renderStr ) {
+		callback(err, renderStr);
 	});
 };
-*/
-
-
+/*
 module.exports.submit = function(req, callback) {
 	if (is.empty(req.body.teachingEvaluation)) return callback(null, null);
 
@@ -143,7 +134,7 @@ module.exports.submit = function(req, callback) {
 		callback(err, evaluation);
 	});	
 };
-
+*/
 
 //Excel parser is on backburner for now
 /*

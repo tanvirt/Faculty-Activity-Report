@@ -13,10 +13,10 @@ module.exports = function(app) {
 		.get(users.requiresLogin, teachingEvaluation.read)
 		.put(users.requiresLogin, teachingEvaluation.update);
 /*
-	app.route('/reports/:reportId/teachingEvaluation/excel')
+	app.route('/teachingEvaluation/excel')
 		.post(users.requiresLogin, teachingEvaluation.createExcel);
 
-	app.route('/reports/:reportId/teachingEvaluation/excel/:teachingEvaluationId')
+	app.route('/teachingEvaluation/excel/:teachingEvaluationId')
 		.put(users.requiresLogin, teachingEvaluation.updateExcel);
 */
 

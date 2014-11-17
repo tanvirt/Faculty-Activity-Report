@@ -117,6 +117,7 @@
 	    "semester":"fall",
 	    "enrolled":"100",
 	    "responses":"30",
+	    "required": "false",
 	    "teacherMean":["1","2","3","1","2","3","1","2","3","3"],
 	    "departmentMean":["2","3","4","2","3","4","2","3","4","3"],
 	    "collegeMean":["4","4","4","4","4","4","4","4","4","3"]
