@@ -7,13 +7,13 @@ angular.module('reports').controller('Section13Controller', ['$http', '$scope', 
 		IDs.get().then(function(data) {
 
 			$scope.IDdata = data;
-			$scope.section13 = data.publications.info;
+			$scope.section13 = data.publication.info;
 		});
 		$scope.update = function()
 		{
-			$http.put('/publications/' + $scope.IDdata.publications._id, {
+			$http.put('/publication/' + $scope.IDdata.publication._id, {
 
-				publications:{
+				publication:{
 					info: $scope.section13
 				}}).
 				success(function(data, status, headers, config) {
