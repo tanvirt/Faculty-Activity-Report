@@ -1,8 +1,18 @@
 'use strict';
 
-angular.module('reports').controller('NavigationController', ['$scope', '$stateParams', '$location', 'Authentication',
-	function($scope, $stateParams, $location, Authentication) {
+angular.module('reports').controller('NavigationController', ['$scope', '$stateParams', '$location', 'Authentication', 'IDs',
+	function($scope, $stateParams, $location, Authentication, IDs) {
 		$scope.authentication = Authentication;
+
+		IDs.get().then(function(data){
+			$scope.IDdata = data;
+
+			$scope.reportName = data.reportName;
+
+		});
+		$scope.update = function() {
+			//todo need to figure out the proper route to update report name
+		};
 
 		$scope.tinymceOptions = {
 			    theme: 'modern',
@@ -13,7 +23,7 @@ angular.module('reports').controller('NavigationController', ['$scope', '$stateP
 			        'insertdatetime save table contextmenu directionality',
 			        'paste textcolor colorpicker textpattern',
 			    ],
-			    toolbar1: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist',
+			    toolbar1: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist'
 		};
 
 		var tabClasses;

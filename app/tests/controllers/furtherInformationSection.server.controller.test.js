@@ -185,7 +185,7 @@ describe('FurtherInformationSection Controller Tests', function() {
         });
     });
     afterEach(function(done) {
-        furtherInformationSection.remove().exec();
+        FurtherInformationSection.remove().exec();
         User.remove().exec();
         Report.remove().exec();
         done();
