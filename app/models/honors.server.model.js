@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 
-var honors = new Schema({
+var Honors = new Schema({
 
     info: {
         type: String,
@@ -24,4 +24,4 @@ var honors = new Schema({
 
 }, {collection: 'Honors'});
 
-mongoose.model('Honors', honors);
+mongoose.model('Honors', Honors);
