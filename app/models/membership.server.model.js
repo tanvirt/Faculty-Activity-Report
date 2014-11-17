@@ -8,19 +8,6 @@ var validateLocalStrategyCourses = function(property) {
 };
 
 var Membership = new Schema({
-	// add more arrays when you find out what else there can be
-	/*examples: [{
-		title: {
-			type: String,
-			required: true
-		},
-		year: {
-			type: Number,
-			required: true,
-			validate: [validateLocalStrategyCourses, 
-			'Year must not be after current year or before 1900']
-		}
-	}],*/
 	info: {
 		type: String,
 		default: 'N/A'

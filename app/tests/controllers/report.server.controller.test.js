@@ -1,19 +1,22 @@
 'use strict';
 
+/*jshint expr: true*/
+
 /**
  * Module dependencies.
  */
+ /*
 var should = require('should'),
 	mongoose = require('mongoose'),
 	report = require('../../../app/controllers/report');
 	var fs = require('fs');
 	
-
+*/
 /**
  * Globals
  */
  var fileCreated = false;
-
+/*
 describe('Report Controller Tests:', function() {
 	beforeEach(function(done) {
 
@@ -72,3 +75,4 @@ describe('Report Controller Tests:', function() {
 		done(); 
 	});
 });
+*/

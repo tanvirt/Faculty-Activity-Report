@@ -1,19 +1,28 @@
 'use strict';
 
-angular.module('reports').controller('Section13Controller', ['$scope',
-	function($scope) {
-		
-		//custom tinymce textarea
-		$scope.tinymceOptions = {
-			    theme: 'modern',
-			    plugins: [
-			        'autoresize',
-			        'advlist autolink lists charmap preview hr',
-			        'searchreplace wordcount',
-			        'insertdatetime save table contextmenu directionality',
-			        'paste textcolor colorpicker textpattern',
-			    ],
-			    toolbar1: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist',
+angular.module('reports').controller('Section13Controller', ['$http', '$scope', '$location', 'Authentication', 'IDs',
+	function($http, $scope, $location, Authentication, IDs ) {
+		$scope.authentication = Authentication;
+
+		IDs.get().then(function(data) {
+
+			$scope.IDdata = data;
+			$scope.section13 = data.publication.info;
+		});
+		$scope.update = function()
+		{
+			$http.put('/publication/' + $scope.IDdata.publication._id, {
+
+				publication:{
+					info: $scope.section13
+				}}).
+				success(function(data, status, headers, config) {
+					alert('Saved!');
+				}).
+				error(function(data, status, headers, config) {
+					alert('There was an error Saving!');
+				}
+			);
 		};
 
 	}

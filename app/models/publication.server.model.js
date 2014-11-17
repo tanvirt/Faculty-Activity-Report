@@ -1,44 +1,20 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-	Schema = mongoose.Schema,
-	validator = require('validator');
-
-	
-var validateDate = function(p) {
-	return validator.isDate(p);
-};	
-
+	Schema = mongoose.Schema;
 	
 var Publication = new Schema({
-	title: {
+	info: {
 		type: String,
-		required: 'please fill in title'
+		default: 'N/A'
 	},
-	
-	authors: {
-		type: [String],
-		required: 'please list author(s)'
+	user: {
+		type: Schema.ObjectId,
+		ref: 'User'
 	},
-	
-	publicationInfo: {
-		type: String,
-	},
-	
-	section: {
-		type: String,
-		default: 'Book',
-		enum: ['Books, Sole Author', 'Books, Co-authored', 'Books, Edited', 'Books, Contributor', 'Monographs', 'Refereed Publications'],
-		required: 'please select an option',
-	},
-	
-	subsection: {
-		type: String
-	},
-	
-	year: {
-		type: Date,
-		validate: [validateDate, 'Must be a valid date \"mm/dd/yyyy\"']
+	report: {
+		type: Schema.ObjectId,
+		ref: 'Report'
 	}
 
 }, {collection: 'Publication'});

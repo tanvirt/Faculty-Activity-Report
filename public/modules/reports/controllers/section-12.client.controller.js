@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('reports').controller('Section12Controller', ['$scope', 'Patents',
-	function($scope, Patents) {
+angular.module('reports').controller('Section12Controller', ['$scope', '$stateParams', '$location', 'Authentication', 'Patents',
+	function($scope, $stateParams, $location, Authentication, Reports, Patents) {
 		
 		$scope.createPatents = function() {
 			// Create new Patent object

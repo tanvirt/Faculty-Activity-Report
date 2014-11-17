@@ -1,22 +1,28 @@
 'use strict';
 
-angular.module('reports').controller('Section7Controller', ['$scope', '$stateParams', '$location', 'Authentication',
-	function($scope, $stateParams, $location, Authentication, Reports ) {
+angular.module('reports').controller('Section7Controller', ['$http', '$scope', '$location', 'Authentication', 'IDs',
+	function($http, $scope, $location, Authentication, IDs ) {
 		$scope.authentication = Authentication;
-		
-		//custom tinymce textarea
-		$scope.tinymceOptions = {
-			    theme: 'modern',
-			    plugins: [
-			        'autoresize',
-			        'advlist autolink lists charmap preview hr',
-			        'searchreplace wordcount',
-			        'insertdatetime save table contextmenu directionality',
-			        'paste textcolor colorpicker textpattern',
-			    ],
-			    toolbar1: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist',
+
+		IDs.get().then(function(data) {
+
+			$scope.IDdata = data;
+			$scope.section7 = data.teachingAdvising.info;
+		});
+		$scope.update = function()
+		{
+			$http.put('/teachingAdvising/' + $scope.IDdata.teachingAdvising._id, {
+
+				teachingAdvising:{
+					info: $scope.section7
+				}}).
+				success(function(data, status, headers, config) {
+					alert('Saved!');
+				}).
+				error(function(data, status, headers, config) {
+					alert('There was an error Saving!');
+				}
+			);
 		};
-		
 	}
 ]);
-

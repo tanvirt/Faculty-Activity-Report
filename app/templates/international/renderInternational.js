@@ -10,6 +10,9 @@ var renderModel = new modelClass.RenderModel( International, 'international/inte
 
 var is = require('is-js');
 
+var defaultData = require('../default.json');
+var _ = require('underscore');
+
 /*
 will explicitly populate the report with
 the data you provide
@@ -33,7 +36,6 @@ module.exports.render = function(req, callback) {
 };
 
 module.exports.submit = function(req, callback) {
-
 	if (is.empty(req.body.international)) return callback(null, null);
 
 	var international = new International({
@@ -43,5 +45,18 @@ module.exports.submit = function(req, callback) {
 
 	international.save(function(err) {
 		callback(err, international);
+	});
+};
+
+module.exports.createDefaultData = function(report, user, cb) {
+	var save = _.extend(defaultData.international, {
+		report: report,
+		user: user
+	});
+
+	var international = new International(save);
+
+	international.save(function(err) {
+		cb(err, international);
 	});
 };

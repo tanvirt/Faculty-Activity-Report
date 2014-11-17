@@ -37,6 +37,6 @@ var currentRank = new Schema({
 		ref: 'Report'
 	}
 
-}, {collection: 'currentRank'});
+}, {collection: 'CurrentRank'});
 
-mongoose.model('currentRank', currentRank);
+mongoose.model('CurrentRank', currentRank);

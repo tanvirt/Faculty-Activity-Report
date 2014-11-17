@@ -8,6 +8,9 @@ var renderModel = new modelClass.RenderModel( TeachingAdvising, 'teachingAdvisin
 
 var is = require('is-js');
 
+var defaultData = require('../default.json');
+var _ = require('underscore');
+
 /*
 will explicitly populate the report with
 the data you provide
@@ -37,7 +40,6 @@ saves it in the database.
 module.exports.submit = function(req, callback) {
 	if (is.empty(req.body.teachingAdvising)) return callback(null, null);
 
-
 	var teachingAdvising = new TeachingAdvising({
 		info: req.body.teachingAdvising.advising,
 		user: req.user
@@ -48,34 +50,15 @@ module.exports.submit = function(req, callback) {
 	});
 };
 
-
-
-/*'use strict';
-
-var renderModel = require('../../../app/templates/renderModel');
-var mongoose = require('mongoose');
-
-// Compile Schema into Model here
-var TeachingAdvising = mongoose.model('TeachingAdvising');
-
-/*
-Populates the database with test data
-
-function dummyObject(Model) {
-	var obj = new Model({
-		info: 'My teaching philosophy is...and I taught the following courses: '
-		//philosophy: 'I have a dream',
-		//supervising: 'about cake'
+module.exports.createDefaultData = function(report, user, cb) {
+	var save = _.extend(defaultData.teachingAdvising, {
+		report: report,
+		user: user
 	});
-	return obj;
-}
 
-/*
-Helper function that gets called in report.server.controller.js
-Output is pushed into a LaTex PDF there.
+	var teachingAdvising = new TeachingAdvising(save);
 
-module.exports.render = function (callback) {
-	renderModel.render( 'teachingAdvising/teachingAdvising.tex', TeachingAdvising, dummyObject, function ( renderStr ) {
-		callback(null, renderStr);
+	teachingAdvising.save(function(err) {
+		cb(err, teachingAdvising);
 	});
-};*/
+};

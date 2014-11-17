@@ -63,18 +63,16 @@ Finds many documents for the current user's report
 	by model.find. Contains the arrayOfObjs as a parameter
 @param cb, a callback function that contains the single object
 */
-RenderModel.prototype._findModelsByReport = function ( req, arrayToObj, cb ) {
+RenderModel.prototype._findModelsByReport = function ( req, cb ) {
 	//Model.find returns an array of objects! so reorganize into
 	//one object and assign
 	this._Model.find({report: req.report}, function(err, arrayOfObjs) {
-		//if (err) return err;
 
-		var single_obj = null;
+		
 
-		if (arrayOfObjs)
-			single_obj = arrayToObj( arrayOfObjs );
+		if (err) return err;
 
-		cb( err, single_obj );
+		cb( err, arrayOfObjs );
 	});
 };
 
@@ -82,6 +80,7 @@ RenderModel.prototype._findModelsByReport = function ( req, arrayToObj, cb ) {
 Helper function that injects values into the latex.tex files
 */
 function renderSwig( folderPath, filePath, json, cb ) {
+	console.log(require('util').inspect(json));
 	require('swig').renderFile(require('path').join(folderPath, filePath), json, function(err, output) {
 		/*
 		if (err) {
@@ -137,25 +136,17 @@ RenderModel.prototype.render = function(req, callback) {
 	});
 };
 
-/* Don't use this. See teachingEvaluation for rendering multiple
-RenderModel.prototype.renderMultiple = function(req, callback, passObj) {
+RenderModel.prototype.renderMultiple = function(req, callback) {
 	var _this = this;
 	
-	_this.findModelsByReport( req, function( arrayOfObjs ) {
-		if (arrayOfObjs.length) {
-			return passObj( arrayOfObjs );
-		} else {
-			return null;
-		}
-	}, function( err, single_obj ) {
+	_this._findModelsByReport( req, function( err, arrayOfObjs ) {
 		if (err) {
 			callback(err, null);
 		} else {
-			_this.render( single_obj, callback );
+			_this._render( {array: arrayOfObjs}, callback );
 		}
 	});
 };
-*/
 
 // Export the function to the world
 module.exports.RenderModel = RenderModel;

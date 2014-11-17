@@ -1,10 +1,23 @@
-<section>
-	
-<div class="col-md-12" style="padding-top:20px">
+<section class="col-md-10" data-ng-controller="Section7Controller">
+
 	<h3 id="section-18">18. Editor of a Scholarly Journal, Service on an Editorial Advisory Board or Reviewer For a Scholarly Journal</h3>
 	<hr>
-	<form class="form-horizontal" novalidate>
-      <textarea ui-tinymce="tinymceOptions" ng-model="section18" id="section18" class="form-control"></textarea>  
-    </form>
-</div>
+	<form class="form-horizontal" data-ng-submit="create()" novalidate>
+
+    	<div class="form-group">
+    	<div class="col-md-1"></div>
+    	<div class="col-md-10">
+    	<textarea data-ng-model="section18" class="form-control" cols="30" rows="10" placeholder="Content" ui-tinymce="tinymceOptions"></textarea>
+    	</div>
+    	<div class="col-md-1"></div>
+    	</div>
+
+    	<div class="form-group">
+	        <div data-ng-show="error" class="text-danger col-md-offset-3">
+	            <strong data-ng-bind="error"></strong>
+	        </div>
+	        <button type="submit" class="col-md-offset-9 btn btn-primary">Save</button>
+	    </div>
+	    
+	</form> 
 </section>

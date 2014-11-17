@@ -3,128 +3,23 @@
 // Reports controller
 var app = angular.module('reports');
 
-app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Reports',
-	function($scope, $http, $stateParams, $location, Authentication, Reports ) {
-		
-		//custom tinymce textarea
-		
-		$scope.tinymceOptions = {
-			    theme: 'modern',
-			    plugins: [
-			        'autoresize',
-			        'advlist autolink lists charmap preview hr',
-			        'searchreplace wordcount',
-			        'insertdatetime save table contextmenu directionality',
-			        'paste textcolor colorpicker textpattern',
-			    ],
-			    toolbar1: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist',
-		};
-		
+app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$stateParams', '$location', 'Authentication', 'Reports',
+	function($scope, $rootScope, $http, $stateParams, $location, Authentication, Reports ) {
 		$scope.authentication = Authentication;
 		
 		
 		// Create new Report
 		$scope.create = function() {
-			// Create new Report object
-			var report = new Reports ({
-				reportName: this.reportName,
-
-				name: {
-					firstName: this.firstName,
-					middleName: this.middleName,
-					lastName: this.lastName
-				},
-
-				tenure: {
-					tenure: this.tenure
-				},
-
-				currentRank: {
-					rank: this.currentRank,
-					department: this.department
-				},
-
-				dateAppointed: {
-					date: this.dateAppointed
-				},
-
-				affiliateAppointments: {
-					appointments: this.affiliateAppointments
-				},
-
-				assignedActivity: {
-					year: this.year,
-
-					springTeaching: this.springTeaching,
-					springResearch: this.springResearch,
-					springService: this.springService,
-
-					fallTeaching: this.fallTeaching,
-					fallResearch: this.fallResearch,
-					fallService: this.fallService,
-
-					summerTeaching: this.summerTeaching,
-					summerResearch: this.summerResearch,
-					summerService: this.summerService
-				},
-
-				teachingAdvising: {
-					advising: this.teachingAdvising
-				},
-
-				teachingEvaluation: this.teachingEvaluationArray,
-
-				graduateCommittee: this.graduateCommitteeArray,
-
-				creativeWorks: this.creativeWorksArray, //this is an array of objects
-
-				patents: this.patentsArray, //this is an array of objects
-				
-				contribution: {
-					info: this.contribution
-				},
-
-				conferences: this.conferencesArray,
-
-				contracts: this.contractsArray,
-				
-				consultationsOutsideUniversity: {
-					consultation: this.consultationsOutsideUniversity
-				},
-				
-				honors: {
-					info: this.honors
-				},
-				
-				furtherInformationSection: {
-					info: this.furtherInformationSection
-				},
-				
-				serviceToSchools: {
-					service: this.serviceToSchools
-				},
-				
-				membership: {
-					info: this.membership
-				},
-
-				international: {
-					activities: this.international
-				}
-
-
-
-			});
-
-			// Redirect after save
-			report.$save(function(response) {
-				$location.path('reports/' + response._id);
-
-				// Clear form fields
-				$scope.reportName = '';
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
+			$http.post('/reports/createNew',
+			{
+				reportName: $scope.reportName
+			}).
+				success(function(data, status, headers, config) {
+					$location.path('reports/' + data._id + '/edit');
+				}).
+				error(function(data, status, headers, config) {
+					console.log('Error in Reports');
+				});
 		};
 
 		// Remove existing Report
@@ -181,101 +76,3 @@ app.controller('ReportsController', ['$scope', '$http', '$stateParams', '$locati
 		};
 	}
 ]);
-
-app.directive('profile', function(){
-    return {
-      restrict: 'E',
-      templateUrl: 'modules/reports/views/profile.client.view.html'
-    };
-});
-
-app.directive('navbar', function(){
-    return {
-      restrict: 'E',
-      templateUrl: 'modules/reports/views/navbar.client.view.html'
-    };
-});
-
-app.directive('assignedActivity', function(){
-    return {
-      restrict: 'E',
-      templateUrl: 'modules/reports/views/assigned-activity.client.view.html'
-    };
-});
-
-app.directive('section7', function(){
-    return {
-      restrict: 'E',
-      templateUrl: 'modules/reports/views/section-7.client.view.html'
-    };
-});
-
-app.directive('section10', function(){
-    return {
-      restrict: 'E',
-      templateUrl: 'modules/reports/views/section-10.client.view.html'
-    };
-});
-
-app.directive('section11', function(){
-    return {
-      restrict: 'E',
-      templateUrl: 'modules/reports/views/section-11.client.view.html'
-    };
-});
-
-app.directive('section12', function(){
-    return {
-      restrict: 'E',
-      templateUrl: 'modules/reports/views/section-12.client.view.html'
-    };
-});
-
-app.directive('section13', function(){
-    return {
-      restrict: 'E',
-      templateUrl: 'modules/reports/views/section-13.client.view.html'
-    };
-});
-
-app.directive('section14', function(){
-    return {
-      restrict: 'E',
-      templateUrl: 'modules/reports/views/section-14.client.view.html'
-    };
-});
-
-app.directive('section15', function(){
-    return {
-      restrict: 'E',
-      templateUrl: 'modules/reports/views/section-15.client.view.html'
-    };
-});
-
-app.directive('section16', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'modules/reports/views/section-16.client.view.html'
-	};
-});
-
-app.directive('section17', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'modules/reports/views/section-17.client.view.html'
-	};
-});
-
-app.directive('section18', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'modules/reports/views/section-18.client.view.html'
-	};
-});
-
-app.directive('section19', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'modules/reports/views/section-19.client.view.html'
-	};
-});

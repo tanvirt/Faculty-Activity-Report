@@ -4,15 +4,16 @@
  */
 var should = require('should'),
     mongoose = require('mongoose'),
-    currentRank = mongoose.model('currentRank');
+    currentRank = mongoose.model('CurrentRank');
 /**
  * Globals
  */
+ 
 var rank01;
 describe('currentRank Model Unit Tests:', function() {
     beforeEach(function(done) {
         rank01 = new currentRank({
-            rank: 'professor',
+            rank: 'Professor',
             department: 'Computer and Informational Science and Engineering'
         });
 

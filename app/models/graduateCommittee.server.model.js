@@ -13,7 +13,11 @@ var validateLocalStrategyDate = function(property) {
 	return new Date() >= property && 1980 <= property.getFullYear();
 };
 
-var gcSub = new Schema({
+var graduateCommittee = new Schema({
+	user: {			
+		type: Schema.ObjectId,
+		ref: 'User'
+	},
 	role: {
 		type: String,
 		enum: ['Chair','Co-Chair','External','Member','Minor'],
@@ -36,20 +40,7 @@ var gcSub = new Schema({
 		type: Date, 
 		validate: [validateLocalStrategyDate, 
 		'Date must be less than or equal to the current year and greator than or equal to 1980']
-	}
-});
-
-gcSub.methods.getMonth = function() {
-	return this.degreeDate.getMonth() + 1;
-};
-
-//The count of each role will be calculated on demand by using the MongoDB count command
-var graduateCommittee = new Schema({
-	user: {			//multiple evaluations per user possible. Use this field to match with user
-		type: Schema.ObjectId,
-		ref: 'User'
 	},
-	sub: [gcSub],
 	report: {
 		type: Schema.ObjectId,
 		ref: 'Report'
@@ -102,6 +93,10 @@ graduateCommittee.methods.incrementCount = function( index ) {
 		default:
 			throw new Error('Role is not defined in method incrementCount');
 	}
+};
+
+graduateCommittee.methods.getMonth = function() {
+	return this.degreeDate.getMonth() + 1;
 };
 
 mongoose.model('GraduateCommittee', graduateCommittee);

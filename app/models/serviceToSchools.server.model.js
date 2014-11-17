@@ -13,7 +13,8 @@ var validateLocalStrategyProperty = function(property) {
 var serviceToSchools = new Schema({
 
     service: { 
-        type: String
+        type: String,
+		default: 'N/A'
         //required: true,
        /* validate: [validateLocalStrategyProperty,
             'If no value is specified, please input "N/A"'] */
@@ -29,6 +30,6 @@ var serviceToSchools = new Schema({
 		ref: 'Report'
 	}
 
-}, {collection: 'serviceToSchools'});
+}, {collection: 'ServiceToSchools'});
 
-mongoose.model('serviceToSchools', serviceToSchools);
+mongoose.model('ServiceToSchools', serviceToSchools);

@@ -5,14 +5,17 @@ var Schema = mongoose.Schema;
 
 var EditorServiceReviewer = new Schema({
 	
-	position: {
+	info: {
 		type: String,
-		enum: ['editor', 'service', 'reviewer'],
-		required: true
+		default: 'N/A'
 	},
-	object: {
-		type: String,
-		required: true
+	user: {
+		type: Schema.ObjectId,
+		ref: 'User'
+	},
+	report: {
+		type: Schema.ObjectId,
+		ref: 'Report'
 	}
 
 }, {collection: EditorServiceReviewer});

@@ -4,7 +4,7 @@
  */
 var should = require('should'),
     mongoose = require('mongoose'),
-    honors = mongoose.model('honors');
+    honors = mongoose.model('Honors');
 /**
  * Globals
  */

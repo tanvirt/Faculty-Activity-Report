@@ -24,6 +24,6 @@ var furtherInformationSection = new Schema({
 
 
 
-}, {collection: 'furtherInformationSection'});
+}, {collection: 'FurtherInformationSection'});
 
-mongoose.model('furtherInformationSection', furtherInformationSection);
+mongoose.model('FurtherInformationSection', furtherInformationSection);

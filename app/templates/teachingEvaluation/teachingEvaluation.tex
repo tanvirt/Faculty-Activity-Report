@@ -11,7 +11,8 @@
 % teacherMean: array of numeric values pertaining to teacher mean scores
 % departmentMean: array of numeric values pertaining to department mean scores
 % collegeMean: array of numeric values pertaining to college mean scores
-{% for evaluation in sub %}
+
+{% for evaluation in array %}
     \noindent {{evaluation.course}} \hfill Required: {{evaluation.required}} \\
     \noindent {{evaluation.semester}}, {{evaluation.year}} \hfill \# Enrolled: {{evaluation.enrolled}}\\
     High={{evaluation.highScore}}, Low={{evaluation.lowScore}} \hfill \# Responses: {{evaluation.responses}}

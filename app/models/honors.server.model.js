@@ -22,6 +22,6 @@ var honors = new Schema({
     }
 
 
-}, {collection: 'honors'});
+}, {collection: 'Honors'});
 
-mongoose.model('honors', honors);
+mongoose.model('Honors', honors);

@@ -8,6 +8,9 @@ var renderModel = new modelClass.RenderModel( DateAppointed, 'dateAppointed/date
 
 var is = require('is-js');
 
+var defaultData = require('../default.json');
+var _ = require('underscore');
+
 /*
 will explicitly populate the report with
 the data you provide
@@ -34,11 +37,24 @@ module.exports.submit = function(req, callback) {
 	if (is.empty(req.body.dateAppointed)) return callback(null, null);
 
 	var dateApp = new DateAppointed({
-		theDate: req.body.dateAppointed.date,
+		date: req.body.dateAppointed.date,
 		user: req.user		
 	});
 
 	dateApp.save(function(err) {
 		callback(err, dateApp);
+	});
+};
+
+module.exports.createDefaultData = function(report, user, cb) {
+	var save = _.extend(defaultData.dateAppointed, {
+		report: report,
+		user: user
+	});
+
+	var dateAppointed = new DateAppointed(save);
+
+	dateAppointed.save(function(err) {
+		cb(err, dateAppointed);
 	});
 };

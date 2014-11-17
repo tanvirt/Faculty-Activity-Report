@@ -12,8 +12,7 @@ var date01;
 describe('DateAppointed Model Unit Tests:', function() {
     beforeEach(function(done) {
         date01 = new DateAppointed({
-            //month: 'January',
-            theDate: '2/2/2010'
+            date: '2/2/2010'
 
         });
 
@@ -26,7 +25,7 @@ describe('DateAppointed Model Unit Tests:', function() {
         });
 		
 		it('should fail to save an invalid date', function(done) {
-			date01.theDate = 'last weeksometimemaybe';
+			date01.date = 'last weeksometimemaybe';
 			return date01.save(function(err) {
                 should.exist(err);
                 done();
