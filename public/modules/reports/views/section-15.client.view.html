@@ -2,37 +2,37 @@
 	  <div class="col-md-12" style="padding-top:20px">
          <h3 id="section-15">15. Contracts and Grants Since Last Promotion or During The Last Five Years</h3>
          <hr>
-         <div class="col-md-4">
+         <div class="col-md-12">
          <form role="form">
-              <div class="form-group">
+              <div class="col-md-6" style="padding-bottom:10px">
                 <label for="titleOfGrant">Title of Grant</label>
                 <input type="text" ng-model="grants.titleOfGrant" ng-model-instant class="form-control" id="titleOfGrant" placeholder="Title">
              </div>
-            <div class="form-group">
+            <div class="col-md-6" style="padding-bottom:10px">
                <label for="fundingAgency">Funding Agency</label>
                <input type="text" ng-model="grants.fundingAgency" ng-model-instant class="form-control" id="fundingAgency" placeholder="Agency">
             </div>
-            <div class="form-group">
+            <div class="col-md-6" style="padding-bottom:10px">
                <label for="privateInve">Investigator</label>
                <input type="text" ng-model="grants.PI" class="form-control" ng-model-instant  id="privateInve" placeholder="PI">
             </div>
-            <div class="form-group">
+            <div class="col-md-6" style="padding-bottom:10px">
                <label for="startDate">Start Date</label>
                <input type="date" ng-model="grants.startDate" class="form-control" ng-model-instant  id="startDate">
             </div>
-            <div class="form-group">
+            <div class="col-md-6" style="padding-bottom:10px">
                <label for="endDate">End Date</label>
                <input type="date" ng-model="grants.endDate" class="form-control" ng-model-instant  id="endDate">
             </div>
-             <div class="form-group">
+             <div class="col-md-6" style="padding-bottom:10px">
                <label for="value">Value</label>
                <input type="number" ng-model="grants.value" class="form-control" ng-model-instant id="value" placeholder="How Much?">
             </div>
-            <div class="form-group">
+            <div class="col-md-6" style="padding-bottom:10px">
                <label for="fundingPortion">Funding Portion</label>
                <input type="number" ng-model="grants.fundingPortion" class="form-control" ng-model-instant  id="fundingPortion" placeholder ="How Much?">
             </div>
-            <div style="padding-bottom:10px">
+            <div class="col-md-12" style="padding-bottom:10px">
             <button class="btn btn-success btn-s" ng-click="addGrants()" ng-disabled="incomplete"> 
             <span class="glyphicon glyphicon-save"> </span> Add Grants
             </button>
