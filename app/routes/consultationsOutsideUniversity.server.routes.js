@@ -14,6 +14,6 @@ module.exports = function(app) {
 		.get(users.requiresLogin, consultationsOutsideUniversity.read)
 		.put(users.requiresLogin, consultationsOutsideUniversity.update);
 
-	// Finish by binding the International middleware
+	// Finish by binding the ConsultationsOutsideUniversity middleware
 	app.param('consultationsOutsideUniversityId', consultationsOutsideUniversity.consultationsOutsideUniversityById);
 };
