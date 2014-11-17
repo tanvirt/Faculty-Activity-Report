@@ -29,7 +29,11 @@ module.exports = {
 
 
 				'public/lib/tinymce/tinymce.min.js',
-				'public/lib/angular-ui-tinymce/src/tinymce.js'
+				'public/lib/angular-ui-tinymce/src/tinymce.js',
+
+				'public/lib/ng-pdfviewer/ng-pdfviewer.js',
+				'public/lib/ng-pdfviewer/lib/pdf.js',
+				'public/lib/ng-pdfviewer/lib/compatibility.js'
 
 
 			]
