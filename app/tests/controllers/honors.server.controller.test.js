@@ -185,7 +185,7 @@ describe('Honors Controller Tests', function() {
         });
     });
     afterEach(function(done) {
-        honors.remove().exec();
+        Honors.remove().exec();
         User.remove().exec();
         Report.remove().exec();
         done();
