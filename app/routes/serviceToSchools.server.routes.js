@@ -10,7 +10,7 @@ module.exports = function(app) {
 		.post(users.requiresLogin, serviceToSchools.create);
 
 	app.route('/serviceToSchools/:serviceToSchoolsId')
-		.get(serviceToSchools.read)
+		.get(users.requiresLogin, serviceToSchools.read)
 		.put(users.requiresLogin, serviceToSchools.update);
 
 	// Finish by binding the middleware
