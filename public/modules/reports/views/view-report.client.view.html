@@ -32,7 +32,7 @@
 
 		<h4><b>4 DATE APPOINTED:</b></h4>
 	    <div>
-			
+			<span>{{ report.dateAppointed.date }} </span>
 		</div>
 		<br>
 
@@ -42,10 +42,100 @@
 			<span>{{report.affiliateAppointments.app}}</span>
 		</div>
 		
-		<br><br>
+		<br>
 
+		<h4><b>6 ASSIGNED ACTIVITY:</b></h4>
+		<table>
+			<tr>
+				<th></th>
+				<th>Spring {{ report.assignedActivity.year }}</th>
+				<th>Summer {{ report.assignedActivity.year }}</th>
+				<th>Fall {{ report.assignedActivity.year }}</th>
+			</tr>
+			<br>
+			<tr>
+				<td>Teaching</td>
+				<td>{{report.assignedActivity.springTeaching}}%</td>
+				<td>{{report.assignedActivity.summerTeaching}}%</td>
+				<td>{{report.assignedActivity.fallTeaching}}%</td>
+			</tr>
+			<br>
+			<tr>
+				<td>Research</td>
+				<td>{{ report.assignedActivity.springResearch }}%</td>
+				<td>{{ report.assignedActivity.summerResearch }}%</td>
+				<td>{{ report.assignedActivity.fallResearch }}%</td>
+			</tr>
+			<br>
+			<tr>
+				<td>Service</td>
+				<td>{{ report.assignedActivity.springService }}%</td>
+				<td>{{ report.assignedActivity.summerService }}%</td>
+				<td>{{ report.assignedActivity.fallService }}%</td>
+			</tr>
+			<br>
+			<tr>
+				<td>Total</td>
+				<td>{{ report.assignedActivity.springTeaching + report.assignedActivity.springResearch
+					+ report.assignedActivity.springService}}%</td>
+				<td>{{ report.assignedActivity.summerTeaching + report.assignedActivity.summerResearch
+					+ report.assignedActivity.summerService}}%</td>
+				<td>{{ report.assignedActivity.fallTeaching + report.assignedActivity.fallResearch
+					+ report.assignedActivity.fallService}}%</td>
+			</tr>
+		</table>
+		<br>
 
-    </div>
+		<h4><b>7 TEACHING, ADVISING AND/OR INSTRUCTIONAL ACCOMPLISHMENTS:</b></h4>
+		<div>
+			<span>{{ report.teachingAdvising.info }}</span>
+		</div>
+
+		<br>
+
+		<h4><b>8 TEACHING EVALUATIONS:</b></h4>
+		<div>
+			<span>{{ report.teachingEvaluation.info }}</span>
+		</div>
+		<br>
+		<h4><b>9 GRADUATE COMMITTEE ACTIVITIES:</b></h4>
+		<div>
+			<span>Role: {{ report.graduateCommittee.role }}</span><br>
+			<span>Student Name: {{ report.graduateCommittee.studentName }}</span><br>
+			<span>Degree: {{ report.graduateCommittee.degree }}</span><br>
+			<span>Major: {{ report.graduateCommittee.major }}</span><br>
+			<span>Degree Date: {{ report.graduateCommittee.degreeDate }}</span><br>
+		</div>
+		<br>
+		<h4><b>10 CONTRIBUTION TO DISCIPLINE/RESEARCH NARRATIVE:</b></h4>
+		<div>
+			<span>{{ report.contribution.info }}</span>
+		</div>
+		<br>
+		<h4><b>11 CREATIVE WORKS OR ACTIVITIES:</b></h4>
+		<div>
+			<span>Name: {{ report.creativeWorks.name }}</span><br>
+			<span>Description: {{ report.creativeWorks.description }}</span><br>
+			<span>Website: {{ report.creativeWorks.website }}</span><br>
+			<span>Date: {{ report.creativeWorks.date }}</span><br>
+			<span>Joint Efforts: {{ report.creativeWorks.jointEfforts }}</span><br>
+		</div>
+		<br>
+		<h4><b>12 PATENTS AND COPYRIGHTS:</b></h4>
+		<div>
+			<span>Title: {{ report.patents.title }}</span><br>
+			<span>Authors: {{ report.patents.authors }}</span><br>
+			<span>Patent Number: {{ report.patents.patentNumber }}</span><br>
+			<span>Date: {{ report.patents.date }}</span><br>
+			<span>Description: {{ report.patents.description }}</span><br>
+		</div>
+		<br>
+		<h4><b>13 PUBLICATIONS:</b></h4>
+		<div>
+			<span>{{ report.publication.info }}</span>
+		</div>
+		<br>
+	</div>
     <div class="col-md-1"></div>
 
 <div class="col-md-12">
