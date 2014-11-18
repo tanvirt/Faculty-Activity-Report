@@ -6,7 +6,7 @@ So far, I have served in {{ totalCount }} committees ({{ chairCount }} as Chair,
   \begin{tabular}{llllll}
     Role & Student Name & Degree & Major & Degree Date\\
 	\hline
-	{% for committee in sub %}
+	{% for committee in array %}
 		{{ committee.role }} & {{ committee.studentName }} & {{ committee.degree }} & {{ committee.major }} & {{ (committee.getMonth() + "/" + committee.degreeDate.getDate() + "/" + committee.degreeDate.getFullYear()) }}\\
 	{% endfor %}
   \end{tabular}
