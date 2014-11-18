@@ -44,6 +44,7 @@ exports.create = function(req, res) {
 			res.jsonp(patent);
 		}
 	});
+
 };
 
 exports.update = function(req, res) {
