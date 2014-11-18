@@ -50,7 +50,7 @@ describe('Patents Controller Tests', function() {
 			report: report,
 			user: user
 		});
-
+		
 		p2 = new Patents({
 			title: 'Alphabet',
 			authors: ['A', 'B', 'C'],

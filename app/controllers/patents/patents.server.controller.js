@@ -21,7 +21,7 @@ exports.create = function(req, res) {
 		});
 	}
 
-	var patents = new Patents({
+	var patent = new Patents({
 		title: req.body.patents.title,
 		authors: req.body.patents.authors,
 		patentNumber: req.body.patents.patentNumber,
@@ -32,16 +32,16 @@ exports.create = function(req, res) {
 		report: req.report
 	});
 
-	patents.save(function(err) {
+	patent.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			req.report.patents = patents;
+			req.report.patents = patent;
 			req.report.save();
-
-			res.jsonp(patents);
+	
+			res.jsonp(patent);
 		}
 	});
 };
