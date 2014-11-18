@@ -203,7 +203,7 @@ describe('Patents Controller Tests', function() {
 					  .end(function(err, res) {
 					  	should.not.exist(err);
 
-					  	res.body.should.have.property('name', pObj.patents.name);
+					  	res.body.should.have.property('title', pObj.patents.title);
 
 					  	res.body.should.have.property('_id');
 					  	res.body.should.have.property('user');
@@ -250,7 +250,7 @@ describe('Patents Controller Tests', function() {
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
 
-					  	res.body.should.be.an.Object.and.have.property('name', 'DifferentName');
+					  	res.body.should.be.an.Object.and.have.property('title', 'DifferentName');
 
 					  	res.body.should.have.property('_id', p1.id);
 					  	res.body.should.have.property('user', user.id);

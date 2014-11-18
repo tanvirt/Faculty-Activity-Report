@@ -22,11 +22,11 @@ exports.create = function(req, res) {
 	}
 
 	var patents = new Patents({
-		name: req.body.patents.name,
-		description: req.body.patents.description,
-		website: req.body.patents.website,
-		jointEfforts: req.body.patents.jointEfforts,
+		title: req.body.patents.title,
+		authors: req.body.patents.authors,
+		patentNumber: req.body.patents.patentNumber,
 		date: req.body.patents.date,
+		description: req.body.patents.description,
 
 		user: req.user,
 		report: req.report
