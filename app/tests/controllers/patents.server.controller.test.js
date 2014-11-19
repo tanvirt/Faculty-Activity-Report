@@ -143,7 +143,6 @@ describe('Patents Controller Tests', function() {
 		});
 
 		it('should be able to get a specific patents based on its id', function(done) {
-			
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -153,7 +152,7 @@ describe('Patents Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					  .get('/patents/' + p2.id)
+					  .get('/patents/' + p1.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .expect('Content-Type', /json/)
@@ -163,7 +162,7 @@ describe('Patents Controller Tests', function() {
 
 					  	res.body.should.be.an.Object;
 
-					  	res.body.should.have.property('_id', p2.id);
+					  	res.body.should.have.property('_id', p1.id);
 					  	res.body.should.have.property('user', user.id);
 					  	res.body.should.have.property('report', report.id);
 
