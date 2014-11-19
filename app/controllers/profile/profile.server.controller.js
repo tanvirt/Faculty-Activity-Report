@@ -67,7 +67,7 @@ exports.readFromId = function(req, res) {
 };
 
 exports.update = function(req, res) {
-	console.log(require('util').inspect(req.body));
+	//console.log(require('util').inspect(req.body));
 	
 	async.parallel({
 		name: async.apply(nameCtrl.update, req, res),

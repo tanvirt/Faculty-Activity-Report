@@ -69,7 +69,7 @@ exports.getExcel = function(req, res, next) {
 */
 
 function parseArrayAndSave( data, res ) {
-	var arr = Array();
+	var arr = new Array();
 
 	for (var i=1; i<data.length; i++) {
 		var te = new TeachingEvaluation();
@@ -227,7 +227,7 @@ exports.create = function(req, res) {
 };
 
 exports.update = function(req, res) {
-	console.log(require('util').inspect(req.body));
+	//console.log(require('util').inspect(req.body));
 	
 	if (is.empty(req.body.teachingEvaluation)) {
 		res.status(400);
