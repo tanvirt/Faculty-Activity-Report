@@ -112,21 +112,29 @@ describe('Graduate Committee Controller Tests', function() {
 
 						  	res.body[0].should.be.an.Object.and.have.property('role', committeeOne.role);
 							res.body[1].should.be.an.Object.and.have.property('role', committeeTwo.role);
+							res.body[2].should.be.an.Object.and.have.property('role', committeeThree.role);
 
 						  	res.body[0].should.have.property('studentName', committeeOne.studentName);
 							res.body[1].should.have.property('studentName', committeeTwo.studentName);
+							res.body[2].should.have.property('studentName', committeeThree.studentName);
 						  	res.body[0].should.have.property('degree', committeeOne.degree);
 							res.body[1].should.have.property('degree', committeeTwo.degree);
+							res.body[2].should.have.property('degree', committeeThree.degree);
 						  	res.body[0].should.have.property('major', committeeOne.major);
 							res.body[1].should.have.property('major', committeeTwo.major);
+							res.body[2].should.have.property('major', committeeThree.major);
 						  	res.body[0].should.have.property('degreeDate', committeeOne.degreeDate.toJSON());
 							res.body[1].should.have.property('degreeDate', committeeTwo.degreeDate.toJSON());
+							res.body[2].should.have.property('degreeDate', committeeThree.degreeDate.toJSON());
 
 						  	res.body[0].should.have.property('_id', committeeOne.id);
 							res.body[1].should.have.property('_id', committeeTwo.id);
+							res.body[2].should.have.property('_id', committeeThree.id);
 							
-						  	res.body[0].should.have.property('user', user.id);
-						  	res.body[0].should.have.property('report', report.id);
+							for(var iii = 0; iii < 3; iii++) {
+								res.body[iii].should.have.property('user', user.id);
+								res.body[iii].should.have.property('report', report.id);
+							}
 
 						  	done();
 						});
