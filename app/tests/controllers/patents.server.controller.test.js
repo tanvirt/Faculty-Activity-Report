@@ -74,9 +74,9 @@ describe('Patents Controller Tests', function() {
 			user: user
 		});
 
-		//p1.save();
-		//p2.save();
-		//p3.save();
+		p1.save();
+		p2.save();
+		p3.save();
 
 		done();
 	});
@@ -93,9 +93,7 @@ describe('Patents Controller Tests', function() {
 	describe('Testing the GET methods', function() {
 
 		it('should fail to be able to get a patents if not logged in', function(done) {
-			p1.save();
-			p2.save();
-			p3.save();
+			
 			request(app)
 			  .get('/reports/' + report.id + '/patents')
 			  .set('Accept', 'application/json')
@@ -105,9 +103,7 @@ describe('Patents Controller Tests', function() {
 		});
 
 		it('should be able to get an patents associated with its report id', function(done) {
-			p1.save();
-			p2.save();
-			p3.save();
+			
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -138,9 +134,6 @@ describe('Patents Controller Tests', function() {
 		});
 
 		it('should fail to be able to get a specific patents if not logged in', function(done) {
-			p1.save();
-			p2.save();
-			p3.save();
 			request(app)
 			  .get('/patents/' + p1.id)
 			  .set('Accept', 'application/json')
@@ -150,9 +143,7 @@ describe('Patents Controller Tests', function() {
 		});
 
 		it('should be able to get a specific patents based on its id', function(done) {
-			p1.save();
-			p2.save();
-			p3.save();
+			
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -162,7 +153,7 @@ describe('Patents Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					  .get('/patents/' + p1.id)
+					  .get('/patents/' + p2.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .expect('Content-Type', /json/)
@@ -172,7 +163,7 @@ describe('Patents Controller Tests', function() {
 
 					  	res.body.should.be.an.Object;
 
-					  	res.body.should.have.property('_id', p1.id);
+					  	res.body.should.have.property('_id', p2.id);
 					  	res.body.should.have.property('user', user.id);
 					  	res.body.should.have.property('report', report.id);
 
@@ -196,9 +187,7 @@ describe('Patents Controller Tests', function() {
 		};
 
 		it('should fail to be able to create an patents if not logged in', function(done) {
-			p1.save();
-			p2.save();
-			p3.save();
+			
 			request(app)
 			  .post('/reports/' + report.id + '/patents')
 			  .set('Accept', 'application/json')
@@ -209,9 +198,7 @@ describe('Patents Controller Tests', function() {
 		});
 
 		it('should be able to create a new patents', function(done) {
-			p1.save();
-			p2.save();
-			p3.save();
+			
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -246,9 +233,7 @@ describe('Patents Controller Tests', function() {
 	describe('Testing the PUT methods', function() {
 
 		it('should fail to be able to update a specific patents if not logged in', function(done) {
-			p1.save();
-			p2.save();
-			p3.save();
+			
 			request(app)
 			  .put('/patents/' + p1.id)
 			  .set('Accept', 'application/json')
@@ -258,9 +243,7 @@ describe('Patents Controller Tests', function() {
 		});
 
 		it('should be able to update a specific patents', function(done) {
-			p1.save();
-			p2.save();
-			p3.save();
+			
 			request(app)
 				.post('/auth/signin')
 				.send({
