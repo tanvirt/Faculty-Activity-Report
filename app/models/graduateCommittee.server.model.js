@@ -18,6 +18,10 @@ var graduateCommittee = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User'
 	},
+	report: {
+		type: Schema.ObjectId,
+		ref: 'Report'
+	},
 	role: {
 		type: String,
 		enum: ['Chair','Co-Chair','External','Member','Minor'],
@@ -40,10 +44,6 @@ var graduateCommittee = new Schema({
 		type: Date, 
 		validate: [validateLocalStrategyDate, 
 		'Date must be less than or equal to the current year and greator than or equal to 1980']
-	},
-	report: {
-		type: Schema.ObjectId,
-		ref: 'Report'
 	},
 	totalCount: {
 		type: Number,
@@ -71,6 +71,8 @@ var graduateCommittee = new Schema({
 	}	
 }, {collection:'GraduateCommittee'});
 
+/*
+//This doesn't work
 graduateCommittee.methods.incrementCount = function( index ) {
 	this.totalCount = this.totalCount + 1;
 
@@ -94,6 +96,7 @@ graduateCommittee.methods.incrementCount = function( index ) {
 			throw new Error('Role is not defined in method incrementCount');
 	}
 };
+*/
 
 graduateCommittee.methods.getMonth = function() {
 	return this.degreeDate.getMonth() + 1;

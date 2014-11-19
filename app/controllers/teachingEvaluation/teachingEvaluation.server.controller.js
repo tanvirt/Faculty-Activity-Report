@@ -255,7 +255,7 @@ exports.update = function(req, res) {
 };
 
 exports.readFromReport = function(req, res) {
-	TeachingEvaluation.findOne({report: req.report}, function(err, result) { //One Teaching Evaluation holds all individual evaluations for the report
+	TeachingEvaluation.find({report: req.report}, function(err, result) { //Returns array
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
