@@ -18,6 +18,10 @@ module.exports = function(app) {
 		.put(users.requiresLogin, reports.hasAuthorization, reports.update)
 		.delete(users.requiresLogin, reports.hasAuthorization, reports.delete);
 
+	app.route('/reports/:reportId/reportName')
+		.get(users.requiresLogin, reports.read)
+		.put(users.requiresLogin, reports.update);
+		
 	app.route('/reportdownload/:reportId')
 		.get(users.requiresLogin, reports.hasAuthorization, 
 			 reports.generateLatex, reports.generatePDF, reports.viewPDF);

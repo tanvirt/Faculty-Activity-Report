@@ -122,7 +122,6 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var report = req.report;
-
 	report = _.extend(report, req.body);
 
 	report.save(function(err) {
