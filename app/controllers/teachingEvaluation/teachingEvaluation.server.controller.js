@@ -12,11 +12,9 @@ var join = path.join;
 
 var _ = require('lodash');
 
-var xlsxj = require('xlsx-to-json');
+var cv2json = require('convert-json');
 
 var u = require('underscore');
-
-var excel = require('excel');
 
 exports.viewCtrl = function(req, res) {
 	res.render('report/upload', {
@@ -24,7 +22,6 @@ exports.viewCtrl = function(req, res) {
 	});
 };
 
-/*
 exports.getExcel = function(req, res, next) {
 	if (req.files.excel) {
 
@@ -42,75 +39,6 @@ exports.getExcel = function(req, res, next) {
 
 	} else {
 		res.jsonp('No file uploaded');
-	}
-};
-*/
-/*
-exports.getExcel = function(req, res, next) {
-	if (req.files.excel) {
-		console.log(req.files.excel);
-		var p = req.files.excel.name;
-		xlsxj({
-			input: "./app/controllers/teachingEvaluation/"+p,
-			output: null
-		}, function(err, result) {
-			if (err) {
-				console.log(err);
-			} else {
-				console.log(result);
-				res.jsonp(result);
-			}
-		});
-	} else {
-		res.jsonp('Nope');
-	}
-	
-};
-*/
-
-function parseArrayAndSave( data, res ) {
-	var arr = new Array();
-
-	for (var i=1; i<data.length; i++) {
-		var te = new TeachingEvaluation();
-
-		te.course = data[i][3];
-		te.enrolled = data[i][7];
-		te.responses = data[i][8];
-
-		var tmpArray = [];
-		for (var j=0; j<10; j++) {
-			console.log(j + ' : ' + data[i][(j*2)+37]);
-			tmpArray[j] = data[i][(j*2)+37];
-		}
-		te.teacherMean = tmpArray;
-		
-		te.save(function(err) {
-			if (err) {
-				return res.jsonp({
-					title: 'Mongoose Save Error',
-					message: err
-				});
-			}
-		});
-
-		arr[i-1] = te.toObject();
-	}
-
-	res.jsonp(arr);
-}
-
-
-exports.getExcel = function(req, res) {
-	if (req.files.excel) {
-		excel(req.files.excel.path, function(err, data) {
-		 	if(err) throw err;
-
-		 	parseArrayAndSave(data, res);
-		 	
-		});
-	} else {
-		res.jsonp('Failure! File Not Uploaded/Found');
 	}
 };
 
@@ -148,15 +76,14 @@ function parseAndSave(obj, key) {
 			obj[d.tm6].v,
 			obj[d.tm7].v,
 			obj[d.tm8].v,
-			obj[d.tm9].v,
-			obj[d.tm10].v
+			obj[d.tm9].v//,
+			//obj[d.tm10].v
 		]
 	};
 }
 
 exports.saveExcel = function(req, res) {
-	//return res.jsonp(req.excel.Sheets);
-	if (req.excel.Sheets.sheet1) {
+	if (req.excel) {
 		var obj = req.excel.Sheets.sheet1;
 
 		var i = 2;
@@ -173,8 +100,6 @@ exports.saveExcel = function(req, res) {
 				}));
 
 				teachingEvaluation.save();
-
-				console.log(teachingEvaluation);
 
 				i++;
 			} else {
@@ -227,7 +152,7 @@ exports.create = function(req, res) {
 };
 
 exports.update = function(req, res) {
-	//console.log(require('util').inspect(req.body));
+	console.log(require('util').inspect(req.body));
 	
 	if (is.empty(req.body.teachingEvaluation)) {
 		res.status(400);
@@ -255,7 +180,7 @@ exports.update = function(req, res) {
 };
 
 exports.readFromReport = function(req, res) {
-	TeachingEvaluation.find({report: req.report}, function(err, result) { //Returns array
+	TeachingEvaluation.findOne({report: req.report}, function(err, result) { //One Teaching Evaluation holds all individual evaluations for the report
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

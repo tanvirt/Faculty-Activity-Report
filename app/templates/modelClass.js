@@ -80,7 +80,7 @@ RenderModel.prototype._findModelsByReport = function ( req, cb ) {
 Helper function that injects values into the latex.tex files
 */
 function renderSwig( folderPath, filePath, json, cb ) {
-	//console.log(require('util').inspect(json));
+	console.log(require('util').inspect(json));
 	require('swig').renderFile(require('path').join(folderPath, filePath), json, function(err, output) {
 		/*
 		if (err) {

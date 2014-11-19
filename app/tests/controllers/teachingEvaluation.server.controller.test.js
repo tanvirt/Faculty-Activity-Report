@@ -18,7 +18,7 @@ var Report = mongoose.model('Report');
 
 var async = require('async');
 
-var user, report, evaluationOne, evaluationTwo;
+var user, report, te;
 
 describe('TeachingEvaluation Controller Tests', function() {
 	beforeEach(function(done) {
@@ -41,7 +41,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 
 		report.save();
 
-		evaluationOne = new TeachingEvaluation({
+		te = new TeachingEvaluation({
 			course: 'testCourse 101',
 			year: '2014',
 			semester: 'spring',
@@ -54,23 +54,8 @@ describe('TeachingEvaluation Controller Tests', function() {
 			report: report,
 			user: user
 		});
-		
-		evaluationTwo = new TeachingEvaluation({
-			course: 'testCourse 102',
-			year: '2012',
-			semester: 'fall',
-			enrolled: '200',
-			responses: '60',
-			teacherMean: [1, 2, 3, 4, 5, 1, 2, 3, 4, 1],
-			departmentMean: [1, 2, 3, 4, 5, 1, 2, 3, 4, 1],
-			collegeMean: [1, 2, 3, 4, 5, 1, 2, 3, 4, 1],
 
-			report: report,
-			user: user
-		});
-
-		evaluationOne.save();
-		evaluationTwo.save();
+		te.save();
 
 		done();
 	});
@@ -86,7 +71,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 			  .end(done);
 		});
 
-		it('should be able to get the teachingEvaluation(s) associated with its report id', function(done) {
+		it('should be able to get an teachingEvaluation associated with its report id', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -104,27 +89,20 @@ describe('TeachingEvaluation Controller Tests', function() {
 						.end(function(err, res) {
 							should.not.exist(err);
 
-						  	res.body[0].should.be.an.Object.and.have.property('course', evaluationOne.course);
-							res.body[1].should.be.an.Object.and.have.property('course', evaluationTwo.course);
+						  	res.body.should.be.an.Object.and.have.property('course', te.course);
 
-						  	res.body[0].should.have.property('year', evaluationOne.year);
-							res.body[1].should.have.property('year', evaluationTwo.year);
-						  	res.body[0].should.have.property('semester', evaluationOne.semester);
-							res.body[1].should.have.property('semester', evaluationTwo.semester);
-						  	res.body[0].should.have.property('enrolled', evaluationOne.enrolled);
-							res.body[1].should.have.property('enrolled', evaluationTwo.enrolled);
-						  	res.body[0].should.have.property('responses', evaluationOne.responses);
-							res.body[1].should.have.property('responses', evaluationTwo.responses);
+						  	res.body.should.have.property('year', te.year);
+						  	res.body.should.have.property('semester', te.semester);
+						  	res.body.should.have.property('enrolled', te.enrolled);
+						  	res.body.should.have.property('responses', te.responses);
 
-						  	res.body[0].teacherMean.should.be.an.Array;
-						  	res.body[0].departmentMean.should.be.an.Array;
-						  	res.body[0].collegeMean.should.be.an.Array;
+						  	res.body.teacherMean.should.be.an.Array;
+						  	res.body.departmentMean.should.be.an.Array;
+						  	res.body.collegeMean.should.be.an.Array;
 
-						  	res.body[0].should.have.property('_id', evaluationOne.id);
-							res.body[1].should.have.property('_id', evaluationTwo.id);
-							
-						  	res.body[0].should.have.property('user', user.id);
-						  	res.body[0].should.have.property('report', report.id);
+						  	res.body.should.have.property('_id', te.id);
+						  	res.body.should.have.property('user', user.id);
+						  	res.body.should.have.property('report', report.id);
 
 						  	done();
 						});
@@ -133,7 +111,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 
 		it('should fail to be able to get a specific teachingEvaluation if not logged in', function(done) {
 			request(app)
-			  .get('/teachingEvaluation/' + evaluationOne.id)
+			  .get('/teachingEvaluation/' + te.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
@@ -149,9 +127,8 @@ describe('TeachingEvaluation Controller Tests', function() {
 				})
 				.expect(200)
 				.end(function(err, res) {
-				//Uses SECOND evaluation for request
 					request(app)
-					  .get('/teachingEvaluation/' + evaluationTwo.id)
+					  .get('/teachingEvaluation/' + te.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .expect('Content-Type', /json/)
@@ -159,18 +136,18 @@ describe('TeachingEvaluation Controller Tests', function() {
 					  .end(function(err, res) {
 					  	should.not.exist(err);
 
-						res.body.should.be.an.Object.and.have.property('course', evaluationTwo.course);
+						res.body.should.be.an.Object.and.have.property('course', te.course);
 
-						res.body.should.have.property('year', evaluationTwo.year);
-						res.body.should.have.property('semester', evaluationTwo.semester);
-						res.body.should.have.property('enrolled', evaluationTwo.enrolled);
-						res.body.should.have.property('responses', evaluationTwo.responses);
+						res.body.should.have.property('year', te.year);
+						res.body.should.have.property('semester', te.semester);
+						res.body.should.have.property('enrolled', te.enrolled);
+						res.body.should.have.property('responses', te.responses);
 
 						res.body.teacherMean.should.be.an.Array;
 						res.body.departmentMean.should.be.an.Array;
 						res.body.collegeMean.should.be.an.Array;
 
-					  	res.body.should.have.property('_id', evaluationTwo.id);
+					  	res.body.should.have.property('_id', te.id);
 					  	res.body.should.have.property('user', user.id);
 					  	res.body.should.have.property('report', report.id);
 
@@ -251,7 +228,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 
 		it('should fail to be able to update a specific teachingEvaluation if not logged in', function(done) {
 			request(app)
-			  .put('/teachingEvaluation/' + evaluationOne.id)
+			  .put('/teachingEvaluation/' + te.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
@@ -268,7 +245,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					.put('/teachingEvaluation/' + evaluationOne.id)
+					.put('/teachingEvaluation/' + te.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
 				  	.send({
@@ -281,18 +258,18 @@ describe('TeachingEvaluation Controller Tests', function() {
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
 
-					  	res.body.should.be.an.Object.and.have.property('course', evaluationOne.course);
+					  	res.body.should.be.an.Object.and.have.property('course', te.course);
 
 						res.body.should.have.property('year', 1999);
-						res.body.should.have.property('semester', evaluationOne.semester);
-						res.body.should.have.property('enrolled', evaluationOne.enrolled);
-						res.body.should.have.property('responses', evaluationOne.responses);
+						res.body.should.have.property('semester', te.semester);
+						res.body.should.have.property('enrolled', te.enrolled);
+						res.body.should.have.property('responses', te.responses);
 
 						res.body.teacherMean.should.be.an.Array;
 						res.body.departmentMean.should.be.an.Array;
 						res.body.collegeMean.should.be.an.Array;
 
-					  	res.body.should.have.property('_id', evaluationOne.id);
+					  	res.body.should.have.property('_id', te.id);
 					  	res.body.should.have.property('user', user.id);
 					  	res.body.should.have.property('report', report.id);
 

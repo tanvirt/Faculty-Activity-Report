@@ -34,7 +34,12 @@ Helper function that gets called in report.server.controller.js
 Output is pushed into a LaTex PDF there.
 */
 module.exports.render = function (req, callback) {
-	renderModel.renderMultiple(req, callback);
+	/*
+	renderModel.renderMultiple( 'graduateCommittee/graduateCommittee.tex', graduateCommittee, { }, passObj,dummyObject, function ( renderStr ) {
+		callback(null, renderStr);
+	});
+*/
+	renderModel.render(req, callback);
 };
 
 module.exports.submit = function(req, callback) {

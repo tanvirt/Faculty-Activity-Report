@@ -27,20 +27,30 @@ exports.create = function(req, res) {
 		});
 	}
 	
-	var graduateCommittee = new GraduateCommittee({
-			role: req.body.graduateCommittee.role,
-			studentName: req.body.graduateCommittee.studentName,
-			degree: req.body.graduateCommittee.degree,
-			major: req.body.graduateCommittee.major,
-			degreeDate: req.body.graduateCommittee.degreeDate, 
-			
-			user: req.user,
-			report: req.report
-		});
+	var sections = [];
+	for (var iii = 0; iii < req.body.graduateCommittee.length; iii++) {
+		var path = req.body.graduateCommittee[iii];
+		var subdoc = {
+			role: path.role,
+			studentName: path.studentName,
+			degree: path.degree,
+			major: path.major,
+			degreeDate: path.degreeDate
+		};
+		sections.push(subdoc);
+	}
 	
-	//for (iii = 0; iii < req.body.graduateCommittee.length; iii++)
-	//	graduateCommittee.incrementCount(iii);
+	var graduateCommittee = new GraduateCommittee({
+		sub: sections,
+		user: req.user,
+		report: req.report
+	});
+	
+	for (iii = 0; iii < req.body.graduateCommittee.length; iii++)
+		graduateCommittee.incrementCount(iii);
 
+		
+		
 	graduateCommittee.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -53,7 +63,7 @@ exports.create = function(req, res) {
 };
 
 exports.update = function(req, res) {
-	//console.log(require('util').inspect(req.body));
+	console.log(require('util').inspect(req.body));
 	
 	if (is.empty(req.body.graduateCommittee)) {
 		res.status(400);
@@ -81,7 +91,8 @@ exports.update = function(req, res) {
 };
 
 exports.readFromReport = function(req, res) {
-	GraduateCommittee.find({report: req.report}, function(err, result) { //Returns an array
+	//One Graduate Committee holds the entire chart of committees for the report
+	GraduateCommittee.findOne({report: req.report}, function(err, result) { 
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

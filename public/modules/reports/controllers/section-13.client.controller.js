@@ -3,9 +3,9 @@
 angular.module('reports').controller('Section13Controller', ['$http', '$scope', '$location', 'Authentication', 'IDs',
 	function($http, $scope, $location, Authentication, IDs ) {
 		$scope.authentication = Authentication;
-		
-		IDs.get().then(function(data) 
-		{
+
+		IDs.get().then(function(data) {
+
 			$scope.IDdata = data;
 			$scope.section13 = data.publication.info;
 		});
@@ -17,12 +17,13 @@ angular.module('reports').controller('Section13Controller', ['$http', '$scope', 
 					info: $scope.section13
 				}}).
 				success(function(data, status, headers, config) {
-					alert('Section13 Saved!');
+					alert('Saved!');
 				}).
 				error(function(data, status, headers, config) {
-					alert('Error Saving!');
+					alert('There was an error Saving!');
 				}
 			);
 		};
+
 	}
 ]);
