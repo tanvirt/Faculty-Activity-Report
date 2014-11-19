@@ -117,6 +117,10 @@ exports.read = function(req, res) {
 	res.jsonp(req.report);
 };
 
+exports.readReportName = function(req, res) {
+	res.jsonp(req.reportName);
+};
+
 /**
  * Update a Report
  */

@@ -18,8 +18,8 @@ module.exports = function(app) {
 		.put(users.requiresLogin, reports.hasAuthorization, reports.update)
 		.delete(users.requiresLogin, reports.hasAuthorization, reports.delete);
 
-	app.route('/reports/:reportId/reportName')
-		.get(users.requiresLogin, reports.read)
+		app.route('/reports/:reportId/reportName')
+		.get(users.requiresLogin, reports.readReportName)
 		.put(users.requiresLogin, reports.update);
 		
 	app.route('/reportdownload/:reportId')
