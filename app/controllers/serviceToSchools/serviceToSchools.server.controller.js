@@ -42,7 +42,7 @@ exports.create = function(req, res) {
 };
 
 exports.update = function(req, res) {
-	console.log(require('util').inspect(req.body));
+	//console.log(require('util').inspect(req.body));
 	
 	if (is.empty(req.body.serviceToSchools)) {
 		return res.jsonp({

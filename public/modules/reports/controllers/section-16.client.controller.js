@@ -1,23 +1,23 @@
 'use strict';
 
-angular.module('reports').controller('Section13Controller', ['$http', '$scope', '$location', 'Authentication', 'IDs',
+angular.module('reports').controller('Section16Controller', ['$http', '$scope', '$location', 'Authentication', 'IDs',
 	function($http, $scope, $location, Authentication, IDs ) {
 		$scope.authentication = Authentication;
-		
-		IDs.get().then(function(data) 
-		{
+
+		IDs.get().then(function(data) {
+
 			$scope.IDdata = data;
-			$scope.section13 = data.publication.info;
+			$scope.section16 = data.governance.govStr;
 		});
 		$scope.update = function()
 		{
-			$http.put('/publication/' + $scope.IDdata.publication._id, {
+			$http.put('/governance/' + $scope.IDdata.governance._id, {
 
-				publication:{
-					info: $scope.section13
+				governance:{
+					govStr: $scope.section16
 				}}).
 				success(function(data, status, headers, config) {
-					alert('Section13 Saved!');
+					alert('Section Saved!');
 				}).
 				error(function(data, status, headers, config) {
 					alert('Error Saving!');

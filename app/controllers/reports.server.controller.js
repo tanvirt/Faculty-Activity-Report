@@ -168,7 +168,6 @@ exports.list = function(req, res) {
 	.populate('user', 'displayName')
 
 	.populate('profile')
-
 	.populate('name')
 	.populate('tenure')
 	.populate('currentRank')
@@ -192,7 +191,6 @@ exports.list = function(req, res) {
 	.populate('publication')
 	.populate('editorServiceReviewer')
 	.populate('serviceToSchools')
-
 
 	.exec(function(err, reports) {
 		if (err) {
@@ -213,7 +211,6 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('user', 'displayName')
 
 	.populate('profile')
-
 	.populate('name')
 	.populate('tenure')
 	.populate('currentRank')
@@ -238,7 +235,6 @@ exports.reportByID = function(req, res, next, id) {
 	.populate('editorServiceReviewer')
 	.populate('serviceToSchools')
 	
-	
 	.exec(function(err, report) {
 		if (err) return next(err);
 		if (!report) return next(new Error('Failed to load Report ' + id));
@@ -251,8 +247,10 @@ exports.reportByID = function(req, res, next, id) {
  * Report authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.report.user.id !== req.user.id || u.contains(req.user.roles, 'admin')) {
-		return res.status(403).send('User is not authorized');
+	if (req.report.user.id !== req.user.id && !u.contains(req.user.roles, 'admin')) {
+		return res.status(403).send({
+			message: 'User is not authorized'
+		});
 	}
 
 	next();

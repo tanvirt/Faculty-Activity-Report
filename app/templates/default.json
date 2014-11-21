@@ -100,8 +100,8 @@
 		"description": "I saved the world"
   	},
 
-  	"publication": {
-  		"info": "This is my info"
+  	"publications": {
+  		"info": "This is my publications"
   	},
 
   	"serviceToSchools": {

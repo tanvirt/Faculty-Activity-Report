@@ -73,7 +73,7 @@ module.exports = function(db) {
 		app.locals.cache = 'memory';
 	}
 
-	app.use(multer({ dest: './public/modules/reports/excel/'}));
+	app.use(multer({ dest: './app/controllers/teachingEvaluation/'}));
 
 	// Request body parsing middleware should be above methodOverride
 	
