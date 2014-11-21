@@ -46,8 +46,7 @@
     "passport-twitter": "~1.0.2",
     "swig": "~1.4.1",
     "underscore": "~1.7.0",
-    "validator": "~3.19.0",
-    "xlsx-to-json": "^0.2.3"
+    "validator": "~3.19.0"
   },
   "devDependencies": {
     "bluebird": "^2.3.11",

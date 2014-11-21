@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('reports').controller('Section11Controller', ['$scope', '$stateParams', '$location', 'Authentication', 'CreativeWorks',
-	function($scope, $stateParams, $location, Authentication, Reports, CreativeWorks) {
+	function($scope, $stateParams, $location, Authentication, CreativeWorks) {
 
-		$scope.createCreativeWorks = function() {
+		$scope.create = function() {
 			// Create new CreativeWork object
 			var creativeWork = new CreativeWorks ({
 				name: this.name,

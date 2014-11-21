@@ -14,7 +14,7 @@ var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var Report = mongoose.model('Report');
 
-var user1, user2, report1, report2;
+var user1, user2, user3, report1, report2;
 
 describe('Reports Controller Tests', function() {
 	beforeEach(function(done) {
@@ -48,6 +48,17 @@ describe('Reports Controller Tests', function() {
 		});
 
 		user2.save();
+
+		user3 = new User({
+			firstName: 'Full',
+			lastName: 'Name',
+			email: 'test@test.com',
+			username: 'username3',
+			password: 'password',
+			provider: 'local'
+		});
+
+		user3.save();
 
 		report2 = new Report({
 			reportName: 'MyReportName02',
@@ -122,6 +133,30 @@ describe('Reports Controller Tests', function() {
 								for(var i=0; i<res.body.length; i++) {
 									res.body[i].user.should.be.an.Object.and.have.property('_id');
 								}
+
+								done();
+							});
+					});
+			});
+
+			it('should not be able to get a list of all reports if user doesn\'t own any of the reports and is not a superuser', function(done) {
+				request(app)
+					.post('/auth/signin')
+					.send({
+						username: 'username3',
+						password: 'password'
+					})
+					.expect(200)
+					.end(function(err, res) {
+						request(app)
+							.get('/reports')
+							.set('cookie', res.headers['set-cookie'])
+							.expect(200)
+							.end(function(err, res) {
+								should.not.exist(err);
+
+								res.body.should.be.an.Array;
+								res.body.should.have.length(0);
 
 								done();
 							});

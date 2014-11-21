@@ -17,7 +17,7 @@ var Report = mongoose.model('Report');
 
 var async = require('async');
 
-var user, report, cw1, cw2, cw3;
+var user, user2, user3, report, cw1, cw2, cw3, cw4;
 
 describe('CreativeWorks Controller Tests', function() {
 	beforeEach(function(done) {
@@ -32,6 +32,29 @@ describe('CreativeWorks Controller Tests', function() {
 		});
 
 		user.save();
+
+		user2 = new User({
+			firstName: 'Full',
+			lastName: 'Name',
+			email: 'test@test.com',
+			username: 'admin',
+			password: 'password',
+			provider: 'local',
+			roles: ['admin']
+		});
+
+		user2.save();
+
+		user3 = new User({
+			firstName: 'Full',
+			lastName: 'Name',
+			email: 'test@test.com',
+			username: 'username2',
+			password: 'password',
+			provider: 'local'
+		});
+
+		user3.save();
 
 		report = new Report({
 			reportName: 'MyReportName',
@@ -73,9 +96,21 @@ describe('CreativeWorks Controller Tests', function() {
 			user: user
 		});
 
+		cw4 = new CreativeWorks({
+			name: 'DataPath',
+			description: 'a fast database system particularly suited for large analytical query loads.',
+			website: 'http://bioverto.org',
+			jointEfforts: ['Tammer Kahveci', 'Mickey Mouse', 'Donald Duck'],
+			date: 'January 2008',
+
+			report: report,
+			user: user2
+		});
+
 		cw1.save();
 		cw2.save();
 		cw3.save();
+		cw4.save();
 
 		done();
 	});
@@ -91,7 +126,7 @@ describe('CreativeWorks Controller Tests', function() {
 			  .end(done);
 		});
 
-		it('should be able to get an creativeWorks associated with its report id', function(done) {
+		it('should be able to get creativeWorks associated with its report id', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -110,11 +145,12 @@ describe('CreativeWorks Controller Tests', function() {
 							should.not.exist(err);
 
 							res.body.should.be.an.Array;
-							res.body.should.have.length(3);
+							res.body.should.have.length(4);
 
 							res.body[0].should.be.an.Object;	
 							res.body[1].should.be.an.Object;	
-							res.body[2].should.be.an.Object;							
+							res.body[2].should.be.an.Object;
+							res.body[3].should.be.an.Object;						
 
 						  	done();
 						});
@@ -130,7 +166,7 @@ describe('CreativeWorks Controller Tests', function() {
 			  .end(done);
 		});
 
-		it('should be able to get a specific creativeWorks based on its id', function(done) {
+		it('should not be able to get a specific creativeWorks if the user does not own the creativeWorks and is not a superuser', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -140,24 +176,105 @@ describe('CreativeWorks Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					  .get('/creativeWorks/' + cw1.id)
-					  .set('cookie', res.headers['set-cookie'])
-					  .set('Accept', 'application/json')
-					  .expect('Content-Type', /json/)
-					  .expect(200)
-					  .end(function(err, res) {
-					  	should.not.exist(err);
+					.get('/creativeWorks/' + cw4.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.expect('Content-Type', /json/)
+				  	.expect(403)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
 
-					  	res.body.should.be.an.Object;
+				  		res.body.should.have.property('message').and.equal('User is not authorized');
+
+				  		done();
+				  	});
+
+				});
+		});    
+
+		it('should be able to get a specific creativeWorks if the user does own the creativeWorks and is not a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'username',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.get('/creativeWorks/' + cw1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
 
 					  	res.body.should.have.property('_id', cw1.id);
-					  	res.body.should.have.property('user', user.id);
-					  	res.body.should.have.property('report', report.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
 
-					  	done();
-					  });
+				  		done();
+				  	});
+
 				});
-		});
+		});   
+
+		it('should be able to get a specific creativeWorks if the user does not own the creativeWorks and is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.get('/creativeWorks/' + cw1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.have.property('_id', cw1.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});   
+
+		it('should be able to get a specific creativeWorks if the user does own the creativeWorks is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.get('/creativeWorks/' + cw4.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.have.property('_id', cw4.id);
+					  	res.body.user.should.have.property('_id', user2.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});  
 
 	});
 
@@ -226,7 +343,38 @@ describe('CreativeWorks Controller Tests', function() {
 			  .end(done);
 		});
 
-		it('should be able to update a specific creativeWorks', function(done) {
+		it('should not be able to update a specific creativeWorks if the user does not own the creativeWorks and is not a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'username',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.put('/creativeWorks/' + cw4.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.send({
+				  		creativeWorks: {
+				  			name:'DifferentName'
+				  		}
+				  	})
+				  	.expect('Content-Type', /json/)
+				  	.expect(403)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+				  		res.body.should.have.property('message').and.equal('User is not authorized');
+
+				  		done();
+				  	});
+
+				});
+		});    
+
+		it('should be able to update a specific creativeWorks if the user does own the creativeWorks and is not a superuser', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -252,16 +400,215 @@ describe('CreativeWorks Controller Tests', function() {
 					  	res.body.should.be.an.Object.and.have.property('name', 'DifferentName');
 
 					  	res.body.should.have.property('_id', cw1.id);
-					  	res.body.should.have.property('user', user.id);
-					  	res.body.should.have.property('report', report.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
 
 				  		done();
 				  	});
 
 				});
+		});   
+
+		it('should be able to update a specific creativeWorks if the user does not own the creativeWorks and is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.put('/creativeWorks/' + cw1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.send({
+				  		creativeWorks: {
+				  			name:'DifferentName'
+				  		}
+				  	})
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.be.an.Object.and.have.property('name', 'DifferentName');
+
+					  	res.body.should.have.property('_id', cw1.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});   
+
+		it('should be able to update a specific creativeWorks if the user does own the creativeWorks is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.put('/creativeWorks/' + cw4.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.send({
+				  		creativeWorks: {
+				  			name:'DifferentName'
+				  		}
+				  	})
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.be.an.Object.and.have.property('name', 'DifferentName');
+
+					  	res.body.should.have.property('_id', cw4.id);
+					  	res.body.user.should.have.property('_id', user2.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});   
+	});
+
+	describe('Testing the DELETE methods', function() {
+		it('should not be able to delete if not logged in', function(done) {
+			request(app)
+				.delete('/creativeWorks/' + cw1.id)
+				.expect('Content-Type', /json/)
+				.expect(401)
+				.end(done);
 		});
-			
-	    
+
+		it('should not be able to delete if user does not own the report and is not a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'username2',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.delete('/creativeWorks/' + cw1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.expect('Content-Type', /json/)
+				  	.expect(403)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+				  		done();
+				  	});
+
+			});
+		});
+
+		it('should be able to delete if user owns the report and is not a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'username',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.delete('/creativeWorks/' + cw1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.be.an.Object.and.have.property('name', cw1.name);
+					  	res.body.should.have.property('description', cw1.description);
+					  	res.body.should.have.property('website', cw1.website);
+					  	res.body.should.have.property('date', cw1.date);
+
+					  	res.body.should.have.property('report');
+					  	res.body.should.have.property('user');
+					  	res.body.should.have.property('_id');
+
+					  	res.body.should.have.property('jointEfforts').and.be.an.instanceOf(Array).with.lengthOf(3);
+
+				  		done();
+		  			});
+				});
+		});
+
+		it('should be able to delete if user does not own the report and is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.delete('/creativeWorks/' + cw1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.be.an.Object.and.have.property('name', cw1.name);
+					  	res.body.should.have.property('description', cw1.description);
+					  	res.body.should.have.property('website', cw1.website);
+					  	res.body.should.have.property('date', cw1.date);
+
+					  	res.body.should.have.property('report');
+					  	res.body.should.have.property('user');
+					  	res.body.should.have.property('_id');
+
+					  	res.body.should.have.property('jointEfforts').and.be.an.instanceOf(Array).with.lengthOf(3);
+
+				  		done();
+		  			});
+				});
+		});
+
+	it('should be able to delete if user does own the report and is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.delete('/creativeWorks/' + cw4.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.be.an.Object.and.have.property('name', cw4.name);
+					  	res.body.should.have.property('description', cw4.description);
+					  	res.body.should.have.property('website', cw4.website);
+					  	res.body.should.have.property('date', cw4.date);
+
+					  	res.body.should.have.property('report');
+					  	res.body.should.have.property('user');
+					  	res.body.should.have.property('_id');
+
+					  	res.body.should.have.property('jointEfforts').and.be.an.instanceOf(Array).with.lengthOf(3);
+
+				  		done();
+		  			});
+				});
+		});
 	});
 
 	afterEach(function(done) {

@@ -1,5 +1,7 @@
 'use strict';
 
+/*jshint -W083 */
+
 var mongoose = require('mongoose');
 var TeachingEvaluation = mongoose.model('TeachingEvaluation');
 
@@ -11,8 +13,6 @@ var path = require('path');
 var join = path.join;
 
 var _ = require('lodash');
-
-var xlsxj = require('xlsx-to-json');
 
 var u = require('underscore');
 
@@ -69,7 +69,7 @@ exports.getExcel = function(req, res, next) {
 */
 
 function parseArrayAndSave( data, res ) {
-	var arr = new Array();
+	var arr = [];
 
 	for (var i=1; i<data.length; i++) {
 		var te = new TeachingEvaluation();

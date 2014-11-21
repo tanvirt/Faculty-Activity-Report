@@ -7,6 +7,7 @@ var errorHandler = require('../errors');
 var is = require('is-js');
 var _ = require('lodash');
 
+var u = require('underscore');
 /*
 Gets the data from the frontend and
 saves it in the database.
@@ -38,9 +39,6 @@ exports.create = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			req.report.creativeWorks = creativeWorks;
-			req.report.save();
-
 			res.jsonp(creativeWorks);
 		}
 	});
@@ -74,7 +72,10 @@ exports.update = function(req, res) {
 };
 
 exports.readFromReport = function(req, res) {
-	CreativeWorks.find({report: req.report}, function(err, result) {
+	CreativeWorks.find({report: req.report})
+	.populate('user', 'displayName')
+	.populate('report', 'reportName')
+	.exec(function(err, result) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -90,10 +91,36 @@ exports.read = function(req, res) {
 
 exports.creativeWorksById = function(req, res, next, id) {
 	CreativeWorks.findById(id)
+	.populate('user', 'displayName')
+	.populate('report', 'reportName')
 	.exec(function(err, creativeWorks) {
 		if (err) return next(err);
 		if (!creativeWorks) return next(new Error('Failed to load CreativeWorks ' + id));
 		req.creativeWorks = creativeWorks;
 		next();
 	});
+};
+
+exports.delete = function(req, res) {
+	var creativeWorks = req.creativeWorks;
+
+	creativeWorks.remove(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(creativeWorks);
+		}
+	});
+};
+
+exports.hasAuthorized = function(req, res, next) {
+	if (req.creativeWorks.user.id !== req.user.id && !u.contains(req.user.roles, 'admin')) {
+		return res.status(403).send({
+			message: 'User is not authorized'
+		});
+	}
+
+	next();
 };
