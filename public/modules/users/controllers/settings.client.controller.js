@@ -54,7 +54,6 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 				$scope.submitted = true;
 			}
 		};
-
 		// Change user password
 		$scope.changeUserPassword = function() {
 			$scope.success = $scope.error = null;
