@@ -5,24 +5,26 @@
 		<form novalidate>
 			<div ng-repeat="o in obj" >
 				<div class="form-group col-md-6 controls">
-				    <input type="text" data-ng-model="o.name" id="name" class="form-control" placeholder="Name" DISABLED>
+				    <input type="text" data-ng-model="o.name" id="name" class="form-control" placeholder="Name">
 				</div>
 
 				<div class="form-group col-md-6 controls">
-				    <input type="text" data-ng-model="o.jointEfforts" id="jointEfforts" class="form-control" placeholder="Collaborators" DISABLED>
+				    <input type="text" data-ng-model="o.jointEfforts" id="jointEfforts" class="form-control" placeholder="Collaborators">
 				</div>
 
 				<div class="form-group col-md-6 controls">
-				    <textarea type="text" data-ng-model="o.description" id="description" class="form-control" placeholder="Description" style="height: 101px" DISABLED></textarea>
+				    <textarea type="text" data-ng-model="o.description" id="description" class="form-control" placeholder="Description" style="height: 101px"></textarea>
 				</div>
 				            
 				<div class="form-group col-md-6 controls">
-				    <input type="url" data-ng-model="o.website" id="website" class="form-control" placeholder="Website" DISABLED>
+				    <input type="url" data-ng-model="o.website" id="website" class="form-control" placeholder="Website">
 				</div>
 				         
 				<div class="form-group col-md-6 controls">
-				    <input type="date" data-ng-model="o.date" ng-model-instant id="date" class="form-control" DISABLED>
+				    <input type="date" data-ng-model="o.date" ng-model-instant id="date" class="form-control">
 				</div>
+					<button type="submit" data-ng-click="delete(o._id, $index)" class="col-md-offset-9 btn btn-primary">Delete</button>
+					<button type="submit" data-ng-click="update(o._id, $index)" class="col-md-offset-9 btn btn-primary">Update</button>
 			</div>
 		</form>
 
