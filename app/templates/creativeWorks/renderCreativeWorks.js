@@ -52,7 +52,7 @@ Helper function that gets called in report.server.controller.js
 Output is pushed into a LaTex PDF there.
 */
 module.exports.render = function(req, callback) {
-	renderModel.render(req, callback);
+	renderModel.renderMultiple(req, callback);
 };
 
 module.exports.submit = function(req, callback) {
@@ -84,14 +84,18 @@ module.exports.submit = function(req, callback) {
 };
 
 module.exports.createDefaultData = function(report, user, cb) {
-	var save = _.extend(defaultData.creativeWorks, {
-		report: report,
-		user: user
-	});
 
-	var creativeWorks = new CreativeWorks(save);
+	var creativeWorks;
 
-	creativeWorks.save(function(err) {
-		cb(err, creativeWorks);
-	});
+	for (var i=0; i<defaultData.creativeWorks.length; i++) {
+		var save = _.extend(defaultData.creativeWorks[i], {
+			report: report,
+			user: user
+		});
+
+		creativeWorks = new CreativeWorks(save);
+		creativeWorks.save();
+	}	
+
+	cb(null, creativeWorks);
 };

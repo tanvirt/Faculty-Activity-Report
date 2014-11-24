@@ -50,13 +50,19 @@
 		"info": "I made the following contributions..."
 	},
 
-	"creativeWorks": {
+	"creativeWorks": [{
 		"name": "Latex",
 		"description": "a high-quality typesetting system",
 		"website": "http://www.latex-project.org",
 		"date":"10/20/1984",
 		"jointEfforts": ["George", "Gandalf", "Rebecca"]
-	},
+	}, {
+		"name": "FireFox",
+		"description": "a web browser",
+		"website": "http://www.mozilla.org",
+		"date":"10/20/1980",
+		"jointEfforts": ["George", "Gandalf", "Rebecca"]
+	}],
 
 	
 

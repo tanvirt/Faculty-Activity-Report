@@ -74,5 +74,19 @@ app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$statePar
 					});
 			}
 		};
+
+		$scope.updateName = function() {
+			var report = $scope.report;
+
+			$http.put('/reports/' + report._id + '/reportName', {
+				reportName: $scope.reportName
+			}).
+			success(function(data, status, headers, config) {
+				alert('name updated');
+			}).
+			error(function(data, status, headers, config) {
+				console.log('error');
+			});
+		};
 	}
 ]);
