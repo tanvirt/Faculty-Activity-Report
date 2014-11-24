@@ -44,7 +44,7 @@ angular.module('reports').controller('Section11Controller', ['$scope', '$http', 
 
 		$scope.create = function() {
 			$http.post('/reports/' + $stateParams.reportId + '/creativeWorks', {
-				"creativeWorks": {
+				'creativeWorks': {
 					name: $scope.name,
 					jointEfforts: $scope.jointEfforts.split(','),
 					description: $scope.description,

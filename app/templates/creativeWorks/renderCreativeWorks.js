@@ -52,7 +52,7 @@ Helper function that gets called in report.server.controller.js
 Output is pushed into a LaTex PDF there.
 */
 module.exports.render = function(req, callback) {
-	renderModel.render(req, callback);
+	renderModel.renderMultiple(req, callback);
 };
 
 module.exports.submit = function(req, callback) {
