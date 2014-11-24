@@ -110,12 +110,35 @@ RenderModel.prototype._render = function( obj, cb ) {
 		throw new Error('Error: isDebugPopulate and isDebugNull can not both be true.');
 	}
 
+	console.log(obj);
+
 	if (this.isDebugPopulate && this._debugJSON) {
 		//console.log('\'Debugging Population\' on for ' + this._Model.modelName);
 		//console.log(require('util').inspect(this.debugJSON));
 		//console.log(require('util').inspect(obj));
 		renderSwig(this.renderFolderPath, this._renderFilePath, this._debugJSON, cb);
 	} else if (this.isDebugNull || !obj) {
+		//if (this.isDebugNull)
+			//console.log('\'Debugging Null\' on for ' + this._Model.modelName);
+		renderSwig(this.renderFolderPath, this._naFilePath, null, cb);
+	} else {
+		renderSwig(this.renderFolderPath, this._renderFilePath, obj, cb);
+	}
+};
+
+RenderModel.prototype._renderMult = function( obj, cb ) {
+	if ( this.isDebugNull && this.isDebugPopulate ) {
+		throw new Error('Error: isDebugPopulate and isDebugNull can not both be true.');
+	}
+
+	console.log(obj);
+
+	if (this.isDebugPopulate && this._debugJSON) {
+		//console.log('\'Debugging Population\' on for ' + this._Model.modelName);
+		//console.log(require('util').inspect(this.debugJSON));
+		//console.log(require('util').inspect(obj));
+		renderSwig(this.renderFolderPath, this._renderFilePath, this._debugJSON, cb);
+	} else if (this.isDebugNull || obj.array.length === 0) {
 		//if (this.isDebugNull)
 			//console.log('\'Debugging Null\' on for ' + this._Model.modelName);
 		renderSwig(this.renderFolderPath, this._naFilePath, null, cb);
@@ -143,7 +166,7 @@ RenderModel.prototype.renderMultiple = function(req, callback) {
 		if (err) {
 			callback(err, null);
 		} else {
-			_this._render( {array: arrayOfObjs}, callback );
+			_this._renderMult( {array: arrayOfObjs}, callback );
 		}
 	});
 };
