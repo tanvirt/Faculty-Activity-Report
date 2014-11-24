@@ -27,9 +27,12 @@
 </style>
 
 <section data-ng-controller="NavigationController">
-    <div class="page-header">
-        <h1><input ng-model="reportName"> <button data-ng-click="update()" class="btn btn-primary">Update Name</button></h1>
-    </div>
+    <section data-ng-controller="ReportsController" data-ng-init="findOne()" class="page-header">
+        <h1>
+            <input ng-model="reportName"> 
+            <button data-ng-click="updateName()" class="btn btn-primary">Update Name</button>
+        </h1>
+    </section>
 
     <div class="tabbable tabs-left">
     <ul class="nav nav-tabs navi">

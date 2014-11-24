@@ -10,9 +10,6 @@ angular.module('reports').controller('NavigationController', ['$scope', '$stateP
 			$scope.reportName = data.reportName;
 
 		});
-		$scope.update = function() {
-			//todo need to figure out the proper route to update report name
-		};
 
 		$scope.tinymceOptions = {
 			    theme: 'modern',

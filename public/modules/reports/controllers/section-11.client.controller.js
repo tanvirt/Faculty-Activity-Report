@@ -23,7 +23,7 @@ function parseData( data, i ) {
 
 	obj.date = dy + '-' + ( ( dm >= 1 && dm <= 9 ) ? '0' + dm : dm ) + '-' + ( ( dd >= 1 && dd <= 9 ) ? '0' + dd : dd );
 
-	obj._id = data[i]._id;
+	obj.id = data[i]._id;
 
 	return obj;
 }
@@ -57,7 +57,6 @@ angular.module('reports').controller('Section11Controller', ['$scope', '$http', 
 				}
 			}).
 			success(function(data, status, headers, config) {
-				console.log(data);
 				$scope.obj.push(parseData([data], 0)); //add to the DOM
 				$scope.name = '';
 				$scope.jointEfforts = '';
@@ -99,6 +98,6 @@ angular.module('reports').controller('Section11Controller', ['$scope', '$http', 
 			error(function(data, status, headers, config) {
 				console.log('There was an error in updating the report');
 			});
-		}
+		};
 	}
 ]);
