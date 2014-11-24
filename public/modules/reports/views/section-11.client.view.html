@@ -2,7 +2,31 @@
 	<div class="col-md-10">
 		<h3>11. Creative Works or Activities</h3>
 		<hr>
-		<form data-ng-submit="createCreativeWorks()" novalidate>
+		<form novalidate>
+			<div ng-repeat="o in obj" >
+				<div class="form-group col-md-6 controls">
+				    <input type="text" data-ng-model="o.name" id="name" class="form-control" placeholder="Name" DISABLED>
+				</div>
+
+				<div class="form-group col-md-6 controls">
+				    <input type="text" data-ng-model="o.jointEfforts" id="jointEfforts" class="form-control" placeholder="Collaborators" DISABLED>
+				</div>
+
+				<div class="form-group col-md-6 controls">
+				    <textarea type="text" data-ng-model="o.description" id="description" class="form-control" placeholder="Description" style="height: 101px" DISABLED></textarea>
+				</div>
+				            
+				<div class="form-group col-md-6 controls">
+				    <input type="url" data-ng-model="o.website" id="website" class="form-control" placeholder="Website" DISABLED>
+				</div>
+				         
+				<div class="form-group col-md-6 controls">
+				    <input type="date" data-ng-model="o.date" ng-model-instant id="date" class="form-control" DISABLED>
+				</div>
+			</div>
+		</form>
+
+		<form>
 		    <div class="form-group col-md-6 controls">
 		        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
 		    </div>
@@ -23,16 +47,18 @@
 		        <input type="date" data-ng-model="date" ng-model-instant id="date" class="form-control">
 		    </div>
 
-		    <div class="form-group">
+		    <!--<div class="form-group">
 				<button type="submit" class="btn btn-primary" style="margin-left: 14px; border-radius: 4px;">+ Add</button>
-			</div>
+			</div>-->
 			<div class="form-group">
 				<div data-ng-show="error" class="text-danger col-md-offset-3">
 					<strong data-ng-bind="error"></strong>
 				</div>
-				<button type="submit" data-ng-click="update()" class="col-md-offset-9 btn btn-primary">Save</button>
+				<button type="submit" data-ng-click="create()" class="col-md-offset-9 btn btn-primary">Create</button>
 			</div>
-        </form>
+		</form>
+			
+        
 	</div>
 
 </section>
