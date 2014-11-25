@@ -110,7 +110,7 @@ RenderModel.prototype._render = function( obj, cb ) {
 		throw new Error('Error: isDebugPopulate and isDebugNull can not both be true.');
 	}
 
-	console.log(obj);
+	//console.log(obj);
 
 	if (this.isDebugPopulate && this._debugJSON) {
 		//console.log('\'Debugging Population\' on for ' + this._Model.modelName);
@@ -131,7 +131,7 @@ RenderModel.prototype._renderMult = function( obj, cb ) {
 		throw new Error('Error: isDebugPopulate and isDebugNull can not both be true.');
 	}
 
-	console.log(obj);
+	//console.log(obj);
 
 	if (this.isDebugPopulate && this._debugJSON) {
 		//console.log('\'Debugging Population\' on for ' + this._Model.modelName);
