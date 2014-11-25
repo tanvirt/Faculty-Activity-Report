@@ -2,13 +2,13 @@
 
 /*jshint expr: true*/
 
-var app = require('../../../server');
+var app = require('../../../../server');
 
 var should = require('should');
 
 var request = require('supertest');
 
-var	teachingEvaluation = require('../../controllers/teachingEvaluation/teachingEvaluation');
+var	teachingEvaluation = require('../../../controllers/teachingEvaluation/teachingEvaluation');
 
 var mongoose = require('mongoose');
 var TeachingEvaluation = mongoose.model('TeachingEvaluation');
@@ -245,6 +245,49 @@ describe('TeachingEvaluation Controller Tests', function() {
 				});
 		});
 
+		it('should be able to create a new teachingEvaluation from excel file', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'username',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					  .post('/reports/' + report.id + '/teachingEvaluation/excel')
+					  .set('cookie', res.headers['set-cookie'])
+					  .set('Accept', 'application/json')
+					  .attach('excel', './app/tests/controllers/teachingEvaluation/excelTest.xlsx')
+					  .expect('Content-Type', /json/)
+					  .expect(200)
+					  .end(function(err, res) {
+					  	should.not.exist(err);
+
+						res.body[0].should.be.an.Object.and.have.property('course', 'EXCL101');
+						res.body[1].should.be.an.Object.and.have.property('course', 'EXCL102');
+
+						//res.body[0].should.have.property('year', teObj.teachingEvaluation.year);
+						//res.body[1].should.have.property('year', teObj.teachingEvaluation.year);
+						//res.body[0].should.have.property('semester', teObj.teachingEvaluation.semester);
+						//res.body[1].should.have.property('semester', teObj.teachingEvaluation.semester);
+						res.body[0].should.have.property('enrolled', 50);
+						res.body[1].should.have.property('enrolled', 100);
+						res.body[0].should.have.property('responses', 15);
+						res.body[1].should.have.property('responses', 45);
+
+						//res.body.teacherMean.should.be.an.Array;
+						//res.body.departmentMean.should.be.an.Array;
+						//res.body.collegeMean.should.be.an.Array;
+
+					  	res.body[0].should.have.property('_id');
+					  	res.body[0].should.have.property('user', user.id);
+					  	res.body[0].should.have.property('report', report.id);
+
+					  	done();
+					  });
+				});
+		});
 	});
 
 	describe('Testing the PUT methods', function() {

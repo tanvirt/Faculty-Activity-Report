@@ -68,7 +68,7 @@ exports.getExcel = function(req, res, next) {
 };
 */
 
-function parseArrayAndSave( data, res ) {
+function _parseArrayAndSave( req, res, data ) {
 	var arr = [];
 
 	for (var i=1; i<data.length; i++) {
@@ -85,6 +85,9 @@ function parseArrayAndSave( data, res ) {
 		}
 		te.teacherMean = tmpArray;
 		
+		te.user = req.user;
+		te.report = req.report;
+		
 		te.save(function(err) {
 			if (err) {
 				return res.jsonp({
@@ -100,21 +103,7 @@ function parseArrayAndSave( data, res ) {
 	res.jsonp(arr);
 }
 
-
-exports.getExcel = function(req, res) {
-	if (req.files.excel) {
-		excel(req.files.excel.path, function(err, data) {
-		 	if(err) throw err;
-
-		 	parseArrayAndSave(data, res);
-		 	
-		});
-	} else {
-		res.jsonp('Failure! File Not Uploaded/Found');
-	}
-};
-
-function getDictionary(key) {
+function _getDictionary(key) {
 	return {
 		course: 'D' + key,
 		enrolled: 'H' + key,
@@ -132,8 +121,8 @@ function getDictionary(key) {
 	};
 }
 
-function parseAndSave(obj, key) {
-	var d = getDictionary(key);
+function _parseAndSave(obj, key) {
+	var d = _getDictionary(key);
 
 	return {
 		course: obj[d.course].v,
@@ -154,6 +143,20 @@ function parseAndSave(obj, key) {
 	};
 }
 
+exports.getExcel = function(req, res) {
+	if (req.files.excel) {
+		excel(req.files.excel.path, function(err, data) {
+		 	if(err) throw err;
+
+		 	_parseArrayAndSave(req, res, data);
+		 	
+		});
+	} else {
+		res.jsonp('Failure! File Not Uploaded/Found');
+	}
+};
+
+
 exports.saveExcel = function(req, res) {
 	//return res.jsonp(req.excel.Sheets);
 	if (req.excel.Sheets.sheet1) {
@@ -165,7 +168,7 @@ exports.saveExcel = function(req, res) {
 			var key = 'A' + i;
 
 			if (obj.hasOwnProperty(key)) {
-				var json = parseAndSave(obj, i);
+				var json = _parseAndSave(obj, i);
 
 				var teachingEvaluation = new TeachingEvaluation(u.extend(json, {
 					user: req.user,
