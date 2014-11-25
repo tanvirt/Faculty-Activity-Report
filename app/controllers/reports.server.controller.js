@@ -94,6 +94,19 @@ exports.createNew = function(req, res) {
 	});
 };
 
+exports.getReportName = function(req, res) {
+	res.jsonp(req.report.reportName);
+};
+
+exports.updateReportName = function(req, res) {
+	var report = req.report;
+	report.reportName = req.body.reportName;
+	report.save(function(err) {
+		if (err) return err;
+		res.jsonp(report);
+	});
+};
+
 /**
  * Create a Report
  */
