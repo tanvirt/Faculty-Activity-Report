@@ -115,7 +115,7 @@ exports.delete = function(req, res) {
 	});
 };
 
-exports.hasAuthorized = function(req, res, next) {
+exports.hasAuthorization = function(req, res, next) {
 	if (req.creativeWorks.user.id !== req.user.id && !u.contains(req.user.roles, 'admin')) {
 		return res.status(403).send({
 			message: 'User is not authorized'
