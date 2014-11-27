@@ -89,16 +89,19 @@ module.exports.submit = function(req, callback) {
 };
 
 module.exports.createDefaultData = function(report, user, cb) {
-	var save = _.extend(defaultData.contracts, {
-		report: report,
-		user: user
-	});
+	var contracts;
 
-	var contracts = new Contracts(save);
+	for (var i=0; i<defaultData.contracts.length; i++) {
+		var save = _.extend(defaultData.contracts[i], {
+			report: report,
+			user: user
+		});
 
-	contracts.save(function(err) {
-		cb(err, contracts);
-	});
+		contracts = new Contracts(save);
+		contracts.save();
+	}
+
+	cb(null, contracts);
 };
 
 

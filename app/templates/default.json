@@ -35,7 +35,7 @@
 		"consultation": "Consultations outside the university go here..."
 	},
 
-	"contracts": {
+	"contracts": [{
 		"title": "Contract 1",
 		"funded": "externally",
 		"PI": "PI",
@@ -44,7 +44,16 @@
 		"fundingAgency": "NASA",
 		"fundingPortion": "100000",
 		"value": "200000"
-	},
+	}, {
+		"title": "Contract 2",
+		"funded": "externally",
+		"PI": "PI",
+		"startDate": "02/13/2000",
+		"endDate": "08/05/2019",
+		"fundingAgency": "NASA",
+		"fundingPortion": "100000",
+		"value": "200000"
+	}],
 
 	"contribution": {
 		"info": "I made the following contributions..."
