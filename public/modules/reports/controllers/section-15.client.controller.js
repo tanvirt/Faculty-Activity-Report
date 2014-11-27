@@ -31,7 +31,6 @@ angular.module('reports').controller('Section15Controller', ['$scope', '$http', 
 	function($scope, $http, $stateParams, $location, Authentication ) {
 		$scope.authentication = Authentication;
 		
-
 		//variable for section 15 to initialize the table
 		$scope.incomplete = false;
       $scope.hideTable = false;
@@ -85,6 +84,38 @@ angular.module('reports').controller('Section15Controller', ['$scope', '$http', 
          error(function(data, status, headers, config) {
             console.log('There was an error in creating the report: ');
             console.log(data);
+         });
+      };
+
+      $scope.update = function( id, i ) {
+         $http.put('/contracts/' + id, {
+            contracts: {
+               title: $scope.obj[i].title,
+               funded: $scope.obj[i].funded,
+               PI: $scope.obj[i].PI,
+               startDate: $scope.obj[i].startDate,
+               endDate: $scope.obj[i].endDate,
+               fundingAgency: $scope.obj[i].fundingAgency,
+               fundingPortion: $scope.obj[i].fundingPortion,
+               value: $scope.obj[i].value
+            }
+         }).
+         success(function(data, status, headers, config) {
+            alert('updated');
+         }).
+         error(function(data, status, headers, config) {
+            console.log('There was an error in updating the report');
+         });
+      };
+
+      $scope.delete = function( id, i ) {
+         $http.delete('/contracts/' + id).
+         success(function(data, status, headers, config) {
+            $scope.obj.splice(i, 1); //remove from the DOM
+            alert('deleted');
+         }).
+         error(function(data, status, headers, config) {
+            console.log('There was an error in deleting the report');
          });
       };
     /*   
