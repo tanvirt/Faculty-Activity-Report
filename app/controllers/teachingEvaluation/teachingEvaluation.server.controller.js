@@ -24,50 +24,6 @@ exports.viewCtrl = function(req, res) {
 	});
 };
 
-/*
-exports.getExcel = function(req, res, next) {
-	if (req.files.excel) {
-
-		cv2json.xlsx(req.files.excel.path, {}, function(err, result) {
-			if (err) {
-				res.jsonp({
-					title: 'error',
-					message: err
-				});
-			} else {
-				req.excel = result;
-				next();
-			}
-		});
-
-	} else {
-		res.jsonp('No file uploaded');
-	}
-};
-*/
-/*
-exports.getExcel = function(req, res, next) {
-	if (req.files.excel) {
-		console.log(req.files.excel);
-		var p = req.files.excel.name;
-		xlsxj({
-			input: "./app/controllers/teachingEvaluation/"+p,
-			output: null
-		}, function(err, result) {
-			if (err) {
-				console.log(err);
-			} else {
-				console.log(result);
-				res.jsonp(result);
-			}
-		});
-	} else {
-		res.jsonp('Nope');
-	}
-	
-};
-*/
-
 function parseArrayAndSave( data, res ) {
 	var arr = [];
 
@@ -155,7 +111,6 @@ function parseAndSave(obj, key) {
 }
 
 exports.saveExcel = function(req, res) {
-	//return res.jsonp(req.excel.Sheets);
 	if (req.excel.Sheets.sheet1) {
 		var obj = req.excel.Sheets.sheet1;
 
@@ -227,8 +182,6 @@ exports.create = function(req, res) {
 };
 
 exports.update = function(req, res) {
-	//console.log(require('util').inspect(req.body));
-	
 	if (is.empty(req.body.teachingEvaluation)) {
 		res.status(400);
 		return res.jsonp({
@@ -255,7 +208,10 @@ exports.update = function(req, res) {
 };
 
 exports.readFromReport = function(req, res) {
-	TeachingEvaluation.find({report: req.report}, function(err, result) { //Returns array
+	TeachingEvaluation.find({report: req.report})
+	.populate('user', 'displayName')
+	.populate('report', 'reportName')
+	.exec(function(err, result) { //Returns array
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -271,10 +227,36 @@ exports.read = function(req, res) {
 
 exports.teachingEvaluationById = function(req, res, next, id) {
 	TeachingEvaluation.findById(id)
+	.populate('user', 'displayName')
+	.populate('report', 'reportName')
 	.exec(function(err, teachingEvaluation) {
 		if (err) return next(err);
 		if (!teachingEvaluation) return next(new Error('Failed to load TeachingEvaluation ' + id));
 		req.teachingEvaluation = teachingEvaluation;
 		next();
 	});
+};
+
+exports.delete = function(req, res) {
+	var teachingEvaluation = req.teachingEvaluation;
+
+	teachingEvaluation.remove(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(teachingEvaluation);
+		}
+	});
+};
+
+exports.hasAuthorization = function(req, res, next) {
+	if (req.teachingEvaluation.user.id !== req.user.id && !u.contains(req.user.roles, 'admin')) {
+		return res.status(403).send({
+			message: 'User is not authorized'
+		});
+	}
+
+	next();
 };

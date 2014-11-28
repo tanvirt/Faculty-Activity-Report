@@ -1,0 +1,117 @@
+<section class="col-md-10" data-ng-controller="Section8Controller">
+	<h3>8. Teaching Evaluations</h3>
+	<hr>
+
+	<form>
+		<div class="form-group col-md-6 controls">
+			<input type="text" data-ng-model="course" id="course" class="form-control" placeholder="Course Title" required>
+		</div>
+
+		<div class="form-group col-md-6 controls">
+		    <input type="text" data-ng-model="year" id="year" class="form-control" placeholder="Year Taught">
+		</div>
+
+		<div class="form-group col-md-6 controls">
+			<select class="form-control" data-ng-model="semester">
+				<option value="" disabled selected>Semester</option>
+            	<option value="fall">Fall</option>
+            	<option value="spring">Spring</option>
+            	<option value="summer">Summer</option>
+          	</select>
+		</div>
+		            
+		<div class="form-group col-md-6 controls">
+		    <input type="number" data-ng-model="enrolled" id="enrolled" class="form-control" placeholder="Number Enrolled">
+		</div>
+
+		<div class="form-group col-md-6 controls">
+		    <input type="number" data-ng-model="responses" id="responses" class="form-control" placeholder="Number Responded">
+		</div>
+
+		<div class="form-group col-md-6 controls">
+			<select class="form-control" data-ng-model="required">
+				<option value="" disabled selected>Required</option>
+            	<option value="true">Yes</option>
+            	<option value="false">No</option>
+          	</select>
+		</div>
+		         
+		<div class="form-group col-md-6 controls">
+			<input type="text" data-ng-model="teacherMean" id="teacherMean" class="form-control" placeholder="Teacher Mean">
+		</div>
+
+		<div class="form-group col-md-6 controls">
+			<input type="text" data-ng-model="departmentMean" id="departmentMean" class="form-control" placeholder="Department Mean">
+		</div>
+
+		<div class="form-group col-md-6 controls">
+			<input type="text" data-ng-model="collegeMean" id="collegeMean" class="form-control" placeholder="College Mean">
+		</div>
+
+		<div class="form-group">
+			<div data-ng-show="error" class="text-danger col-md-offset-3">
+				<strong data-ng-bind="error"></strong>
+			</div>
+			<button type="submit" data-ng-click="create()" class="col-md-offset-10 btn btn-primary">Create</button>
+		</div>
+
+	</form>
+
+	<form>
+		<div ng-repeat="o in obj">
+			<div class="form-group col-md-6 controls">
+				<input type="text" data-ng-model="o.course" id="course" class="form-control" placeholder="Course Title" required>
+			</div>
+
+			<div class="form-group col-md-6 controls">
+			    <input type="text" data-ng-model="o.year" id="year" class="form-control" placeholder="Year Taught">
+			</div>
+
+			<div class="form-group col-md-6 controls">
+				<select class="form-control" data-ng-model="o.semester">
+					<option value="" disabled selected>Semester</option>
+	            	<option value="fall">Fall</option>
+	            	<option value="spring">Spring</option>
+	            	<option value="summer">Summer</option>
+	          	</select>
+			</div>
+			            
+			<div class="form-group col-md-6 controls">
+			    <input type="number" data-ng-model="o.enrolled" id="enrolled" class="form-control" placeholder="Number Enrolled">
+			</div>
+
+			<div class="form-group col-md-6 controls">
+			    <input type="number" data-ng-model="o.responses" id="responses" class="form-control" placeholder="Number Responded">
+			</div>
+
+			<div class="form-group col-md-6 controls">
+				<select class="form-control" data-ng-model="o.required" placeholder="Required">
+					<option value="" disabled selected>Required</option>
+	            	<option value="true">Yes</option>
+	            	<option value="false">No</option>
+	          	</select>
+			</div>
+			         
+			<div class="form-group col-md-6 controls">
+				<input type="text" data-ng-model="o.teacherMean" id="teacherMean" class="form-control" placeholder="Teacher Mean">
+			</div>
+
+			<div class="form-group col-md-6 controls">
+				<input type="text" data-ng-model="o.departmentMean" id="departmentMean" class="form-control" placeholder="Department Mean">
+			</div>
+
+			<div class="form-group col-md-6 controls">
+				<input type="text" data-ng-model="o.collegeMean" id="collegeMean" class="form-control" placeholder="College Mean">
+			</div>
+
+			<div class="form-group">
+				<div data-ng-show="error" class="text-danger col-md-offset-3">
+					<strong data-ng-bind="error"></strong>
+				</div>
+				<button type="submit" data-ng-click="update(o.id, $index)" class="col-md-offset-10 btn btn-warning">Update</button>
+				<button type="submit" data-ng-click="delete(o.id, $index)" class="col-md-offset-10 btn btn-danger">Delete</button>
+			</div>
+
+		</div>
+	</form>
+</section>
