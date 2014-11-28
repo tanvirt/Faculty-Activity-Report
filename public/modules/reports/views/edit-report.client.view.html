@@ -69,6 +69,8 @@
         <li ng-class="getTabClass(20)" ng-click="setActiveTab(20)"><a href="" data-toggle="tab">Service To Schools</a></li>
 
         <li ng-class="getTabClass(21)" ng-click="setActiveTab(21)"><a href="" data-toggle="tab">Membership and Activities in the Profession</a></li>
+
+        <li ng-class="getTabClass(22)" ng-click="setActiveTab(22)"><a href="" data-toggle="tab">Honors</a></li>
     </ul>
 
     <div class="tab-content">
@@ -138,6 +140,10 @@
 
         <div ng-class="getTabPaneClass(21)" id="section21">     
             <div ng-include="'modules/reports/views/section-21.client.view.html'"></div>
+        </div> 
+
+        <div ng-class="getTabPaneClass(22)" id="section22">     
+            <div ng-include="'modules/reports/views/section-22.client.view.html'"></div>
         </div> 
 
     </div>
