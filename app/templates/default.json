@@ -73,8 +73,6 @@
 		"jointEfforts": ["George", "Gandalf", "Rebecca"]
 	}],
 
-	
-
   	"editorServiceReviwer": {
   		"info": "debug string"
   	},
@@ -107,13 +105,19 @@
     	"info":"This is my membership string"
   	},
 
-  	"patents": {
+  	"patents": [{
 		"title": "Patent",
 		"authors": ["Me", "Myself", "I"],
 		"patentNumber": "1234",
 		"date": "12/31/1999",
 		"description": "I saved the world"
-  	},
+  	}, {
+		"title": "Patent2",
+		"authors": ["Me", "Myself", "I"],
+		"patentNumber": "1234",
+		"date": "12/31/1999",
+		"description": "I saved the world"
+  	}],
 
   	"publications": {
   		"info": "This is my publications"

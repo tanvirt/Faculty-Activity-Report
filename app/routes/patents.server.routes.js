@@ -7,12 +7,13 @@ module.exports = function(app) {
 
 	//todo: require authorization
 	app.route('/reports/:reportId/patents')
-		.get(users.requiresLogin, patents.readFromReport)
-		.post(users.requiresLogin, patents.create);
+		.get(users.requiresLogin, reports.hasAuthorization, patents.readFromReport)
+		.post(users.requiresLogin, reports.hasAuthorization, patents.create);
 
 	app.route('/patents/:patentsId')
-		.get(users.requiresLogin, patents.read)
-		.put(users.requiresLogin, patents.update);
+		.get(users.requiresLogin, patents.hasAuthorization, patents.read)
+		.put(users.requiresLogin, patents.hasAuthorization, patents.update)
+		.delete(users.requiresLogin, patents.hasAuthorization, patents.delete);
 
 	// Finish by binding the patents middleware
 	app.param('patentsId', patents.patentsById);
