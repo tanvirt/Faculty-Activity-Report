@@ -120,7 +120,6 @@ angular.module('reports').controller('Section8Controller', ['$http', '$scope', '
 				alert('updated');
 			}).
 			error(function(data, status, headers, config) {
-				console.log(data);
 				console.log('There was an error in updating the report');
 			});
 		};

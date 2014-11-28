@@ -44,6 +44,8 @@
 
         <li ng-class="getTabClass(8)" ng-click="setActiveTab(8)"><a href="" data-toggle="tab">Teaching Evaluations</a></li>
 
+        <li ng-class="getTabClass(9)" ng-click="setActiveTab(9)"><a href="" data-toggle="tab">Graduate Committee Activites</a></li>
+
         <li ng-class="getTabClass(10)" ng-click="setActiveTab(10)"><a href="" data-toggle="tab">Contribution To Discipline/Research Narrative</a></li>
 
         <li ng-class="getTabClass(11)" ng-click="setActiveTab(11)"><a href="" data-toggle="tab">Creative Works or Activities</a></li>
@@ -80,6 +82,10 @@
 
         <div ng-class="getTabPaneClass(8)" id="section8">     
             <div ng-include="'modules/reports/views/section-8.client.view.html'"></div>
+        </div>
+
+        <div ng-class="getTabPaneClass(9)" id="section9">     
+            <div ng-include="'modules/reports/views/section-9.client.view.html'"></div>
         </div>
 
         <div ng-class="getTabPaneClass(10)" id="section10">     

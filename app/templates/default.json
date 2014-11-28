@@ -85,13 +85,19 @@
   		"govStr":"This is my governance"
   	},
 
-  	"graduateCommittee": {
+  	"graduateCommittee": [{
   		"role":"Chair",
 	    "studentName":"Gordan Ramsey",
 	    "degree":"M.S.",
 	    "major":"Culinary Arts",
 	    "degreeDate":"1/05/1993"
-	},
+	}, {
+  		"role":"Chair",
+	    "studentName":"Gordan Ramsey",
+	    "degree":"M.S.",
+	    "major":"Culinary Arts",
+	    "degreeDate":"1/05/1993"
+	}],
 
 	"honors": {
     	"info":"This is my Honors string"
