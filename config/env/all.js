@@ -33,9 +33,10 @@ module.exports = {
 
 				'public/lib/ng-pdfviewer/ng-pdfviewer.js',
 				'public/lib/ng-pdfviewer/lib/pdf.js',
-				'public/lib/ng-pdfviewer/lib/compatibility.js'
+				'public/lib/ng-pdfviewer/lib/compatibility.js',
 
-
+				'public/lib/ng-file-upload-shim/angular-file-upload-shim.js',
+				'public/lib/ng-file-upload/angular-file-upload.js'
 			]
 		},
 		css: [

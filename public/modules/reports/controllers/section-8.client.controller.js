@@ -39,8 +39,8 @@ function parseEvalData( data, i ) {
 	return obj;
 }
 
-angular.module('reports').controller('Section8Controller', ['$http', '$scope', '$stateParams', '$location', 'Authentication',
-	function($http, $scope, $stateParams, $location, Authentication ) {
+angular.module('reports').controller('Section8Controller', ['$http', '$upload', '$scope', '$stateParams', '$location', 'Authentication',
+	function($http, $upload, $scope, $stateParams, $location, Authentication ) {
 		$scope.authentication = Authentication;
 		
 		$http.get('/reports/' + $stateParams.reportId + '/teachingEvaluation').
@@ -56,6 +56,47 @@ angular.module('reports').controller('Section8Controller', ['$http', '$scope', '
 			error(function(data, status, headers, config) {
 				console.log('There was an error in getting report');
 			});	
+
+		$scope.tabs = [{
+			name: 'user'
+		}, {
+			name: 'excel'
+		}];
+
+		$scope.currentContent = $scope.tabs[0];
+
+		$scope.setPage = function( page ) {
+			$scope.currentContent = $scope.tabs[ page ];
+		};
+
+		$scope.onFileSelect = function( $files ) {
+			$scope.percentDone = 0;
+
+			$scope.upload = $upload.upload({
+				url: '/reports/' + $stateParams.reportId + '/teachingEvaluation/excel',
+				method: 'POST',
+				data: {excel: $scope.excel},
+				file: $files[0]
+			}).progress(function(evt) {
+				$scope.percentDone = parseInt(100.0 * evt.loaded / evt.total);
+				console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+			}).success(function(data, status, headers, config) {
+				alert('Uploaded');
+				for (var i=0; i<data.length; i++) {
+					$scope.obj.push(parseEvalData(data, i));
+				}
+			});
+		};
+
+		$scope.upload = function() {
+			$http.post('/reports/' + $stateParams.reportId + '/teachingEvaluation/excel').
+			success(function(data, status, headers, config) {
+				alert('uploaded');
+			}).
+			error(function(data, status, headers, config) {
+				console.log('There was an error in creating the report');
+			});
+		};
 
 		$scope.create = function() {
 			$http.post('/reports/' + $stateParams.reportId + '/teachingEvaluation', {

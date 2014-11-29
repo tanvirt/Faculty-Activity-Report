@@ -47,7 +47,6 @@ angular.module('reports').controller('Section15Controller', ['$scope', '$http', 
             }
 
             $scope.obj = obj;
-            console.log(data);
          }).
          error(function(data, status, headers, config) {
             console.log('There was an error in getting report');

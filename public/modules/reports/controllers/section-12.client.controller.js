@@ -1,7 +1,6 @@
 'use strict';
 
 function parsePatentsData( data, i ) {
-	console.log(data);
 	var obj = {};
 	
 	obj.title = data[i].title;
@@ -37,7 +36,6 @@ angular.module('reports').controller('Section12Controller', ['$scope', '$http', 
 
 		$http.get('/reports/' + $stateParams.reportId + '/patents').
 			success(function(data, status, headers, config) {
-				console.log(data);
 				var obj = [];
 
 				for (var i=0; i<data.length; i++) {

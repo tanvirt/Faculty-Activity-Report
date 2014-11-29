@@ -24,47 +24,49 @@ exports.viewCtrl = function(req, res) {
 	});
 };
 
-function parseArrayAndSave( data, res ) {
-	var arr = [];
-
-	for (var i=1; i<data.length; i++) {
-		var te = new TeachingEvaluation();
-
-		te.course = data[i][3];
-		te.enrolled = data[i][7];
-		te.responses = data[i][8];
-
-		var tmpArray = [];
-		for (var j=0; j<10; j++) {
-			console.log(j + ' : ' + data[i][(j*2)+37]);
-			tmpArray[j] = data[i][(j*2)+37];
-		}
-		te.teacherMean = tmpArray;
-		
-		te.save(function(err) {
-			if (err) {
-				return res.jsonp({
-					title: 'Mongoose Save Error',
-					message: err
-				});
-			}
-		});
-
-		arr[i-1] = te.toObject();
+exports.getExcel = function(req, res) {
+	if (req.files.file.extension !== 'xlsx') {
+		return res.jsonp('Must Be An xslx file');
 	}
 
-	res.jsonp(arr);
-}
-
-
-exports.getExcel = function(req, res) {
-	if (req.files.excel) {
-		excel(req.files.excel.path, function(err, data) {
+	if (req.files.file) {
+		excel(req.files.file.path, function(err, data) {
 		 	if(err) throw err;
 
-		 	parseArrayAndSave(data, res);
-		 	
+		 	var arr = [];
+
+			for (var i=1; i<data.length; i++) {
+				var te = new TeachingEvaluation();
+
+				te.course = data[i][3];
+				te.enrolled = data[i][7];
+				te.responses = data[i][8];
+
+				var tmpArray = [];
+				for (var j=0; j<10; j++) {
+					//console.log(j + ' : ' + data[i][(j*2)+37]);
+					tmpArray[j] = data[i][(j*2)+37];
+				}
+				te.teacherMean = tmpArray;
+
+				te.report = req.report;
+				te.user = req.user;
+				
+				te.save(function(err) {
+					if (err) {
+						return res.jsonp({
+							title: 'Mongoose Save Error',
+							message: err
+						});
+					}
+				});
+
+				arr[i-1] = te.toObject();
+			}
+
+			res.jsonp(arr);
 		});
+
 	} else {
 		res.jsonp('Failure! File Not Uploaded/Found');
 	}
@@ -128,8 +130,6 @@ exports.saveExcel = function(req, res) {
 				}));
 
 				teachingEvaluation.save();
-
-				console.log(teachingEvaluation);
 
 				i++;
 			} else {
