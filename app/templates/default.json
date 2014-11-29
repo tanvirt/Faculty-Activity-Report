@@ -1,9 +1,9 @@
 {
 	"_comment": "Section 1",
 	"name": {
-		"firstName": "Rosie",
-		"middleName": "T",
-		"lastName": "Poodle"
+		"firstName": "Alin",
+		"middleName": "V",
+		"lastName": "Dobra"
 	},
 
 	"_comment": "Section 2",
@@ -13,34 +13,34 @@
 
   	"_comment": "Section 3",
   	"currentRank": {
-    	"rank":"Professor",
-    	"department":"Agricultural and Biological Engineering"
+    	"rank":"Associate Professor",
+    	"department":"Computer and Informational Science and Engineering"
   	},
 
   	"_comment": "Section 4",
   	"dateAppointed" : {
-   		"date":"October 1993"
+   		"date":"August 2009"
   	},
 
 	"_comment": "Section 5",
 	"affiliateAppointments": {
-		"app": "whatevs, bro"
+		"app": "None"
 	},
 
 	"_comment": "Section 6",
 	"assignedActivity": {
-	    "year":"1993",
-	    "springTeaching":"30",
-	    "springResearch":"30",
-	    "springService":"40",
+	    "year":"2013",
+	    "springTeaching":"45",
+	    "springResearch":"40",
+	    "springService":"15",
 	 
-	    "fallTeaching":"30",
-	    "fallResearch":"30",
-	    "fallService":"40",
+	    "fallTeaching":"2",
+	    "fallResearch":"90",
+	    "fallService":"8",
 	 
-	    "summerTeaching":"30",
-	    "summerResearch":"30",
-	    "summerService":"40"
+	    "summerTeaching":"50",
+	    "summerResearch":"35",
+	    "summerService":"15"
   	},
 
   	"_comment": "Section 7",
@@ -50,40 +50,46 @@
 
   	"_comment": "Section 8",
   	"teachingEvaluation": [{
-	    "course":"testCourse1",
-	    "year":"2003",
+	    "course":"COP 5615",
+	    "year":"2013",
 	    "semester":"fall",
-	    "enrolled":"100",
-	    "responses":"30",
+	    "enrolled":"152",
+	    "responses":"37",
 	    "required": "false",
-	    "teacherMean":["1","2","3","1","2","3","1","2","3","3"],
-	    "departmentMean":["2","3","4","2","3","4","2","3","4","3"],
-	    "collegeMean":["4","4","4","4","4","4","4","4","4","3"]
+	    "teacherMean":["4.41","4.35","4.49","4.43","4.49","4.57","4.49","4.73","4.76","4.49"],
+	    "departmentMean":["4.12","3.97","4.07","4.18","4.29","4.04","4.00","4.32","4.19","4.09"],
+	    "collegeMean":["4.24","4.05","4.17","4.19","4.32","4.08","4.03","4.38","4.18","4.17"]
   	}, {
-	    "course":"testCourse2",
-	    "year":"2003",
+	    "course":"COP 6726",
+	    "year":"2012",
 	    "semester":"fall",
-	    "enrolled":"100",
-	    "responses":"30",
+	    "enrolled":"112",
+	    "responses":"48",
 	    "required": "true",
-	    "teacherMean":["1","2","3","1","2","3","1","2","3","3"],
-	    "departmentMean":["2","3","4","2","3","4","2","3","4","3"],
-	    "collegeMean":["4","4","4","4","4","4","4","4","4","3"]
+	    "teacherMean":["4.29","4.46","4.42","4.31","4.52","4.68","4.40","4.70","4.69","4.48"],
+	    "departmentMean":["4.06","3.94","4.04","4.13","4.22","4.01","3.96","4.31","4.18","4.05"],
+	    "collegeMean":["4.15","4.01","4.13","4.14","4.26","4.07","4.03","4.37","4.20","4.15"]
   	}], 	
 
   	"_comment": "Section 9",
   	"graduateCommittee": [{
   		"role":"Chair",
-	    "studentName":"Gordan Ramsey",
+	    "studentName":"Alex Daley",
 	    "degree":"M.S.",
-	    "major":"Culinary Arts",
-	    "degreeDate":"1/05/1993"
+	    "major":"Computer Engineering",
+	    "degreeDate":"8/14/2012"
 	}, {
   		"role":"Chair",
-	    "studentName":"Gordan Ramsey",
-	    "degree":"M.S.",
-	    "major":"Culinary Arts",
-	    "degreeDate":"1/05/1993"
+	    "studentName":"Chen Lixia",
+	    "degree":"Ph.D.",
+	    "major":"Computer Engineering",
+	    "degreeDate":"12/20/2011"
+	}, {
+  		"role":"Chair",
+	    "studentName":"Cheung Louis",
+	    "degree":"Ph.D.",
+	    "major":"Computer Engineering",
+	    "degreeDate":"12/20/2011"
 	}],
 
 	"_comment": "Section 10",
@@ -97,7 +103,7 @@
 		"description": "a high-quality typesetting system",
 		"website": "http://www.latex-project.org",
 		"date":"10/20/1984",
-		"jointEfforts": ["George", "Gandalf", "Rebecca"]
+		"jointEfforts": ["Tamer Kahveci"]
 	}, {
 		"name": "FireFox",
 		"description": "a web browser",

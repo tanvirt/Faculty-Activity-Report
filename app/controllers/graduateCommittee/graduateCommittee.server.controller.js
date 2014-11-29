@@ -29,15 +29,17 @@ exports.create = function(req, res) {
 	}
 	
 	var graduateCommittee = new GraduateCommittee({
-			role: req.body.graduateCommittee.role,
-			studentName: req.body.graduateCommittee.studentName,
-			degree: req.body.graduateCommittee.degree,
-			major: req.body.graduateCommittee.major,
-			degreeDate: req.body.graduateCommittee.degreeDate, 
+		role: req.body.graduateCommittee.role,
+		studentName: req.body.graduateCommittee.studentName,
+		degree: req.body.graduateCommittee.degree,
+		major: req.body.graduateCommittee.major,
+		degreeDate: req.body.graduateCommittee.degreeDate, 
 			
-			user: req.user,
-			report: req.report
-		});
+		user: req.user,
+		report: req.report
+	});
+
+	graduateCommittee.incrementCount();
 
 	graduateCommittee.save(function(err) {
 		if (err) {
@@ -61,6 +63,8 @@ exports.update = function(req, res) {
 	}
 
 	var graduateCommittee = req.graduateCommittee;
+
+	graduateCommittee.updateCount( req.body.graduateCommittee.role );
 
 	//I know this is gonna screw up with the subsection array and counts for each role
 	graduateCommittee = _.extend(graduateCommittee, req.body.graduateCommittee);
@@ -108,6 +112,8 @@ exports.graduateCommitteeById = function(req, res, next, id) {
 
 exports.delete = function(req, res) {
 	var graduateCommittee = req.graduateCommittee;
+
+	graduateCommittee.removeCount();
 
 	graduateCommittee.remove(function(err) {
 		if (err) {

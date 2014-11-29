@@ -229,6 +229,18 @@ RenderModel.prototype.render = function(req, callback) {
 	});
 };
 
+RenderModel.prototype.renderMultipleGrad = function(req, callback, parseObj) {
+	var _this = this;
+	
+	_this._findModelsByReport( req, function( err, arrayOfObjs ) {
+		if (err) {
+			callback(err, null);
+		} else {
+			_this._renderMult( parseObj( arrayOfObjs ), callback );
+		}
+	});
+};
+
 RenderModel.prototype.renderMultiple = function(req, callback) {
 	var _this = this;
 	

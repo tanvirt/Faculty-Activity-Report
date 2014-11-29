@@ -24,7 +24,43 @@ renderModel.isDebugNull = false;
 
 
 module.exports.render = function (req, callback) {
-	renderModel.renderMultiple(req, callback);
+	renderModel.renderMultipleGrad(req, callback, function( arrayOfObjs ) {
+
+		var c = {};
+
+		c.total = 0;
+		c.chair = 0;
+		c.coChair = 0;
+		c.externalMember = 0;
+		c.member = 0;
+		c.minor = 0;
+
+		for (var i=0; i<arrayOfObjs.length; i++) {
+			c.total++;
+
+			switch ( arrayOfObjs[i].role ) {
+				case 'Chair':
+					c.chair++;
+					break;
+				case 'Co-Chair':
+					c.coChair++;
+					break;
+				case 'External':
+					c.externalMember++;
+					break;
+				case 'Member':
+					c.member++;
+					break;
+				case 'Minor':
+					c.minor++;
+					break;
+				default:
+					throw new Error('Role is not defined in method incrementCount');
+			}
+		}
+
+		return {array: arrayOfObjs, count: c};
+	});
 };
 
 module.exports.createDefaultData = function(report, user, cb) {

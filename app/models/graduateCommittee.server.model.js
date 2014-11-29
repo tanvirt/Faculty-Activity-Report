@@ -44,59 +44,8 @@ var graduateCommittee = new Schema({
 		type: Date, 
 		validate: [validateLocalStrategyDate, 
 		'Date must be less than or equal to the current year and greator than or equal to 1980']
-	},
-	totalCount: {
-		type: Number,
-		default: 0
-	},
-	chairCount: {
-		type: Number,
-		default: 0
-	},
-	coChairCount: {
-		type: Number,
-		default: 0
-	},
-	externalMemberCount: {
-		type: Number,
-		default: 0
-	},
-	memberCount: {
-		type: Number,
-		default: 0
-	},
-	minorCount: {
-		type: Number,
-		default: 0
-	}	
-}, {collection:'GraduateCommittee'});
-
-/*
-//This doesn't work
-graduateCommittee.methods.incrementCount = function( index ) {
-	this.totalCount = this.totalCount + 1;
-
-	switch (this.sub[index].role) {
-		case 'Chair':
-			this.chairCount++;
-			break;
-		case 'Co-Chair':
-			this.coChairCount++;
-			break;
-		case 'External':
-			this.externalMemberCount++;
-			break;
-		case 'Member':
-			this.memberCount++;
-			break;
-		case 'Minor':
-			this.minorCount++;
-			break;
-		default:
-			throw new Error('Role is not defined in method incrementCount');
 	}
-};
-*/
+}, {collection:'GraduateCommittee'});
 
 graduateCommittee.methods.getMonth = function() {
 	return this.degreeDate.getMonth() + 1;
