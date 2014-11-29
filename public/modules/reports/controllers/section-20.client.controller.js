@@ -6,7 +6,7 @@ angular.module('reports').controller('Section20Controller', ['$http', '$scope', 
 		
 		$http.get('/reports/' + $stateParams.reportId + '/serviceToSchools').
 			success(function(data, status, headers, config) {
-				$scope.service = data.service;
+				$scope.service = data.info;
 				$scope.id = data._id;
 			}).
 			error(function(data, status, headers, config) {
@@ -16,7 +16,7 @@ angular.module('reports').controller('Section20Controller', ['$http', '$scope', 
 		$scope.update = function() {
 			$http.put('/serviceToSchools/' + $scope.id, {
 				serviceToSchools: {
-					service: $scope.service
+					info: $scope.service
 				}
 			}).
 			success(function(data, status, headers, config) {

@@ -22,13 +22,12 @@
 		"app": "whatevs, bro"
 	},
 
-	"_comment":"Conferences not ready yet",
 	"conferences": {
-		"info":"This is my Conferences..."
+		"info":"<p>This is my Conferences...</p>"
 	},
 
 	"consultationsOutsideUniversity": {
-		"consultation": "Consultations outside the university go here..."
+		"info": "<p>Consultations outside the university go here...</p>"
 	},
 
 	"contracts": [{
@@ -52,7 +51,7 @@
 	}],
 
 	"contribution": {
-		"info": "I made the following contributions..."
+		"info": "<p>I made the following contributions...</p>"
 	},
 
 	"creativeWorks": [{
@@ -70,15 +69,15 @@
 	}],
 
   	"editorServiceReviewer": {
-  		"info": "debug string"
+  		"info": "<p>This is my editor reviewer string</p>"
   	},
 
   	"furtherInformationSection": {
-    	"info":"This is my Further Information string"
+    	"info":"<p>This is my Further Information string</p>"
   	},
 
   	"governance": {
-  		"govStr":"This is my governance"
+  		"info":"<p>This is my governance</p>"
   	},
 
   	"graduateCommittee": [{
@@ -96,15 +95,15 @@
 	}],
 
 	"honors": {
-    	"info":"This is my Honors string"
+    	"info":"<p>This is my Honors string</p>"
   	},
 
 	"international": {
-    	"activities":"This is my international activity"
+    	"info":"<p>This is my international activity</p>"
   	},
 
   	"membership": {
-    	"info":"This is my membership string"
+    	"info":"<p>This is my membership string</p>"
   	},
 
   	"patents": [{
@@ -122,15 +121,15 @@
   	}],
 
   	"publications": {
-  		"info": "This is my publications"
+  		"info": "<p>This is my publications</p>"
   	},
 
   	"serviceToSchools": {
-  		"service": "Service to schools goes here..."
+  		"info": "<p>Service to schools goes here...</p>"
   	},
 
   	"teachingAdvising": {
-    	"info":"My Teaching Advising Here"
+    	"info":"<p>My Teaching Advising Here</p>"
   	},
 
   	"teachingEvaluation": [{

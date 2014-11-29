@@ -12,7 +12,7 @@ var validateLocalStrategyProperty = function(property) {
 
 var serviceToSchools = new Schema({
 
-    service: { 
+    info: { 
         type: String,
 		default: 'N/A'
         //required: true,

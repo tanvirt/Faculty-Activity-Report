@@ -12,7 +12,7 @@ var con01;
 describe('consultationsOutsideUniversity Model Unit Tests:', function() {
     beforeEach(function(done) {
         con01 = new ConsultationsOutsideUniversity({
-            consultation: 'My Consultations'
+            info: 'My Consultations'
         });
 
         done();

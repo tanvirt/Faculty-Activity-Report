@@ -41,7 +41,7 @@ describe('ConsultationsOutsideUniversity Controller Tests', function() {
 		report.save();
 
 		consult = new ConsultationsOutsideUniversity({
-			consultation: 'I did stuff',
+			info: 'I did stuff',
 
 			report: report,
 			user: user
@@ -81,7 +81,7 @@ describe('ConsultationsOutsideUniversity Controller Tests', function() {
 						.end(function(err, res) {
 							should.not.exist(err);
 
-							res.body.should.be.an.Object.and.have.property('consultation', consult.consultation);						
+							res.body.should.be.an.Object.and.have.property('info', consult.info);						
 
 							res.body.should.have.property('_id', consult.id);
 						  	res.body.should.have.property('user', user.id);
@@ -168,7 +168,7 @@ describe('ConsultationsOutsideUniversity Controller Tests', function() {
 					  .end(function(err, res) {
 					  	should.not.exist(err);
 
-					  	res.body.should.have.property('consultation', consultationObj.consultationsOutsideUniversity.info);
+					  	res.body.should.have.property('info', consultationObj.consultationsOutsideUniversity.info);
 
 					  	res.body.should.have.property('_id');
 					  	res.body.should.have.property('user');
@@ -207,7 +207,7 @@ describe('ConsultationsOutsideUniversity Controller Tests', function() {
 				  	.set('Accept', 'application/json')
 				  	.send({
 				  		consultationsOutsideUniversity: {
-				  			consultation: 'doing other stuff'
+				  			info: 'doing other stuff'
 				  		}
 				  	})
 				  	.expect('Content-Type', /json/)
@@ -215,7 +215,7 @@ describe('ConsultationsOutsideUniversity Controller Tests', function() {
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
 
-					  	res.body.should.be.an.Object.and.have.property('consultation', 'doing other stuff');
+					  	res.body.should.be.an.Object.and.have.property('info', 'doing other stuff');
 
 					  	res.body.should.have.property('_id', consult.id);
 					  	res.body.should.have.property('user', user.id);

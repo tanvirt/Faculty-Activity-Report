@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 
 var consultationsOutsideUniversity = new Schema({
 
-    consultation: { //default input is N/A
+    info: { //default input is N/A
         type: String,
         default: 'N/A'
     },

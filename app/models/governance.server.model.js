@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 var Governance = new Schema({
 	
-	govStr: {
+	info: {
 		type: String,
 		default: 'N/A'
 	},
