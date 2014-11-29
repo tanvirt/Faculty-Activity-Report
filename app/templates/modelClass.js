@@ -1,5 +1,8 @@
  'use strict';
 
+var swig = require('swig');
+var join = require('path').join;
+
 /*
 class that takes care of rendering the swig/debugging
 @param MongooseModel, an instance of a mongoose model
@@ -81,7 +84,7 @@ Helper function that injects values into the latex.tex files
 */
 function renderSwig( folderPath, filePath, json, cb ) {
 	//console.log(require('util').inspect(json));
-	require('swig').renderFile(require('path').join(folderPath, filePath), json, function(err, output) {
+	swig.renderFile(join(folderPath, filePath), json, function(err, output) {
 		/*
 		if (err) {
 			throw err;

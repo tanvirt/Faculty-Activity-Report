@@ -20,6 +20,6 @@ var Governance = new Schema({
 		ref: 'Report'
 	}
 
-}, {collection: Governance});
+}, {collection: 'Governance'});
 
 mongoose.model('Governance', Governance);

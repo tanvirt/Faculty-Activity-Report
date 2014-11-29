@@ -24,11 +24,7 @@
 
 	"_comment":"Conferences not ready yet",
 	"conferences": {
-		"area": "State",
-		"presentation": "Poster",
-		"title": "Test Conference Data",
-		"date": "October 12, 2001",
-		"where": "Somewhere. Earth."
+		"info":"This is my Conferences..."
 	},
 
 	"consultationsOutsideUniversity": {
@@ -73,7 +69,7 @@
 		"jointEfforts": ["George", "Gandalf", "Rebecca"]
 	}],
 
-  	"editorServiceReviwer": {
+  	"editorServiceReviewer": {
   		"info": "debug string"
   	},
 

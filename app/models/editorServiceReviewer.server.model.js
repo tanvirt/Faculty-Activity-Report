@@ -18,6 +18,6 @@ var EditorServiceReviewer = new Schema({
 		ref: 'Report'
 	}
 
-}, {collection: EditorServiceReviewer});
+}, {collection: 'EditorServiceReviewer'});
 
 mongoose.model('EditorServiceReviewer', EditorServiceReviewer);
