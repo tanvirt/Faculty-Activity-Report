@@ -1,137 +1,54 @@
 {
+	"_comment": "Section 1",
 	"name": {
 		"firstName": "Rosie",
 		"middleName": "T",
 		"lastName": "Poodle"
 	},
 
+	"_comment": "Section 2",
 	"tenure": {
     	"tenure":"Tenured"
   	},
 
+  	"_comment": "Section 3",
   	"currentRank": {
     	"rank":"Professor",
     	"department":"Agricultural and Biological Engineering"
   	},
 
+  	"_comment": "Section 4",
   	"dateAppointed" : {
    		"date":"October 1993"
   	},
 
+	"_comment": "Section 5",
 	"affiliateAppointments": {
 		"app": "whatevs, bro"
 	},
 
-	"conferences": {
-		"info":"<p>This is my Conferences...</p>"
-	},
-
-	"consultationsOutsideUniversity": {
-		"info": "<p>Consultations outside the university go here...</p>"
-	},
-
-	"contracts": [{
-		"title": "Contract 1",
-		"funded": "externally",
-		"PI": "PI",
-		"startDate": "02/13/2000",
-		"endDate": "08/05/2019",
-		"fundingAgency": "NASA",
-		"fundingPortion": "100000",
-		"value": "200000"
-	}, {
-		"title": "Contract 2",
-		"funded": "externally",
-		"PI": "PI",
-		"startDate": "02/13/2000",
-		"endDate": "08/05/2019",
-		"fundingAgency": "NASA",
-		"fundingPortion": "100000",
-		"value": "200000"
-	}],
-
-	"contribution": {
-		"info": "<p>I made the following contributions...</p>"
-	},
-
-	"creativeWorks": [{
-		"name": "Latex",
-		"description": "a high-quality typesetting system",
-		"website": "http://www.latex-project.org",
-		"date":"10/20/1984",
-		"jointEfforts": ["George", "Gandalf", "Rebecca"]
-	}, {
-		"name": "FireFox",
-		"description": "a web browser",
-		"website": "http://www.mozilla.org",
-		"date":"10/20/1980",
-		"jointEfforts": ["George", "Gandalf", "Rebecca"]
-	}],
-
-  	"editorServiceReviewer": {
-  		"info": "<p>This is my editor reviewer string</p>"
+	"_comment": "Section 6",
+	"assignedActivity": {
+	    "year":"1993",
+	    "springTeaching":"30",
+	    "springResearch":"30",
+	    "springService":"40",
+	 
+	    "fallTeaching":"30",
+	    "fallResearch":"30",
+	    "fallService":"40",
+	 
+	    "summerTeaching":"30",
+	    "summerResearch":"30",
+	    "summerService":"40"
   	},
 
-  	"furtherInformationSection": {
-    	"info":"<p>This is my Further Information string</p>"
-  	},
-
-  	"governance": {
-  		"info":"<p>This is my governance</p>"
-  	},
-
-  	"graduateCommittee": [{
-  		"role":"Chair",
-	    "studentName":"Gordan Ramsey",
-	    "degree":"M.S.",
-	    "major":"Culinary Arts",
-	    "degreeDate":"1/05/1993"
-	}, {
-  		"role":"Chair",
-	    "studentName":"Gordan Ramsey",
-	    "degree":"M.S.",
-	    "major":"Culinary Arts",
-	    "degreeDate":"1/05/1993"
-	}],
-
-	"honors": {
-    	"info":"<p>This is my Honors string</p>"
-  	},
-
-	"international": {
-    	"info":"<p>This is my international activity</p>"
-  	},
-
-  	"membership": {
-    	"info":"<p>This is my membership string</p>"
-  	},
-
-  	"patents": [{
-		"title": "Patent",
-		"authors": ["Me", "Myself", "I"],
-		"patentNumber": "1234",
-		"date": "12/31/1999",
-		"description": "I saved the world"
-  	}, {
-		"title": "Patent2",
-		"authors": ["Me", "Myself", "I"],
-		"patentNumber": "1234",
-		"date": "12/31/1999",
-		"description": "I saved the world"
-  	}],
-
-  	"publications": {
-  		"info": "<p>This is my publications</p>"
-  	},
-
-  	"serviceToSchools": {
-  		"info": "<p>Service to schools goes here...</p>"
-  	},
-
+  	"_comment": "Section 7",
   	"teachingAdvising": {
     	"info":"<p>My Teaching Advising Here</p>"
   	},
 
+  	"_comment": "Section 8",
   	"teachingEvaluation": [{
 	    "course":"testCourse1",
 	    "year":"2003",
@@ -154,18 +71,124 @@
 	    "collegeMean":["4","4","4","4","4","4","4","4","4","3"]
   	}], 	
 
-  	"assignedActivity": {
-	    "year":"1993",
-	    "springTeaching":"30",
-	    "springResearch":"30",
-	    "springService":"40",
-	 
-	    "fallTeaching":"30",
-	    "fallResearch":"30",
-	    "fallService":"40",
-	 
-	    "summerTeaching":"30",
-	    "summerResearch":"30",
-	    "summerService":"40"
-  	}
+  	"_comment": "Section 9",
+  	"graduateCommittee": [{
+  		"role":"Chair",
+	    "studentName":"Gordan Ramsey",
+	    "degree":"M.S.",
+	    "major":"Culinary Arts",
+	    "degreeDate":"1/05/1993"
+	}, {
+  		"role":"Chair",
+	    "studentName":"Gordan Ramsey",
+	    "degree":"M.S.",
+	    "major":"Culinary Arts",
+	    "degreeDate":"1/05/1993"
+	}],
+
+	"_comment": "Section 10",
+	"contribution": {
+		"info": "<p>I made the following contributions...</p>"
+	},
+
+	"_comment": "Section 11",
+	"creativeWorks": [{
+		"name": "Latex",
+		"description": "a high-quality typesetting system",
+		"website": "http://www.latex-project.org",
+		"date":"10/20/1984",
+		"jointEfforts": ["George", "Gandalf", "Rebecca"]
+	}, {
+		"name": "FireFox",
+		"description": "a web browser",
+		"website": "http://www.mozilla.org",
+		"date":"10/20/1980",
+		"jointEfforts": ["George", "Gandalf", "Rebecca"]
+	}],
+
+	"_comment": "Section 12",
+	"patents": [{
+		"title": "Patent",
+		"authors": ["Me", "Myself", "I"],
+		"patentNumber": "1234",
+		"date": "12/31/1999",
+		"description": "I saved the world"
+  	}, {
+		"title": "Patent2",
+		"authors": ["Me", "Myself", "I"],
+		"patentNumber": "1234",
+		"date": "12/31/1999",
+		"description": "I saved the world"
+  	}],
+
+  	"_comment": "Section 13",
+  	"publications": {
+  		"info": "<p>This is my publications</p>"
+  	},
+
+  	"_comment": "Section 14",
+	"conferences": {
+		"info":"<p>This is my Conferences...</p>"
+	},
+
+	"_comment": "Section 15",
+	"contracts": [{
+		"title": "Contract 1",
+		"funded": "externally",
+		"PI": "PI",
+		"startDate": "02/13/2000",
+		"endDate": "08/05/2019",
+		"fundingAgency": "NASA",
+		"fundingPortion": "100000",
+		"value": "200000"
+	}, {
+		"title": "Contract 2",
+		"funded": "externally",
+		"PI": "PI",
+		"startDate": "02/13/2000",
+		"endDate": "08/05/2019",
+		"fundingAgency": "NASA",
+		"fundingPortion": "100000",
+		"value": "200000"
+	}],
+
+	"_comment": "Section 16",
+	"governance": {
+  		"info":"<p>This is my governance</p>"
+  	},
+
+  	"_comment": "Section 17",
+	"consultationsOutsideUniversity": {
+		"info": "<p>Consultations outside the university go here...</p>"
+	},
+
+	"_comment": "Section 18",
+  	"editorServiceReviewer": {
+  		"info": "<p>This is my editor reviewer string</p>"
+  	},
+
+  	"_comment": "Section 19",
+  	"international": {
+    	"info":"<p>This is my international activity</p>"
+  	},
+
+  	"_comment": "Section 20",
+  	"serviceToSchools": {
+  		"info": "<p>Service to schools goes here...</p>"
+  	},
+
+  	"_comment": "Section 21",
+  	"membership": {
+    	"info":"<p>This is my membership string</p>"
+  	},
+
+  	"_comment": "Section 22",
+  	"honors": {
+    	"info":"<p>This is my Honors string</p>"
+  	},
+
+  	"_comment": "Section 23",
+  	"furtherInformationSection": {
+    	"info":"<p>This is my Further Information string</p>"
+  	}	
 }
