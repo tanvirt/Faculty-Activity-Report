@@ -57,8 +57,8 @@ var teachingEvaluation = new Schema({
 	},
 	semester: {
 		type: String,
-		enum: ['spring', 'fall', 'summer'],
-		default: 'spring'
+		enum: ['Spring', 'Fall', 'Summer'],
+		default: 'Spring'
 	},
 	enrolled: {
 		type: Number,

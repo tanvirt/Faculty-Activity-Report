@@ -44,7 +44,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 		evaluationOne = new TeachingEvaluation({
 			course: 'testCourse 101',
 			year: '2014',
-			semester: 'spring',
+			semester: 'Spring',
 			enrolled: '100',
 			responses: '30',
 			teacherMean: [1, 2, 3, 4, 5, 1, 2, 3, 4, 1],
@@ -58,7 +58,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 		evaluationTwo = new TeachingEvaluation({
 			course: 'testCourse 102',
 			year: '2012',
-			semester: 'fall',
+			semester: 'Fall',
 			enrolled: '200',
 			responses: '60',
 			teacherMean: [1, 2, 3, 4, 5, 1, 2, 3, 4, 1],
@@ -186,7 +186,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 			teachingEvaluation: {
     	  		course: 'testCourse 101',
 				year: '2014',
-				semester: 'spring',
+				semester: 'Spring',
 				enrolled: '100',
 				responses: '30',
 				teacherMean: [1, 2, 3, 4, 5, 1, 2, 3, 4, 1],

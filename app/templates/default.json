@@ -52,7 +52,7 @@
   	"teachingEvaluation": [{
 	    "course":"COP 5615",
 	    "year":"2013",
-	    "semester":"fall",
+	    "semester":"Fall",
 	    "enrolled":"152",
 	    "responses":"37",
 	    "required": "false",
@@ -62,7 +62,7 @@
   	}, {
 	    "course":"COP 6726",
 	    "year":"2012",
-	    "semester":"fall",
+	    "semester":"Fall",
 	    "enrolled":"112",
 	    "responses":"48",
 	    "required": "true",

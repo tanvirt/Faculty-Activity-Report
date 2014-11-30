@@ -99,6 +99,11 @@ angular.module('reports').controller('Section8Controller', ['$http', '$upload', 
 		};
 
 		$scope.create = function() {
+			console.log($scope.course);
+			console.log($scope.year);
+			console.log($scope.semester);
+			console.log($scope.teacherMean);
+
 			$http.post('/reports/' + $stateParams.reportId + '/teachingEvaluation', {
 				teachingEvaluation: {
 					course: $scope.course,

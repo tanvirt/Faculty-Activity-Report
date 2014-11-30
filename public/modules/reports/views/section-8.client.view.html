@@ -12,32 +12,32 @@
 	<form class="tab-content" ng-switch on="currentContent.name">
 		<div ng-switch-when="user">
 			<div class="form-group col-md-6 controls">
-				<input type="text" data-ng-model="course" id="course" class="form-control" placeholder="Course Title" required>
+				<input type="text" data-ng-model="$parent.course" id="course" class="form-control" placeholder="Course Title" required>
 			</div>
 
 			<div class="form-group col-md-6 controls">
-			    <input type="text" data-ng-model="year" id="year" class="form-control" placeholder="Year Taught">
+			    <input type="text" data-ng-model="$parent.year" id="year" class="form-control" placeholder="Year Taught">
 			</div>
 
 			<div class="form-group col-md-6 controls">
-				<select class="form-control" data-ng-model="semester">
+				<select class="form-control" data-ng-model="$parent.semester">
 					<option value="" disabled selected>Semester</option>
-		           	<option value="fall">Fall</option>
-		           	<option value="spring">Spring</option>
-		           	<option value="summer">Summer</option>
+		           	<option value="Fall">Fall</option>
+		           	<option value="Spring">Spring</option>
+		           	<option value="Summer">Summer</option>
 		       	</select>
 			</div>
 				            
 			<div class="form-group col-md-6 controls">
-			    <input type="number" data-ng-model="enrolled" id="enrolled" class="form-control" placeholder="Number Enrolled">
+			    <input type="number" data-ng-model="$parent.enrolled" id="enrolled" class="form-control" placeholder="Number Enrolled">
 			</div>
 
 			<div class="form-group col-md-6 controls">
-			    <input type="number" data-ng-model="responses" id="responses" class="form-control" placeholder="Number Responded">
+			    <input type="number" data-ng-model="$parent.responses" id="responses" class="form-control" placeholder="Number Responded">
 			</div>
 
 			<div class="form-group col-md-6 controls">
-				<select class="form-control" data-ng-model="required">
+				<select class="form-control" data-ng-model="$parent.required">
 					<option value="" disabled selected>Required</option>
 		           	<option value="true">Yes</option>
 		           	<option value="false">No</option>
@@ -45,22 +45,22 @@
 			</div>
 				         
 			<div class="form-group col-md-6 controls">
-				<input type="text" data-ng-model="teacherMean" id="teacherMean" class="form-control" placeholder="Teacher Mean">
+				<input type="text" data-ng-model="$parent.teacherMean" id="teacherMean" class="form-control" placeholder="Teacher Mean">
 			</div>
 
 			<div class="form-group col-md-6 controls">
-				<input type="text" data-ng-model="departmentMean" id="departmentMean" class="form-control" placeholder="Department Mean">
+				<input type="text" data-ng-model="$parent.departmentMean" id="departmentMean" class="form-control" placeholder="Department Mean">
 			</div>
 
 			<div class="form-group col-md-6 controls">
-				<input type="text" data-ng-model="collegeMean" id="collegeMean" class="form-control" placeholder="College Mean">
+				<input type="text" data-ng-model="$parent.collegeMean" id="collegeMean" class="form-control" placeholder="College Mean">
 			</div>
 
 			<div class="form-group">
 				<div data-ng-show="error" class="text-danger col-md-offset-3">
 					<strong data-ng-bind="error"></strong>
 				</div>
-				<button type="submit" data-ng-click="create()" class="col-md-offset-10 btn btn-primary">Create</button>
+				<button type="submit" data-ng-click="$parent.create()" class="col-md-offset-10 btn btn-primary">Create</button>
 			</div>
 		</div>
 
@@ -92,9 +92,9 @@
 			<div class="form-group col-md-6 controls">
 				<select class="form-control" data-ng-model="o.semester">
 					<option value="" disabled selected>Semester</option>
-	            	<option value="fall">Fall</option>
-	            	<option value="spring">Spring</option>
-	            	<option value="summer">Summer</option>
+	            	<option value="Fall">Fall</option>
+	            	<option value="Spring">Spring</option>
+	            	<option value="Summer">Summer</option>
 	          	</select>
 			</div>
 			            
