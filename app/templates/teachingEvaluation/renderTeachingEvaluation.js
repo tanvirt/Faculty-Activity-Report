@@ -157,14 +157,17 @@ module.exports.submit = function(req, res, callback) {
 */
 
 module.exports.createDefaultData = function(report, user, cb) {
-	var save = _.extend(defaultData.teachingEvaluation, {
-		report: report,
-		user: user
-	});
+	var teachingEvaluation;
 
-	var teachingEvaluation = new TeachingEvaluation(save);
+	for (var i=0; i<defaultData.teachingEvaluation.length; i++) {
+		var save = _.extend(defaultData.teachingEvaluation[i], {
+			report: report,
+			user: user
+		});
 
-	teachingEvaluation.save(function(err) {
-		cb(err, teachingEvaluation);
-	});
+		teachingEvaluation = new TeachingEvaluation(save);
+		teachingEvaluation.save();
+	}	
+
+	cb(null, teachingEvaluation);
 };

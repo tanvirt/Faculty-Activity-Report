@@ -1,67 +1,143 @@
 <section class="col-md-10" ng-controller='Section15Controller'>
+  <h3>15. Contracts and Grants Since Last Promotion or During The Last Five Years</h3>
+  <hr>
+  <div class="col-md-12">
+    <form role="form">
+      <div class="col-md-6" style="padding-bottom:10px">
+        <label for="title">Title of Grant</label>
+        <input type="text" ng-model="title" ng-model-instant class="form-control" id="title" placeholder="Title">
+      </div>
 
-         <h3>15. Contracts and Grants Since Last Promotion or During The Last Five Years</h3>
-         <hr>
-         <div class="col-md-12">
-         <form role="form">
-              <div class="col-md-6" style="padding-bottom:10px">
-                <label for="titleOfGrant">Title of Grant</label>
-                <input type="text" ng-model="grants.titleOfGrant" ng-model-instant class="form-control" id="titleOfGrant" placeholder="Title">
-             </div>
-            <div class="col-md-6" style="padding-bottom:10px">
-               <label for="fundingAgency">Funding Agency</label>
-               <input type="text" ng-model="grants.fundingAgency" ng-model-instant class="form-control" id="fundingAgency" placeholder="Agency">
-            </div>
-            <div class="col-md-6" style="padding-bottom:10px">
-               <label for="privateInve">Investigator</label>
-               <input type="text" ng-model="grants.PI" class="form-control" ng-model-instant  id="privateInve" placeholder="PI">
-            </div>
-            <div class="col-md-6" style="padding-bottom:10px">
-               <label for="startDate">Start Date</label>
-               <input type="date" ng-model="grants.startDate" class="form-control" ng-model-instant  id="startDate">
-            </div>
-            <div class="col-md-6" style="padding-bottom:10px">
-               <label for="endDate">End Date</label>
-               <input type="date" ng-model="grants.endDate" class="form-control" ng-model-instant  id="endDate">
-            </div>
-             <div class="col-md-6" style="padding-bottom:10px">
-               <label for="value">Value</label>
-               <input type="number" ng-model="grants.value" class="form-control" ng-model-instant id="value" placeholder="How Much?">
-            </div>
-            <div class="col-md-6" style="padding-bottom:10px">
-               <label for="fundingPortion">Funding Portion</label>
-               <input type="number" ng-model="grants.fundingPortion" class="form-control" ng-model-instant  id="fundingPortion" placeholder ="How Much?">
-            </div>
-            <div class="col-md-12" style="padding-bottom:10px">
-            <button class="btn btn-success btn-s" ng-click="addGrants()" ng-disabled="incomplete"> 
-            <span class="glyphicon glyphicon-save"> </span> Add Grants
-            </button>
-            </div>
-     </div> 
-     <div class="col-md-12">
-            <table class="table table-bordered" ng-hide = "hideTable">
-                <tr>
-                     <th>Title of Grant</th>
-                     <th>Funding Agency</th>
-                     <th>PI</th>
-                     <th>Start Date</th>
-                     <th>End Date</th>
-                     <th>Value</th>
-                     <th>Funding Portion</th>
-                </tr>
-                 <tr ng-repeat="grant in grants">
-                     <td> {{grant.titleOfGrant}}     </td>
-                     <td> {{grant.fundingAgency}}    </td>
-                     <td> {{grant.PI}}               </td>
-                     <td> {{grant.startDate}}         </td>
-                     <td> {{grant.endDate}}         </td>
-                     <td> {{grant.value | currency}} </td>
-                     <td> {{grant.fundingPortion | currency}} </td>
-                  </tr>
-        </div>
-          <div class="col-md-2">
-            <table class="table table-bordered" ng-hide = "hideTable">
-              <th>Total Funding Proportion</th>
-              <td>{{total| currency }}</td>
-          </div>
+      <div class="col-md-6" style="padding-bottom:10px">
+        <label for="funded">Funded</label>
+        <input type="text" ng-model="funded" ng-model-instant class="form-control" id="funded" placeholder="externally">
+      </div>
+
+      <div class="col-md-6" style="padding-bottom:10px">
+        <label for="PI">Investigator</label>
+        <input type="text" ng-model="PI" class="form-control" ng-model-instant  id="PI" placeholder="Private Investment">
+      </div>
+
+      <div class="col-md-6" style="padding-bottom:10px">
+        <label for="startDate">Start Date</label>
+        <input type="date" ng-model="startDate" class="form-control" ng-model-instant id="startDate">
+      </div>
+
+      <div class="col-md-6" style="padding-bottom:10px">
+        <label for="endDate">End Date</label>
+        <input type="date" ng-model="endDate" class="form-control" ng-model-instant id="endDate">
+      </div>
+
+      <div class="col-md-6" style="padding-bottom:10px">
+        <label for="value">Value</label>
+        <input type="number" ng-model="value" class="form-control" ng-model-instant id="value" placeholder="How Much?">
+      </div>
+
+      <div class="col-md-6" style="padding-bottom:10px">
+        <label for="fundingPortion">Funding Portion</label>
+        <input type="number" ng-model="fundingPortion" class="form-control" ng-model-instant  id="fundingPortion" placeholder ="How Much?">
+      </div>
+
+      <div class="col-md-6" style="padding-bottom:10px">
+        <label for="fundingAgency">Funding Agency</label>
+        <input type="text" ng-model="fundingAgency" ng-model-instant class="form-control" id="fundingAgency" placeholder="Agency">
+      </div>
+
+      <div class="col-md-12" style="padding-bottom:10px">
+        <button class="btn btn-success btn-s" ng-click="create()" ng-disabled="incomplete"> 
+          <span class="glyphicon glyphicon-save"> </span> Add Grants
+        </button>
+      </div>
+    </form>
+  </div> 
+
+  <div class="col-md-12">
+    <table class="table table-bordered">
+      <tr>
+        <th>Title of Grant</th>
+        <th>Funding Agency</th>
+        <th>PI</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+      </tr>
+
+      <tr ng-repeat="grant in obj">
+        <td> 
+          <input type="text" ng-model="grant.title" class="form-control" placeholder="Title">
+        </td>
+
+        <td>
+          <select class="form-control" ng-model="grant.funded">
+            <option value="externally">Externally</option>
+            <option value="internally">Internally</option>
+            <option value="pending">Pending</option>
+            <option value="not">Not</option>
+          </select>
+        </td>
+
+        <td>
+          <select class="form-control" ng-model="grant.PI">
+            <option value="PI">PI</option>
+            <option value="co-PI">Co-PI</option>
+            <option value="N/A">N/A</option>
+          </select>
+        </td>
+
+        <td>
+          <input type="date" ng-model="grant.startDate" class="form-control">
+        </td>
+        <td>
+          <input type="date" ng-model="grant.endDate" class="form-control">
+        </td>
+
+        <td class="btn-group btn-group-sm" role="group">
+          <button type="submit" class="btn btn-warning" ng-click="update(grant.id, $index)">Update</button>
+          <button type="submit" class="btn btn-danger" ng-click="delete(grant.id, $index)">Delete</button>
+        </td>
+
+      </tr>
+    </table>
+  </div>
+  <div class="col-md-12">
+    <table class="table table-bordered">
+      <tr>
+        <th>Title of Grant</th>
+        <th>Value</th>
+        <th>Funding Portion</th>
+        <th>Funding Agency</th>
+      </tr>
+
+      <tr ng-repeat="grant in obj">
+        <td> 
+          <input type="text" ng-model="grant.title" class="form-control" placeholder="Title">
+        </td>
+
+        <td>
+          <input type="number" ng-model="grant.value" class="form-control">
+        </td>
+
+        <td>
+          <input type="number" ng-model="grant.fundingPortion" class="form-control">
+        </td>
+
+        <td>
+          <input type="text" ng-model="grant.fundingAgency" class="form-control">
+        </td>
+
+        <td class="btn-group btn-group-sm" role="group">
+          <button type="submit" class="btn btn-warning" ng-click="update(grant.id, $index)">Update</button>
+          <button type="submit" class="btn btn-danger" ng-click="delete(grant.id, $index)">Delete</button>
+        </td>
+
+      </tr>
+    </table>
+  </div>
+
+  <div class="col-md-2">
+    <table class="table table-bordered">
+      <th>Total Funding Proportion</th>
+      <td>{{total | currency }}</td>
+    </table>
+  </div>
+
 </section>

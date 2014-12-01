@@ -13,7 +13,7 @@
 % collegeMean: array of numeric values pertaining to college mean scores
 
 {% for evaluation in array %}
-    \noindent {{evaluation.course}} \hfill Required: {{evaluation.required}} \\
+    \noindent {{evaluation.course}} \hfill Required: {% if evaluation.required %} YES {% else %} NO {% endif %} \\
     \noindent {{evaluation.semester}}, {{evaluation.year}} \hfill \# Enrolled: {{evaluation.enrolled}}\\
     High={{evaluation.highScore}}, Low={{evaluation.lowScore}} \hfill \# Responses: {{evaluation.responses}}
     \nopagebreak[4]

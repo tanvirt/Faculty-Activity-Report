@@ -19,6 +19,7 @@ angular.module('reports').controller('NavigationController', ['$scope', '$stateP
 			        'searchreplace wordcount',
 			        'insertdatetime save table contextmenu directionality',
 			        'paste textcolor colorpicker textpattern',
+			        'legacyoutput'
 			    ],
 			    toolbar1: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist'
 		};

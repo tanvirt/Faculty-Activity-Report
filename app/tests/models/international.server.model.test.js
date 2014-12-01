@@ -21,11 +21,11 @@ describe('International Model Unit Tests:', function() {
 			done();
 		});
 		it('should set activities to N/A if nothing given', function(done) {
-			assert.equal(international.activities, 'N/A');
+			assert.equal(international.info, 'N/A');
 			done();
 		});
 		it('should be able to save without problems if activities is given', function(done) {
-			international.activities = 'I went to some other countries';
+			international.info = 'I went to some other countries';
 			international.save();
 			done();
 		});

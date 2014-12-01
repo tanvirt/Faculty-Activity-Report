@@ -1,52 +1,122 @@
 'use strict';
 
-angular.module('reports').controller('Section15Controller', ['$scope', '$stateParams', '$location', 'Authentication',
-	function($scope, $stateParams, $location, Authentication, Reports ) {
+function parseDate( date ) {
+   var dy = new Date(date).getFullYear();
+   var dm = new Date(date).getMonth() + 1;
+   var dd = new Date(date).getDate();
 
+   return dy + '-' + ( ( dm >= 1 && dm <= 9 ) ? '0' + dm : dm ) + '-' + ( ( dd >= 1 && dd <= 9 ) ? '0' + dd : dd );
+}
 
+function parseContractData( data, i ) {
+   var obj = {};
+
+   obj.title = data[i].title;
+   obj.funded = data[i].funded;
+   obj.PI = data[i].PI;
+
+   obj.startDate = parseDate(data[i].startDate);
+   obj.endDate = parseDate(data[i].endDate);
+
+   obj.fundingAgency = data[i].fundingAgency;
+   obj.fundingPortion = data[i].fundingPortion;
+   obj.value = data[i].value;
+
+   obj.id = data[i]._id;
+
+   return obj;
+}
+
+angular.module('reports').controller('Section15Controller', ['$scope', '$http', '$stateParams', '$location', 'Authentication',
+	function($scope, $http, $stateParams, $location, Authentication ) {
 		$scope.authentication = Authentication;
 		
-
 		//variable for section 15 to initialize the table
 		$scope.incomplete = false;
-      $scope.hideTable = true;
+      $scope.hideTable = false;
 
-      $scope.grants = 
-            [];
-      //var e = 'error';
-      //var titleOfGrant = $scope.grants.titleOfGrant;
+      $scope.total = 0;
 
-         var total = 0; 
+      $http.get('/reports/' + $stateParams.reportId + '/contracts').
+         success(function(data, status, headers, config) {
+            var obj = [];
 
-         $scope.total = total;
+            for (var i=0; i<data.length; i++) {
+               obj[i] = parseContractData(data, i);
+               $scope.total += data[i].fundingPortion;
+            }
+
+            $scope.obj = obj;
+         }).
+         error(function(data, status, headers, config) {
+            console.log('There was an error in getting report');
+         });
       
-   
+      $scope.create = function() {
+         $http.post('/reports/' + $stateParams.reportId + '/contracts', {
+            contracts: {
+               title: $scope.title,
+               funded: $scope.funded,
+               PI: $scope.PI,
+               startDate: $scope.startDate,
+               endDate: $scope.endDate,
+               fundingAgency: $scope.fundingAgency,
+               fundingPortion: $scope.fundingPortion,
+               value: $scope.value
+            }
+         }).
+         success(function(data, status, headers, config) {
+            $scope.total = $scope.total + $scope.fundingPortion;
 
+            $scope.obj.push(parseContractData([data], 0));
+            $scope.title = '';
+            $scope.funded = '';
+            $scope.PI = '';
+            $scope.startDate = '';
+            $scope.endDate = '';
+            $scope.fundingAgency = '';
+            $scope.fundingPortion = '';
+            $scope.value = '';
 
-         //When the add grant button is pressed this function is called.
-        $scope.addGrants = function()
-        {
-               $scope.grants.push({
-                  titleOfGrant: $scope.grants.titleOfGrant, 
-                  fundingAgency: $scope.grants.fundingAgency, 
-                  PI: $scope.grants.PI,  
-                  startDate: $scope.grants.startDate,
-                  endDate: $scope.grants.endDate,
-                  value: $scope.grants.value, 
-                  fundingPortion: $scope.grants.fundingPortion});
-               total = total + $scope.grants.fundingPortion;
-               $scope.total = total;
+            alert('Created!');
+         }).
+         error(function(data, status, headers, config) {
+            console.log('There was an error in creating the report: ');
+            console.log(data);
+         });
+      };
 
+      $scope.update = function( id, i ) {
+         $http.put('/contracts/' + id, {
+            contracts: {
+               title: $scope.obj[i].title,
+               funded: $scope.obj[i].funded,
+               PI: $scope.obj[i].PI,
+               startDate: $scope.obj[i].startDate,
+               endDate: $scope.obj[i].endDate,
+               fundingAgency: $scope.obj[i].fundingAgency,
+               fundingPortion: $scope.obj[i].fundingPortion,
+               value: $scope.obj[i].value
+            }
+         }).
+         success(function(data, status, headers, config) {
+            alert('updated');
+         }).
+         error(function(data, status, headers, config) {
+            console.log('There was an error in updating the report');
+         });
+      };
 
-               $scope.grants.titleOfGrant = ''; 
-               $scope.grants.fundingAgency = '';
-               $scope.grants.PI = '';
-               $scope.grants.startDate = '';
-               $scope.grants.endDate = '';
-               $scope.grants.value = '';
-               $scope.grants.fundingPortion = '';
-               $scope.hideTable = false;
-            };
+      $scope.delete = function( id, i ) {
+         $http.delete('/contracts/' + id).
+         success(function(data, status, headers, config) {
+            $scope.obj.splice(i, 1); //remove from the DOM
+            alert('deleted');
+         }).
+         error(function(data, status, headers, config) {
+            console.log('There was an error in deleting the report');
+         });
+      };
     /*   
       //Function to look for changes that are happening in the Grants object.
       $scope.$watch('grants.titleOfGrant',function(){$scope.test();});

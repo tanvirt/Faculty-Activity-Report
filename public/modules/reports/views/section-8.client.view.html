@@ -1,0 +1,139 @@
+<section class="col-md-10" data-ng-controller="Section8Controller">
+	<h3>8. Teaching Evaluations</h3>
+	<hr>
+
+	<!-- http://joelhooks.com/blog/2013/07/22/the-basics-of-using-ui-router-with-angularjs/ -->
+	<ul class="nav nav-tabs">
+		<li><a ng-click="setPage(0)" data-toggle="tab">User Input</a></li>
+		<li><a ng-click="setPage(1)" data-toggle="tab">Excel Upload</a></li>
+	</ul>
+	<br>
+
+	<form class="tab-content" ng-switch on="currentContent.name">
+		<div ng-switch-when="user">
+			<div class="form-group col-md-6 controls">
+				<input type="text" data-ng-model="$parent.course" id="course" class="form-control" placeholder="Course Title" required>
+			</div>
+
+			<div class="form-group col-md-6 controls">
+			    <input type="text" data-ng-model="$parent.year" id="year" class="form-control" placeholder="Year Taught">
+			</div>
+
+			<div class="form-group col-md-6 controls">
+				<select class="form-control" data-ng-model="$parent.semester">
+					<option value="" disabled selected>Semester</option>
+		           	<option value="Fall">Fall</option>
+		           	<option value="Spring">Spring</option>
+		           	<option value="Summer">Summer</option>
+		       	</select>
+			</div>
+				            
+			<div class="form-group col-md-6 controls">
+			    <input type="number" data-ng-model="$parent.enrolled" id="enrolled" class="form-control" placeholder="Number Enrolled">
+			</div>
+
+			<div class="form-group col-md-6 controls">
+			    <input type="number" data-ng-model="$parent.responses" id="responses" class="form-control" placeholder="Number Responded">
+			</div>
+
+			<div class="form-group col-md-6 controls">
+				<select class="form-control" data-ng-model="$parent.required">
+					<option value="" disabled selected>Required</option>
+		           	<option value="true">Yes</option>
+		           	<option value="false">No</option>
+		       	</select>
+			</div>
+				         
+			<div class="form-group col-md-6 controls">
+				<input type="text" data-ng-model="$parent.teacherMean" id="teacherMean" class="form-control" placeholder="Teacher Mean">
+			</div>
+
+			<div class="form-group col-md-6 controls">
+				<input type="text" data-ng-model="$parent.departmentMean" id="departmentMean" class="form-control" placeholder="Department Mean">
+			</div>
+
+			<div class="form-group col-md-6 controls">
+				<input type="text" data-ng-model="$parent.collegeMean" id="collegeMean" class="form-control" placeholder="College Mean">
+			</div>
+
+			<div class="form-group">
+				<div data-ng-show="error" class="text-danger col-md-offset-3">
+					<strong data-ng-bind="error"></strong>
+				</div>
+				<button type="submit" data-ng-click="$parent.create()" class="col-md-offset-10 btn btn-primary">Create</button>
+			</div>
+		</div>
+
+		<div ng-switch-when="excel">
+			<p>Upload Excel</p>
+			<input type="file" ng-file-select="onFileSelect($files)" onclick="this.value=null">
+			<br>
+			<p>Progress: </p>
+			<div class="progress">
+				<div class="progress-bar" role="progressbar" aria-valuenow={{percentDone}} aria-valuemin="0" aria-valuemax="100" style="width: {{percentDone}}%;">
+					{{percentDone}}
+				</div>
+			</div>
+
+		</div>
+
+	</form>
+
+	<form>
+		<div ng-repeat="o in obj">
+			<div class="form-group col-md-6 controls">
+				<input type="text" data-ng-model="o.course" id="course" class="form-control" placeholder="Course Title" required>
+			</div>
+
+			<div class="form-group col-md-6 controls">
+			    <input type="text" data-ng-model="o.year" id="year" class="form-control" placeholder="Year Taught">
+			</div>
+
+			<div class="form-group col-md-6 controls">
+				<select class="form-control" data-ng-model="o.semester">
+					<option value="" disabled selected>Semester</option>
+	            	<option value="Fall">Fall</option>
+	            	<option value="Spring">Spring</option>
+	            	<option value="Summer">Summer</option>
+	          	</select>
+			</div>
+			            
+			<div class="form-group col-md-6 controls">
+			    <input type="number" data-ng-model="o.enrolled" id="enrolled" class="form-control" placeholder="Number Enrolled">
+			</div>
+
+			<div class="form-group col-md-6 controls">
+			    <input type="number" data-ng-model="o.responses" id="responses" class="form-control" placeholder="Number Responded">
+			</div>
+
+			<div class="form-group col-md-6 controls">
+				<select class="form-control" data-ng-model="o.required" placeholder="Required">
+					<option value="" disabled selected>Required</option>
+	            	<option value="true">Yes</option>
+	            	<option value="false">No</option>
+	          	</select>
+			</div>
+			         
+			<div class="form-group col-md-6 controls">
+				<input type="text" data-ng-model="o.teacherMean" id="teacherMean" class="form-control" placeholder="Teacher Mean">
+			</div>
+
+			<div class="form-group col-md-6 controls">
+				<input type="text" data-ng-model="o.departmentMean" id="departmentMean" class="form-control" placeholder="Department Mean">
+			</div>
+
+			<div class="form-group col-md-6 controls">
+				<input type="text" data-ng-model="o.collegeMean" id="collegeMean" class="form-control" placeholder="College Mean">
+			</div>
+
+			<div class="form-group">
+				<div data-ng-show="error" class="text-danger col-md-offset-3">
+					<strong data-ng-bind="error"></strong>
+				</div>
+				<button type="submit" data-ng-click="update(o.id, $index)" class="col-md-offset-10 btn btn-warning">Update</button>
+				<button type="submit" data-ng-click="delete(o.id, $index)" class="col-md-offset-10 btn btn-danger">Delete</button>
+			</div>
+
+		</div>
+	</form>
+</section>

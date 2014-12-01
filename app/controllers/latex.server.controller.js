@@ -1,8 +1,8 @@
 'use strict';
 
 
-
 /*
+
 
 exports.generateLatex = function(req,res,next) {	
 	//console.log('Req.report' + req.report._id);
@@ -44,7 +44,7 @@ exports.generateLatex = function(req,res,next) {
 		});
 
 		//Generate Report
-		/*
+		
 		var writeable = fs.createWriteStream('./public/modules/reports/pdf/' + req.report._id + '.pdf');
 
 		latex([

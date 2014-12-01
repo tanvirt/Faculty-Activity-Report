@@ -1,23 +1,2 @@
 \section{LECTURES, SPEECHES OR POSTERS PRESENTED AT PROFESSIONAL
   CONFERENCES/MEETINGS}
-{% for conference in array %}
-
-	{% if conference.area === 'International' %}
-	\subsection*{International}
-		{{conference.presentation}}:\textit{ {{- conference.title -}} } on {{conference.date | date('M d, Y') }} at {{conference.where}}
-	{% endif %}
-
-
-	{% if conference.area === 'State' %}
-	\subsection*{State}
-		{{conference.presentation}}:\textit{ {{- conference.title -}} } on {{conference.date | date('M d, Y') }} at {{conference.where}}
-	{% endif %}
-
-
-	{% if conference.area === 'Local' %}
-	\subsection*{Local}
-		{{conference.presentation}}:\textit{ {{- conference.title -}} } on {{conference.date | date('M d, Y') }} at {{conference.where}}
-	{% endif %}
-
-
-{% endfor %}

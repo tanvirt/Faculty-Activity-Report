@@ -16,7 +16,7 @@ will explicitly populate the report with
 the data you provide
 */
 renderModel.setDebugPopulate( false, {
-	govStr: 'Debug String'
+	info: 'Debug String'
 });
 
 /*
@@ -30,7 +30,7 @@ render function that finds the obj in the database
 and converts it into latex.
 */
 module.exports.render = function(req, callback) {
-	renderModel.render(req, callback);
+	renderModel.renderHTML(req, callback);
 };
 
 /*
@@ -41,7 +41,7 @@ module.exports.submit = function(req, callback) {
 	if (is.empty(req.body.governance)) return callback(null, null);
 
 	var gov = new Governance({
-		govStr: req.body.governance.govStr,
+		info: req.body.governance.info,
 		user: req.user
 	});
 

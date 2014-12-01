@@ -24,84 +24,53 @@ exports.viewCtrl = function(req, res) {
 	});
 };
 
-/*
-exports.getExcel = function(req, res, next) {
-	if (req.files.excel) {
+exports.getExcel = function(req, res) {
+	if (req.files.file.extension !== 'xlsx') {
+		return res.jsonp('Must Be An xslx file');
+	}
 
-		cv2json.xlsx(req.files.excel.path, {}, function(err, result) {
-			if (err) {
-				res.jsonp({
-					title: 'error',
-					message: err
+	if (req.files.file) {
+		excel(req.files.file.path, function(err, data) {
+		 	if(err) throw err;
+
+		 	var arr = [];
+
+			for (var i=1; i<data.length; i++) {
+				var te = new TeachingEvaluation();
+
+				te.course = data[i][3];
+				te.enrolled = data[i][7];
+				te.responses = data[i][8];
+
+				var tmpArray = [];
+				for (var j=0; j<10; j++) {
+					//console.log(j + ' : ' + data[i][(j*2)+37]);
+					tmpArray[j] = data[i][(j*2)+37];
+				}
+				te.teacherMean = tmpArray;
+
+				te.report = req.report;
+				te.user = req.user;
+				
+				te.save(function(err) {
+					if (err) {
+						return res.jsonp({
+							title: 'Mongoose Save Error',
+							message: err
+						});
+					}
 				});
-			} else {
-				req.excel = result;
-				next();
+
+				arr[i-1] = te.toObject();
 			}
+
+			res.jsonp(arr);
 		});
 
 	} else {
-		res.jsonp('No file uploaded');
+		res.jsonp('Failure! File Not Uploaded/Found');
 	}
 };
-*/
-/*
-exports.getExcel = function(req, res, next) {
-	if (req.files.excel) {
-		console.log(req.files.excel);
-		var p = req.files.excel.name;
-		xlsxj({
-			input: "./app/controllers/teachingEvaluation/"+p,
-			output: null
-		}, function(err, result) {
-			if (err) {
-				console.log(err);
-			} else {
-				console.log(result);
-				res.jsonp(result);
-			}
-		});
-	} else {
-		res.jsonp('Nope');
-	}
-	
-};
-*/
-
-function _parseArrayAndSave( req, res, data ) {
-	var arr = [];
-
-	for (var i=1; i<data.length; i++) {
-		var te = new TeachingEvaluation();
-
-		te.course = data[i][3];
-		te.enrolled = data[i][7];
-		te.responses = data[i][8];
-
-		var tmpArray = [];
-		for (var j=0; j<10; j++) {
-			console.log(j + ' : ' + data[i][(j*2)+37]);
-			tmpArray[j] = data[i][(j*2)+37];
-		}
-		te.teacherMean = tmpArray;
-		
-		te.user = req.user;
-		te.report = req.report;
-		
-		te.save(function(err) {
-			if (err) {
-				return res.jsonp({
-					title: 'Mongoose Save Error',
-					message: err
-				});
-			}
-		});
-
-		arr[i-1] = te.toObject();
-	}
-
-	res.jsonp(arr);
-}
 
 function _getDictionary(key) {
 	return {
@@ -148,7 +117,7 @@ exports.getExcel = function(req, res) {
 		excel(req.files.excel.path, function(err, data) {
 		 	if(err) throw err;
 
-		 	_parseArrayAndSave(req, res, data);
+		 	//_parseArrayAndSave(req, res, data);
 		 	
 		});
 	} else {
@@ -158,7 +127,6 @@ exports.getExcel = function(req, res) {
 
 
 exports.saveExcel = function(req, res) {
-	//return res.jsonp(req.excel.Sheets);
 	if (req.excel.Sheets.sheet1) {
 		var obj = req.excel.Sheets.sheet1;
 
@@ -176,8 +144,6 @@ exports.saveExcel = function(req, res) {
 				}));
 
 				teachingEvaluation.save();
-
-				console.log(teachingEvaluation);
 
 				i++;
 			} else {
@@ -230,8 +196,6 @@ exports.create = function(req, res) {
 };
 
 exports.update = function(req, res) {
-	//console.log(require('util').inspect(req.body));
-	
 	if (is.empty(req.body.teachingEvaluation)) {
 		res.status(400);
 		return res.jsonp({
@@ -258,7 +222,10 @@ exports.update = function(req, res) {
 };
 
 exports.readFromReport = function(req, res) {
-	TeachingEvaluation.find({report: req.report}, function(err, result) { //Returns array
+	TeachingEvaluation.find({report: req.report})
+	.populate('user', 'displayName')
+	.populate('report', 'reportName')
+	.exec(function(err, result) { //Returns array
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -274,10 +241,36 @@ exports.read = function(req, res) {
 
 exports.teachingEvaluationById = function(req, res, next, id) {
 	TeachingEvaluation.findById(id)
+	.populate('user', 'displayName')
+	.populate('report', 'reportName')
 	.exec(function(err, teachingEvaluation) {
 		if (err) return next(err);
 		if (!teachingEvaluation) return next(new Error('Failed to load TeachingEvaluation ' + id));
 		req.teachingEvaluation = teachingEvaluation;
 		next();
 	});
+};
+
+exports.delete = function(req, res) {
+	var teachingEvaluation = req.teachingEvaluation;
+
+	teachingEvaluation.remove(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(teachingEvaluation);
+		}
+	});
+};
+
+exports.hasAuthorization = function(req, res, next) {
+	if (req.teachingEvaluation.user.id !== req.user.id && !u.contains(req.user.roles, 'admin')) {
+		return res.status(403).send({
+			message: 'User is not authorized'
+		});
+	}
+
+	next();
 };

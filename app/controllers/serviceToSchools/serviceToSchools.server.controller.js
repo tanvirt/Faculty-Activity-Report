@@ -23,7 +23,7 @@ exports.create = function(req, res) {
 	}
 
 	var serviceToSchools = new ServiceToSchools({
-		service: req.body.serviceToSchools.service,
+		info: req.body.serviceToSchools.info,
 		user: req.user,
 		report: req.report
 	});

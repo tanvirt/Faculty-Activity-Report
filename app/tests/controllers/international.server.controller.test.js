@@ -41,7 +41,7 @@ describe('International Controller Tests', function() {
 		report.save();
 
 		activity = new International({
-			activities: 'I did stuff in other countries',
+			info: 'I did stuff in other countries',
 
 			report: report,
 			user: user
@@ -81,7 +81,7 @@ describe('International Controller Tests', function() {
 						.end(function(err, res) {
 							should.not.exist(err);
 
-							res.body.should.be.an.Object.and.have.property('activities', activity.activities);						
+							res.body.should.be.an.Object.and.have.property('info', activity.info);						
 
 							res.body.should.have.property('_id', activity.id);
 						  	res.body.should.have.property('user', user.id);
@@ -135,7 +135,7 @@ describe('International Controller Tests', function() {
 
 		var internationalObj = {
 			international: {
-			    activities:'I did so much stuff in other countries'
+			    info:'I did so much stuff in other countries'
 		 	}
 		};
 
@@ -168,7 +168,7 @@ describe('International Controller Tests', function() {
 					  .end(function(err, res) {
 					  	should.not.exist(err);
 
-					  	res.body.should.have.property('activities', internationalObj.international.activities);
+					  	res.body.should.have.property('info', internationalObj.international.info);
 
 					  	res.body.should.have.property('_id');
 					  	res.body.should.have.property('user');
@@ -207,7 +207,7 @@ describe('International Controller Tests', function() {
 				  	.set('Accept', 'application/json')
 				  	.send({
 				  		international: {
-				  			activities: 'doing other stuff in other countries'
+				  			info: 'doing other stuff in other countries'
 				  		}
 				  	})
 				  	.expect('Content-Type', /json/)
@@ -215,7 +215,7 @@ describe('International Controller Tests', function() {
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
 
-					  	res.body.should.be.an.Object.and.have.property('activities', 'doing other stuff in other countries');
+					  	res.body.should.be.an.Object.and.have.property('info', 'doing other stuff in other countries');
 
 					  	res.body.should.have.property('_id', activity.id);
 					  	res.body.should.have.property('user', user.id);

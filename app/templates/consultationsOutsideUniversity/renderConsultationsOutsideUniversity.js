@@ -30,7 +30,7 @@ render function that finds the obj in the database
 and converts it into latex.
 */
 module.exports.render = function(req, callback) {
-	renderModel.render(req, callback);
+	renderModel.renderHTML(req, callback);
 };
 
 /*
@@ -41,7 +41,7 @@ module.exports.submit = function(req, callback) {
 	if (is.empty(req.body.consultationsOutsideUniversity)) return callback(null, null);
 
 	var consultations = new ConsultationsOutsideUniversity({
-		consultation: req.body.consultationsOutsideUniversity.consultation,
+		info: req.body.consultationsOutsideUniversity.info,
 		user: req.user
 	});
 

@@ -1,27 +1,20 @@
-
-<!--This should use the section 10 controller instead for these purposes we are using the 7 to display.--> 
-
 <section class="col-md-10" data-ng-controller="Section10Controller">
-
-
     <h3>10. Contribution To Discipline/Research Narrative</h3>
     <hr>
-    <form class="form-horizontal" data-ng-submit="create()" novalidate>
+    <form class="form-horizontal" novalidate>
+        <div class="form-group">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <textarea data-ng-model="section10" class="form-control" cols="30" rows="10" placeholder="Content" ui-tinymce="tinymceOptions"></textarea>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
 
-    	<div class="form-group">
-    	<div class="col-md-1"></div>
-    	<div class="col-md-10">
-    	<textarea data-ng-model="section10" class="form-control" cols="30" rows="10" placeholder="Content" ui-tinymce="tinymceOptions"></textarea>
-    	</div>
-    	<div class="col-md-1"></div>
-    	</div>
-
-    	<div class="form-group">
-	        <div data-ng-show="error" class="text-danger col-md-offset-3">
-	            <strong data-ng-bind="error"></strong>
-	        </div>
-	        <button type="submit" data-ng-click="update()" class="col-md-offset-9 btn btn-primary">Save</button>
-	    </div>
-	    
-	</form> 
+        <div class="form-group">
+            <div data-ng-show="error" class="text-danger col-md-offset-3">
+                <strong data-ng-bind="error"></strong>
+            </div>
+            <button type="submit" data-ng-click="update()" class="col-md-offset-9 btn btn-primary">Save</button>
+        </div>
+    </form>
 </section>
