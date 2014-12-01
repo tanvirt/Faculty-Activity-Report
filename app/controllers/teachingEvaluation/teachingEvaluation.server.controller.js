@@ -112,20 +112,6 @@ function _parseAndSave(obj, key) {
 	};
 }
 
-exports.getExcel = function(req, res) {
-	if (req.files.excel) {
-		excel(req.files.excel.path, function(err, data) {
-		 	if(err) throw err;
-
-		 	//_parseArrayAndSave(req, res, data);
-		 	
-		});
-	} else {
-		res.jsonp('Failure! File Not Uploaded/Found');
-	}
-};
-
-
 exports.saveExcel = function(req, res) {
 	if (req.excel.Sheets.sheet1) {
 		var obj = req.excel.Sheets.sheet1;

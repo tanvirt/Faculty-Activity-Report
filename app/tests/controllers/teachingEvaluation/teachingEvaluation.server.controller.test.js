@@ -260,7 +260,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 					  .post('/reports/' + report.id + '/teachingEvaluation/excel')
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
-					  .attach('excel', './app/tests/controllers/teachingEvaluation/excelTest.xlsx')
+					  .attach('file', './app/tests/controllers/teachingEvaluation/excelTest.xlsx')
 					  .expect('Content-Type', /json/)
 					  .expect(200)
 					  .end(function(err, res) {
@@ -278,13 +278,13 @@ describe('TeachingEvaluation Controller Tests', function() {
 						res.body[0].should.have.property('responses', 15);
 						res.body[1].should.have.property('responses', 45);
 
-						//res.body.teacherMean.should.be.an.Array;
-						//res.body.departmentMean.should.be.an.Array;
-						//res.body.collegeMean.should.be.an.Array;
+						res.body.teacherMean.should.be.an.Array;
+						res.body.departmentMean.should.be.an.Array;
+						res.body.collegeMean.should.be.an.Array;
 
 					  	res.body[0].should.have.property('_id');
-					  	//res.body[0].should.have.property('user', user.id);
-					  	//res.body[0].should.have.property('report', report.id);
+					  	res.body[0].should.have.property('user', user.id);
+					  	res.body[0].should.have.property('report', report.id);
 
 					  	done();
 					  });
