@@ -18,7 +18,7 @@ will explicitly populate the report with
 the data you provide
 */
 renderModel.setDebugPopulate( false, {
-	activities: 'I participated in things in other countries'
+	info: 'I participated in things in other countries'
 });
 
 /*
@@ -32,14 +32,14 @@ render function that finds the obj in the database
 and converts it into latex.
 */
 module.exports.render = function(req, callback) {
-	renderModel.render(req, callback);
+	renderModel.renderHTML(req, callback);
 };
 
 module.exports.submit = function(req, callback) {
 	if (is.empty(req.body.international)) return callback(null, null);
 
 	var international = new International({
-		activities: req.body.international.activities,
+		info: req.body.international.info,
 		user: req.user		
 	});
 

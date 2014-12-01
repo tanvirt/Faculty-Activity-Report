@@ -1,61 +1,109 @@
 {
+	"_comment": "Section 1",
 	"name": {
-		"firstName": "Rosie",
-		"middleName": "T",
-		"lastName": "Poodle"
+		"firstName": "Alin",
+		"middleName": "V",
+		"lastName": "Dobra"
 	},
 
+	"_comment": "Section 2",
 	"tenure": {
     	"tenure":"Tenured"
   	},
 
+  	"_comment": "Section 3",
   	"currentRank": {
-    	"rank":"Professor",
-    	"department":"Agricultural and Biological Engineering"
+    	"rank":"Associate Professor",
+    	"department":"Computer and Informational Science and Engineering"
   	},
 
+  	"_comment": "Section 4",
   	"dateAppointed" : {
-   		"date":"October 1993"
+   		"date":"August 2009"
   	},
 
+	"_comment": "Section 5",
 	"affiliateAppointments": {
-		"app": "whatevs, bro"
+		"app": "None"
 	},
 
-	"_comment":"Conferences not ready yet",
-	"conferences": {
-		"area": "State",
-		"presentation": "Poster",
-		"title": "Test Conference Data",
-		"date": "October 12, 2001",
-		"where": "Somewhere. Earth."
-	},
+	"_comment": "Section 6",
+	"assignedActivity": {
+	    "year":"2013",
+	    "springTeaching":"45",
+	    "springResearch":"40",
+	    "springService":"15",
+	 
+	    "fallTeaching":"2",
+	    "fallResearch":"90",
+	    "fallService":"8",
+	 
+	    "summerTeaching":"50",
+	    "summerResearch":"35",
+	    "summerService":"15"
+  	},
 
-	"consultationsOutsideUniversity": {
-		"consultation": "Consultations outside the university go here..."
-	},
+  	"_comment": "Section 7",
+  	"teachingAdvising": {
+    	"info":"<p>My Teaching Advising Here</p>"
+  	},
 
-	"contracts": {
-		"title": "Contract 1",
-		"funded": "externally",
-		"PI": "PI",
-		"startDate": "02/13/2000",
-		"endDate": "08/05/2019",
-		"fundingAgency": "NASA",
-		"fundingPortion": "100000",
-		"value": "200000"
-	},
+  	"_comment": "Section 8",
+  	"teachingEvaluation": [{
+	    "course":"COP 5615",
+	    "year":"2013",
+	    "semester":"Fall",
+	    "enrolled":"152",
+	    "responses":"37",
+	    "required": "false",
+	    "teacherMean":["4.41","4.35","4.49","4.43","4.49","4.57","4.49","4.73","4.76","4.49"],
+	    "departmentMean":["4.12","3.97","4.07","4.18","4.29","4.04","4.00","4.32","4.19","4.09"],
+	    "collegeMean":["4.24","4.05","4.17","4.19","4.32","4.08","4.03","4.38","4.18","4.17"]
+  	}, {
+	    "course":"COP 6726",
+	    "year":"2012",
+	    "semester":"Fall",
+	    "enrolled":"112",
+	    "responses":"48",
+	    "required": "true",
+	    "teacherMean":["4.29","4.46","4.42","4.31","4.52","4.68","4.40","4.70","4.69","4.48"],
+	    "departmentMean":["4.06","3.94","4.04","4.13","4.22","4.01","3.96","4.31","4.18","4.05"],
+	    "collegeMean":["4.15","4.01","4.13","4.14","4.26","4.07","4.03","4.37","4.20","4.15"]
+  	}], 	
 
+  	"_comment": "Section 9",
+  	"graduateCommittee": [{
+  		"role":"Chair",
+	    "studentName":"Alex Daley",
+	    "degree":"M.S.",
+	    "major":"Computer Engineering",
+	    "degreeDate":"8/14/2012"
+	}, {
+  		"role":"Chair",
+	    "studentName":"Chen Lixia",
+	    "degree":"Ph.D.",
+	    "major":"Computer Engineering",
+	    "degreeDate":"12/20/2011"
+	}, {
+  		"role":"Chair",
+	    "studentName":"Cheung Louis",
+	    "degree":"Ph.D.",
+	    "major":"Computer Engineering",
+	    "degreeDate":"12/20/2011"
+	}],
+
+	"_comment": "Section 10",
 	"contribution": {
-		"info": "I made the following contributions..."
+		"info": "<p>I made the following contributions...</p>"
 	},
 
+	"_comment": "Section 11",
 	"creativeWorks": [{
 		"name": "Latex",
 		"description": "a high-quality typesetting system",
 		"website": "http://www.latex-project.org",
 		"date":"10/20/1984",
-		"jointEfforts": ["George", "Gandalf", "Rebecca"]
+		"jointEfforts": ["Tamer Kahveci"]
 	}, {
 		"name": "FireFox",
 		"description": "a web browser",
@@ -64,84 +112,89 @@
 		"jointEfforts": ["George", "Gandalf", "Rebecca"]
 	}],
 
-	
-
-  	"editorServiceReviwer": {
-  		"info": "debug string"
-  	},
-
-  	"furtherInformationSection": {
-    	"info":"This is my Further Information string"
-  	},
-
-  	"governance": {
-  		"govStr":"This is my governance"
-  	},
-
-  	"graduateCommittee": {
-  		"role":"Chair",
-	    "studentName":"Gordan Ramsey",
-	    "degree":"M.S.",
-	    "major":"Culinary Arts",
-	    "degreeDate":"1/05/1993"
-	},
-
-	"honors": {
-    	"info":"This is my Honors string"
-  	},
-
-	"international": {
-    	"activities":"This is my international activity"
-  	},
-
-  	"membership": {
-    	"info":"This is my membership string"
-  	},
-
-  	"patents": {
+	"_comment": "Section 12",
+	"patents": [{
 		"title": "Patent",
 		"authors": ["Me", "Myself", "I"],
 		"patentNumber": "1234",
 		"date": "12/31/1999",
 		"description": "I saved the world"
-  	},
+  	}, {
+		"title": "Patent2",
+		"authors": ["Me", "Myself", "I"],
+		"patentNumber": "1234",
+		"date": "12/31/1999",
+		"description": "I saved the world"
+  	}],
 
+  	"_comment": "Section 13",
   	"publications": {
-  		"info": "This is my publications"
+  		"info": "<p>This is my publications</p>"
   	},
 
+  	"_comment": "Section 14",
+	"conferences": {
+		"info":"<p>This is my Conferences...</p>"
+	},
+
+	"_comment": "Section 15",
+	"contracts": [{
+		"title": "Contract 1",
+		"funded": "externally",
+		"PI": "PI",
+		"startDate": "02/13/2000",
+		"endDate": "08/05/2019",
+		"fundingAgency": "NASA",
+		"fundingPortion": "100000",
+		"value": "200000"
+	}, {
+		"title": "Contract 2",
+		"funded": "externally",
+		"PI": "PI",
+		"startDate": "02/13/2000",
+		"endDate": "08/05/2019",
+		"fundingAgency": "NASA",
+		"fundingPortion": "100000",
+		"value": "200000"
+	}],
+
+	"_comment": "Section 16",
+	"governance": {
+  		"info":"<p>This is my governance</p>"
+  	},
+
+  	"_comment": "Section 17",
+	"consultationsOutsideUniversity": {
+		"info": "<p>Consultations outside the university go here...</p>"
+	},
+
+	"_comment": "Section 18",
+  	"editorServiceReviewer": {
+  		"info": "<p>This is my editor reviewer string</p>"
+  	},
+
+  	"_comment": "Section 19",
+  	"international": {
+    	"info":"<p>This is my international activity</p>"
+  	},
+
+  	"_comment": "Section 20",
   	"serviceToSchools": {
-  		"service": "Service to schools goes here..."
+  		"info": "<p>Service to schools goes here...</p>"
   	},
 
-  	"teachingAdvising": {
-    	"info":"My Teaching Advising Here"
+  	"_comment": "Section 21",
+  	"membership": {
+    	"info":"<p>This is my membership string</p>"
   	},
 
-  	"teachingEvaluation": {
-	    "course":"testCourse1",
-	    "year":"2003",
-	    "semester":"fall",
-	    "enrolled":"100",
-	    "responses":"30",
-	    "required": "false",
-	    "teacherMean":["1","2","3","1","2","3","1","2","3","3"],
-	    "departmentMean":["2","3","4","2","3","4","2","3","4","3"],
-	    "collegeMean":["4","4","4","4","4","4","4","4","4","3"]
-  	}, 	
+  	"_comment": "Section 22",
+  	"honors": {
+    	"info":"<p>This is my Honors string</p>"
+  	},
 
-  	"assignedActivity": {
-	    "year":"1993",
-	    "springTeaching":"30",
-	    "springResearch":"30",
-	    "springService":"40",
-	 
-	    "fallTeaching":"30",
-	    "fallResearch":"30",
-	    "fallService":"40",
-	 
-	    "summerTeaching":"30",
-	    "summerResearch":"30",
-	    "summerService":"40"
-  	}
+  	"_comment": "Section 23",
+  	"furtherInformationSection": {
+    	"info":"<p>This is my Further Information string</p>"
+  	}	
 }

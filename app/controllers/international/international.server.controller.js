@@ -27,7 +27,7 @@ exports.create = function(req, res) {
 	}
 
 	var international = new International({
-		activities: req.body.international.activities,
+		info: req.body.international.info,
 
 		user: req.user,
 		report: req.report

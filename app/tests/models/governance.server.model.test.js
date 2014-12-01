@@ -13,7 +13,7 @@ var gov1;
 describe('Governance Model Unit Tests:', function() {
 	beforeEach(function(done) {
 		gov1 = new Governance({
-			//govStr: 'this is a random string of stuff'
+			//info: 'this is a random string of stuff'
 		});
 				
 		done();
@@ -27,7 +27,7 @@ describe('Governance Model Unit Tests:', function() {
 		});
 		
 		it('should set info to N/A if nothing given', function(done) {
-			assert.equal(gov1.govStr, 'N/A');
+			assert.equal(gov1.info, 'N/A');
 			done();
 		});
 		

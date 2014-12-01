@@ -17,7 +17,7 @@ var Report = mongoose.model('Report');
 
 var async = require('async');
 
-var user, report, c1, c2, c3;
+var user, user2, user3, report, c1, c2, c3, c4;
 
 describe('Contracts Controller Tests', function() {
 	beforeEach(function(done) {
@@ -32,6 +32,29 @@ describe('Contracts Controller Tests', function() {
 		});
 
 		user.save();
+
+		user2 = new User({
+			firstName: 'Full',
+			lastName: 'Name',
+			email: 'test@test.com',
+			username: 'admin',
+			password: 'password',
+			provider: 'local',
+			roles: ['admin']
+		});
+
+		user2.save();
+
+		user3 = new User({
+			firstName: 'Full',
+			lastName: 'Name',
+			email: 'test@test.com',
+			username: 'username2',
+			password: 'password',
+			provider: 'local'
+		});
+
+		user3.save();
 
 		report = new Report({
 			reportName: 'MyReportName',
@@ -82,9 +105,24 @@ describe('Contracts Controller Tests', function() {
 			user: user
 		});
 
+		c4 = new Contracts({
+			title: 'MyTitle3',
+			funded: 'externally',
+			PI: 'PI',
+			startDate: 'October 1993',
+			endDate: 'December 2000',
+			fundingAgency: 'This is the funding agency',
+			fundingPortion: 100,
+			value: 200,
+
+			report: report,
+			user: user2
+		});
+
 		c1.save();
 		c2.save();
 		c3.save();
+		c4.save();
 
 		done();
 	});
@@ -119,11 +157,12 @@ describe('Contracts Controller Tests', function() {
 							should.not.exist(err);
 
 							res.body.should.be.an.Array;
-							res.body.should.have.length(3);
+							res.body.should.have.length(4);
 
 							res.body[0].should.be.an.Object;	
 							res.body[1].should.be.an.Object;	
-							res.body[2].should.be.an.Object;							
+							res.body[2].should.be.an.Object;	
+							res.body[3].should.be.an.Object;						
 
 						  	done();
 						});
@@ -139,7 +178,32 @@ describe('Contracts Controller Tests', function() {
 			  .end(done);
 		});
 
-		it('should be able to get a specific contracts based on its id', function(done) {
+		it('should not be able to get a specific contracts if the user does not own the contracts and is not a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'username',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					  .get('/contracts/' + c4.id)
+					  .set('cookie', res.headers['set-cookie'])
+					  .set('Accept', 'application/json')
+					  .expect('Content-Type', /json/)
+					  .expect(403)
+					  .end(function(err, res) {
+					  	should.not.exist(err);
+
+					  	res.body.should.have.property('message').and.equal('User is not authorized');
+
+					  	done();
+					  });
+				});
+		});
+
+		it('should be able to get a specific contracts if the user does own the contracts and is not a superuser', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -160,8 +224,66 @@ describe('Contracts Controller Tests', function() {
 					  	res.body.should.be.an.Object;
 
 					  	res.body.should.have.property('_id', c1.id);
-					  	res.body.should.have.property('user', user.id);
-					  	res.body.should.have.property('report', report.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+					  	done();
+					  });
+				});
+		});
+
+		it('should be able to get a specific contracts if the user does not own the contracts and is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					  .get('/contracts/' + c1.id)
+					  .set('cookie', res.headers['set-cookie'])
+					  .set('Accept', 'application/json')
+					  .expect('Content-Type', /json/)
+					  .expect(200)
+					  .end(function(err, res) {
+					  	should.not.exist(err);
+
+					  	res.body.should.be.an.Object;
+
+					  	res.body.should.have.property('_id', c1.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+					  	done();
+					  });
+				});
+		});
+
+		it('should not be able to get a specific contracts if the user does own the contracts and is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					  .get('/contracts/' + c1.id)
+					  .set('cookie', res.headers['set-cookie'])
+					  .set('Accept', 'application/json')
+					  .expect('Content-Type', /json/)
+					  .expect(200)
+					  .end(function(err, res) {
+					  	should.not.exist(err);
+
+					  	res.body.should.be.an.Object;
+
+					  	res.body.should.have.property('_id', c1.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
 
 					  	done();
 					  });
@@ -239,7 +361,38 @@ describe('Contracts Controller Tests', function() {
 			  .end(done);
 		});
 
-		it('should be able to update a specific contracts', function(done) {
+		it('should not be able to update a specific contracts if the user does not own the contracts and is not a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'username',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.put('/contracts/' + c4.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.send({
+				  		contracts: {
+				  			title:'Different Title'
+				  		}
+				  	})
+				  	.expect('Content-Type', /json/)
+				  	.expect(403)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+				  		res.body.should.have.property('message').and.equal('User is not authorized');
+
+				  		done();
+				  	});
+
+				});
+		});
+
+		it('should be able to update a specific contracts if the user does own the contracts and is not a superuser', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -262,11 +415,81 @@ describe('Contracts Controller Tests', function() {
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
 
-					  	res.body.should.be.an.Object.and.have.property('title', 'Different Title');
+				  		res.body.should.be.an.Object.and.have.property('title', 'Different Title');
 
 					  	res.body.should.have.property('_id', c1.id);
-					  	res.body.should.have.property('user', user.id);
-					  	res.body.should.have.property('report', report.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});
+
+		it('should be able to update a specific contracts if the user does not own the contracts and is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.put('/contracts/' + c1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.send({
+				  		contracts: {
+				  			title:'Different Title'
+				  		}
+				  	})
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+				  		res.body.should.be.an.Object.and.have.property('title', 'Different Title');
+
+					  	res.body.should.have.property('_id', c1.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});
+
+		it('should be able to update a specific contracts if the user does own the contracts and is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.put('/contracts/' + c4.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.send({
+				  		contracts: {
+				  			title:'Different Title'
+				  		}
+				  	})
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+				  		res.body.should.be.an.Object.and.have.property('title', 'Different Title');
+
+					  	res.body.should.have.property('_id', c4.id);
+					  	res.body.user.should.have.property('_id', user2.id);
+					  	res.body.report.should.have.property('_id', report.id);
 
 				  		done();
 				  	});
@@ -274,6 +497,117 @@ describe('Contracts Controller Tests', function() {
 				});
 		});
 	    
+	});
+
+	describe('Testing the DELETE methods', function() {
+		it('should not be able to delete if not logged in', function(done) {
+			request(app)
+				.delete('/contracts/' + c1.id)
+				.expect('Content-Type', /json/)
+				.expect(401)
+				.end(done);
+		});
+
+		it('should not be able to delete if user does not own the report and is not a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'username2',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.delete('/contracts/' + c1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.expect('Content-Type', /json/)
+				  	.expect(403)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+				  		done();
+				  	});
+
+			});
+		});
+
+		it('should be able to delete if user owns the report and is not a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'username',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.delete('/contracts/' + c1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.report.should.have.property('_id');
+					  	res.body.user.should.have.property('_id');
+					  	res.body.should.have.property('_id');
+
+				  		done();
+		  			});
+				});
+		});
+
+	it('should be able to delete if user does not own the report and is a superuser', function(done) {
+		request(app)
+			.post('/auth/signin')
+			.send({
+				username:'admin',
+				password:'password'
+			})
+			.expect(200)
+			.end(function(err, res) {
+				request(app)
+					.delete('/contracts/' + c1.id)
+					.set('cookie', res.headers['set-cookie'])
+			  		.expect('Content-Type', /json/)
+			  		.expect(200)
+			  		.end(function(err, res) {
+			  			should.not.exist(err);
+
+					  	res.body.report.should.have.property('_id');
+					  	res.body.user.should.have.property('_id');
+					  	res.body.should.have.property('_id');
+
+				  		done();
+		  			});
+			});
+		});
+
+	it('should be able to delete if user does own the report and is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.delete('/contracts/' + c4.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.report.should.have.property('_id');
+					  	res.body.user.should.have.property('_id');
+					  	res.body.should.have.property('_id');
+
+				  		done();
+		  			});
+				});
+		});
+
 	});
 
 	afterEach(function(done) {

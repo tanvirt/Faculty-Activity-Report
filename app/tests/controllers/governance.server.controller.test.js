@@ -41,7 +41,7 @@ describe('Governance Controller Tests', function() {
 		report.save();
 
 		gov = new Governance({
-			govStr: 'editing and servicing and reviewing',
+			info: 'editing and servicing and reviewing',
 
 			report: report,
 			user: user
@@ -81,7 +81,7 @@ describe('Governance Controller Tests', function() {
 						.end(function(err, res) {
 							should.not.exist(err);
 
-							res.body.should.be.an.Object.and.have.property('govStr', gov.govStr);						
+							res.body.should.be.an.Object.and.have.property('info', gov.info);						
 
 							res.body.should.have.property('_id', gov.id);
 						  	res.body.should.have.property('user', user.id);
@@ -135,7 +135,7 @@ describe('Governance Controller Tests', function() {
 
 		var govObj = {
 			governance: {
-			    govStr:'new editing stuff'
+			    info:'new editing stuff'
 		 	}
 		};
 
@@ -168,7 +168,7 @@ describe('Governance Controller Tests', function() {
 					  .end(function(err, res) {
 					  	should.not.exist(err);
 
-					  	res.body.should.have.property('govStr', govObj.governance.govStr);
+					  	res.body.should.have.property('info', govObj.governance.info);
 
 					  	res.body.should.have.property('_id');
 					  	res.body.should.have.property('user');
@@ -207,7 +207,7 @@ describe('Governance Controller Tests', function() {
 				  	.set('Accept', 'application/json')
 				  	.send({
 				  		governance: {
-				  			govStr: 'editing other stuff'
+				  			info: 'editing other stuff'
 				  		}
 				  	})
 				  	.expect('Content-Type', /json/)
@@ -215,7 +215,7 @@ describe('Governance Controller Tests', function() {
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
 
-					  	res.body.should.be.an.Object.and.have.property('govStr', 'editing other stuff');
+					  	res.body.should.be.an.Object.and.have.property('info', 'editing other stuff');
 
 					  	res.body.should.have.property('_id', gov.id);
 					  	res.body.should.have.property('user', user.id);

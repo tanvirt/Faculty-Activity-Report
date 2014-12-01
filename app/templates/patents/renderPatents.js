@@ -67,14 +67,17 @@ module.exports.submit = function(req, callback) {
 };
 
 module.exports.createDefaultData = function(report, user, cb) {
-	var save = _.extend(defaultData.patents, {
-		report: report,
-		user: user
-	});
+	var patents;
 
-	var patents = new Patents(save);
+	for (var i=0; i<defaultData.patents.length; i++) {
+		var save = _.extend(defaultData.patents[i], {
+			report: report,
+			user: user
+		});
 
-	patents.save(function(err) {
-		cb(err, patents);
-	});
+		patents = new Patents(save);
+		patents.save();
+	}	
+
+	cb(null, patents);
 };

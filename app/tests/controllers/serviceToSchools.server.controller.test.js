@@ -41,7 +41,7 @@ describe('ServiceToSchools Controller Tests', function() {
 		report.save();
 
 		schools = new ServiceToSchools({
-			service: 'I did stuff',
+			info: 'I did stuff',
 
 			report: report,
 			user: user
@@ -81,7 +81,7 @@ describe('ServiceToSchools Controller Tests', function() {
 						.end(function(err, res) {
 							should.not.exist(err);
 
-							res.body.should.be.an.Object.and.have.property('service', schools.service);						
+							res.body.should.be.an.Object.and.have.property('info', schools.info);						
 
 							res.body.should.have.property('_id', schools.id);
 						  	res.body.should.have.property('user', user.id);
@@ -135,7 +135,7 @@ describe('ServiceToSchools Controller Tests', function() {
 
 		var schoolsObj = {
 			serviceToSchools: {
-			    service:'I did so much stuff'
+			    info:'I did so much stuff'
 		 	}
 		};
 
@@ -168,7 +168,7 @@ describe('ServiceToSchools Controller Tests', function() {
 					  .end(function(err, res) {
 					  	should.not.exist(err);
 
-					  	res.body.should.have.property('service', schoolsObj.serviceToSchools.service);
+					  	res.body.should.have.property('info', schoolsObj.serviceToSchools.info);
 
 					  	res.body.should.have.property('_id');
 					  	res.body.should.have.property('user');
@@ -207,7 +207,7 @@ describe('ServiceToSchools Controller Tests', function() {
 				  	.set('Accept', 'application/json')
 				  	.send({
 				  		serviceToSchools: {
-				  			service: 'doing other stuff'
+				  			info: 'doing other stuff'
 				  		}
 				  	})
 				  	.expect('Content-Type', /json/)
@@ -215,7 +215,7 @@ describe('ServiceToSchools Controller Tests', function() {
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
 
-					  	res.body.should.be.an.Object.and.have.property('service', 'doing other stuff');
+					  	res.body.should.be.an.Object.and.have.property('info', 'doing other stuff');
 
 					  	res.body.should.have.property('_id', schools.id);
 					  	res.body.should.have.property('user', user.id);

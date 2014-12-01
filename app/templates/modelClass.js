@@ -1,5 +1,11 @@
  'use strict';
 
+var swig = require('swig');
+var join = require('path').join;
+var fs = require('fs');
+
+var spawn = require('child_process').spawn;
+
 /*
 class that takes care of rendering the swig/debugging
 @param MongooseModel, an instance of a mongoose model
@@ -81,7 +87,7 @@ Helper function that injects values into the latex.tex files
 */
 function renderSwig( folderPath, filePath, json, cb ) {
 	//console.log(require('util').inspect(json));
-	require('swig').renderFile(require('path').join(folderPath, filePath), json, function(err, output) {
+	swig.renderFile(join(folderPath, filePath), json, function(err, output) {
 		/*
 		if (err) {
 			throw err;
@@ -91,6 +97,49 @@ function renderSwig( folderPath, filePath, json, cb ) {
 		// error must be past first, and then the output
 		// from the render
 		cb( err, output );
+	});
+}
+
+function renderLatex( modelName, folderPath, filePath, json, cb ) {
+	var sectionHTML = modelName + '.html';
+	var sectionLATEX = modelName + '.tex';
+
+	fs.writeFile(join('./app/templates/html2latex_tmp/', sectionHTML), json.info, function(err) {
+		if (err) return cb(err, '');
+
+		var h2l = spawn('java', ['-jar', './htmltolatex-1.0.1/htmltolatex.jar', 
+								'-config','./htmltolatex-1.0.1/config.xml',
+								'-input', join('./app/templates/html2latex_tmp/', sectionHTML),
+								'-output', join('./app/templates/html2latex_tmp/', sectionLATEX)]);
+
+		h2l.stdout.on('data', function (data) {
+  			console.log('stdout: ' + data);
+		});
+ 		
+		h2l.stderr.on('data', function (data) {
+			console.log('stderr: ' + data);
+		});
+ 		
+		h2l.on('close', function (code) {
+			fs.readFile(join('./app/templates/html2latex_tmp/', sectionLATEX), 'utf8', function(err, tex) {
+				if (err) {
+					console.log('there was an error 0: ' + err);
+					return cb(err, '');
+				}
+
+				var converted = tex;
+
+				fs.readFile(join(folderPath, filePath), 'utf8', function(err, data) {
+					if (err) {
+						console.log('there was an error 1: ' + err);
+						return cb( err, '');
+					}
+					
+					cb( null, data + converted);
+				});				
+			});
+		});
+
 	});
 }
 
@@ -110,7 +159,7 @@ RenderModel.prototype._render = function( obj, cb ) {
 		throw new Error('Error: isDebugPopulate and isDebugNull can not both be true.');
 	}
 
-	console.log(obj);
+	//console.log(obj);
 
 	if (this.isDebugPopulate && this._debugJSON) {
 		//console.log('\'Debugging Population\' on for ' + this._Model.modelName);
@@ -131,7 +180,7 @@ RenderModel.prototype._renderMult = function( obj, cb ) {
 		throw new Error('Error: isDebugPopulate and isDebugNull can not both be true.');
 	}
 
-	console.log(obj);
+	//console.log(obj);
 
 	if (this.isDebugPopulate && this._debugJSON) {
 		//console.log('\'Debugging Population\' on for ' + this._Model.modelName);
@@ -147,6 +196,27 @@ RenderModel.prototype._renderMult = function( obj, cb ) {
 	}
 };
 
+RenderModel.prototype._renderHTML = function( obj, cb ) {
+	if ( this.isDebugNull && this.isDebugPopulate ) {
+		throw new Error('Error: isDebugPopulate and isDebugNull can not both be true.');
+	}
+
+	//console.log(obj);
+
+	if (this.isDebugPopulate && this._debugJSON) {
+		//console.log('\'Debugging Population\' on for ' + this._Model.modelName);
+		//console.log(require('util').inspect(this.debugJSON));
+		//console.log(require('util').inspect(obj));
+		renderSwig(this.renderFolderPath, this._renderFilePath, this._debugJSON, cb);
+	} else if (this.isDebugNull || !obj) {
+		//if (this.isDebugNull)
+			//console.log('\'Debugging Null\' on for ' + this._Model.modelName);
+		renderSwig(this.renderFolderPath, this._naFilePath, null, cb);
+	} else {
+		renderLatex(this._Model.modelName, this.renderFolderPath, this._renderFilePath, obj, cb);
+	}
+};
+
 RenderModel.prototype.render = function(req, callback) {
 	var _this = this;
 
@@ -159,6 +229,18 @@ RenderModel.prototype.render = function(req, callback) {
 	});
 };
 
+RenderModel.prototype.renderMultipleGrad = function(req, callback, parseObj) {
+	var _this = this;
+	
+	_this._findModelsByReport( req, function( err, arrayOfObjs ) {
+		if (err) {
+			callback(err, null);
+		} else {
+			_this._renderMult( parseObj( arrayOfObjs ), callback );
+		}
+	});
+};
+
 RenderModel.prototype.renderMultiple = function(req, callback) {
 	var _this = this;
 	
@@ -167,6 +249,18 @@ RenderModel.prototype.renderMultiple = function(req, callback) {
 			callback(err, null);
 		} else {
 			_this._renderMult( {array: arrayOfObjs}, callback );
+		}
+	});
+};
+
+RenderModel.prototype.renderHTML = function(req, callback) {
+	var _this = this;
+
+	_this._findOneModelByReport( req, function( err, obj ) {
+		if (err) {
+			callback(err, null);
+		} else {
+			_this._renderHTML( obj, callback );
 		}
 	});
 };

@@ -1,5 +1,3 @@
-
-
 <section class="col-md-10" data-ng-controller="Section12Controller">
 		<h3>12. Patents and Copyrights</h3>
 		<hr>
@@ -26,9 +24,38 @@
 		    </div>
 
 		    <div class="form-group">
-				<button type="submit" class="btn btn-primary" style="margin-left: 14px; border-radius: 4px;">+ Add</button>
+				<button type="submit" class="btn btn-primary" data-ng-click="create()">Create</button>
 			</div>
 	    <form>
+
+		<form novalidate>
+			<div ng-repeat="o in obj" >
+				<div class="form-group col-md-6 controls">
+				    <input type="text" data-ng-model="o.title" id="title" class="form-control" placeholder="Title">
+				</div>
+
+				<div class="form-group col-md-6 controls">
+				    <input type="text" data-ng-model="o.authors" id="authors" class="form-control" placeholder="Authors">
+				</div>
+
+				<div class="form-group col-md-6 controls">
+				    <textarea type="text" data-ng-model="o.description" id="description" class="form-control" placeholder="Description" style="height: 101px"></textarea>
+				</div>
+				         
+				<div class="form-group col-md-6 controls">
+				    <input type="date" data-ng-model="o.date" ng-model-instant id="date" class="form-control">
+				</div>
+
+				<div class="form-group col-md-6 controls">
+				    <input type="text" data-ng-model="o.patentNumber" id="patentNumber" class="form-control" placeholder="Patent Number">
+				</div>
+
+				<button type="submit" data-ng-click="delete(o.id, $index)" class="col-md-offset-9 btn btn-primary">Delete</button>
+				<button type="submit" data-ng-click="update(o.id, $index)" class="col-md-offset-9 btn btn-primary">Update</button>
+			</div>
+		</form>
+
+		
 	<!--
 	<div class="col-md-12">
 		<h3 for="section12">12. Patents and Copyrights</h3>

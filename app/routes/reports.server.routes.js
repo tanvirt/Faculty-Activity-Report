@@ -26,7 +26,6 @@ module.exports = function(app) {
 		.get(users.requiresLogin, reports.hasAuthorization, 
 			 reports.generateLatex, reports.generatePDF, reports.viewPDF);
 		
-
 	app.route('/reportdownload/:reportId/latex')
 		.get(users.requiresLogin, reports.hasAuthorization, 
 			reports.generateLatex, reports.getLatex);

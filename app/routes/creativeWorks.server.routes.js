@@ -11,9 +11,9 @@ module.exports = function(app) {
 		.post(users.requiresLogin, reports.hasAuthorization, creativeWorks.create);
 
 	app.route('/creativeWorks/:creativeWorksId')
-		.get(users.requiresLogin, creativeWorks.hasAuthorized, creativeWorks.read)
-		.put(users.requiresLogin, creativeWorks.hasAuthorized, creativeWorks.update)
-		.delete(users.requiresLogin, creativeWorks.hasAuthorized, creativeWorks.delete);
+		.get(users.requiresLogin, creativeWorks.hasAuthorization, creativeWorks.read)
+		.put(users.requiresLogin, creativeWorks.hasAuthorization, creativeWorks.update)
+		.delete(users.requiresLogin, creativeWorks.hasAuthorization, creativeWorks.delete);
 
 	// Finish by binding the creativeWorks middleware
 	app.param('creativeWorksId', creativeWorks.creativeWorksById);

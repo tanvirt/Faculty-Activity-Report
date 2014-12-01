@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 var Governance = new Schema({
 	
-	govStr: {
+	info: {
 		type: String,
 		default: 'N/A'
 	},
@@ -20,6 +20,6 @@ var Governance = new Schema({
 		ref: 'Report'
 	}
 
-}, {collection: Governance});
+}, {collection: 'Governance'});
 
 mongoose.model('Governance', Governance);

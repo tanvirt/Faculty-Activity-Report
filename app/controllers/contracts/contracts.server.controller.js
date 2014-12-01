@@ -7,6 +7,8 @@ var errorHandler = require('../errors');
 var is = require('is-js');
 var _ = require('lodash');
 
+var u  = require('underscore');
+
 /*
 Gets the data from the frontend and
 saves it in the database.
@@ -77,7 +79,10 @@ exports.update = function(req, res) {
 };
 
 exports.readFromReport = function(req, res) {
-	Contracts.find({report: req.report}, function(err, result) {
+	Contracts.find({report: req.report})
+	.populate('user', 'displayName')
+	.populate('report', 'reportName')
+	.exec(function(err, result) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -93,10 +98,36 @@ exports.read = function(req, res) {
 
 exports.contractsById = function(req, res, next, id) {
 	Contracts.findById(id)
+	.populate('user', 'displayName')
+	.populate('report', 'reportName')
 	.exec(function(err, contracts) {
 		if (err) return next(err);
 		if (!contracts) return next(new Error('Failed to load Contracts ' + id));
 		req.contracts = contracts;
 		next();
 	});
+};
+
+exports.delete = function(req, res) {
+	var contracts = req.contracts;
+
+	contracts.remove(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(contracts);
+		}
+	});
+};
+
+exports.hasAuthorization = function(req, res, next) {
+	if (req.contracts.user.id !== req.user.id && !u.contains(req.user.roles, 'admin')) {
+		return res.status(403).send({
+			message: 'User is not authorized'
+		});
+	}
+
+	next();
 };

@@ -29,7 +29,7 @@ exports.create = function(req, res) {
 	}
 
 	var governance = new Governance({
-		govStr: req.body.governance.govStr,
+		info: req.body.governance.info,
 
 		user: req.user,
 		report: req.report

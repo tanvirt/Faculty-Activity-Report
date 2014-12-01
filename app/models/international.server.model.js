@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var International = new Schema({
-	activities: {
+	info: {
 		type: String,
 		default: 'N/A'
 	},

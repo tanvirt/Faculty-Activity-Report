@@ -22,7 +22,6 @@ var Contracts = new Schema({
 	funded: {
 		type: String,
 		enum: ['externally', 'internally', 'pending', 'not'],
-		default: 'externally',
 		required: true
 	},
 	PI: {

@@ -22,12 +22,12 @@ describe('serviceToSchools Model Unit Tests:', function() {
 
 
 		it('should set service to N/A if nothing given', function(done) {
-			assert.equal(s.service, 'N/A');
+			assert.equal(s.info, 'N/A');
 			done();
 		});	
 		
 		it('should save without problems when info is given', function(done) {
-			s.service = 'I did service for the school. I am very saintly.';
+			s.info = 'I did service for the school. I am very saintly.';
 			s.save(done);
 		});
 		

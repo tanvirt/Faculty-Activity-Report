@@ -19,7 +19,7 @@ describe('Teaching Evaluation Model Unit Tests:', function() {
 		evaluation01 = new TeachingEvaluation({
 			course: 'testCourse 101',
 			year: '2014',
-			semester: 'spring',
+			semester: 'Spring',
 			enrolled: '100',
 			responses: '30',
 			teacherMean: [1, 2, 3, 4, 5, 1, 2, 3, 4, 1],
@@ -59,7 +59,7 @@ describe('Teaching Evaluation Model Unit Tests:', function() {
 		});
 
 		it('should not fail to save a semester that is not spring, fall, summer', function(done) {
-			evaluation01.semester = 'fall';
+			evaluation01.semester = 'Fall';
 			evaluation01.save();
 			done();
 		});

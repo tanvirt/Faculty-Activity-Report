@@ -10,3 +10,5 @@ app/tests/coverage/
 node_modules/
 *.pdf
 *.xlsx
+app/templates/html2latex_tmp/*.html
+app/templates/html2latex_tmp/*.tex

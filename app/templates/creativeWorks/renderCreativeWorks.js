@@ -84,7 +84,6 @@ module.exports.submit = function(req, callback) {
 };
 
 module.exports.createDefaultData = function(report, user, cb) {
-
 	var creativeWorks;
 
 	for (var i=0; i<defaultData.creativeWorks.length; i++) {
