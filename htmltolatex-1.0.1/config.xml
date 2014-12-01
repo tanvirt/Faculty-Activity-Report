@@ -135,7 +135,8 @@
         <end>@NL\end{quotation}</end>
     </element>
     <element name='br'>
-        <start>@NL\\</start>
+        <!--<start>@NL\\</start>-->
+        <start></start>
         <end></end>
     </element>
     <element name='button'>
