@@ -102,8 +102,8 @@ function renderSwig( folderPath, filePath, json, cb ) {
 
 function renderLatex( modelName, id, folderPath, filePath, json, cb ) {
 	var randNum = Math.floor((Math.random() * 300) + 100); //100 - 400
-	var sectionHTML = randNum + modelName + id + '.html';
-	var sectionLATEX = randNum + modelName + id + '.tex';
+	var sectionHTML = modelName + '_id' + id + '_r' + randNum + '.html';
+	var sectionLATEX = modelName + '_id' + id + '_r' + randNum + '.tex';
 
 	fs.writeFile(join('./app/templates/html2latex_tmp/', sectionHTML), json.info, function(err) {
 		if (err) return cb(err, '');
