@@ -100,7 +100,7 @@ module.exports.render = function(req, callback) {
 */
 
 module.exports.render = function (req, callback) {
-	renderModel.renderMultiple( req, callback);
+	renderModel.renderMultiple( req, callback );
 };
 /*
 module.exports.submit = function(req, callback) {
