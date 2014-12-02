@@ -1,3 +1,0 @@
-This is a placeholder file so the pdf directory doesn't disappear.
-
-To generate pdf, go to 'localhost:3000/report/test'

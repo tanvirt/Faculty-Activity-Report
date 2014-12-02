@@ -37,6 +37,15 @@ module.exports = function(app) {
 	app.route('/reportdownload/:reportId/download')
 		.get(users.requiresLogin, reports.hasAuthorization, reports.download);
 
+	app.route('/cleanTmp')
+		.get(users.requiresLogin, reports.isAdmin, reports.cleanTmp);
+
+	app.route('/cleanExcel')
+		.get(users.requiresLogin, reports.isAdmin, reports.cleanExcel);
+
+	app.route('/cleanPDF')
+		.get(users.requiresLogin, reports.isAdmin, reports.cleanPDF);
+
 	// Finish by binding the Report middleware
 	app.param('reportId', reports.reportByID);
 };
