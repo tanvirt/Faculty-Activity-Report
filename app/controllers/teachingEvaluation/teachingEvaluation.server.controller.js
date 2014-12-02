@@ -72,7 +72,7 @@ exports.getExcel = function(req, res) {
 	}
 };
 
-function getDictionary(key) {
+function _getDictionary(key) {
 	return {
 		course: 'D' + key,
 		enrolled: 'H' + key,
@@ -90,8 +90,8 @@ function getDictionary(key) {
 	};
 }
 
-function parseAndSave(obj, key) {
-	var d = getDictionary(key);
+function _parseAndSave(obj, key) {
+	var d = _getDictionary(key);
 
 	return {
 		course: obj[d.course].v,
@@ -122,7 +122,7 @@ exports.saveExcel = function(req, res) {
 			var key = 'A' + i;
 
 			if (obj.hasOwnProperty(key)) {
-				var json = parseAndSave(obj, i);
+				var json = _parseAndSave(obj, i);
 
 				var teachingEvaluation = new TeachingEvaluation(u.extend(json, {
 					user: req.user,
