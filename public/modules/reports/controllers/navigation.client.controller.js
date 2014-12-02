@@ -21,7 +21,12 @@ angular.module('reports').controller('NavigationController', ['$scope', '$stateP
 			        'paste textcolor colorpicker textpattern',
 			        'legacyoutput'
 			    ],
-			    toolbar1: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist'
+			    toolbar1: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist',
+			    paste_auto_cleanup_on_paste: true,
+			    paste_remove_styles: true,
+	            paste_remove_styles_if_webkit: true,
+	            paste_strip_class_attributes: true,
+	            paste_as_text: true
 		};
 
 		var tabClasses;

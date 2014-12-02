@@ -136,7 +136,7 @@
     </element>
     <element name='br'>
         <!--<start>@NL\\</start>-->
-        <start></start>
+        <start> </start>
         <end></end>
     </element>
     <element name='button'>
