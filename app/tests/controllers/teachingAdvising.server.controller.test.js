@@ -101,9 +101,10 @@ describe('TeachingAdvising Controller Tests', function() {
 						.end(function(err, res) {
 							should.not.exist(err);
 
-							res.body.should.have.property('_id', advising.id);
-						  	res.body.should.have.property('user', user.id);
-						  	res.body.should.have.property('report', report.id);
+							res.body[0].should.have.property('_id', advising.id);
+							res.body[0].should.have.property('info', advising.info);
+						  	res.body[0].user.should.have.property('_id', user.id);
+						  	res.body[0].report.should.have.property('_id', report.id);
 						  	done();
 						});
 				});
