@@ -4,14 +4,10 @@ var mongoose = require('mongoose');
 var International = mongoose.model('International');
 
 var errorHandler = require('../errors');
-
 var is = require('is-js');
-
-var path = require('path');
-var join = path.join;
-
 var _ = require('lodash');
 
+var u = require('underscore');
 /*
 Gets the data from the frontend and
 saves it in the database.
@@ -39,8 +35,6 @@ exports.create = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			req.report.international = international;
-			req.report.save();
 			res.jsonp(international);
 		}
 	});
@@ -53,7 +47,7 @@ exports.update = function(req, res) {
 		res.status(400);
 		return res.jsonp({
 			err: 'Put (update): Does not exist',
-			message: 'req.body.international did not get sent to backend',
+			message: 'req.body.international did not get send to backend',
 			changes: 'No Changes Made'
 		});
 	}
@@ -74,7 +68,10 @@ exports.update = function(req, res) {
 };
 
 exports.readFromReport = function(req, res) {
-	International.findOne({report: req.report}, function(err, result) {
+	International.find({report: req.report})
+	.populate('user', 'displayName')
+	.populate('report', 'reportName')
+	.exec(function(err, result) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -90,10 +87,22 @@ exports.read = function(req, res) {
 
 exports.internationalById = function(req, res, next, id) {
 	International.findById(id)
+	.populate('user', 'displayName')
+	.populate('report', 'reportName')
 	.exec(function(err, international) {
 		if (err) return next(err);
 		if (!international) return next(new Error('Failed to load International ' + id));
 		req.international = international;
 		next();
 	});
+};
+
+exports.hasAuthorization = function(req, res, next) {
+	if (req.international.user.id !== req.user.id && !u.contains(req.user.roles, 'admin')) {
+		return res.status(403).send({
+			message: 'User is not authorized'
+		});
+	}
+
+	next();
 };
