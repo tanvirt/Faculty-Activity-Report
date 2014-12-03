@@ -79,21 +79,21 @@ var teachingEvaluation = new Schema({
 		default: [1, 1, 1, 
 				  1, 1, 1, 
 				  1, 1, 1, 1]//,
-		//validate: [validateLocalStrategyMean, 'Array Length must equal number of questions (10)']
+		//validate: [validateLocalStrategyMean, 'Array Length must equal number of questions and total(10)']
 	},
 	departmentMean: {
 		type: [Number],
 		default: [1, 1, 1, 
 				  1, 1, 1, 
 				  1, 1, 1, 1]//,
-		//validate: [validateLocalStrategyMean, 'Array Length must equal number of questions (10)']
+		//validate: [validateLocalStrategyMean, 'Array Length must equal number of questions and total(10)']
 	},
 	collegeMean: {
 		type: [Number],
 		default: [1, 1, 1, 
 				  1, 1, 1, 
 				  1, 1, 1, 1]//,
-		//validate: [validateLocalStrategyMean, 'Array Length must equal number of questions (10)']
+		//validate: [validateLocalStrategyMean, 'Array Length must equal number of questions and total(10)']
 	},
 	report: {
 		type: Schema.ObjectId,
