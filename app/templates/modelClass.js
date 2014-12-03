@@ -100,9 +100,10 @@ function renderSwig( folderPath, filePath, json, cb ) {
 	});
 }
 
-function renderLatex( modelName, folderPath, filePath, json, cb ) {
-	var sectionHTML = modelName + '.html';
-	var sectionLATEX = modelName + '.tex';
+function renderLatex( modelName, id, folderPath, filePath, json, cb ) {
+	var randNum = Math.floor((Math.random() * 300) + 100); //100 - 400
+	var sectionHTML = modelName + '_id' + id + '_r' + randNum + '.html';
+	var sectionLATEX = modelName + '_id' + id + '_r' + randNum + '.tex';
 
 	fs.writeFile(join('./app/templates/html2latex_tmp/', sectionHTML), json.info, function(err) {
 		if (err) return cb(err, '');
@@ -171,7 +172,7 @@ RenderModel.prototype._render = function( obj, cb ) {
 			//console.log('\'Debugging Null\' on for ' + this._Model.modelName);
 		renderSwig(this.renderFolderPath, this._naFilePath, null, cb);
 	} else {
-		renderSwig(this.renderFolderPath, this._renderFilePath, obj, cb);
+		renderSwig(this.renderFolderPath,this._renderFilePath, obj, cb);
 	}
 };
 
@@ -196,7 +197,7 @@ RenderModel.prototype._renderMult = function( obj, cb ) {
 	}
 };
 
-RenderModel.prototype._renderHTML = function( obj, cb ) {
+RenderModel.prototype._renderHTML = function( obj, id, cb ) {
 	if ( this.isDebugNull && this.isDebugPopulate ) {
 		throw new Error('Error: isDebugPopulate and isDebugNull can not both be true.');
 	}
@@ -213,7 +214,7 @@ RenderModel.prototype._renderHTML = function( obj, cb ) {
 			//console.log('\'Debugging Null\' on for ' + this._Model.modelName);
 		renderSwig(this.renderFolderPath, this._naFilePath, null, cb);
 	} else {
-		renderLatex(this._Model.modelName, this.renderFolderPath, this._renderFilePath, obj, cb);
+		renderLatex(this._Model.modelName, id, this.renderFolderPath, this._renderFilePath, obj, cb);
 	}
 };
 
@@ -260,7 +261,7 @@ RenderModel.prototype.renderHTML = function(req, callback) {
 		if (err) {
 			callback(err, null);
 		} else {
-			_this._renderHTML( obj, callback );
+			_this._renderHTML( obj, req.report._id, callback );
 		}
 	});
 };

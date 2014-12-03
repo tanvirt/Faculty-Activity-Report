@@ -24,7 +24,6 @@ module.exports = function(app) {
 		.get(users.requiresLogin, teachingEvaluation.hasAuthorization, teachingEvaluation.getExcel)
 		.put(users.requiresLogin, teachingEvaluation.hasAuthorization, teachingEvaluation.updateExcel);*/
 
-
 	// Finish by binding the middleware
 	app.param('teachingEvaluationId', teachingEvaluation.teachingEvaluationById);
 };

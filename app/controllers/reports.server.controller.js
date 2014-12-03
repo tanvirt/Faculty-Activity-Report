@@ -11,7 +11,9 @@ var mongoose = require('mongoose'),
 	u = require('underscore'),
 	latex = require('latex'),
 	fs = require('fs'),
-	async = require('async');
+	async = require('async'),
+	spawn = require('child_process').spawn,
+	join = require('path').join;
 
 var headerFooter = require('../templates/headerFooter/renderHeaderFooter');
 
@@ -50,6 +52,48 @@ exports.generatePDF = function(req, res, next) {
 		console.log('Report Generated!');
 		next();
 	});
+};
+
+function clean(dir, req, res) {
+	var cleanDir = spawn('rm', ['-rf', dir]);
+
+	cleanDir.stderr.on('data', function(data) {
+		return res.jsonp({ error: 'error: ' + data });
+	});
+
+	cleanDir.on('close', function(code) {
+		var createDir = spawn('mkdir', [dir]);
+
+		createDir.stderr.on('data', function(data) {
+			return res.jsonp({ error: 'error: ' + data });
+		});
+
+		createDir.on('close', function(code) {
+			console.log('./' + join(dir, '/placeholder'));
+
+			var place = spawn('touch', ['./' + join(dir, '/placeholder')]);
+
+			place.stderr.on('data', function(data) {
+				return res.jsonp({ error: 'error: ' + data });
+			});
+
+			place.on('close', function(code) {
+				return res.jsonp({ message: 'Cleaned!' });
+			});
+		});
+	});
+}
+
+exports.cleanTmp = function(req, res) {
+	clean('./app/templates/html2latex_tmp', req, res);
+};
+
+exports.cleanExcel = function(req, res) {
+	clean('./public/modules/reports/excel', req, res);
+};
+
+exports.cleanPDF = function(req, res) {
+	clean('./public/modules/reports/pdf', req, res);
 };
 
 exports.getLatex = function(req, res) {
@@ -266,6 +310,16 @@ exports.hasAuthorization = function(req, res, next) {
 	if (req.report.user.id !== req.user.id && !u.contains(req.user.roles, 'admin')) {
 		return res.status(403).send({
 			message: 'User is not authorized'
+		});
+	}
+
+	next();
+};
+
+exports.isAdmin = function(req, res, next) {
+	if (process.env.NODE_ENV !== 'development' && !u.contains(req.user.roles, 'admin')) {
+		return res.status(403).send({
+			message: 'User is not authorized. Needs Admin Privilages.'
 		});
 	}
 

@@ -135,7 +135,8 @@
         <end>@NL\end{quotation}</end>
     </element>
     <element name='br'>
-        <start>@NL\\</start>
+        <!--<start>@NL\\</start>-->
+        <start> </start>
         <end></end>
     </element>
     <element name='button'>
@@ -604,7 +605,8 @@
     <char num='8364' name='euro' convertTo='\euro' /> <!-- eurosym package -->
     <char num='8249' name='lsaquo' convertTo='\guilsinglleft' />
     <char num='8250' name='rsaquo' convertTo='\guilsinglright' />
-    <char num='160' name='nbsp' convertTo='\nolinebreak' />
+    <!--<char num='160' name='nbsp' convertTo='\nolinebreak' />-->
+    <char num='160' name='nbsp' convertTo=' ' />
     <char num='161' name='iexcl' convertTo='\textexclamdown' />
     <char num='163' name='pound' convertTo='\pounds' />
     <char num='164' name='curren' convertTo='\currency' /> <!-- wasysym package -->

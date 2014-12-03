@@ -12,7 +12,6 @@ Faculty Activity Report
    - Pablo Arango (whospablo) - pabloaran17@ufl.edu
 
 
-
 *Back End*
    - Christine King (xtineking) - airpwane@ufl.edu
    - Morgan Wheeler (mkwheeler) - mkwheeler@ufl.edu
