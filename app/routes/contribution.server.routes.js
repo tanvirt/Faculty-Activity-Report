@@ -3,17 +3,16 @@
 module.exports = function(app) {
 	var users = require('../../app/controllers/users');
 	var contribution = require('../../app/controllers/contribution/contribution');
-	//var reports = require('../../app/controllers/reports');
+	var reports = require('../../app/controllers/reports');
 
-	//todo: require authorization
 	app.route('/reports/:reportId/contribution')
-		.get(users.requiresLogin, contribution.readFromReport)
-		.post(users.requiresLogin, contribution.create);
+		.get(users.requiresLogin, reports.hasAuthorization, contribution.readFromReport)
+		.post(users.requiresLogin, reports.hasAuthorization, contribution.create);
 
 	app.route('/contribution/:contributionId')
-		.get(users.requiresLogin, contribution.read)
-		.put(users.requiresLogin, contribution.update);
+		.get(users.requiresLogin, contribution.hasAuthorization, contribution.read)
+		.put(users.requiresLogin, contribution.hasAuthorization, contribution.update);
 
-	// Finish by binding the Contribution middleware
+	// Finish by binding the TeachingAdvising middleware
 	app.param('contributionId', contribution.contributionById);
 };
