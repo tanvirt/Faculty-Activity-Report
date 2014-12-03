@@ -123,9 +123,8 @@ describe('TeachingEvaluation Controller Tests', function() {
 						  	res.body[0].should.have.property('_id', evaluationOne.id);
 							res.body[1].should.have.property('_id', evaluationTwo.id);
 							
-							//Is the user and report supposed to be returned like this??
-						  	res.body[0].should.have.property('user', {_id:(user.id)});
-						  	res.body[0].should.have.property('report', {_id:(report.id), reportName:(report.reportName)});
+						  	res.body[0].user.should.have.property('_id', user.id);
+						  	res.body[0].report.should.have.property('_id', report.id);
 
 						  	done();
 						});
@@ -172,8 +171,8 @@ describe('TeachingEvaluation Controller Tests', function() {
 						res.body.collegeMean.should.be.an.Array;
 
 					  	res.body.should.have.property('_id', evaluationTwo.id);
-					  	res.body.should.have.property('user', {_id:(user.id)}); 
-					  	res.body.should.have.property('report', {_id:(report.id), reportName:(report.reportName)});
+						res.body.user.should.have.property('_id', user.id);
+						res.body.report.should.have.property('_id', report.id);
 
 					  	done();
 					  });
@@ -238,7 +237,9 @@ describe('TeachingEvaluation Controller Tests', function() {
 						res.body.collegeMean.should.be.an.Array;
 
 					  	res.body.should.have.property('_id');
-					  	res.body.should.have.property('user', user.id);
+					  	//res.body.user.should.have.property('_id', user.id);
+					  	//res.body.report.should.have.property('_id', report.id);
+						res.body.should.have.property('user', user.id);
 					  	res.body.should.have.property('report', report.id);
 
 					  	done();
@@ -278,14 +279,20 @@ describe('TeachingEvaluation Controller Tests', function() {
 						res.body[0].should.have.property('responses', 15);
 						res.body[1].should.have.property('responses', 45);
 
-						res.body.teacherMean.should.be.an.Array;
-						res.body.departmentMean.should.be.an.Array;
-						res.body.collegeMean.should.be.an.Array;
+						res.body[0].teacherMean.should.be.an.Array;
+						res.body[0].departmentMean.should.be.an.Array;
+						res.body[0].collegeMean.should.be.an.Array;
+						
+						res.body[1].teacherMean.should.be.an.Array;
+						res.body[1].departmentMean.should.be.an.Array;
+						res.body[1].collegeMean.should.be.an.Array;
 
 					  	res.body[0].should.have.property('_id');
-					  	res.body[0].should.have.property('user', user.id);
+					  	//res.body[0].user.should.have.property('_id', user.id);
+					  	//res.body[0].report.should.have.property('_id', report.id);
+						res.body[0].should.have.property('user', user.id);
 					  	res.body[0].should.have.property('report', report.id);
-
+						
 					  	done();
 					  });
 				});
@@ -338,8 +345,8 @@ describe('TeachingEvaluation Controller Tests', function() {
 						res.body.collegeMean.should.be.an.Array;
 
 					  	res.body.should.have.property('_id', evaluationOne.id);
-					  	res.body.should.have.property('user', {_id:(user.id)}); 
-					  	res.body.should.have.property('report', {_id:(report.id), reportName:(report.reportName)});
+						res.body.user.should.have.property('_id', user.id);
+						res.body.report.should.have.property('_id', report.id);
 
 				  		done();
 				  	});
