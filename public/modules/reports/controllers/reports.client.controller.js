@@ -22,16 +22,18 @@ app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$statePar
 		};
 
 		$scope.createPrevious = function() {
-			$http.post('/reports/createPrevious', {
-				reportName: $scope.reportName,
-				prevId: '547fc87d0b24fd2428f62406'
-			}).
-			success(function(data, status, headers, config) {
-				$location.path('reports/' + data._id + '/edit');
-			}).
-			error(function(data, status, headers, config) {
-				console.log('Error in Reports');
-			});
+			if ($scope.id) {
+				$http.post('/reports/createPrevious', {
+					reportName: $scope.reportName,
+					prevId: $scope.id
+				}).
+				success(function(data, status, headers, config) {
+					$location.path('reports/' + data._id + '/edit');
+				}).
+				error(function(data, status, headers, config) {
+					console.log('Error in Reports');
+				});
+			}
 		};
 
 		// Remove existing Report

@@ -60,3 +60,7 @@ module.exports.createDefaultData = function(report, user, cb) {
 		cb(err, affiliateAppointments);
 	});
 };
+
+module.exports.createPrevious = function(report, user, prevId, cb) {
+	renderModel.createPrevious(AffiliateAppointments, {affiliateAppointments: undefined}, report, user, prevId, cb);
+};

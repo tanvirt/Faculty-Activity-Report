@@ -62,3 +62,7 @@ module.exports.createDefaultData = function(report, user, cb) {
 		cb(err, editorServiceReviewer);
 	});
 };
+
+module.exports.createPrevious = function(report, user, prevId, cb) {
+	renderModel.createPrevious(EditorServiceReviewer, {editorServiceReviewer: undefined}, report, user, prevId, cb);
+};

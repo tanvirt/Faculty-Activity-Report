@@ -104,4 +104,6 @@ module.exports.createDefaultData = function(report, user, cb) {
 	cb(null, contracts);
 };
 
-
+module.exports.createPrevious = function(report, user, prevId, cb) {
+	renderModel.createPreviousMult(Contracts, {contracts: undefined}, report, user, prevId, cb);
+};

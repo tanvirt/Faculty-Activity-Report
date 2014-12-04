@@ -58,3 +58,7 @@ module.exports.createDefaultData = function(report, user, cb) {
 		cb(err, dateAppointed);
 	});
 };
+
+module.exports.createPrevious = function(report, user, prevId, cb) {
+	renderModel.createPrevious(DateAppointed, {dateAppointed: undefined}, report, user, prevId, cb);
+};

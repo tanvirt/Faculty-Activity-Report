@@ -46,22 +46,5 @@ module.exports.createDefaultData = function(report, user, cb) {
 };
 
 module.exports.createPrevious = function(report, user, prevId, cb) {
-	Name.findOne({report: prevId})
-	.lean()
-	.select('-_id')
-	.select('-__v')
-	.select('-report')
-	.exec(function(err, result) {
-		if (err) return cb(err, undefined);
-		if (!result) {
-			return cb(undefined, {name: undefined});
-		}
-
-		var name = new Name(result);
-		name.report = report;
-
-		name.save(function(err) {
-			cb(err, name);
-		});
-	});
+	renderModel.createPrevious(Name, {name: undefined}, report, user, prevId, cb);
 };

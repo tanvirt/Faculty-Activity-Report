@@ -8,8 +8,19 @@
             <h3>Enter new report name: </h3>
             <input data-ng-model="reportName">
         </p>
+
         <button data-ng-click="createDefault()" class="btn btn-primary">Default Data</button>
-        <button data-ng-click="createPrevious()" class="btn btn-primary">Previous Data</button>
+
+        <div data-ng-init="find()">
+
+            <select class="form-control" id="id" data-ng-model="id">
+                <option value="" disabled selected>Previous Reports</option>
+                <option ng-repeat="report in reports" value="{{report._id}}">{{report.reportName}}</option>
+            </select>
+
+            <button data-ng-click="createPrevious()" class="btn btn-primary">Previous Data</button>
+        </div>
+        
     </div>
 
 </section>

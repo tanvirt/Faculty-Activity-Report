@@ -203,7 +203,7 @@ exports.defaultValues = function(report, profile, user, cb) {
 
 exports.previousReport = function(report, profile, user, prevId, cb) {
 	async.parallel({	
-		name: async.apply(renderName.createPrevious, report, user, prevId)/*,
+		name: async.apply(renderName.createPrevious, report, user, prevId),
 		tenure: async.apply(renderTenure.createPrevious, report, user, prevId),
 		currentRank: async.apply(renderCurrentRank.createPrevious, report, user, prevId),
 		affiliateAppointments: async.apply(renderAffiliateAppointments.createPrevious, report, user, prevId),
@@ -214,7 +214,7 @@ exports.previousReport = function(report, profile, user, prevId, cb) {
 		graduateCommittee: async.apply(renderGraduateCommittee.createPrevious, report, user, prevId),
 		creativeWorks: async.apply(renderCreativeWorks.createPrevious, report, user, prevId),
 		patents: async.apply(renderPatents.createPrevious, report, user, prevId),
-		publication: async.apply(renderPublication.creatPrevious, report, user, prevId),
+		publication: async.apply(renderPublication.createPrevious, report, user, prevId),
 		contribution: async.apply(renderContribution.createPrevious, report, user, prevId),
 		conferences: async.apply(renderConferences.createPrevious, report, user, prevId),
 		contracts: async.apply(renderContracts.createPrevious, report, user, prevId),
@@ -225,7 +225,7 @@ exports.previousReport = function(report, profile, user, prevId, cb) {
 		international: async.apply(renderInternational.createPrevious, report, user, prevId),
 		serviceToSchools: async.apply(renderServiceToSchools.createPrevious, report, user, prevId),
 		honors: async.apply(renderHonors.createPrevious, report, user, prevId),
-		furtherInformationSection: async.apply(renderFurtherInformationSection.createPrevious, report, user, prevId)*/
+		furtherInformationSection: async.apply(renderFurtherInformationSection.createPrevious, report, user, prevId)
 	}, function(err, models) {
 		if (err) {
 			return cb({

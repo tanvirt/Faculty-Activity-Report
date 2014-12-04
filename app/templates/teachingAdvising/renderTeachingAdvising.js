@@ -62,3 +62,7 @@ module.exports.createDefaultData = function(report, user, cb) {
 		cb(err, teachingAdvising);
 	});
 };
+
+module.exports.createPrevious = function(report, user, prevId, cb) {
+	renderModel.createPrevious(TeachingAdvising, {teachingAdvising: undefined}, report, user, prevId, cb);
+};

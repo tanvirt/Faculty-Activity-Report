@@ -55,7 +55,7 @@ module.exports.render = function (req, callback) {
 					c.minor++;
 					break;
 				default:
-					throw new Error('Role is not defined in method incrementCount');
+					throw new Error('Role is not defined');
 			}
 		}
 
@@ -77,4 +77,8 @@ module.exports.createDefaultData = function(report, user, cb) {
 	}	
 
 	cb(null, graduateCommittee);
+};
+
+module.exports.createPrevious = function(report, user, prevId, cb) {
+	renderModel.createPreviousMult(GraduateCommittee, {graduateCommittee: undefined}, report, user, prevId, cb);
 };

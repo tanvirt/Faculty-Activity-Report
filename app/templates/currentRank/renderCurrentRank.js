@@ -64,3 +64,7 @@ module.exports.createDefaultData = function(report, user, cb) {
 		cb(err, currentRank);
 	});
 };
+
+module.exports.createPrevious = function(report, user, prevId, cb) {
+	renderModel.createPrevious(CurrentRank, {currentRank: undefined}, report, user, prevId, cb);
+};

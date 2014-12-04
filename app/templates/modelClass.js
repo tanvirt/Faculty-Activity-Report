@@ -266,5 +266,51 @@ RenderModel.prototype.renderHTML = function(req, callback) {
 	});
 };
 
+RenderModel.prototype.createPrevious = function(Model, json, report, user, prevId, cb) {
+	Model.findOne({report: prevId})
+	.lean()
+	.select('-_id')
+	.select('-__v')
+	.select('-report')
+	.exec(function(err, result) {
+		if (err) return cb(err, undefined);
+		if (!result) {
+			return cb(undefined, json);
+		}
+
+		var model = new Model(result);
+		model.report = report;
+
+		model.save(function(err) {
+			cb(err, model);
+		});
+	});
+};
+
+RenderModel.prototype.createPreviousMult = function(Model, json, report, user, prevId, cb) {
+	Model.find({report: prevId})
+	.lean()
+	.select('-_id')
+	.select('-__v')
+	.select('-report')
+	.exec(function(err, result) {
+		if (err) return cb(err, undefined);
+		if (!result) {
+			return cb(undefined, json);
+		}
+
+		var model;
+
+		for (var i=0; i<result.length; i++) {
+			model = new Model(result[i]);
+			model.report = report;
+
+			model.save();
+		}
+
+		cb(err, model);
+	});
+};
+
 // Export the function to the world
 module.exports.RenderModel = RenderModel;

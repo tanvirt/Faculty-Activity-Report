@@ -60,3 +60,7 @@ module.exports.createDefaultData = function(report, user, cb) {
 		cb(err, honors);
 	});
 };
+
+module.exports.createPrevious = function(report, user, prevId, cb) {
+	renderModel.createPrevious(Honors, {honors: undefined}, report, user, prevId, cb);
+};
