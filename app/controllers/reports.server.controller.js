@@ -20,7 +20,7 @@ var headerFooter = require('../templates/headerFooter/renderHeaderFooter');
 exports.dropDatabase = function(req, res) {
 	mongoose.connection.db.dropDatabase();
 	res.jsonp({
-		message:'Database Dropped!'
+		message:'Database Dropped! Please restart your server now!'
 	});
 };
 
