@@ -88,6 +88,10 @@ var UserSchema = new Schema({
 	},
   	resetPasswordExpires: {
   		type: Date
+  	},
+  	reportsCreated: {
+  		type: Number,
+  		default: 0
   	}
 });
 

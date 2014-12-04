@@ -15,7 +15,7 @@
 
             <select class="form-control" id="id" data-ng-model="id">
                 <option value="" disabled selected>Previous Reports</option>
-                <option ng-repeat="report in reports" value="{{report._id}}">{{report.reportName}}</option>
+                <option ng-repeat="report in reports" value="{{report._id}}">{{report.reportName}}; Reports Created: {{report.number}}; Date: {{report.created | date}} </option>
             </select>
 
             <button data-ng-click="createPrevious()" class="btn btn-primary">Previous Data</button>

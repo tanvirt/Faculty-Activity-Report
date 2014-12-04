@@ -118,10 +118,15 @@ exports.getNew = function(req, res) {
 };
 
 exports.createDefault = function(req, res) {
+	req.user.reportsCreated++;
+	req.user.save();
+
 	var report = new Report({
 		reportName: req.body.reportName,
 		user: req.user
 	});
+
+	report.number = req.user.reportsCreated;
 	
 	var profile = new Profile({
 		report: report,
@@ -138,10 +143,15 @@ exports.createDefault = function(req, res) {
 };
 
 exports.createPrevious = function(req, res) {
+	req.user.reportsCreated++;
+	req.user.save();
+
 	var report = new Report({
 		reportName: req.body.reportName,
 		user: req.user
 	});
+
+	report.number = req.user.reportsCreated;
 	
 	var profile = new Profile({
 		report: report,
@@ -174,9 +184,13 @@ exports.updateReportName = function(req, res) {
  * Create a Report
  */
 exports.create = function(req, res) {
+	req.user.reportCreated++;
+	req.user.save();
+	
 	var report = new Report();
 	
 	report.user = req.user;
+	report.number = req.user.reportsCreated;
 
 	// Assign Prev values
 	report.reportName = req.body.reportName;

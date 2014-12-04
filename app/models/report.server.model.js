@@ -16,10 +16,13 @@ var ReportSchema = new Schema({
 		//required: 'Please fill Report name',
 		trim: true
 	},
-
 	created: {
 		type: Date,
 		default: Date.now
+	},
+	number: {
+		type: Number,
+		required: true
 	},
 	user: {
 		type: Schema.ObjectId,
