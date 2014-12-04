@@ -78,7 +78,7 @@ app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$statePar
 			$scope.report = Reports.get({ 
 				reportId: $stateParams.reportId
 			});
-			if ($scope.report) {
+			/*if ($scope.report) {
 				$http.get('/reportdownload/' + $stateParams.reportId).
 					success(function(data, status, headers, config) {
 						//$location.path('reports/' + $stateParams.reportId);
@@ -86,7 +86,7 @@ app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$statePar
 					error(function(data, status, headers, config) {
 						console.log('error');
 					});
-			}
+			}*/
 			$scope.pdfLocation = "/modules/reports/pdf/" + $stateParams.reportId + ".pdf";
 		};
 
