@@ -18,10 +18,17 @@ var mongoose = require('mongoose'),
 var headerFooter = require('../templates/headerFooter/renderHeaderFooter');
 
 exports.dropDatabase = function(req, res) {
-	mongoose.connection.db.dropDatabase();
-	res.jsonp({
-		message:'Database Dropped! Please restart your server now!'
-	});
+	if (process.env.NODE_ENV === 'development') {
+		mongoose.connection.db.dropDatabase();
+		res.jsonp({
+			message:'Database Dropped! Please restart your server now!'
+		});
+	} else {
+		res.jsonp({
+			error: 'You can only drop the database this way in development mode.',
+			message: 'Database not dropped.'
+		});
+	}
 };
 
 exports.viewCtrl = function(req, res) {
