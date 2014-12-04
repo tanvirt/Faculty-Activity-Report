@@ -3,9 +3,41 @@
 	<div class="page-header">
 		<h1 data-ng-bind="report.reportName"></h1>
 	</div>
-	
-	<div class="col-md-1"></div>
+
+	<div class="col-md-12">
+		<div class="col-md-offset-4 btn btn-primary" ng-click="prevPage()">
+			<i class="glyphicon glyphicon-chevron-left"></i>
+		</div>
+		<span>page {{currentPage}} of {{totalPages}}</span>
+		<div class="btn btn-primary" ng-click="nextPage()">
+			<i class="glyphicon glyphicon-chevron-right"></i>
+		</div>
+		<div class="pull-right" data-ng-show="authentication.user._id == report.user._id">
+
+			<a class="btn btn-primary" data-ng-click="download();">
+				<i class="glyphicon glyphicon-download"> Download</i>
+			</a>
+
+			<a class="btn btn-primary" href="/#!/reports/{{report._id}}/edit">
+				<i class="glyphicon glyphicon-edit"> Edit</i>
+			</a>
+			<a class="btn btn-primary" data-ng-click="remove();">
+				<i class="glyphicon glyphicon-trash"></i>
+			</a>
+		</div>
+		<br>
+		<!--pdfviewer class="col-md-offset-2" ng-src="/modules/reports/pdf/{{report._id}}.pdf"-->
+		<pdfviewer class="col-md-offset-2" src="{{pdfLocation}}"
+					 on-page-load='pageLoaded(page,total)' id="viewer">
+		</pdfviewer>
+	</div>
+	<!--
 	<div class="col-md-10">
+
+
+
+
+
 		<h3 class="text-center">COLLEGE OF ENGINEERING<p>Annual Activities Report</h3>
 		<br>
 
@@ -137,21 +169,8 @@
 		<br>
 	</div>
     <div class="col-md-1"></div>
-
+-->
 <div class="col-md-12">
-    <div class="pull-right" data-ng-show="authentication.user._id == report.user._id">
-
-		<a class="btn btn-primary" data-ng-click="download();">
-			<i class="glyphicon glyphicon-download"></i>
-		</a>
-
-		<a class="btn btn-primary" href="/#!/reports/{{report._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
-	</div>
 	<small>
 		<em class="text-muted">
 			Created on
