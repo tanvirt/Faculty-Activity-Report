@@ -200,3 +200,111 @@ exports.defaultValues = function(report, profile, user, cb) {
 		});
 	});
 };
+
+exports.previousReport = function(report, profile, user, prevId, cb) {
+	async.parallel({	
+		name: async.apply(renderName.createPrevious, report, user, prevId)/*,
+		tenure: async.apply(renderTenure.createPrevious, report, user, prevId),
+		currentRank: async.apply(renderCurrentRank.createPrevious, report, user, prevId),
+		affiliateAppointments: async.apply(renderAffiliateAppointments.createPrevious, report, user, prevId),
+		dateAppointed: async.apply(renderDateAppointed.createPrevious, report, user, prevId),
+		teachingAdvising: async.apply(renderTeachingAdvising.createPrevious, report, user, prevId),
+		assignedActivity: async.apply(renderAssignedActivity.createPrevious, report, user, prevId),
+		teachingEvaluation: async.apply(renderTeachingEvaluation.createPrevious, report, user, prevId),
+		graduateCommittee: async.apply(renderGraduateCommittee.createPrevious, report, user, prevId),
+		creativeWorks: async.apply(renderCreativeWorks.createPrevious, report, user, prevId),
+		patents: async.apply(renderPatents.createPrevious, report, user, prevId),
+		publication: async.apply(renderPublication.creatPrevious, report, user, prevId),
+		contribution: async.apply(renderContribution.createPrevious, report, user, prevId),
+		conferences: async.apply(renderConferences.createPrevious, report, user, prevId),
+		contracts: async.apply(renderContracts.createPrevious, report, user, prevId),
+		governance: async.apply(renderGovernance.createPrevious, report, user, prevId),
+		consultationsOutsideUniversity: async.apply(renderConsultationsOutsideUniversity.createPrevious, report, user, prevId),
+		editorServiceReviewer: async.apply(renderEditorServiceReviewer.createPrevious, report, user, prevId),
+		membership: async.apply(renderMembership.createPrevious, report, user, prevId),
+		international: async.apply(renderInternational.createPrevious, report, user, prevId),
+		serviceToSchools: async.apply(renderServiceToSchools.createPrevious, report, user, prevId),
+		honors: async.apply(renderHonors.createPrevious, report, user, prevId),
+		furtherInformationSection: async.apply(renderFurtherInformationSection.createPrevious, report, user, prevId)*/
+	}, function(err, models) {
+		if (err) {
+			return cb({
+				title: 'Error',
+				message: err
+			});
+		}
+
+		if (!models) {
+			return cb({
+				title: 'Error',
+				message: 'One of the models was undefined'
+			});
+		}
+
+		if (models.name)
+			profile.name = models.name._id;
+		if (models.tenure)
+			profile.tenure = models.tenure._id;
+		if (models.dateAppointed)
+			profile.dateAppointed = models.dateAppointed._id;
+		if (models.currentRank)
+			profile.currentRank = models.currentRank._id;
+		if (models.affiliateAppointments)
+			profile.affiliateAppointments = models.affiliateAppointments._id;
+
+		if (models.name)
+			report.name = models.name._id;
+		if (models.tenure)
+			report.tenure = models.tenure._id;
+		if (models.currentRank)
+			report.currentRank = models.currentRank._id;
+		if (models.affiliateAppointments)
+			report.affiliateAppointments = models.affiliateAppointments._id;
+		if (models.dateAppointed)
+			report.dateAppointed = models.dateAppointed._id;
+		if (models.teachingAdvising)
+			report.teachingAdvising = models.teachingAdvising._id;
+		if (models.assignedActivity)
+			report.assignedActivity = models.assignedActivity._id;
+		if (models.teachingEvaluation)
+			report.teachingEvaluation = models.teachingEvaluation._id;
+		if (models.graduateCommittee)
+			report.graduateCommittee = models.graduateCommittee._id;
+		if (models.creativeWorks)
+			report.creativeWorks = models.creativeWorks._id;
+		if (models.patents)
+			report.patents = models.patents._id;
+		if (models.publication)
+			report.publication = models.publication._id;
+		if (models.contribution)
+			report.contribution = models.contribution._id;
+		if (models.conferences)
+			report.conferences = models.conferences._id;
+		if (models.contracts)
+			report.contracts = models.contracts._id;
+		if (models.governance)
+			report.governance = models.governance._id;
+		if (models.consultationsOutsideUniversity)
+			report.consultationsOutsideUniversity = models.consultationsOutsideUniversity._id;
+		if (models.editorServiceReviewer)
+			report.editorServiceReviewer = models.editorServiceReviewer._id;
+		if (models.membership)
+			report.membership = models.membership._id;
+		if (models.international)
+			report.international = models.international._id;
+		if (models.serviceToSchools)
+			report.serviceToSchools = models.serviceToSchools._id;
+		if (models.honors)
+			report.honors = models.honors._id;
+		if (models.furtherInformationSection)
+			report.furtherInformationSection = models.furtherInformationSection._id;
+
+		report.save(function(err) {
+			if (err) return cb(err);
+
+			profile.save(function(err) {
+				cb(err);
+			});
+		});
+	});
+};

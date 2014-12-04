@@ -117,8 +117,7 @@ exports.getNew = function(req, res) {
 	res.jsonp(req.report);
 };
 
-exports.createNew = function(req, res) {
-	console.log(req.body);
+exports.createDefault = function(req, res) {
 	var report = new Report({
 		reportName: req.body.reportName,
 		user: req.user
@@ -132,6 +131,26 @@ exports.createNew = function(req, res) {
 	report.profile = profile;
 
 	headerFooter.defaultValues(report, profile, req.user, function(err) {
+		if (err) return res.jsonp(err);
+		req.report = report;
+		res.jsonp(report);
+	});
+};
+
+exports.createPrevious = function(req, res) {
+	var report = new Report({
+		reportName: req.body.reportName,
+		user: req.user
+	});
+	
+	var profile = new Profile({
+		report: report,
+		user: req.user
+	});
+
+	report.profile = profile;
+
+	headerFooter.previousReport(report, profile, req.user, req.body.prevId, function(err) {
 		if (err) return res.jsonp(err);
 		req.report = report;
 		res.jsonp(report);

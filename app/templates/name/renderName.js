@@ -35,21 +35,6 @@ module.exports.render = function(req, callback) {
 	renderModel.render(req, callback);
 };
 
-module.exports.submit = function(req, callback) {
-	if (is.empty(req.body.name)) return callback(null, null);
-
-	var name = new Name({
-		firstName: req.body.name.firstName,
-		middleName: req.body.name.middleName,
-		lastName: req.body.name.lastName,
-		user: req.user
-	});
-
-	name.save(function(err) {
-		callback(err, name);
-	});
-};
-
 module.exports.createDefaultData = function(report, user, cb) {
 	var save = _.extend(defaultData.name, {report: report, user: user});
 
@@ -57,5 +42,26 @@ module.exports.createDefaultData = function(report, user, cb) {
 		
 	name.save(function(err) {
 		cb(err, name);
+	});
+};
+
+module.exports.createPrevious = function(report, user, prevId, cb) {
+	Name.findOne({report: prevId})
+	.lean()
+	.select('-_id')
+	.select('-__v')
+	.select('-report')
+	.exec(function(err, result) {
+		if (err) return cb(err, undefined);
+		if (!result) {
+			return cb(undefined, {name: undefined});
+		}
+
+		var name = new Name(result);
+		name.report = report;
+
+		name.save(function(err) {
+			cb(err, name);
+		});
 	});
 };

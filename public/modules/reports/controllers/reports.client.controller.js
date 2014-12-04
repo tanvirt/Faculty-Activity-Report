@@ -9,17 +9,29 @@ app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$statePar
 		
 		
 		// Create new Report
-		$scope.create = function() {
-			$http.post('/reports/createNew',
-			{
+		$scope.createDefault = function() {
+			$http.post('/reports/createDefault', {
 				reportName: $scope.reportName
 			}).
-				success(function(data, status, headers, config) {
-					$location.path('reports/' + data._id + '/edit');
-				}).
-				error(function(data, status, headers, config) {
-					console.log('Error in Reports');
-				});
+			success(function(data, status, headers, config) {
+				$location.path('reports/' + data._id + '/edit');
+			}).
+			error(function(data, status, headers, config) {
+				console.log('Error in Reports');
+			});
+		};
+
+		$scope.createPrevious = function() {
+			$http.post('/reports/createPrevious', {
+				reportName: $scope.reportName,
+				prevId: '547fc87d0b24fd2428f62406'
+			}).
+			success(function(data, status, headers, config) {
+				$location.path('reports/' + data._id + '/edit');
+			}).
+			error(function(data, status, headers, config) {
+				console.log('Error in Reports');
+			});
 		};
 
 		// Remove existing Report
