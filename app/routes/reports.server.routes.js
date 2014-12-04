@@ -49,6 +49,9 @@ module.exports = function(app) {
 	app.route('/cleanPDF')
 		.get(users.requiresLogin, reports.isAdmin, reports.cleanPDF);
 
+	app.route('/dropDatabase')
+		.get(reports.dropDatabase);
+
 	// Finish by binding the Report middleware
 	app.param('reportId', reports.reportByID);
 };

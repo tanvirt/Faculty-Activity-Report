@@ -17,6 +17,13 @@ var mongoose = require('mongoose'),
 
 var headerFooter = require('../templates/headerFooter/renderHeaderFooter');
 
+exports.dropDatabase = function(req, res) {
+	mongoose.connection.db.dropDatabase();
+	res.jsonp({
+		message:'Database Dropped!'
+	});
+};
+
 exports.viewCtrl = function(req, res) {
 	res.render('report/upload', {
 		title: 'excel'
@@ -186,7 +193,7 @@ exports.updateReportName = function(req, res) {
 exports.create = function(req, res) {
 	req.user.reportCreated++;
 	req.user.save();
-	
+
 	var report = new Report();
 	
 	report.user = req.user;
