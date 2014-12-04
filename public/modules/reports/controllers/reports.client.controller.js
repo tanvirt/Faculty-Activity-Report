@@ -3,9 +3,27 @@
 // Reports controller
 var app = angular.module('reports');
 
-app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$stateParams', '$location', 'Authentication', 'Reports',
-	function($scope, $rootScope, $http, $stateParams, $location, Authentication, Reports ) {
+app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$stateParams', '$location', 'Authentication', 'Reports', 'PDFViewerService',
+	function($scope, $rootScope, $http, $stateParams, $location, Authentication, Reports, pdf ) {
 		$scope.authentication = Authentication;
+
+
+
+		$scope.viewer = pdf.Instance("viewer");
+
+		$scope.nextPage = function() {
+			$scope.viewer.nextPage();
+		};
+
+
+		$scope.prevPage = function() {
+			$scope.viewer.prevPage();
+		};
+
+		$scope.pageLoaded = function(curPage, totalPages) {
+			$scope.currentPage = curPage;
+			$scope.totalPages = totalPages;
+		};
 		
 		
 		// Create new Report
@@ -60,6 +78,16 @@ app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$statePar
 			$scope.report = Reports.get({ 
 				reportId: $stateParams.reportId
 			});
+			if ($scope.report) {
+				$http.get('/reportdownload/' + $stateParams.reportId).
+					success(function(data, status, headers, config) {
+						//$location.path('reports/' + $stateParams.reportId);
+					}).
+					error(function(data, status, headers, config) {
+						console.log('error');
+					});
+			}
+			$scope.pdfLocation = "/modules/reports/pdf/" + $stateParams.reportId + ".pdf";
 		};
 
 		// Download existing report
