@@ -33,3 +33,38 @@ exports = module.exports = app;
 
 // Logging initialization
 console.log('MEAN.JS application started on port ' + config.port);
+
+// Add Root User on StartUp
+var User = mongoose.model('User');
+
+User.find({username:'admin'}, function(err, results) {
+	if (err) {
+		console.log('Finding Root Admin Failed.');
+		console.log(err);
+		return;
+	}
+
+	if (results.length > 1) {
+		console.log('More than one Root Admin is Defined!');
+		return;
+	}
+
+	if (results.length === 0) {
+		var user = new User({
+			firstName: 'FirstName',
+			lastName: 'LastName',
+			email: 'admin@admin.com',
+			username: 'admin',
+			password: 'password',
+			roles: ['user', 'admin'],
+			provider: 'local'
+		});
+
+		user.save(function(err) {
+			if (err) {
+				console.log('Error Saving Root Admin');
+				console.log(err);
+			}
+		});
+	}
+});
