@@ -9,7 +9,7 @@ app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$statePar
 
 
 
-		$scope.viewer = pdf.Instance("viewer");
+		$scope.viewer = pdf.Instance('viewer');
 
 		$scope.nextPage = function() {
 			$scope.viewer.nextPage();
@@ -101,7 +101,7 @@ app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$statePar
 						console.log('error');
 					});
 			}*/
-			$scope.pdfLocation = "/modules/reports/pdf/" + $stateParams.reportId + ".pdf";
+			$scope.pdfLocation = '/modules/reports/pdf/' + $stateParams.reportId + '.pdf';
 		};
 
 		// Download existing report
