@@ -72,6 +72,7 @@ describe('Teaching Evaluation Model Unit Tests:', function() {
 			});
 		});
 
+		/*
 		it('should fail to save if one of the mean scores is over highScore', function(done) {
 			evaluation01.teacherMean[3] = 10;
 			return evaluation01.save(function(err) {
@@ -95,7 +96,7 @@ describe('Teaching Evaluation Model Unit Tests:', function() {
 				done();
 			});
 		});
-
+		*/
 
 	}); 
 

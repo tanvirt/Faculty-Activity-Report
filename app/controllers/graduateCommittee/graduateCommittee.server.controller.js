@@ -39,8 +39,6 @@ exports.create = function(req, res) {
 		report: req.report
 	});
 
-	graduateCommittee.incrementCount();
-
 	graduateCommittee.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -64,9 +62,6 @@ exports.update = function(req, res) {
 
 	var graduateCommittee = req.graduateCommittee;
 
-	graduateCommittee.updateCount( req.body.graduateCommittee.role );
-
-	//I know this is gonna screw up with the subsection array and counts for each role
 	graduateCommittee = _.extend(graduateCommittee, req.body.graduateCommittee);
 
 	graduateCommittee.save(function(err) {

@@ -17,7 +17,7 @@ var Report = mongoose.model('Report');
 
 var async = require('async');
 
-var user, report, advising;
+var user, user2, advising, advising2, report;
 
 describe('TeachingAdvising Controller Tests', function() {
 	beforeEach(function(done) {
@@ -33,6 +33,18 @@ describe('TeachingAdvising Controller Tests', function() {
 
 		user.save();
 
+		user2 = new User({
+			firstName: 'Full',
+			lastName: 'Name',
+			email: 'test@test.com',
+			username: 'admin',
+			password: 'password',
+			provider: 'local',
+			roles: ['admin']
+		});
+
+		user2.save();
+
 		report = new Report({
 			reportName: 'MyReportName',
 			user: user
@@ -41,20 +53,28 @@ describe('TeachingAdvising Controller Tests', function() {
 		report.save();
 
 		advising = new TeachingAdvising({
-			info: 'I am teaching some courses and advising some people',
+			info: 'I taught some courses and advised some people',
 
 			report: report,
 			user: user
 		});
 
+		advising2 = new TeachingAdvising({
+			info: 'I did stuff',
+
+			report: report,
+			user: user2
+		});
+
 		advising.save();
-		
+		advising2.save();
+
 		done();
 	});
 
 	describe('Testing the GET methods', function() {
 
-		it('should fail to get a teachingAdvising if not logged in', function(done) {
+		it('should fail to be able to get a teachingAdvising if not logged in', function(done) {
 			request(app)
 			  .get('/reports/' + report.id + '/teachingAdvising')
 			  .set('Accept', 'application/json')
@@ -63,7 +83,7 @@ describe('TeachingAdvising Controller Tests', function() {
 			  .end(done);
 		});
 
-		it('should be able to get a teachingAdvising associated with its report id', function(done) {
+		it('should be able to get teachingAdvising associated with its report id', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -81,17 +101,16 @@ describe('TeachingAdvising Controller Tests', function() {
 						.end(function(err, res) {
 							should.not.exist(err);
 
-							res.body.should.be.an.Object.and.have.property('info', advising.info);						
-
-							res.body.should.have.property('_id', advising.id);
-						  	res.body.should.have.property('user', user.id);
-						  	res.body.should.have.property('report', report.id);
+							res.body[0].should.have.property('_id', advising.id);
+							res.body[0].should.have.property('info', advising.info);
+						  	res.body[0].user.should.have.property('_id', user.id);
+						  	res.body[0].report.should.have.property('_id', report.id);
 						  	done();
 						});
 				});
 		});
 
-		it('should fail to get a specific teachingAdvising if not logged in', function(done) {
+		it('should fail to be able to get a specific teachingAdvising if not logged in', function(done) {
 			request(app)
 			  .get('/teachingAdvising/' + advising.id)
 			  .set('Accept', 'application/json')
@@ -100,7 +119,7 @@ describe('TeachingAdvising Controller Tests', function() {
 			  .end(done);
 		});
 
-		it('should be able to get a specific teachingAdvising based on its id', function(done) {
+		it('should not be able to get a specific teachingAdvising if the user does not own the teachingAdvising and is not a superuser', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -110,24 +129,105 @@ describe('TeachingAdvising Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					  .get('/teachingAdvising/' + advising.id)
-					  .set('cookie', res.headers['set-cookie'])
-					  .set('Accept', 'application/json')
-					  .expect('Content-Type', /json/)
-					  .expect(200)
-					  .end(function(err, res) {
-					  	should.not.exist(err);
+					.get('/teachingAdvising/' + advising2.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.expect('Content-Type', /json/)
+				  	.expect(403)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
 
-					  	res.body.should.be.an.Object;
+				  		res.body.should.have.property('message').and.equal('User is not authorized');
+
+				  		done();
+				  	});
+
+				});
+		});    
+
+		it('should be able to get a specific teachingAdvising if the user does own the teachingAdvising and is not a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'username',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.get('/teachingAdvising/' + advising.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
 
 					  	res.body.should.have.property('_id', advising.id);
-					  	res.body.should.have.property('user', user.id);
-					  	res.body.should.have.property('report', report.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
 
-					  	done();
-					  });
+				  		done();
+				  	});
+
 				});
-		});
+		});   
+
+		it('should be able to get a specific teachingAdvising if the user does not own the teachingAdvising and is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.get('/teachingAdvising/' + advising.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.have.property('_id', advising.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});   
+
+		it('should be able to get a specific teachingAdvising if the user does own the teachingAdvising is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.get('/teachingAdvising/' + advising2.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.have.property('_id', advising2.id);
+					  	res.body.user.should.have.property('_id', user2.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});  
 
 	});
 
@@ -135,11 +235,11 @@ describe('TeachingAdvising Controller Tests', function() {
 
 		var advisingObj = {
 			teachingAdvising: {
-			    info:'teaching stuff'
+			    info:'Advising people'
 		 	}
 		};
 
-		it('should fail to create a teachingAdvising if not logged in', function(done) {
+		it('should fail to be able to create a teachingAdvising if not logged in', function(done) {
 			request(app)
 			  .post('/reports/' + report.id + '/teachingAdvising')
 			  .set('Accept', 'application/json')
@@ -183,7 +283,7 @@ describe('TeachingAdvising Controller Tests', function() {
 
 	describe('Testing the PUT methods', function() {
 
-		it('should fail to update a specific teachingAdvising if not logged in', function(done) {
+		it('should fail to be able to update a specific teachingAdvising if not logged in', function(done) {
 			request(app)
 			  .put('/teachingAdvising/' + advising.id)
 			  .set('Accept', 'application/json')
@@ -192,7 +292,38 @@ describe('TeachingAdvising Controller Tests', function() {
 			  .end(done);
 		});
 
-		it('should be able to update a specific teachingAdvising', function(done) {
+		it('should not be able to update a specific teachingAdvising if the user does not own the teachingAdvising and is not a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'username',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.put('/teachingAdvising/' + advising2.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.send({
+				  		teachingAdvising: {
+				  			info:'Different advising'
+				  		}
+				  	})
+				  	.expect('Content-Type', /json/)
+				  	.expect(403)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+				  		res.body.should.have.property('message').and.equal('User is not authorized');
+
+				  		done();
+				  	});
+
+				});
+		});    
+
+		it('should be able to update a specific teachingAdvising if the user does own the teachingAdvising and is not a superuser', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -207,7 +338,7 @@ describe('TeachingAdvising Controller Tests', function() {
 				  	.set('Accept', 'application/json')
 				  	.send({
 				  		teachingAdvising: {
-				  			info: 'teaching other stuff'
+				  			info:'Different advising'
 				  		}
 				  	})
 				  	.expect('Content-Type', /json/)
@@ -215,19 +346,87 @@ describe('TeachingAdvising Controller Tests', function() {
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
 
-					  	res.body.should.be.an.Object.and.have.property('info', 'teaching other stuff');
+					  	res.body.should.be.an.Object.and.have.property('info', 'Different advising');
 
 					  	res.body.should.have.property('_id', advising.id);
-					  	res.body.should.have.property('user', user.id);
-					  	res.body.should.have.property('report', report.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
 
 				  		done();
 				  	});
 
 				});
-		});
-			
-	    
+		});   
+
+		it('should be able to update a specific teachingAdvising if the user does not own the teachingAdvising and is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.put('/teachingAdvising/' + advising.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.send({
+				  		teachingAdvising: {
+				  			info:'Different info'
+				  		}
+				  	})
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.be.an.Object.and.have.property('info', 'Different info');
+
+					  	res.body.should.have.property('_id', advising.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});   
+
+		it('should be able to update a specific teachingAdvising if the user does own the teachingAdvising is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.put('/teachingAdvising/' + advising2.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.send({
+				  		teachingAdvising: {
+				  			info:'Different info'
+				  		}
+				  	})
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.be.an.Object.and.have.property('info', 'Different info');
+
+					  	res.body.should.have.property('_id', advising2.id);
+					  	res.body.user.should.have.property('_id', user2.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});   
 	});
 
 	afterEach(function(done) {

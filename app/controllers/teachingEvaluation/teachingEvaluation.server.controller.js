@@ -166,7 +166,7 @@ exports.create = function(req, res) {
 		departmentMean: req.body.teachingEvaluation.departmentMean,
 		collegeMean: req.body.teachingEvaluation.collegeMean,
 
-		user: req.user,
+		user: req.user, //Why is this not returning an object in the json, but GET and PUT do?
 		report: req.report
 	});
 
@@ -211,13 +211,13 @@ exports.readFromReport = function(req, res) {
 	TeachingEvaluation.find({report: req.report})
 	.populate('user', 'displayName')
 	.populate('report', 'reportName')
-	.exec(function(err, result) { //Returns array
+	.exec(function(err, result) { 
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		}
-		return res.jsonp(result);
+		return res.jsonp(result); //Returns array
 	});
 };
 

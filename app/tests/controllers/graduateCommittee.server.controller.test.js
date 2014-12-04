@@ -132,8 +132,8 @@ describe('Graduate Committee Controller Tests', function() {
 							res.body[2].should.have.property('_id', committeeThree.id);
 							
 							for(var iii = 0; iii < 3; iii++) {
-								res.body[iii].should.have.property('user', user.id);
-								res.body[iii].should.have.property('report', report.id);
+								res.body[iii].user.should.have.property('_id', user.id);
+								res.body[iii].report.should.have.property('_id', report.id);
 							}
 
 						  	done();
@@ -178,8 +178,8 @@ describe('Graduate Committee Controller Tests', function() {
 
 					  	res.body.should.have.property('_id', committeeTwo.id);
 						
-					  	res.body.should.have.property('user', user.id);
-					  	res.body.should.have.property('report', report.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
 
 					  	done();
 					  });
@@ -240,8 +240,10 @@ describe('Graduate Committee Controller Tests', function() {
 
 					  	res.body.should.have.property('_id');
 						
-					  	res.body.should.have.property('user', user.id);
-					  	res.body.should.have.property('report', report.id);
+					  	//res.body.user.should.have.property('_id', user.id);
+					  	//res.body.report.should.have.property('_id', report.id);
+						res.body.should.have.property('user', user.id);
+						res.body.should.have.property('report', report.id);
 
 					  	done();
 					  });
@@ -294,8 +296,8 @@ describe('Graduate Committee Controller Tests', function() {
 
 					  	res.body.should.have.property('_id', committeeThree.id);
 						
-					  	res.body.should.have.property('user', user.id);
-					  	res.body.should.have.property('report', report.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
 
 				  		done();
 				  	});

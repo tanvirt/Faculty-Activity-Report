@@ -64,7 +64,7 @@ describe('Patents Controller Tests', function() {
 		});
 
 		p3 = new Patents({
-			title: 'three',
+			title: 'Three',
 			authors: ['one', '2', 'three'],
 			patentNumber: '4380jfs084',
 			date: '05/02/1999',
@@ -102,7 +102,7 @@ describe('Patents Controller Tests', function() {
 			  .end(done);
 		});
 
-		it('should be able to get an patents associated with its report id', function(done) {
+		it('should be able to get patents associated with its report id', function(done) {
 			
 			request(app)
 				.post('/auth/signin')
@@ -123,10 +123,13 @@ describe('Patents Controller Tests', function() {
 
 							res.body.should.be.an.Array;
 							res.body.should.have.length(3);
+							
+							res.body[0].should.be.an.Object.and.have.property('title',p1.title);	
+							res.body[1].should.be.an.Object.and.have.property('title',p2.title);	
+							res.body[2].should.be.an.Object.and.have.property('title',p3.title);
 
-							res.body[0].should.be.an.Object;	
-							res.body[1].should.be.an.Object;	
-							res.body[2].should.be.an.Object;							
+						  	res.body[0].user.should.have.property('_id', user.id);
+						  	res.body[0].report.should.have.property('_id', report.id);							
 
 						  	done();
 						});
@@ -160,11 +163,11 @@ describe('Patents Controller Tests', function() {
 					  .end(function(err, res) {
 					  	should.not.exist(err);
 
-					  	res.body.should.be.an.Object;
+					  	res.body.should.be.an.Object.and.have.property('title', p1.title);
 
 					  	res.body.should.have.property('_id', p1.id);
-					  	res.body.should.have.property('user', user.id);
-					  	res.body.should.have.property('report', report.id);
+						res.body.user.should.have.property('_id', user.id);
+						res.body.report.should.have.property('_id', report.id);
 
 					  	done();
 					  });
@@ -216,7 +219,7 @@ describe('Patents Controller Tests', function() {
 					  .end(function(err, res) {
 					  	should.not.exist(err);
 
-					  	res.body.should.have.property('title', pObj.patents.title);
+					  	res.body.should.be.an.Object.and.have.property('title', pObj.patents.title);
 
 					  	res.body.should.have.property('_id');
 					  	res.body.should.have.property('user');
@@ -268,8 +271,8 @@ describe('Patents Controller Tests', function() {
 					  	res.body.should.be.an.Object.and.have.property('title', 'DifferentName');
 
 					  	res.body.should.have.property('_id', p1.id);
-					  	res.body.should.have.property('user', user.id);
-					  	res.body.should.have.property('report', report.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
 
 				  		done();
 				  	});
