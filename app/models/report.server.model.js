@@ -22,7 +22,7 @@ var ReportSchema = new Schema({
 	},
 	number: {
 		type: Number,
-		required: true
+		default: 0
 	},
 	user: {
 		type: Schema.ObjectId,

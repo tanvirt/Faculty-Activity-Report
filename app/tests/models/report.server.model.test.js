@@ -31,7 +31,7 @@ describe('Report Model Unit Tests:', function() {
 		user.save(function() { 
 			report = new Report({
 				//reportName: 'Report Name',
-				user: user,
+				user: user
 				//name.firstName: 'first',
 				//name.middleName: 'M',
 				//name.lastName: 'last',
