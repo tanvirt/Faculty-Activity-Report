@@ -17,7 +17,7 @@ var Report = mongoose.model('Report');
 
 var async = require('async');
 
-var user, report, gov;
+var user, user2, g1, g2, report;
 
 describe('Governance Controller Tests', function() {
 	beforeEach(function(done) {
@@ -33,6 +33,18 @@ describe('Governance Controller Tests', function() {
 
 		user.save();
 
+		user2 = new User({
+			firstName: 'Full',
+			lastName: 'Name',
+			email: 'test@test.com',
+			username: 'admin',
+			password: 'password',
+			provider: 'local',
+			roles: ['admin']
+		});
+
+		user2.save();
+
 		report = new Report({
 			reportName: 'MyReportName',
 			user: user
@@ -40,21 +52,29 @@ describe('Governance Controller Tests', function() {
 
 		report.save();
 
-		gov = new Governance({
-			info: 'editing and servicing and reviewing',
+		g1 = new Governance({
+			info: 'I did stuff',
 
 			report: report,
 			user: user
 		});
 
-		gov.save();
-		
+		g2 = new Governance({
+			info: 'I did other stuff too',
+
+			report: report,
+			user: user2
+		});
+
+		g1.save();
+		g2.save();
+
 		done();
 	});
 
 	describe('Testing the GET methods', function() {
 
-		it('should fail to get a governance if not logged in', function(done) {
+		it('should fail to be able to get a governance if not logged in', function(done) {
 			request(app)
 			  .get('/reports/' + report.id + '/governance')
 			  .set('Accept', 'application/json')
@@ -63,7 +83,7 @@ describe('Governance Controller Tests', function() {
 			  .end(done);
 		});
 
-		it('should be able to get a governance associated with its report id', function(done) {
+		it('should be able to get governance associated with its report id', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -81,26 +101,25 @@ describe('Governance Controller Tests', function() {
 						.end(function(err, res) {
 							should.not.exist(err);
 
-							res.body.should.be.an.Object.and.have.property('info', gov.info);						
-
-							res.body.should.have.property('_id', gov.id);
-						  	res.body.should.have.property('user', user.id);
-						  	res.body.should.have.property('report', report.id);
+							res.body[0].should.have.property('_id', g1.id);
+							res.body[0].should.have.property('info', g1.info);
+						  	res.body[0].user.should.have.property('_id', user.id);
+						  	res.body[0].report.should.have.property('_id', report.id);
 						  	done();
 						});
 				});
 		});
 
-		it('should fail to get a specific governance if not logged in', function(done) {
+		it('should fail to be able to get a specific governance if not logged in', function(done) {
 			request(app)
-			  .get('/governance/' + gov.id)
+			  .get('/governance/' + g1.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
 			  .end(done);
 		});
 
-		it('should be able to get a specific governance based on its id', function(done) {
+		it('should not be able to get a specific governance if the user does not own the governance and is not a superuser', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -110,40 +129,121 @@ describe('Governance Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					  .get('/governance/' + gov.id)
-					  .set('cookie', res.headers['set-cookie'])
-					  .set('Accept', 'application/json')
-					  .expect('Content-Type', /json/)
-					  .expect(200)
-					  .end(function(err, res) {
-					  	should.not.exist(err);
+					.get('/governance/' + g2.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.expect('Content-Type', /json/)
+				  	.expect(403)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
 
-					  	res.body.should.be.an.Object;
+				  		res.body.should.have.property('message').and.equal('User is not authorized');
 
-					  	res.body.should.have.property('_id', gov.id);
-					  	res.body.should.have.property('user', user.id);
-					  	res.body.should.have.property('report', report.id);
+				  		done();
+				  	});
 
-					  	done();
-					  });
 				});
-		});
+		});    
+
+		it('should be able to get a specific governance if the user does own the governance and is not a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'username',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.get('/governance/' + g1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.have.property('_id', g1.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});   
+
+		it('should be able to get a specific governance if the user does not own the governance and is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.get('/governance/' + g1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.have.property('_id', g1.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});   
+
+		it('should be able to get a specific governance if the user does own the governance is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.get('/governance/' + g2.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.have.property('_id', g2.id);
+					  	res.body.user.should.have.property('_id', user2.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});  
 
 	});
 
 	describe('Testing the POST methods', function() {
 
-		var govObj = {
+		var governanceObj = {
 			governance: {
-			    info:'new editing stuff'
+			    info:'Doing things'
 		 	}
 		};
 
-		it('should fail to create a governance if not logged in', function(done) {
+		it('should fail to be able to create a governance if not logged in', function(done) {
 			request(app)
 			  .post('/reports/' + report.id + '/governance')
 			  .set('Accept', 'application/json')
-			  .send(govObj)
+			  .send(governanceObj)
 			  .expect('Content-Type', /json/)
 			  .expect(401)
 			  .end(done);
@@ -162,13 +262,13 @@ describe('Governance Controller Tests', function() {
 					  .post('/reports/' + report.id + '/governance')
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
-					  .send(govObj)
+					  .send(governanceObj)
 					  .expect('Content-Type', /json/)
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
 
-					  	res.body.should.have.property('info', govObj.governance.info);
+					  	res.body.should.have.property('info', governanceObj.governance.info);
 
 					  	res.body.should.have.property('_id');
 					  	res.body.should.have.property('user');
@@ -183,16 +283,16 @@ describe('Governance Controller Tests', function() {
 
 	describe('Testing the PUT methods', function() {
 
-		it('should fail to update a specific governance if not logged in', function(done) {
+		it('should fail to be able to update a specific governance if not logged in', function(done) {
 			request(app)
-			  .put('/governance/' + gov.id)
+			  .put('/governance/' + g1.id)
 			  .set('Accept', 'application/json')
 			  .expect('Content-Type', /json/)
 			  .expect(401)
 			  .end(done);
 		});
 
-		it('should be able to update a specific governance', function(done) {
+		it('should not be able to update a specific governance if the user does not own the governance and is not a superuser', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -202,12 +302,43 @@ describe('Governance Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					.put('/governance/' + gov.id)
+					.put('/governance/' + g2.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
 				  	.send({
 				  		governance: {
-				  			info: 'editing other stuff'
+				  			info:'Different things'
+				  		}
+				  	})
+				  	.expect('Content-Type', /json/)
+				  	.expect(403)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+				  		res.body.should.have.property('message').and.equal('User is not authorized');
+
+				  		done();
+				  	});
+
+				});
+		});    
+
+		it('should be able to update a specific governance if the user does own the governance and is not a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'username',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.put('/governance/' + g1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.send({
+				  		governance: {
+				  			info:'Different things'
 				  		}
 				  	})
 				  	.expect('Content-Type', /json/)
@@ -215,19 +346,87 @@ describe('Governance Controller Tests', function() {
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
 
-					  	res.body.should.be.an.Object.and.have.property('info', 'editing other stuff');
+					  	res.body.should.be.an.Object.and.have.property('info', 'Different things');
 
-					  	res.body.should.have.property('_id', gov.id);
-					  	res.body.should.have.property('user', user.id);
-					  	res.body.should.have.property('report', report.id);
+					  	res.body.should.have.property('_id', g1.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
 
 				  		done();
 				  	});
 
 				});
-		});
-			
-	    
+		});   
+
+		it('should be able to update a specific governance if the user does not own the governance and is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.put('/governance/' + g1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.send({
+				  		governance: {
+				  			info:'Different things'
+				  		}
+				  	})
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.be.an.Object.and.have.property('info', 'Different things');
+
+					  	res.body.should.have.property('_id', g1.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});   
+
+		it('should be able to update a specific governance if the user does own the governance is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.put('/governance/' + g2.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.send({
+				  		governance: {
+				  			info:'Different things'
+				  		}
+				  	})
+				  	.expect('Content-Type', /json/)
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.be.an.Object.and.have.property('info', 'Different things');
+
+					  	res.body.should.have.property('_id', g2.id);
+					  	res.body.user.should.have.property('_id', user2.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});   
 	});
 
 	afterEach(function(done) {
