@@ -13,6 +13,6 @@ module.exports = function(app) {
 		.get(users.requiresLogin, international.hasAuthorization, international.read)
 		.put(users.requiresLogin, international.hasAuthorization, international.update);
 
-	// Finish by binding the TeachingAdvising middleware
+	// Finish by binding the International middleware
 	app.param('internationalId', international.internationalById);
 };
