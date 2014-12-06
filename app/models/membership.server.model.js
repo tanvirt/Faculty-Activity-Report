@@ -3,10 +3,6 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
-var validateLocalStrategyCourses = function(property) {
-	return property <= 2014 && property >= 1900;
-};
-
 var Membership = new Schema({
 	info: {
 		type: String,

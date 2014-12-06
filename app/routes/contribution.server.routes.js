@@ -13,6 +13,6 @@ module.exports = function(app) {
 		.get(users.requiresLogin, contribution.hasAuthorization, contribution.read)
 		.put(users.requiresLogin, contribution.hasAuthorization, contribution.update);
 
-	// Finish by binding the TeachingAdvising middleware
+	// Finish by binding the Contribution middleware
 	app.param('contributionId', contribution.contributionById);
 };

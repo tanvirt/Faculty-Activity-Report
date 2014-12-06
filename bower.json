@@ -20,6 +20,7 @@
     "pdfjs-dist": "latest",
     "ng-file-upload": "~1.6.12",
     "ng-file-upload-shim": "~1.6.12",
-    "angularjs": "latest"
+    "angularjs": "latest",
+    "angular-x2js": "~0.1.1"
   }
 }

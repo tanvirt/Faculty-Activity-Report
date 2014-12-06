@@ -3,16 +3,15 @@
 module.exports = function(app) {
 	var users = require('../../app/controllers/users');
 	var consultationsOutsideUniversity = require('../../app/controllers/consultationsOutsideUniversity/consultationsOutsideUniversity');
-	//var reports = require('../../app/controllers/reports');
+	var reports = require('../../app/controllers/reports');
 
-	//todo: require authorization
 	app.route('/reports/:reportId/consultationsOutsideUniversity')
-		.get(users.requiresLogin, consultationsOutsideUniversity.readFromReport)
-		.post(users.requiresLogin, consultationsOutsideUniversity.create);
+		.get(users.requiresLogin, reports.hasAuthorization, consultationsOutsideUniversity.readFromReport)
+		.post(users.requiresLogin, reports.hasAuthorization, consultationsOutsideUniversity.create);
 
 	app.route('/consultationsOutsideUniversity/:consultationsOutsideUniversityId')
-		.get(users.requiresLogin, consultationsOutsideUniversity.read)
-		.put(users.requiresLogin, consultationsOutsideUniversity.update);
+		.get(users.requiresLogin, consultationsOutsideUniversity.hasAuthorization, consultationsOutsideUniversity.read)
+		.put(users.requiresLogin, consultationsOutsideUniversity.hasAuthorization, consultationsOutsideUniversity.update);
 
 	// Finish by binding the ConsultationsOutsideUniversity middleware
 	app.param('consultationsOutsideUniversityId', consultationsOutsideUniversity.consultationsOutsideUniversityById);
