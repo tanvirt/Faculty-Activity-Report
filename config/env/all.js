@@ -36,7 +36,10 @@ module.exports = {
 				'public/lib/ng-pdfviewer/lib/compatibility.js',
 
 				'public/lib/ng-file-upload-shim/angular-file-upload-shim.js',
-				'public/lib/ng-file-upload/angular-file-upload.js'
+				'public/lib/ng-file-upload/angular-file-upload.js',
+
+				'public/lib/x2js/xml2json.js',
+				'public/lib/angular-x2js/src/x2js.js'
 			]
 		},
 		css: [
