@@ -87,6 +87,16 @@ app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$statePar
 			$scope.reports = Reports.query();
 		};
 
+		$scope.findFromUser = function() {
+			$http.get('/reports/reportsFromUser')
+			.success(function(data, status, headers, config) {
+				$scope.reports = data;
+			}).
+			error(function(data, status, headers, config) {
+				alert('Error Finding your Reports!');
+			});
+		};
+
 		// Find existing Report
 		$scope.findOne = function() {
 			$scope.report = Reports.get({ 

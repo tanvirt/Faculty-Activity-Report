@@ -10,6 +10,9 @@ module.exports = function(app) {
 		.get(users.requiresLogin, reports.list)
 		.post(users.requiresLogin, reports.create);
 
+	app.route('/reports/reportsFromUser')
+		.get(users.requiresLogin, reports.listFromUser);
+
 	app.route('/reports/createDefault')
 		.post(users.requiresLogin, reports.createDefault);
 

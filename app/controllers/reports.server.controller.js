@@ -310,6 +310,18 @@ exports.list = function(req, res) {
 	});
 };
 
+exports.listFromUser = function(req, res) {
+	Report.find({user: req.user}, function(err, reports) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(reports);
+		}
+	});
+};
+
 /**
  * Report middleware
  */
