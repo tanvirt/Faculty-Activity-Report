@@ -4,6 +4,14 @@
 		<h1 data-ng-bind="report.reportName"></h1>
 	</div>
 
+	<div ng-show="generating" class="alert alert-info">
+		<span us-spinner>Generating Your Report</span><p></p>	
+	</div>
+
+	<div ng-show="downloading" class="alert alert-info">
+		<span us-spinner>Downloading Your Report</span><p></p>	
+	</div>
+
 	<div class="col-md-12">
 		<div class="col-md-offset-4 btn btn-primary" ng-click="prevPage()">
 			<i class="glyphicon glyphicon-chevron-left"></i>
@@ -13,7 +21,12 @@
 			<i class="glyphicon glyphicon-chevron-right"></i>
 		</div>
 		<!--<div class="pull-right" data-ng-show="authentication.user._id == report.user._id">-->
+
 		<div class="pull-right">
+
+			<a class="btn btn-primary" data-ng-click="generate();">
+				<i class="glyphicon glyphicon-wrench"> Generate</i>
+			</a>
 
 			<a class="btn btn-primary" data-ng-click="download();">
 				<i class="glyphicon glyphicon-download"> Download</i>
