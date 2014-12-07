@@ -17,7 +17,7 @@ var Report = mongoose.model('Report');
 
 var async = require('async');
 
-var user, report, esr;
+var user, user2, e1, e2, report;
 
 describe('EditorServiceReviewer Controller Tests', function() {
 	beforeEach(function(done) {
@@ -33,6 +33,18 @@ describe('EditorServiceReviewer Controller Tests', function() {
 
 		user.save();
 
+		user2 = new User({
+			firstName: 'Full',
+			lastName: 'Name',
+			email: 'test@test.com',
+			username: 'admin',
+			password: 'password',
+			provider: 'local',
+			roles: ['admin']
+		});
+
+		user2.save();
+
 		report = new Report({
 			reportName: 'MyReportName',
 			user: user
@@ -40,21 +52,29 @@ describe('EditorServiceReviewer Controller Tests', function() {
 
 		report.save();
 
-		esr = new EditorServiceReviewer({
-			info: 'editing and servicing and reviewing',
+		e1 = new EditorServiceReviewer({
+			info: 'I edited stuff',
 
 			report: report,
 			user: user
 		});
 
-		esr.save();
-		
+		e2 = new EditorServiceReviewer({
+			info: 'I edited other stuff',
+
+			report: report,
+			user: user2
+		});
+
+		e1.save();
+		e2.save();
+
 		done();
 	});
 
 	describe('Testing the GET methods', function() {
 
-		it('should fail to get a editorServiceReviewer if not logged in', function(done) {
+		it('should fail to be able to get an editorServiceReviewer if not logged in', function(done) {
 			request(app)
 			  .get('/reports/' + report.id + '/editorServiceReviewer')
 			  .set('Accept', 'application/json')
@@ -63,7 +83,7 @@ describe('EditorServiceReviewer Controller Tests', function() {
 			  .end(done);
 		});
 
-		it('should be able to get a editorServiceReviewer associated with its report id', function(done) {
+		it('should be able to get editorServiceReviewer associated with its report id', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -81,26 +101,25 @@ describe('EditorServiceReviewer Controller Tests', function() {
 						.end(function(err, res) {
 							should.not.exist(err);
 
-							res.body.should.be.an.Object.and.have.property('info', esr.info);						
-
-							res.body.should.have.property('_id', esr.id);
-						  	res.body.should.have.property('user', user.id);
-						  	res.body.should.have.property('report', report.id);
+							res.body[0].should.have.property('_id', e1.id);
+							res.body[0].should.have.property('info', e1.info);
+						  	res.body[0].user.should.have.property('_id', user.id);
+						  	res.body[0].report.should.have.property('_id', report.id);
 						  	done();
 						});
 				});
 		});
 
-		it('should fail to get a specific editorServiceReviewer if not logged in', function(done) {
+		it('should fail to be able to get a specific editorServiceReviewer if not logged in', function(done) {
 			request(app)
-			  .get('/editorServiceReviewer/' + esr.id)
+			  .get('/editorServiceReviewer/' + e1.id)
 			  .set('Accept', 'application/json')
 			  
 			  .expect(401)
 			  .end(done);
 		});
 
-		it('should be able to get a specific editorServiceReviewer based on its id', function(done) {
+		it('should not be able to get a specific editorServiceReviewer if the user does not own the editorServiceReviewer and is not a superuser', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -110,40 +129,121 @@ describe('EditorServiceReviewer Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					  .get('/editorServiceReviewer/' + esr.id)
-					  .set('cookie', res.headers['set-cookie'])
-					  .set('Accept', 'application/json')
-					  
-					  .expect(200)
-					  .end(function(err, res) {
-					  	should.not.exist(err);
+					.get('/editorServiceReviewer/' + e2.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	
+				  	.expect(403)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
 
-					  	res.body.should.be.an.Object;
+				  		res.body.should.have.property('message').and.equal('User is not authorized');
 
-					  	res.body.should.have.property('_id', esr.id);
-					  	res.body.should.have.property('user', user.id);
-					  	res.body.should.have.property('report', report.id);
+				  		done();
+				  	});
 
-					  	done();
-					  });
 				});
-		});
+		});    
+
+		it('should be able to get a specific editorServiceReviewer if the user does own the editorServiceReviewer and is not a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'username',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.get('/editorServiceReviewer/' + e1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.have.property('_id', e1.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});   
+
+		it('should be able to get a specific editorServiceReviewer if the user does not own the editorServiceReviewer and is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.get('/editorServiceReviewer/' + e1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.have.property('_id', e1.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});   
+
+		it('should be able to get a specific editorServiceReviewer if the user does own the editorServiceReviewer is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.get('/editorServiceReviewer/' + e2.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.have.property('_id', e2.id);
+					  	res.body.user.should.have.property('_id', user2.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});  
 
 	});
 
 	describe('Testing the POST methods', function() {
 
-		var esrObj = {
+		var editorServiceReviewerObj = {
 			editorServiceReviewer: {
-			    info:'new editing stuff'
+			    info:'Editing things'
 		 	}
 		};
 
-		it('should fail to create a editorServiceReviewer if not logged in', function(done) {
+		it('should fail to be able to create an editorServiceReviewer if not logged in', function(done) {
 			request(app)
 			  .post('/reports/' + report.id + '/editorServiceReviewer')
 			  .set('Accept', 'application/json')
-			  .send(esrObj)
+			  .send(editorServiceReviewerObj)
 			  
 			  .expect(401)
 			  .end(done);
@@ -162,13 +262,13 @@ describe('EditorServiceReviewer Controller Tests', function() {
 					  .post('/reports/' + report.id + '/editorServiceReviewer')
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
-					  .send(esrObj)
+					  .send(editorServiceReviewerObj)
 					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
 
-					  	res.body.should.have.property('info', esrObj.editorServiceReviewer.info);
+					  	res.body.should.have.property('info', editorServiceReviewerObj.editorServiceReviewer.info);
 
 					  	res.body.should.have.property('_id');
 					  	res.body.should.have.property('user');
@@ -183,16 +283,16 @@ describe('EditorServiceReviewer Controller Tests', function() {
 
 	describe('Testing the PUT methods', function() {
 
-		it('should fail to update a specific editorServiceReviewer if not logged in', function(done) {
+		it('should fail to be able to update a specific editorServiceReviewer if not logged in', function(done) {
 			request(app)
-			  .put('/editorServiceReviewer/' + esr.id)
+			  .put('/editorServiceReviewer/' + e1.id)
 			  .set('Accept', 'application/json')
 			  
 			  .expect(401)
 			  .end(done);
 		});
 
-		it('should be able to update a specific editorServiceReviewer', function(done) {
+		it('should not be able to update a specific editorServiceReviewer if the user does not own the editorServiceReviewer and is not a superuser', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -202,12 +302,43 @@ describe('EditorServiceReviewer Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					.put('/editorServiceReviewer/' + esr.id)
+					.put('/editorServiceReviewer/' + e2.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
 				  	.send({
 				  		editorServiceReviewer: {
-				  			info: 'editing other stuff'
+				  			info:'Different stuff'
+				  		}
+				  	})
+				  	
+				  	.expect(403)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+				  		res.body.should.have.property('message').and.equal('User is not authorized');
+
+				  		done();
+				  	});
+
+				});
+		});    
+
+		it('should be able to update a specific editorServiceReviewer if the user does own the editorServiceReviewer and is not a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'username',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.put('/editorServiceReviewer/' + e1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.send({
+				  		editorServiceReviewer: {
+				  			info:'Different stuff'
 				  		}
 				  	})
 				  	
@@ -215,19 +346,87 @@ describe('EditorServiceReviewer Controller Tests', function() {
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
 
-					  	res.body.should.be.an.Object.and.have.property('info', 'editing other stuff');
+					  	res.body.should.be.an.Object.and.have.property('info', 'Different stuff');
 
-					  	res.body.should.have.property('_id', esr.id);
-					  	res.body.should.have.property('user', user.id);
-					  	res.body.should.have.property('report', report.id);
+					  	res.body.should.have.property('_id', e1.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
 
 				  		done();
 				  	});
 
 				});
-		});
-			
-	    
+		});   
+
+		it('should be able to update a specific editorServiceReviewer if the user does not own the editorServiceReviewer and is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.put('/editorServiceReviewer/' + e1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.send({
+				  		editorServiceReviewer: {
+				  			info:'Different stuff'
+				  		}
+				  	})
+				  	
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.be.an.Object.and.have.property('info', 'Different stuff');
+
+					  	res.body.should.have.property('_id', e1.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});   
+
+		it('should be able to update a specific editorServiceReviewer if the user does own the editorServiceReviewer is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.put('/editorServiceReviewer/' + e2.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.send({
+				  		editorServiceReviewer: {
+				  			info:'Different stuff'
+				  		}
+				  	})
+				  	
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.be.an.Object.and.have.property('info', 'Different stuff');
+
+					  	res.body.should.have.property('_id', e2.id);
+					  	res.body.user.should.have.property('_id', user2.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});   
 	});
 
 	afterEach(function(done) {
