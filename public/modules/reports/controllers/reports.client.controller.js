@@ -9,7 +9,7 @@ app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$statePar
 		$scope.user = Authentication.user;
 		
 		
-		// Create new Report
+		// Create new Report  new report
 		$scope.create = function() {
 			$http.post('/reports/createNew',
 			{
