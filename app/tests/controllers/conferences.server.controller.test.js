@@ -78,7 +78,6 @@ describe('Conferences Controller Tests', function() {
 			request(app)
 			  .get('/reports/' + report.id + '/conferences')
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
 			  .expect(401)
 			  .end(done);
 		});
@@ -96,7 +95,7 @@ describe('Conferences Controller Tests', function() {
 						.get('/reports/' + report.id + '/conferences')
 						.set('cookie', res.headers['set-cookie'])
 						.set('Accept', 'application/json')
-						.expect('Content-Type', /json/)
+						
 						.expect(200)
 						.end(function(err, res) {
 							should.not.exist(err);
@@ -114,7 +113,6 @@ describe('Conferences Controller Tests', function() {
 			request(app)
 			  .get('/conferences/' + c1.id)
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
 			  .expect(401)
 			  .end(done);
 		});
@@ -132,7 +130,7 @@ describe('Conferences Controller Tests', function() {
 					.get('/conferences/' + c2.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(403)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -158,7 +156,7 @@ describe('Conferences Controller Tests', function() {
 					.get('/conferences/' + c1.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -186,7 +184,7 @@ describe('Conferences Controller Tests', function() {
 					.get('/conferences/' + c1.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -214,7 +212,7 @@ describe('Conferences Controller Tests', function() {
 					.get('/conferences/' + c2.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -244,7 +242,6 @@ describe('Conferences Controller Tests', function() {
 			  .post('/reports/' + report.id + '/conferences')
 			  .set('Accept', 'application/json')
 			  .send(conferencesObj)
-			  .expect('Content-Type', /json/)
 			  .expect(401)
 			  .end(done);
 		});
@@ -263,7 +260,7 @@ describe('Conferences Controller Tests', function() {
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .send(conferencesObj)
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -287,7 +284,6 @@ describe('Conferences Controller Tests', function() {
 			request(app)
 			  .put('/conferences/' + c1.id)
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
 			  .expect(401)
 			  .end(done);
 		});
@@ -310,7 +306,7 @@ describe('Conferences Controller Tests', function() {
 				  			info:'Going to conferences'
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(403)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -341,7 +337,7 @@ describe('Conferences Controller Tests', function() {
 				  			info:'Going to conferences'
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -376,7 +372,7 @@ describe('Conferences Controller Tests', function() {
 				  			info:'Going to conferences'
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -411,7 +407,7 @@ describe('Conferences Controller Tests', function() {
 				  			info:'Going to conferences'
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);

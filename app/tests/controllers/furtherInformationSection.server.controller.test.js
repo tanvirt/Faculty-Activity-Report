@@ -39,7 +39,7 @@ describe('FurtherInformationSection Controller Tests', function() {
             request(app)
                 .get('/reports/' + report.id + '/furtherInformationSection')
                 .set('Accept', 'application/json')
-                .expect('Content-Type', /json/)
+                
                 .expect(401)
                 .end(done);
         });
@@ -56,7 +56,7 @@ describe('FurtherInformationSection Controller Tests', function() {
                         .get('/reports/' + report.id + '/furtherInformationSection')
                         .set('cookie', res.headers['set-cookie'])
                         .set('Accept', 'application/json')
-                        .expect('Content-Type', /json/)
+                        
                         .expect(200)
                         .end(function(err, res) {
                             should.not.exist(err);
@@ -72,7 +72,7 @@ describe('FurtherInformationSection Controller Tests', function() {
             request(app)
                 .get('/furtherInformationSection/' + info.id)
                 .set('Accept', 'application/json')
-                .expect('Content-Type', /json/)
+                
                 .expect(401)
                 .end(done);
         });
@@ -89,7 +89,7 @@ describe('FurtherInformationSection Controller Tests', function() {
                         .get('/furtherInformationSection/' + info.id)
                         .set('cookie', res.headers['set-cookie'])
                         .set('Accept', 'application/json')
-                        .expect('Content-Type', /json/)
+                        
                         .expect(200)
                         .end(function(err, res) {
                             should.not.exist(err);
@@ -113,7 +113,7 @@ describe('FurtherInformationSection Controller Tests', function() {
                 .post('/reports/' + report.id + '/furtherInformationSection')
                 .set('Accept', 'application/json')
                 .send(furtherInformationSectionObj)
-                .expect('Content-Type', /json/)
+                
                 .expect(401)
                 .end(done);
         });
@@ -131,7 +131,7 @@ describe('FurtherInformationSection Controller Tests', function() {
                         .set('cookie', res.headers['set-cookie'])
                         .set('Accept', 'application/json')
                         .send(furtherInformationSectionObj)
-                        .expect('Content-Type', /json/)
+                        
                         .expect(200)
                         .end(function(err, res) {
                             should.not.exist(err);
@@ -149,7 +149,7 @@ describe('FurtherInformationSection Controller Tests', function() {
             request(app)
                 .put('/furtherInformationSection/' + info.id)
                 .set('Accept', 'application/json')
-                .expect('Content-Type', /json/)
+                
                 .expect(401)
                 .end(done);
         });
@@ -171,7 +171,7 @@ describe('FurtherInformationSection Controller Tests', function() {
                                 info: 'so much info'
                             }
                         })
-                        .expect('Content-Type', /json/)
+                        
                         .expect(200)
                         .end(function(err, res) {
                             should.not.exist(err);

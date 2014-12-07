@@ -133,7 +133,7 @@ describe('Contracts Controller Tests', function() {
 			request(app)
 			  .get('/reports/' + report.id + '/contracts')
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -151,7 +151,7 @@ describe('Contracts Controller Tests', function() {
 						.get('/reports/' + report.id + '/contracts')
 						.set('cookie', res.headers['set-cookie'])
 						.set('Accept', 'application/json')
-						.expect('Content-Type', /json/)
+						
 						.expect(200)
 						.end(function(err, res) {
 							should.not.exist(err);
@@ -173,7 +173,7 @@ describe('Contracts Controller Tests', function() {
 			request(app)
 			  .get('/contracts/' + c1.id)
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -191,7 +191,7 @@ describe('Contracts Controller Tests', function() {
 					  .get('/contracts/' + c4.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(403)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -216,7 +216,7 @@ describe('Contracts Controller Tests', function() {
 					  .get('/contracts/' + c1.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -245,7 +245,7 @@ describe('Contracts Controller Tests', function() {
 					  .get('/contracts/' + c1.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -274,7 +274,7 @@ describe('Contracts Controller Tests', function() {
 					  .get('/contracts/' + c1.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -312,7 +312,7 @@ describe('Contracts Controller Tests', function() {
 			  .post('/reports/' + report.id + '/contracts')
 			  .set('Accept', 'application/json')
 			  .send(cObj)
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -331,7 +331,7 @@ describe('Contracts Controller Tests', function() {
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .send(cObj)
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -356,7 +356,7 @@ describe('Contracts Controller Tests', function() {
 			request(app)
 			  .put('/contracts/' + c1.id)
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -379,7 +379,7 @@ describe('Contracts Controller Tests', function() {
 				  			title:'Different Title'
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(403)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -410,7 +410,7 @@ describe('Contracts Controller Tests', function() {
 				  			title:'Different Title'
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -445,7 +445,7 @@ describe('Contracts Controller Tests', function() {
 				  			title:'Different Title'
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -480,7 +480,7 @@ describe('Contracts Controller Tests', function() {
 				  			title:'Different Title'
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -503,7 +503,7 @@ describe('Contracts Controller Tests', function() {
 		it('should not be able to delete if not logged in', function(done) {
 			request(app)
 				.delete('/contracts/' + c1.id)
-				.expect('Content-Type', /json/)
+				
 				.expect(401)
 				.end(done);
 		});
@@ -520,7 +520,7 @@ describe('Contracts Controller Tests', function() {
 					request(app)
 					.delete('/contracts/' + c1.id)
 					.set('cookie', res.headers['set-cookie'])
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(403)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -542,7 +542,7 @@ describe('Contracts Controller Tests', function() {
 					request(app)
 					.delete('/contracts/' + c1.id)
 					.set('cookie', res.headers['set-cookie'])
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -568,7 +568,7 @@ describe('Contracts Controller Tests', function() {
 				request(app)
 					.delete('/contracts/' + c1.id)
 					.set('cookie', res.headers['set-cookie'])
-			  		.expect('Content-Type', /json/)
+			  		
 			  		.expect(200)
 			  		.end(function(err, res) {
 			  			should.not.exist(err);
@@ -594,7 +594,7 @@ describe('Contracts Controller Tests', function() {
 					request(app)
 					.delete('/contracts/' + c4.id)
 					.set('cookie', res.headers['set-cookie'])
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);

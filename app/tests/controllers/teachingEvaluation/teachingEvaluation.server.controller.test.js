@@ -81,7 +81,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 			request(app)
 			  .get('/reports/' + report.id + '/teachingEvaluation')
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -99,7 +99,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 						.get('/reports/' + report.id + '/teachingEvaluation')
 						.set('cookie', res.headers['set-cookie'])
 						.set('Accept', 'application/json')
-						.expect('Content-Type', /json/)
+						
 						.expect(200)
 						.end(function(err, res) {
 							should.not.exist(err);
@@ -135,7 +135,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 			request(app)
 			  .get('/teachingEvaluation/' + evaluationOne.id)
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -154,7 +154,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 					  .get('/teachingEvaluation/' + evaluationTwo.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -200,7 +200,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 			  .post('/reports/' + report.id + '/teachingEvaluation')
 			  .set('Accept', 'application/json')
 			  .send(teObj)
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -220,7 +220,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .send(teObj)
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -262,7 +262,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .attach('file', './app/tests/controllers/teachingEvaluation/excelTest.xlsx')
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -305,7 +305,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 			request(app)
 			  .put('/teachingEvaluation/' + evaluationOne.id)
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -328,7 +328,7 @@ describe('TeachingEvaluation Controller Tests', function() {
 				  			year: 1999
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);

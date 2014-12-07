@@ -58,7 +58,7 @@ describe('ServiceToSchools Controller Tests', function() {
 			request(app)
 			  .get('/reports/' + report.id + '/serviceToSchools')
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -76,7 +76,7 @@ describe('ServiceToSchools Controller Tests', function() {
 						.get('/reports/' + report.id + '/serviceToSchools')
 						.set('cookie', res.headers['set-cookie'])
 						.set('Accept', 'application/json')
-						.expect('Content-Type', /json/)
+						
 						.expect(200)
 						.end(function(err, res) {
 							should.not.exist(err);
@@ -95,7 +95,7 @@ describe('ServiceToSchools Controller Tests', function() {
 			request(app)
 			  .get('/serviceToSchools/' + schools.id)
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -113,7 +113,7 @@ describe('ServiceToSchools Controller Tests', function() {
 					  .get('/serviceToSchools/' + schools.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -144,7 +144,7 @@ describe('ServiceToSchools Controller Tests', function() {
 			  .post('/reports/' + report.id + '/serviceToSchools')
 			  .set('Accept', 'application/json')
 			  .send(schoolsObj)
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -163,7 +163,7 @@ describe('ServiceToSchools Controller Tests', function() {
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .send(schoolsObj)
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -187,7 +187,7 @@ describe('ServiceToSchools Controller Tests', function() {
 			request(app)
 			  .put('/serviceToSchools/' + schools.id)
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -210,7 +210,7 @@ describe('ServiceToSchools Controller Tests', function() {
 				  			info: 'doing other stuff'
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);

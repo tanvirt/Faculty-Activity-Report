@@ -78,7 +78,7 @@ describe('International Controller Tests', function() {
 			request(app)
 			  .get('/reports/' + report.id + '/international')
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -96,7 +96,7 @@ describe('International Controller Tests', function() {
 						.get('/reports/' + report.id + '/international')
 						.set('cookie', res.headers['set-cookie'])
 						.set('Accept', 'application/json')
-						.expect('Content-Type', /json/)
+						
 						.expect(200)
 						.end(function(err, res) {
 							should.not.exist(err);
@@ -114,7 +114,7 @@ describe('International Controller Tests', function() {
 			request(app)
 			  .get('/international/' + activities.id)
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -132,7 +132,7 @@ describe('International Controller Tests', function() {
 					.get('/international/' + activities2.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(403)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -158,7 +158,7 @@ describe('International Controller Tests', function() {
 					.get('/international/' + activities.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -186,7 +186,7 @@ describe('International Controller Tests', function() {
 					.get('/international/' + activities.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -214,7 +214,7 @@ describe('International Controller Tests', function() {
 					.get('/international/' + activities2.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -244,7 +244,7 @@ describe('International Controller Tests', function() {
 			  .post('/reports/' + report.id + '/international')
 			  .set('Accept', 'application/json')
 			  .send(activitiesObj)
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -263,7 +263,7 @@ describe('International Controller Tests', function() {
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .send(activitiesObj)
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -287,7 +287,7 @@ describe('International Controller Tests', function() {
 			request(app)
 			  .put('/international/' + activities.id)
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -310,7 +310,7 @@ describe('International Controller Tests', function() {
 				  			info:'Different places'
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(403)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -341,7 +341,7 @@ describe('International Controller Tests', function() {
 				  			info:'Different places'
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -376,7 +376,7 @@ describe('International Controller Tests', function() {
 				  			info:'Different places'
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -411,7 +411,7 @@ describe('International Controller Tests', function() {
 				  			info:'Different places'
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);

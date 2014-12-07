@@ -108,8 +108,6 @@ exports.graduateCommitteeById = function(req, res, next, id) {
 exports.delete = function(req, res) {
 	var graduateCommittee = req.graduateCommittee;
 
-	graduateCommittee.removeCount();
-
 	graduateCommittee.remove(function(err) {
 		if (err) {
 			return res.status(400).send({

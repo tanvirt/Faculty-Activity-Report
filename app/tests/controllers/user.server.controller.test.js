@@ -33,7 +33,7 @@ describe('User Tests', function() {
 					password: 'MyPassword'
 				})
 				.expect(200)
-				.expect('Content-Type', /json/)
+				
 				.end(done);
 		});
 	});
@@ -47,7 +47,7 @@ describe('User Tests', function() {
 					password: 'MyPassword'
 				})
 				.expect(400)
-				.expect('Content-Type', /json/)
+				
 				.end(done);
 		});
 
@@ -63,7 +63,7 @@ describe('User Tests', function() {
 				password: 'MyPassword'
 			})
 			.expect(200)
-			.expect('Content-Type', /json/)
+			
 			.end()
 
 			.get('/auth/signout')
@@ -76,7 +76,7 @@ describe('User Tests', function() {
 				password: 'MyPassword'
 			})
 			.expect(200)
-			.expect('Content-Type', /json/)
+			
 			.end(done);
 		});
 	});

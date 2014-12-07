@@ -71,7 +71,6 @@ describe('AssignedActivity Controller Tests', function() {
 			request(app)
 			  .get('/reports/' + report.id + '/assignedActivity')
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
 			  .expect(401)
 			  .end(done);
 		});
@@ -89,7 +88,7 @@ describe('AssignedActivity Controller Tests', function() {
 						.get('/reports/' + report.id + '/assignedActivity')
 						.set('cookie', res.headers['set-cookie'])
 						.set('Accept', 'application/json')
-						.expect('Content-Type', /json/)
+						
 						.expect(200)
 						.end(function(err, res) {
 							should.not.exist(err);
@@ -121,7 +120,6 @@ describe('AssignedActivity Controller Tests', function() {
 			request(app)
 			  .get('/assignedActivity/' + aa.id)
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
 			  .expect(401)
 			  .end(done);
 		});
@@ -139,7 +137,7 @@ describe('AssignedActivity Controller Tests', function() {
 					  .get('/assignedActivity/' + aa.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -193,7 +191,6 @@ describe('AssignedActivity Controller Tests', function() {
 			  .post('/reports/' + report.id + '/assignedActivity')
 			  .set('Accept', 'application/json')
 			  .send(aaObj)
-			  .expect('Content-Type', /json/)
 			  .expect(401)
 			  .end(done);
 		});
@@ -212,7 +209,7 @@ describe('AssignedActivity Controller Tests', function() {
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .send(aaObj)
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -247,7 +244,6 @@ describe('AssignedActivity Controller Tests', function() {
 			request(app)
 			  .put('/assignedActivity/' + aa.id)
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
 			  .expect(401)
 			  .end(done);
 		});
@@ -272,7 +268,7 @@ describe('AssignedActivity Controller Tests', function() {
 				  			fallTeaching: 40
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);

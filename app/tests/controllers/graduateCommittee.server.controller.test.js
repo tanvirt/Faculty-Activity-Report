@@ -87,7 +87,7 @@ describe('Graduate Committee Controller Tests', function() {
 			request(app)
 			  .get('/reports/' + report.id + '/graduateCommittee')
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -105,7 +105,7 @@ describe('Graduate Committee Controller Tests', function() {
 						.get('/reports/' + report.id + '/graduateCommittee')
 						.set('cookie', res.headers['set-cookie'])
 						.set('Accept', 'application/json')
-						.expect('Content-Type', /json/)
+						
 						.expect(200)
 						.end(function(err, res) {
 							should.not.exist(err);
@@ -145,7 +145,7 @@ describe('Graduate Committee Controller Tests', function() {
 			request(app)
 			  .get('/graduateCommittee/' + committeeOne.id)
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -164,7 +164,7 @@ describe('Graduate Committee Controller Tests', function() {
 					  .get('/graduateCommittee/' + committeeTwo.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -204,7 +204,7 @@ describe('Graduate Committee Controller Tests', function() {
 			  .post('/reports/' + report.id + '/graduateCommittee')
 			  .set('Accept', 'application/json')
 			  .send(gcObj)
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -224,7 +224,7 @@ describe('Graduate Committee Controller Tests', function() {
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .send(gcObj)
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -258,7 +258,7 @@ describe('Graduate Committee Controller Tests', function() {
 			request(app)
 			  .put('/graduateCommittee/' + committeeOne.id)
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -282,7 +282,7 @@ describe('Graduate Committee Controller Tests', function() {
 				  			major: 'Art History'
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);

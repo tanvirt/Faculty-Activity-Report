@@ -97,7 +97,7 @@ describe('Patents Controller Tests', function() {
 			request(app)
 			  .get('/reports/' + report.id + '/patents')
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -116,7 +116,7 @@ describe('Patents Controller Tests', function() {
 						.get('/reports/' + report.id + '/patents')
 						.set('cookie', res.headers['set-cookie'])
 						.set('Accept', 'application/json')
-						.expect('Content-Type', /json/)
+						
 						.expect(200)
 						.end(function(err, res) {
 							should.not.exist(err);
@@ -140,7 +140,7 @@ describe('Patents Controller Tests', function() {
 			request(app)
 			  .get('/patents/' + p1.id)
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -158,7 +158,7 @@ describe('Patents Controller Tests', function() {
 					  .get('/patents/' + p1.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -194,7 +194,7 @@ describe('Patents Controller Tests', function() {
 			  .post('/reports/' + report.id + '/patents')
 			  .set('Accept', 'application/json')
 			  .send(pObj)
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -214,7 +214,7 @@ describe('Patents Controller Tests', function() {
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .send(pObj)
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -239,7 +239,7 @@ describe('Patents Controller Tests', function() {
 			request(app)
 			  .put('/patents/' + p1.id)
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -263,7 +263,7 @@ describe('Patents Controller Tests', function() {
 				  			title:'DifferentName'
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);

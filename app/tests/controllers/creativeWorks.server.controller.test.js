@@ -121,7 +121,7 @@ describe('CreativeWorks Controller Tests', function() {
 			request(app)
 			  .get('/reports/' + report.id + '/creativeWorks')
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -139,7 +139,7 @@ describe('CreativeWorks Controller Tests', function() {
 						.get('/reports/' + report.id + '/creativeWorks')
 						.set('cookie', res.headers['set-cookie'])
 						.set('Accept', 'application/json')
-						.expect('Content-Type', /json/)
+						
 						.expect(200)
 						.end(function(err, res) {
 							should.not.exist(err);
@@ -161,7 +161,7 @@ describe('CreativeWorks Controller Tests', function() {
 			request(app)
 			  .get('/creativeWorks/' + cw1.id)
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -179,7 +179,7 @@ describe('CreativeWorks Controller Tests', function() {
 					.get('/creativeWorks/' + cw4.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(403)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -205,7 +205,7 @@ describe('CreativeWorks Controller Tests', function() {
 					.get('/creativeWorks/' + cw1.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -233,7 +233,7 @@ describe('CreativeWorks Controller Tests', function() {
 					.get('/creativeWorks/' + cw1.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -261,7 +261,7 @@ describe('CreativeWorks Controller Tests', function() {
 					.get('/creativeWorks/' + cw4.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -295,7 +295,7 @@ describe('CreativeWorks Controller Tests', function() {
 			  .post('/reports/' + report.id + '/creativeWorks')
 			  .set('Accept', 'application/json')
 			  .send(cwObj)
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -314,7 +314,7 @@ describe('CreativeWorks Controller Tests', function() {
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .send(cwObj)
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -338,7 +338,7 @@ describe('CreativeWorks Controller Tests', function() {
 			request(app)
 			  .put('/creativeWorks/' + cw1.id)
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -361,7 +361,7 @@ describe('CreativeWorks Controller Tests', function() {
 				  			name:'DifferentName'
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(403)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -392,7 +392,7 @@ describe('CreativeWorks Controller Tests', function() {
 				  			name:'DifferentName'
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -427,7 +427,7 @@ describe('CreativeWorks Controller Tests', function() {
 				  			name:'DifferentName'
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -462,7 +462,7 @@ describe('CreativeWorks Controller Tests', function() {
 				  			name:'DifferentName'
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -484,7 +484,7 @@ describe('CreativeWorks Controller Tests', function() {
 		it('should not be able to delete if not logged in', function(done) {
 			request(app)
 				.delete('/creativeWorks/' + cw1.id)
-				.expect('Content-Type', /json/)
+				
 				.expect(401)
 				.end(done);
 		});
@@ -501,7 +501,7 @@ describe('CreativeWorks Controller Tests', function() {
 					request(app)
 					.delete('/creativeWorks/' + cw1.id)
 					.set('cookie', res.headers['set-cookie'])
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(403)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -523,7 +523,7 @@ describe('CreativeWorks Controller Tests', function() {
 					request(app)
 					.delete('/creativeWorks/' + cw1.id)
 					.set('cookie', res.headers['set-cookie'])
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -556,7 +556,7 @@ describe('CreativeWorks Controller Tests', function() {
 					request(app)
 					.delete('/creativeWorks/' + cw1.id)
 					.set('cookie', res.headers['set-cookie'])
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
@@ -589,7 +589,7 @@ describe('CreativeWorks Controller Tests', function() {
 					request(app)
 					.delete('/creativeWorks/' + cw4.id)
 					.set('cookie', res.headers['set-cookie'])
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);

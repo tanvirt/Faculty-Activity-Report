@@ -58,7 +58,7 @@ describe('Membership Controller Tests', function() {
 			request(app)
 			  .get('/reports/' + report.id + '/membership')
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -76,7 +76,7 @@ describe('Membership Controller Tests', function() {
 						.get('/reports/' + report.id + '/membership')
 						.set('cookie', res.headers['set-cookie'])
 						.set('Accept', 'application/json')
-						.expect('Content-Type', /json/)
+						
 						.expect(200)
 						.end(function(err, res) {
 							should.not.exist(err);
@@ -95,7 +95,7 @@ describe('Membership Controller Tests', function() {
 			request(app)
 			  .get('/membership/' + member.id)
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -113,7 +113,7 @@ describe('Membership Controller Tests', function() {
 					  .get('/membership/' + member.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -144,7 +144,7 @@ describe('Membership Controller Tests', function() {
 			  .post('/reports/' + report.id + '/membership')
 			  .set('Accept', 'application/json')
 			  .send(membershipObj)
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -163,7 +163,7 @@ describe('Membership Controller Tests', function() {
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .send(membershipObj)
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -187,7 +187,7 @@ describe('Membership Controller Tests', function() {
 			request(app)
 			  .put('/membership/' + member.id)
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -210,7 +210,7 @@ describe('Membership Controller Tests', function() {
 				  			info: 'joining more organizations'
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);

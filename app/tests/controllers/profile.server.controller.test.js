@@ -119,7 +119,7 @@ describe('Profile Controller Tests', function() {
 			request(app)
 			  .get('/reports/' + report.id + '/profile')
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -137,7 +137,7 @@ describe('Profile Controller Tests', function() {
 						.get('/reports/' + report.id + '/profile')
 						.set('cookie', res.headers['set-cookie'])
 						.set('Accept', 'application/json')
-						.expect('Content-Type', /json/)
+						
 						.expect(200)
 						.end(function(err, res) {
 							should.not.exist(err);
@@ -197,7 +197,7 @@ describe('Profile Controller Tests', function() {
 			  .post('/reports/' + report.id + '/profile')
 			  .set('Accept', 'application/json')
 			  .send(profileObj)
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -216,7 +216,7 @@ describe('Profile Controller Tests', function() {
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  .send(profileObj)
-					  .expect('Content-Type', /json/)
+					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
@@ -243,7 +243,7 @@ describe('Profile Controller Tests', function() {
 			request(app)
 			  .put('/profile/' + profile.id)
 			  .set('Accept', 'application/json')
-			  .expect('Content-Type', /json/)
+			  
 			  .expect(401)
 			  .end(function(err, res) {
 			  	should.not.exist(err);
@@ -271,7 +271,7 @@ describe('Profile Controller Tests', function() {
 				  			lastName: 'Smoe'
 				  		}
 				  	})
-				  	.expect('Content-Type', /json/)
+				  	
 				  	.expect(200)
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
