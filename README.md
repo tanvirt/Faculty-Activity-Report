@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/simkimsia/UtilityBehaviors.png)](https://travis-ci.org/simkimsia/UtilityBehaviors)
+
 Faculty Activity Report
 ================================
 ####[Current Release v0.1](https://github.com/tanvirt/Faculty-Activity-Report/releases/tag/v0.1)
