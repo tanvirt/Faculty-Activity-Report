@@ -10,12 +10,23 @@
 
       <div class="col-md-6" style="padding-bottom:10px">
         <label for="funded">Funded</label>
-        <input type="text" ng-model="funded" ng-model-instant class="form-control" id="funded" placeholder="externally">
+          <select class="form-control" ng-model="grant.funded">
+            <option value="" disabled selected>Funded</option>
+            <option value="externally">Externally</option>
+            <option value="internally">Internally</option>
+            <option value="pending">Pending</option>
+            <option value="not">Not</option>
+          </select>
       </div>
 
       <div class="col-md-6" style="padding-bottom:10px">
         <label for="PI">Investigator</label>
-        <input type="text" ng-model="PI" class="form-control" ng-model-instant  id="PI" placeholder="Private Investment">
+          <select class="form-control" ng-model="grant.PI">
+            <option value="" disabled selected>Investigator</option>
+            <option value="PI">PI</option>
+            <option value="co-PI">Co-PI</option>
+            <option value="N/A">N/A</option>
+          </select>
       </div>
 
       <div class="col-md-6" style="padding-bottom:10px">
