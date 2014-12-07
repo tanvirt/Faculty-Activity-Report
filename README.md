@@ -2,6 +2,8 @@ Faculty Activity Report
 ================================
 ####[Current Release v0.1](https://github.com/tanvirt/Faculty-Activity-Report/releases/tag/v0.1)
 
+###*NOTE: You must have LaTeX installed on your server*
+
 This application is an attempt to replace the facultiy's need to write in latex to create their annual activity report.
 
 By using a Single Page Web Application (SPA), the user can input and store information in an interactive form and, though a standardized report format, generate the requested PDF.
