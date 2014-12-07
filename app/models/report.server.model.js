@@ -33,38 +33,6 @@ var ReportSchema = new Schema({
 		ref: 'Profile'
 	},
 
-	//TEMPORARY FIELDS FOR REPORT SECTIONS------------------------------------------------
-	/*
-	firstName: {
-		type: String,
-		default: '',
-		required: 'Please fill first name',
-		trim: true
-	},
-	middleName: {
-		type: String,
-		default: '',
-		required: 'Please fill middle name',
-		trim: true
-	},
-	lastName: {
-		type: String,
-		default: '',
-		required: 'Please fill last name',
-		trim: true
-	},
-
-
-	tenure: {
-		type: String,
-		default: 'Not Tenured',
-		enum: ['Tenured', 'Not Tenured'],
-		trim: true
-	},
-	*/
-
-
-
 	name: {
 		type: Schema.Types.ObjectId, ref: 'Name'
 	},
