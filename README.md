@@ -12,6 +12,24 @@ By using a Single Page Web Application (SPA), the user can input and store infor
 
 The chair (admin) can then read, edit and generate any of the faculty's reports. 
 
+###To Run
+1. Clone the repository 
+
+``` > git clone https://github.com/tanvirt/Faculty-Activity-Report.git FAR ```
+
+2. cd into FAR and npm install
+
+```> cd FAR```
+
+3. to run, type grunt
+
+```> grunt```
+
+4. to run the tests, type grunt test
+
+```> grunt test ```
+
+
 ###Collaborators
 *Front End*
    - Tanvir Talukder (tanvirt) - tanvirt@ufl.edu
