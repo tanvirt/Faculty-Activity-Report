@@ -1,14 +1,14 @@
 {
 	"_comment": "Section 1",
 	"name": {
-		"firstName": "Alin",
-		"middleName": "V",
-		"lastName": "Dobra"
+		"firstName": "First Name",
+		"middleName": "M",
+		"lastName": "Last Name"
 	},
 
 	"_comment": "Section 2",
 	"tenure": {
-    	"tenure":"Tenured"
+    	"tenure":"Not Tenured"
   	},
 
   	"_comment": "Section 3",
@@ -24,7 +24,7 @@
 
 	"_comment": "Section 5",
 	"affiliateAppointments": {
-		"app": "None"
+		"app": "Write your Affiliate Appointments here. "
 	},
 
 	"_comment": "Section 6",
@@ -45,7 +45,7 @@
 
   	"_comment": "Section 7",
   	"teachingAdvising": {
-    	"info":"<p>My Teaching Advising Here</p>"
+    	"info":"<p>Write Your Teaching Advising Here!</p><ul><li>Teaching Philosophy</li><li>COP3031</li><li>More lists</li></ul>"
   	},
 
   	"_comment": "Section 8",
@@ -94,7 +94,7 @@
 
 	"_comment": "Section 10",
 	"contribution": {
-		"info": "<p>I made the following contributions...</p>"
+		"info": "<p>Write Your Contributions here!</p><ul><li>Awesome thing #1</li><li>Awesome thing #2</li></ul>"
 	},
 
 	"_comment": "Section 11",
@@ -129,12 +129,12 @@
 
   	"_comment": "Section 13",
   	"publications": {
-  		"info": "<p>This is my publications</p>"
+  		"info": "<p>Write Your Publications here!</p><ul><li>Awesome thing #1</li><li>Awesome thing #2</li></ul>"
   	},
 
   	"_comment": "Section 14",
 	"conferences": {
-		"info":"<p>This is my Conferences...</p>"
+		"info":"<p>Write Your Conferences here!</p><ul><li>Awesome thing #1</li><li>Awesome thing #2</li></ul>"
 	},
 
 	"_comment": "Section 15",
@@ -160,41 +160,41 @@
 
 	"_comment": "Section 16",
 	"governance": {
-  		"info":"<p>This is my governance</p>"
+  		"info":"<p>Write Your Governance here!</p><ul><li>Awesome thing #1</li><li>Awesome thing #2</li></ul>"
   	},
 
   	"_comment": "Section 17",
 	"consultationsOutsideUniversity": {
-		"info": "<p>Consultations outside the university go here...</p>"
+		"info": "<p>Write Your Consultations here!</p><ul><li>Awesome thing #1</li><li>Awesome thing #2</li></ul>"
 	},
 
 	"_comment": "Section 18",
   	"editorServiceReviewer": {
-  		"info": "<p>This is my editor reviewer string</p>"
+  		"info": "<p>Write Your Editor Service Reviewer here!</p><ul><li>Awesome thing #1</li><li>Awesome thing #2</li></ul>"
   	},
 
   	"_comment": "Section 19",
   	"international": {
-    	"info":"<p>This is my international activity</p>"
+    	"info":"<p>Write Your International here!</p><ul><li>Awesome thing #1</li><li>Awesome thing #2</li></ul>"
   	},
 
   	"_comment": "Section 20",
   	"serviceToSchools": {
-  		"info": "<p>Service to schools goes here...</p>"
+  		"info": "<p>Write Your Service to Schools here!</p><ul><li>Awesome thing #1</li><li>Awesome thing #2</li></ul>"
   	},
 
   	"_comment": "Section 21",
   	"membership": {
-    	"info":"<p>This is my membership string</p>"
+    	"info":"<p>Write Your Membership here!</p><ul><li>Awesome thing #1</li><li>Awesome thing #2</li></ul>"
   	},
 
   	"_comment": "Section 22",
   	"honors": {
-    	"info":"<p>This is my Honors string</p>"
+    	"info":"<p>Write Your Honors here!</p><ul><li>Awesome thing #1</li><li>Awesome thing #2</li></ul>"
   	},
 
   	"_comment": "Section 23",
   	"furtherInformationSection": {
-    	"info":"<p>This is my Further Information string</p>"
+    	"info":"<p>Write Your Further Information here!</p><ul><li>Awesome thing #1</li><li>Awesome thing #2</li></ul>"
   	}	
 }
