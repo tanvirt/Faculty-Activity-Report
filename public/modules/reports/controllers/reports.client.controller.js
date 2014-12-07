@@ -3,9 +3,10 @@
 // Reports controller
 var app = angular.module('reports');
 
-app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$stateParams', '$location', 'Authentication', 'Reports',
-	function($scope, $rootScope, $http, $stateParams, $location, Authentication, Reports ) {
+app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$stateParams','$location', 'Authentication', 'Reports', 'Users',
+	function($scope, $rootScope, $http, $stateParams, $location, Authentication, Reports, Users ) {
 		$scope.authentication = Authentication;
+		$scope.user = Authentication.user;
 		
 		
 		// Create new Report
@@ -52,7 +53,15 @@ app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$statePar
 
 		// Find a list of Reports
 		$scope.find = function() {
+
+		var user = new Users($scope.user);
+		console.log(user.roles);
+
+		if(user.roles == 'admin')
+		{
 			$scope.reports = Reports.query();
+		}
+
 		};
 
 		// Find existing Report
