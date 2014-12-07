@@ -57,7 +57,8 @@ User.find({username:'admin'}, function(err, results) {
 			username: 'admin',
 			password: 'password',
 			roles: ['user', 'admin'],
-			provider: 'local'
+			provider: 'local',
+			displayName: 'admin'
 		});
 
 		user.save(function(err) {
