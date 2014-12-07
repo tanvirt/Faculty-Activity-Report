@@ -127,7 +127,6 @@ exports.download = function(req, res) {
 };
 
 exports.getNew = function(req, res) {
-	console.log(require('util').inspect(req.report));
 	res.jsonp(req.report);
 };
 

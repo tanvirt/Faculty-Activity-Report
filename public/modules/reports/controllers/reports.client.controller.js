@@ -120,7 +120,13 @@ app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$statePar
 		// Download existing report
 		$scope.download = function() {
 			if ($scope.report) {
-				window.open('/modules/reports/pdf/' + $scope.report._id + '.pdf', '_blank', '');
+				$http.get('/reportdownload/' + $stateParams.reportId + '/download').
+				success(function(data, status, headers, config) {
+					window.open('/modules/reports/pdf/' + $scope.report._id + '.pdf', '_blank', '');
+				}).
+				error(function(data, status, headers, config) {
+					console.log('error');
+				});
 			}
 		};
 
