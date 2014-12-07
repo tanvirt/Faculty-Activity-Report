@@ -95,51 +95,32 @@ app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$statePar
 			});
 		};
 
-		$scope.generate = function() {
-			$scope.generating = true;
-
-			if ($scope.report) {
-				$http.get('/reportdownload/' + $stateParams.reportId).
-				success(function(data, status, headers, config) {
-					$scope.generating = false;
-					window.location.reload();
-				}).
-				error(function(data, status, headers, config) {
-					console.log('error');
-				});
-			}
-		};
-
 		// Find existing Report
 		$scope.findOne = function() {
+			$scope.generating = true;
+
 			$scope.report = Reports.get({ 
 				reportId: $stateParams.reportId
 			});
-			/*if ($scope.report) {
+			
+			if ($scope.report) {
 				$http.get('/reportdownload/' + $stateParams.reportId).
 					success(function(data, status, headers, config) {
 						//$location.path('reports/' + $stateParams.reportId);
+
+						$scope.generating = false;
+						$scope.pdfLocation = '/modules/reports/pdf/' + $stateParams.reportId + '.pdf';
 					}).
 					error(function(data, status, headers, config) {
 						console.log('error');
 					});
-			}*/
-			$scope.pdfLocation = '/modules/reports/pdf/' + $stateParams.reportId + '.pdf';
+			}
 		};
 
 		// Download existing report
 		$scope.download = function() {
-			$scope.downloading = true;
-
 			if ($scope.report) {
-				$http.get('/reportdownload/' + $scope.report._id).
-					success(function(data, status, headers, config) {
-						$scope.downloading = false;
-						window.open('/modules/reports/pdf/' + $scope.report._id + '.pdf', '_blank', '');
-					}).
-					error(function(data, status, headers, config) {
-						console.log('error');
-					});
+				window.open('/modules/reports/pdf/' + $scope.report._id + '.pdf', '_blank', '');
 			}
 		};
 
