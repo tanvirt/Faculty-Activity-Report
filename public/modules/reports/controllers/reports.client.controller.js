@@ -117,11 +117,20 @@ app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$statePar
 			}
 		};
 
+		$scope.getName = function() {
+			$scope.report = Reports.get({ 
+				reportId: $stateParams.reportId
+			});
+		};
+
 		// Download existing report
 		$scope.download = function() {
+			$scope.downloading = true;
+
 			if ($scope.report) {
 				$http.get('/reportdownload/' + $stateParams.reportId + '/download').
 				success(function(data, status, headers, config) {
+					$scope.downloading = false;
 					window.open('/modules/reports/pdf/' + $scope.report._id + '.pdf', '_blank', '');
 				}).
 				error(function(data, status, headers, config) {
