@@ -1,3 +1,5 @@
+<!-- Original Code
+
 <section data-ng-controller="ReportsController" data-ng-init="find()">
     <div class="page-header">
         <h1>Reports</h1>
@@ -22,5 +24,38 @@
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!reports.$resolved || reports.length">
     	No Reports yet, why don't you <a href="/#!/reports/create">create one</a>?
+    </div>
+</section>
+-->
+
+<section data-ng-controller="ReportsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Reports</h1>
+    </div>
+    <div class="form-group">
+<div class = "row">
+    <div class="col-md-8">
+         <div class="input-group input-group-lg">
+            <input type="text" class="form-control" ng-model="searchtext" placeholder="search...">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button">Go!</button>
+            </span>
+        </div>
+    </div>
+</div>  
+</br>
+        <a data-ng-repeat="report in reports | filter :searchtext" data-ng-href="#!/reports/{{report._id}}" class="list-group-item List-grup-item-push-1">
+               <h3 class="list-group-item-heading" data-ng-bind="report.reportName"></h3>
+            <small class="list-group-item-text">
+                    Posted on
+                    <span data-ng-bind="report.created | date:'medium'"></span>
+                    by
+                    <span data-ng-bind="report.user.displayName"></span>
+               </small>
+        </a>
+</div>
+</div>
+    <div class="alert alert-warning text-center" data-ng-hide="!reports.$resolved || reports.length">
+         No Reports yet, why don't you <a href="/#!/reports/create">create one</a>?
     </div>
 </section>
