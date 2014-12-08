@@ -30,7 +30,7 @@ module.exports = function(app) {
 
 	app.route('/reportdownload/:reportId')
 		.get(users.requiresLogin, reports.hasAuthorization, 
-			 reports.generateLatex, reports.generatePDF, reports.viewPDF);
+			 reports.generateLatex, reports.generatePDF);
 		
 	app.route('/reportdownload/:reportId/latex')
 		.get(users.requiresLogin, reports.hasAuthorization, 

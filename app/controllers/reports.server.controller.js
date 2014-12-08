@@ -51,7 +51,7 @@ exports.generateLatex = function(req, res, next) {
 	});
 };
 
-exports.generatePDF = function(req, res, next) {
+exports.generatePDF = function(req, res) {
 	var myStream = latex(req.entireLatex);
 
 	var writeable = fs.createWriteStream('./public/modules/reports/pdf/' + req.report._id + '.pdf');
@@ -64,7 +64,7 @@ exports.generatePDF = function(req, res, next) {
 
 	writeable.on('finish', function() {
 		console.log('Report Generated!');
-		next();
+		return res.jsonp({message: true});
 	});
 };
 
