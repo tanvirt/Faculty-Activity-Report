@@ -68,7 +68,7 @@ exports.update = function(req, res) {
 };
 
 exports.readFromReport = function(req, res) {
-	ConsultationsOutsideUniversity.find({report: req.report})
+	ConsultationsOutsideUniversity.findOne({report: req.report})
 	.populate('user', 'displayName')
 	.populate('report', 'reportName')
 	.exec(function(err, result) {
