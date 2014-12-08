@@ -56,7 +56,8 @@ describe('Patents Controller Tests', function() {
 			authors: ['A', 'B', 'C'],
 			patentNumber: 'defg',
 			date: '03/12/2000',
-			description: 'hijklmnop',		
+			description: 'hijklmnop',
+		
 
 			report: report,
 			user: user
