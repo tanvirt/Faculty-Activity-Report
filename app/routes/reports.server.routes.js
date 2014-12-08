@@ -29,7 +29,7 @@ module.exports = function(app) {
 		.put(users.requiresLogin, reports.hasAuthorization, reports.updateReportName);
 
 	app.route('/reportdownload/:reportId')
-		.get(users.requiresLogin, reports.hasAuthorization, 
+		.post(users.requiresLogin, reports.hasAuthorization, 
 			 reports.generateLatex, reports.generatePDF);
 		
 	app.route('/reportdownload/:reportId/latex')
@@ -39,9 +39,6 @@ module.exports = function(app) {
 	app.route('/upload')
 		.get(reports.viewCtrl)
 		.post(teachingEvaluation.getExcel, teachingEvaluation.saveExcel);
-
-	app.route('/reportdownload/:reportId/download')
-		.get(users.requiresLogin, reports.hasAuthorization, reports.download);
 
 	app.route('/cleanTmp')
 		.get(users.requiresLogin, reports.isAdmin, reports.cleanTmp);

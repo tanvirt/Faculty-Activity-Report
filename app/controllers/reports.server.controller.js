@@ -13,7 +13,8 @@ var mongoose = require('mongoose'),
 	fs = require('fs'),
 	async = require('async'),
 	spawn = require('child_process').spawn,
-	join = require('path').join;
+	join = require('path').join,
+	crypto = require('crypto');
 
 var headerFooter = require('../templates/headerFooter/renderHeaderFooter');
 
@@ -54,17 +55,21 @@ exports.generateLatex = function(req, res, next) {
 exports.generatePDF = function(req, res) {
 	var myStream = latex(req.entireLatex);
 
-	var writeable = fs.createWriteStream('./public/modules/reports/pdf/' + req.report._id + '.pdf');
+	var rand = ( Math.floor(Math.random() * 4294967296 ) );
+	var name = req.report.reportName + '_r' + rand;
+	var path = './public/modules/reports/pdf/' + name + '.pdf';
+
+	var writeable = fs.createWriteStream(path);
 
 	myStream.pipe(writeable);
 
 	myStream.on('error', function(err) {
-		return res.jsonp(err);
+		return res.jsonp({message: false, err: err});
 	});
 
 	writeable.on('finish', function() {
 		console.log('Report Generated!');
-		return res.jsonp({message: true});
+		return res.jsonp({message: true, path: name});
 	});
 };
 
@@ -116,14 +121,6 @@ exports.getLatex = function(req, res) {
 
 exports.getPDF = function(req, res) {
 	res.jsonp(req.entirePDF);
-};
-
-exports.viewPDF = function(req, res) {
-	res.sendfile('./public/modules/reports/pdf/' + req.report._id + '.pdf');
-};
-
-exports.download = function(req, res) {
-	res.download('./public/modules/reports/pdf/' + req.report._id + '.pdf');
 };
 
 exports.getNew = function(req, res) {
