@@ -3,27 +3,28 @@
     <div class="page-header">
         <h1>Create a new report</h1>
     </div>
-    <div class="row">
-        <p>
-            <h3>Enter new report name: </h3>
-            <input data-ng-model="reportName">
-        </p>
+            <div class="row" align="left">
+                <div class="col-md-12">
+            <h3>
+                <input class="col-md-4" data-ng-model="reportName" placeholder = "Enter New Report Name">
+            </h3>
+            <div class="col-md-2" style="padding-bottom:10px">
+                <button data-ng-click="createDefault()" id='default' class="btn btn-primary">Default Data
+                </button>
+            </div>
+            </div>
+              <div class="row" align="left">
+                <div class="col-md-12">
 
-        <button data-ng-click="createDefault()" id='default' class="btn btn-primary">Default Data</button>
-
-        
-        <div data-ng-init="findFromUser()" ng-hide="reports.length === 0">
-
-            <select class="form-control" id="id" data-ng-model="id">
-                <option value="" disabled selected>Previous Reports</option>
-                <option ng-repeat="report in reports" value="{{report._id}}">{{report.reportName}}; Reports Created: {{report.number}}; Date: {{report.created | date}} </option>
-                    
-            </select>
-
-            <button data-ng-click="createPrevious()" class="btn btn-primary">Previous Data</button>
-                
-        </div>
-        
+                <div class="col-md-4" data-ng-init="findFromUser()" ng-hide="reports.length === 0">
+                    <select class="form-control" id="id" data-ng-model="id">
+                        <option value="" disabled selected>Previous Reports</option>
+                        <option ng-repeat="report in reports" value="{{report._id}}">{{report.reportName}}; Reports Created: {{report.number}}; Date: {{report.created | date}} </option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                     <button data-ng-click="createPrevious()" class="btn btn-primary">Previous Data</button> 
+               </div>
+         </div>
     </div>
-
 </section>
