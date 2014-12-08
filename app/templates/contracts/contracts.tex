@@ -3,80 +3,166 @@
   
 \subsection*{Funded Research Contracts and Grants}
 
-{% for contract in array %}
+\begin{enumerate}
 
-\begin{itemize}
-{% if contract.funded === 'externally' %}
-\item \textbf{Funded Externally}
-
+\item[a.] \textbf{Funded Externally}
+{% if total.externally !== 0 %}
 \begin{center}
   \begin{tabular}{lllllll}
     Title of Grant & Funding & PI & Start-End & Value
     &Funding\\
     & Agen. & & & &  Portion \\
     \hline
-    {{contract.title}} & {{contract.fundingAgency}} & {{contract.PI}} & {{contract.startDate|date('M/d/Y')}}-{{contract.endDate|date('M/d/Y')}} & \${{contract.value}} & \${{contract.fundingPortion}}\\
-    
+
+{% for contract in array %}
+{% if contract.funded === 'externally' %}
+ {{contract.title}} & {{contract.fundingAgency}} & {{contract.PI}} & {{contract.startDate|date('M/d/Y')}}-{{contract.endDate|date('M/d/Y')}} & \${{contract.value}} & \${{contract.fundingPortion}}\\
+{% endif %}
+{% endfor %}
+
   \end{tabular}
 \end{center}
 
-\textbf{
   \begin{center}
-    Summary of Grant Funding Received \\
+    \bf Summary of Grant Funding Received
+    \newline
     \begin{tabular}{lc}
-      Role & Total \\
+      \bf Role & Total \\
       \hline
-      {{contract.PI}} & \${{contract.fundingPortion}} \\
+
+      {% for contract in array %} 
+      {% if contract.funded === 'externally' %}
+      \bf {{contract.PI}} & \${{contract.fundingPortion}} \\
+      {% endif %}
+      {% endfor %}
+
       \hline
-      Totals & \${{fundingTotal}}
+      \bf Totals & \${{total.externally}}
     \end{tabular}
   \end{center}
-}
+{% else %}
+N/A
 {% endif %}
+
+\item[b.] \textbf{Funded Internally}
+{% if total.internally !== 0 %}
+
+\begin{center}
+  \begin{tabular}{lllllll}
+    Title of Grant & Funding & PI & Start-End & Value
+    &Funding\\
+    & Agen. & & & &  Portion \\
+    \hline
+
+{% for contract in array %}
 {% if contract.funded === 'internally' %}
-\item \textbf{Funded Internally}
-
-\begin{center}
-  \begin{tabular}{lllllll}
-    Title of Grant & Funding & PI & Start-End & Value
-    &Funding\\
-    & Agen. & & & &  Portion \\
-    \hline
-    {{contract.title}} & N/A & {{contract.PI}} & {{contract.startDate|date('M/d/Y')}}-{{contract.endDate|date('M/d/Y')}} & \${{contract.value}} & \${{contract.fundingPortion}}\\
-    
-  \end{tabular}
-\end{center}
-
+ {{contract.title}} & {{contract.fundingAgency}} & {{contract.PI}} & {{contract.startDate|date('M/d/Y')}}-{{contract.endDate|date('M/d/Y')}} & \${{contract.value}} & \${{contract.fundingPortion}}\\
 {% endif %}
-{% if contract.funded === 'pending' %}
-\item \textbf{Submitted, Pending Decision}
-
-\begin{center}
-  \begin{tabular}{lllllll}
-    Title of Grant & Funding & PI & Start-End & Value
-    &Funding\\
-    & Agen. & & & &  Portion \\
-    \hline
-    {{contract.title}} & {{contract.fundingAgency}} & {{contract.PI}} & {{contract.startDate|date('M/d/Y')}}-{{contract.endDate|date('M/d/Y')}} & \${{contract.value}} & \${{contract.fundingPortion}}\\
-    
-  \end{tabular}
-\end{center}
-
-{% endif %}
-{% if contract.funded === 'not' %}
-\item \textbf{Submitted Not Funded}
-
-\begin{center}
-  \begin{tabular}{llllll}
-    Title of Grant & Fund.  & PI & Start-End & Value \\
-    & Agen. & & &  Funding \\
-    \hline
-    {{contract.title}} & {{contract.fundingAgency}} & {{contract.PI}} & {{contract.startDate|date('M/d/Y')}}-{{contract.endDate|date('M/d/Y')}} & \${{contract.value}}\\
-  \end{tabular}
-\end{center}
-
-{% endif %}
-
-\end{itemize}
-
 {% endfor %}
+
+  \end{tabular}
+\end{center}
+
+  \begin{center}
+    \bf Summary of Grant Funding Received
+    \newline
+    \begin{tabular}{lc}
+      \bf Role & Total \\
+      \hline
+
+      {% for contract in array %} 
+      {% if contract.funded === 'internally' %}
+      \bf {{contract.PI}} & \${{contract.fundingPortion}} \\
+      {% endif %}
+      {% endfor %}
+
+      \hline
+      \bf Totals & \${{total.internally}}
+    \end{tabular}
+  \end{center}
+{% else %}
+N/A
+{% endif %}
+
+\item[c.] \textbf{Submitted, Pending Decision}
+{% if total.pending !== 0 %}
+
+\begin{center}
+  \begin{tabular}{lllllll}
+    Title of Grant & Funding & PI & Start-End & Value
+    &Funding\\
+    & Agen. & & & &  Portion \\
+    \hline
+
+{% for contract in array %}
+{% if contract.funded === 'pending' %}
+ {{contract.title}} & {{contract.fundingAgency}} & {{contract.PI}} & {{contract.startDate|date('M/d/Y')}}-{{contract.endDate|date('M/d/Y')}} & \${{contract.value}} & \${{contract.fundingPortion}}\\
+{% endif %}
+{% endfor %}
+
+  \end{tabular}
+\end{center}
+
+  \begin{center}
+    \bf Summary of Grant Funding Received
+    \newline
+    \begin{tabular}{lc}
+      \bf Role & Total \\
+      \hline
+
+      {% for contract in array %} 
+      {% if contract.funded === 'pending' %}
+      \bf {{contract.PI}} & \${{contract.fundingPortion}} \\
+      {% endif %}
+      {% endfor %}
+
+      \hline
+      \bf Totals & \${{total.pending}}
+    \end{tabular}
+  \end{center}
+{% else %}
+N/A
+{% endif %}
+
+\item[d.] \textbf{Submitted Not Funded}
+{% if total.not !== 0 %}
+
+\begin{center}
+  \begin{tabular}{lllllll}
+    Title of Grant & Funding & PI & Start-End & Value
+    &Funding\\
+    & Agen. & & & &  Portion \\
+    \hline
+
+{% for contract in array %}
+{% if contract.funded === 'not' %}
+ {{contract.title}} & {{contract.fundingAgency}} & {{contract.PI}} & {{contract.startDate|date('M/d/Y')}}-{{contract.endDate|date('M/d/Y')}} & \${{contract.value}} & \${{contract.fundingPortion}}\\
+{% endif %}
+{% endfor %}
+
+  \end{tabular}
+\end{center}
+
+  \begin{center}
+    \bf Summary of Grant Funding Received
+    \newline
+    \begin{tabular}{lc}
+      \bf Role & Total \\
+      \hline
+
+      {% for contract in array %} 
+      {% if contract.funded === 'not' %}
+      \bf {{contract.PI}} & \${{contract.fundingPortion}} \\
+      {% endif %}
+      {% endfor %}
+
+      \hline
+      \bf Totals & \${{total.not}}
+    \end{tabular}
+  \end{center}
+{% else %}
+N/A
+{% endif %}
+
+\end{enumerate}
+
