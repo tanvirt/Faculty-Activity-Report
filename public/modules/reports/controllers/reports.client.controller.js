@@ -3,11 +3,9 @@
 // Reports controller
 var app = angular.module('reports');
 
-app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$stateParams', '$location', 'Authentication', 'Reports', 'PDFViewerService',
+app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$stateParams', '$location', 'Authentication', 'Reports', 'PDFViewerService', 
 	function($scope, $rootScope, $http, $stateParams, $location, Authentication, Reports, pdf ) {
 		$scope.authentication = Authentication;
-
-
 
 		$scope.viewer = pdf.Instance('viewer');
 
@@ -99,31 +97,45 @@ app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$statePar
 
 		// Find existing Report
 		$scope.findOne = function() {
+			$scope.generating = true;
+
 			$scope.report = Reports.get({ 
 				reportId: $stateParams.reportId
 			});
-			/*if ($scope.report) {
+			
+			if ($scope.report) {
 				$http.get('/reportdownload/' + $stateParams.reportId).
 					success(function(data, status, headers, config) {
 						//$location.path('reports/' + $stateParams.reportId);
+
+						$scope.generating = false;
+						$scope.pdfLocation = '/modules/reports/pdf/' + $stateParams.reportId + '.pdf';
 					}).
 					error(function(data, status, headers, config) {
 						console.log('error');
 					});
-			}*/
-			$scope.pdfLocation = '/modules/reports/pdf/' + $stateParams.reportId + '.pdf';
+			}
+		};
+
+		$scope.getName = function() {
+			$scope.report = Reports.get({ 
+				reportId: $stateParams.reportId
+			});
 		};
 
 		// Download existing report
 		$scope.download = function() {
+			$scope.downloading = true;
+
 			if ($scope.report) {
-				$http.get('/reportdownload/' + $scope.report._id).
-					success(function(data, status, headers, config) {
-						window.open('/modules/reports/pdf/' + $scope.report._id + '.pdf', '_blank', '');
-					}).
-					error(function(data, status, headers, config) {
-						console.log('error');
-					});
+				$http.get('/reportdownload/' + $stateParams.reportId + '/download').
+				success(function(data, status, headers, config) {
+					$scope.downloading = false;
+					window.open('/modules/reports/pdf/' + $scope.report._id + '.pdf', '_blank', '');
+				}).
+				error(function(data, status, headers, config) {
+					console.log('error');
+				});
 			}
 		};
 

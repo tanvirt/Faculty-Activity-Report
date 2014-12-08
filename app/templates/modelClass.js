@@ -242,6 +242,36 @@ RenderModel.prototype.renderMultipleGrad = function(req, callback, parseObj) {
 	});
 };
 
+RenderModel.prototype.renderMultipleContracts = function(req, callback) {
+	var _this = this;
+	
+	_this._findModelsByReport( req, function( err, arrayOfObjs ) {
+		if (err) {
+			callback(err, null);
+		} else {
+			var total = {};
+			total.externally = 0;
+			total.internally = 0;
+			total.pending = 0;
+			total.not = 0;
+
+			for (var i=0; i<arrayOfObjs.length; i++) {
+				if (arrayOfObjs[i].funded === 'externally') {
+					total.externally += arrayOfObjs[i].fundingPortion;
+				} else if (arrayOfObjs[i].funded === 'internally') {
+					total.internally += arrayOfObjs[i].fundingPortion;
+				} else if (arrayOfObjs[i].funded === 'pending') {
+					total.pending += arrayOfObjs[i].fundingPortion;
+				} else if (arrayOfObjs[i].funded === 'not') {
+					total.not += arrayOfObjs[i].fundingPortion;
+				}
+			}
+
+			_this._renderMult( {array: arrayOfObjs, total: total}, callback );
+		}
+	});
+};
+
 RenderModel.prototype.renderMultiple = function(req, callback) {
 	var _this = this;
 	

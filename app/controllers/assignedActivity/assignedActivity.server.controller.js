@@ -7,6 +7,8 @@ var errorHandler = require('../errors');
 var is = require('is-js');
 var _ = require('lodash');
 
+var u = require('underscore');
+
 exports.create = function(req, res) {
 	if (is.empty(req.body.assignedActivity)) {
 		return res.jsonp({
@@ -41,8 +43,6 @@ exports.create = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			req.report.assignedActivity = assignedActivity;
-			req.report.save();
 			res.jsonp(assignedActivity);
 		}
 	});
@@ -76,7 +76,10 @@ exports.update = function(req, res) {
 };
 
 exports.readFromReport = function(req, res) {
-	AssignedActivity.findOne({report: req.report}, function(err, result) {
+	AssignedActivity.find({report: req.report})
+	.populate('user', 'displayName')
+	.populate('report', 'reportName')
+	.exec(function(err, result) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -92,10 +95,22 @@ exports.read = function(req, res) {
 
 exports.assignedActivityById = function(req, res, next, id) {
 	AssignedActivity.findById(id)
+	.populate('user', 'displayName')
+	.populate('report', 'reportName')
 	.exec(function(err, assignedActivity) {
 		if (err) return next(err);
 		if (!assignedActivity) return next(new Error('Failed to load AssignedActivity ' + id));
 		req.assignedActivity = assignedActivity;
 		next();
 	});
+};
+
+exports.hasAuthorization = function(req, res, next) {
+	if (req.assignedActivity.user.id !== req.user.id && !u.contains(req.user.roles, 'admin')) {
+		return res.status(403).send({
+			message: 'User is not authorized'
+		});
+	}
+
+	next();
 };

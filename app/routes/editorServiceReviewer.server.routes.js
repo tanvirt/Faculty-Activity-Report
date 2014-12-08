@@ -3,17 +3,16 @@
 module.exports = function(app) {
 	var users = require('../../app/controllers/users');
 	var editorServiceReviewer = require('../../app/controllers/editorServiceReviewer/editorServiceReviewer');
-	//var reports = require('../../app/controllers/reports');
+	var reports = require('../../app/controllers/reports');
 
-	//todo: require authorization
 	app.route('/reports/:reportId/editorServiceReviewer')
-		.get(users.requiresLogin, editorServiceReviewer.readFromReport)
-		.post(users.requiresLogin, editorServiceReviewer.create);
+		.get(users.requiresLogin, reports.hasAuthorization, editorServiceReviewer.readFromReport)
+		.post(users.requiresLogin, reports.hasAuthorization, editorServiceReviewer.create);
 
 	app.route('/editorServiceReviewer/:editorServiceReviewerId')
-		.get(users.requiresLogin, editorServiceReviewer.read)
-		.put(users.requiresLogin, editorServiceReviewer.update);
+		.get(users.requiresLogin, editorServiceReviewer.hasAuthorization, editorServiceReviewer.read)
+		.put(users.requiresLogin, editorServiceReviewer.hasAuthorization, editorServiceReviewer.update);
 
-	// Finish by binding the editorServiceReviewer middleware
+	// Finish by binding the EditorServiceReviewer middleware
 	app.param('editorServiceReviewerId', editorServiceReviewer.editorServiceReviewerById);
 };

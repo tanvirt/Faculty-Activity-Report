@@ -39,7 +39,10 @@ module.exports = {
 				'public/lib/ng-file-upload/angular-file-upload.js',
 
 				'public/lib/x2js/xml2json.js',
-				'public/lib/angular-x2js/src/x2js.js'
+				'public/lib/angular-x2js/src/x2js.js',
+
+				'public/lib/spin.js/spin.js',
+				'public/lib/angular-spinner/angular-spinner.js'
 			]
 		},
 		css: [

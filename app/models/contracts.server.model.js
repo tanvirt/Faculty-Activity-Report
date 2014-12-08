@@ -51,8 +51,7 @@ var Contracts = new Schema({
 	report: {
 		type: Schema.ObjectId,
 		ref: 'Report'
-	},
-	fundingTotal: Number
+	}
 }, {collection:'Contracts'});
 
 mongoose.model('Contracts', Contracts);
