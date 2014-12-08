@@ -36,8 +36,10 @@ exports.create = function(req, res) {
 
 	patents.save(function(err) {
 		if (err) {
+			console.log(require('util').inspect(req.body));
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
+
 			});
 		} else {
 			res.jsonp(patents);
