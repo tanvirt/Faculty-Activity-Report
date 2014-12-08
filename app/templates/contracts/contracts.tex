@@ -16,7 +16,7 @@
 
 {% for contract in array %}
 {% if contract.funded === 'externally' %}
- {{contract.title}} & {{contract.fundingAgency}} & {{contract.PI}} & {{contract.startDate|date('M/d/Y')}}-{{contract.endDate|date('M/d/Y')}} & \${{contract.valueStr}} & \${{contract.fundingPortionStr}}\\
+ {{contract.title}} & {{contract.fundingAgency}} & {{contract.PI}} & {{contract.startDate|date('M/d/Y')}}-{{contract.endDate|date('M/d/Y')}} & \${{contract.value}} & \${{contract.fundingPortion}}\\
 {% endif %}
 {% endfor %}
 
@@ -32,12 +32,12 @@
 
       {% for contract in array %} 
       {% if contract.funded === 'externally' %}
-      \bf {{contract.PI}} & \${{contract.fundingPortionStr}} \\
+      \bf {{contract.PI}} & \${{contract.fundingPortion}} \\
       {% endif %}
       {% endfor %}
 
       \hline
-      \bf Totals & \${{total.externallyStr}}
+      \bf Totals & \${{total.externally}}
     \end{tabular}
   \end{center}
 {% else %}
@@ -56,7 +56,7 @@ N/A
 
 {% for contract in array %}
 {% if contract.funded === 'internally' %}
- {{contract.title}} & {{contract.fundingAgency}} & {{contract.PI}} & {{contract.startDate|date('M/d/Y')}}-{{contract.endDate|date('M/d/Y')}} & \${{contract.valueStr}} & \${{contract.fundingPortionStr}}\\
+ {{contract.title}} & {{contract.fundingAgency}} & {{contract.PI}} & {{contract.startDate|date('M/d/Y')}}-{{contract.endDate|date('M/d/Y')}} & \${{contract.value}} & \${{contract.fundingPortion}}\\
 {% endif %}
 {% endfor %}
 
@@ -72,12 +72,12 @@ N/A
 
       {% for contract in array %} 
       {% if contract.funded === 'internally' %}
-      \bf {{contract.PI}} & \${{contract.fundingPortionStr}} \\
+      \bf {{contract.PI}} & \${{contract.fundingPortion}} \\
       {% endif %}
       {% endfor %}
 
       \hline
-      \bf Totals & \${{total.internallyStr}}
+      \bf Totals & \${{total.internally}}
     \end{tabular}
   \end{center}
 {% else %}
@@ -96,7 +96,7 @@ N/A
 
 {% for contract in array %}
 {% if contract.funded === 'pending' %}
- {{contract.title}} & {{contract.fundingAgency}} & {{contract.PI}} & {{contract.startDate|date('M/d/Y')}}-{{contract.endDate|date('M/d/Y')}} & \${{contract.valueStr}} & \${{contract.fundingPortionStr}}\\
+ {{contract.title}} & {{contract.fundingAgency}} & {{contract.PI}} & {{contract.startDate|date('M/d/Y')}}-{{contract.endDate|date('M/d/Y')}} & \${{contract.value}} & \${{contract.fundingPortion}}\\
 {% endif %}
 {% endfor %}
 
@@ -112,12 +112,12 @@ N/A
 
       {% for contract in array %} 
       {% if contract.funded === 'pending' %}
-      \bf {{contract.PI}} & \${{contract.fundingPortionStr}} \\
+      \bf {{contract.PI}} & \${{contract.fundingPortion}} \\
       {% endif %}
       {% endfor %}
 
       \hline
-      \bf Totals & \${{total.pendingStr}}
+      \bf Totals & \${{total.pending}}
     \end{tabular}
   \end{center}
 {% else %}
@@ -136,7 +136,7 @@ N/A
 
 {% for contract in array %}
 {% if contract.funded === 'not' %}
- {{contract.title}} & {{contract.fundingAgency}} & {{contract.PI}} & {{contract.startDate|date('M/d/Y')}}-{{contract.endDate|date('M/d/Y')}} & \${{contract.valueStr}} & \${{contract.fundingPortionStr}}\\
+ {{contract.title}} & {{contract.fundingAgency}} & {{contract.PI}} & {{contract.startDate|date('M/d/Y')}}-{{contract.endDate|date('M/d/Y')}} & \${{contract.value}} & \${{contract.fundingPortion}}\\
 {% endif %}
 {% endfor %}
 
@@ -152,12 +152,12 @@ N/A
 
       {% for contract in array %} 
       {% if contract.funded === 'not' %}
-      \bf {{contract.PI}} & \${{contract.fundingPortionStr}} \\
+      \bf {{contract.PI}} & \${{contract.fundingPortion}} \\
       {% endif %}
       {% endfor %}
 
       \hline
-      \bf Totals & \${{total.notStr}}
+      \bf Totals & \${{total.not}}
     \end{tabular}
   \end{center}
 {% else %}
