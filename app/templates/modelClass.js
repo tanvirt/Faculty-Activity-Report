@@ -242,6 +242,14 @@ RenderModel.prototype.renderMultipleGrad = function(req, callback, parseObj) {
 	});
 };
 
+function numberWithCommas(x) {
+	/* http://stackoverflow.com/a/2901298/4172373 */
+	/* by Elias Zamaria */
+	var parts = x.toString().split('.');
+	parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	return parts.join('.');
+}
+
 RenderModel.prototype.renderMultipleContracts = function(req, callback) {
 	var _this = this;
 	
@@ -256,6 +264,9 @@ RenderModel.prototype.renderMultipleContracts = function(req, callback) {
 			total.not = 0;
 
 			for (var i=0; i<arrayOfObjs.length; i++) {
+				arrayOfObjs[i].fundingPortionStr = numberWithCommas(arrayOfObjs[i].fundingPortion);
+				arrayOfObjs[i].valueStr = numberWithCommas(arrayOfObjs[i].value);
+
 				if (arrayOfObjs[i].funded === 'externally') {
 					total.externally += arrayOfObjs[i].fundingPortion;
 				} else if (arrayOfObjs[i].funded === 'internally') {
@@ -266,6 +277,15 @@ RenderModel.prototype.renderMultipleContracts = function(req, callback) {
 					total.not += arrayOfObjs[i].fundingPortion;
 				}
 			}
+
+			if (total.externally !== 0)
+				total.externallyStr = numberWithCommas(total.externally);
+			if (total.internally !== 0)
+				total.internallyStr = numberWithCommas(total.internally);
+			if (total.pending !== 0)
+				total.pendingStr = numberWithCommas(total.pending);
+			if (total.not !== 0)
+				total.notStr = numberWithCommas(total.not);
 
 			_this._renderMult( {array: arrayOfObjs, total: total}, callback );
 		}
