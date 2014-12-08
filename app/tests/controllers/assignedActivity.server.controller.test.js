@@ -5,7 +5,6 @@
 var app = require('../../../server');
 
 var should = require('should');
-
 var request = require('supertest');
 
 var	assignedActivity = require('../../controllers/assignedActivity/assignedActivity');
@@ -18,7 +17,7 @@ var Report = mongoose.model('Report');
 
 var async = require('async');
 
-var user, report, aa;
+var user, user2, aa1, aa2, report;
 
 describe('AssignedActivity Controller Tests', function() {
 	beforeEach(function(done) {
@@ -34,6 +33,18 @@ describe('AssignedActivity Controller Tests', function() {
 
 		user.save();
 
+		user2 = new User({
+			firstName: 'Full',
+			lastName: 'Name',
+			email: 'test@test.com',
+			username: 'admin',
+			password: 'password',
+			provider: 'local',
+			roles: ['admin']
+		});
+
+		user2.save();
+
 		report = new Report({
 			reportName: 'MyReportName',
 			user: user
@@ -41,7 +52,7 @@ describe('AssignedActivity Controller Tests', function() {
 
 		report.save();
 
-		aa = new AssignedActivity({
+		aa1 = new AssignedActivity({
 			year: '2000',
 
 			springTeaching: 20,
@@ -60,22 +71,43 @@ describe('AssignedActivity Controller Tests', function() {
 			user: user
 		});
 
-		aa.save();
+		aa2 = new AssignedActivity({
+			year: '2001',
+
+			springTeaching: 15,
+			springService: 15,
+			springResearch: 70,
+
+			fallTeaching: 15,
+			fallService: 15,
+			fallResearch: 70,
+
+			summerTeaching: 15,
+			summerService: 15,
+			summerResearch: 70,
+
+			report: report,
+			user: user2
+		});
+
+		aa1.save();
+		aa2.save();
 
 		done();
 	});
 
 	describe('Testing the GET methods', function() {
 
-		it('should fail to be able to get a assignedActivity if not logged in', function(done) {
+		it('should fail to be able to get an assignedActivity if not logged in', function(done) {
 			request(app)
 			  .get('/reports/' + report.id + '/assignedActivity')
 			  .set('Accept', 'application/json')
+			  
 			  .expect(401)
 			  .end(done);
 		});
 
-		it('should be able to get an assignedActivity associated with its report id', function(done) {
+		it('should be able to get assignedActivity associated with its report id', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -93,23 +125,23 @@ describe('AssignedActivity Controller Tests', function() {
 						.end(function(err, res) {
 							should.not.exist(err);
 
-						  	res.body.should.be.an.Object.and.have.property('year', aa.year);
+							res.body[0].should.be.an.Object.and.have.property('year', aa1.year);
 
-						  	res.body.should.have.property('springTeaching', aa.springTeaching);
-						  	res.body.should.have.property('springService', aa.springService);
-						  	res.body.should.have.property('springResearch', aa.springResearch);
+						  	res.body[0].should.have.property('springTeaching', aa1.springTeaching);
+						  	res.body[0].should.have.property('springService', aa1.springService);
+						  	res.body[0].should.have.property('springResearch', aa1.springResearch);
 
-						  	res.body.should.have.property('fallTeaching', aa.fallTeaching);
-						  	res.body.should.have.property('fallService', aa.fallService);
-						  	res.body.should.have.property('fallResearch', aa.fallResearch);
+						  	res.body[0].should.have.property('fallTeaching', aa1.fallTeaching);
+						  	res.body[0].should.have.property('fallService', aa1.fallService);
+						  	res.body[0].should.have.property('fallResearch', aa1.fallResearch);
 
-						  	res.body.should.have.property('summerTeaching', aa.summerTeaching);
-						  	res.body.should.have.property('summerService', aa.summerService);
-						  	res.body.should.have.property('summerResearch', aa.summerResearch);
+						  	res.body[0].should.have.property('summerTeaching', aa1.summerTeaching);
+						  	res.body[0].should.have.property('summerService', aa1.summerService);
+						  	res.body[0].should.have.property('summerResearch', aa1.summerResearch);
 
-						  	res.body.should.have.property('_id', aa.id);
-						  	res.body.should.have.property('user', user.id);
-						  	res.body.should.have.property('report', report.id);
+						  	res.body[0].should.have.property('_id', aa1.id);
+						  	res.body[0].user.should.have.property('_id', user.id);
+						  	res.body[0].report.should.have.property('_id', report.id);
 
 						  	done();
 						});
@@ -118,13 +150,14 @@ describe('AssignedActivity Controller Tests', function() {
 
 		it('should fail to be able to get a specific assignedActivity if not logged in', function(done) {
 			request(app)
-			  .get('/assignedActivity/' + aa.id)
+			  .get('/assignedActivity/' + aa1.id)
 			  .set('Accept', 'application/json')
+			  
 			  .expect(401)
 			  .end(done);
 		});
 
-		it('should be able to get a specific assignedActivity based on its id', function(done) {
+		it('should not be able to get a specific assignedActivity if the user does not own the assignedActivity and is not a superuser', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -134,41 +167,111 @@ describe('AssignedActivity Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					  .get('/assignedActivity/' + aa.id)
-					  .set('cookie', res.headers['set-cookie'])
-					  .set('Accept', 'application/json')
-					  
-					  .expect(200)
-					  .end(function(err, res) {
-					  	should.not.exist(err);
+					.get('/assignedActivity/' + aa2.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	
+				  	.expect(403)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
 
-					  	res.body.should.be.an.Object.and.have.property('year', aa.year);
+				  		res.body.should.have.property('message').and.equal('User is not authorized');
 
-					  	res.body.should.have.property('springTeaching', aa.springTeaching);
-					  	res.body.should.have.property('springService', aa.springService);
-					  	res.body.should.have.property('springResearch', aa.springResearch);
+				  		done();
+				  	});
 
-					  	res.body.should.have.property('fallTeaching', aa.fallTeaching);
-					  	res.body.should.have.property('fallService', aa.fallService);
-					  	res.body.should.have.property('fallResearch', aa.fallResearch);
-
-					  	res.body.should.have.property('summerTeaching', aa.summerTeaching);
-					  	res.body.should.have.property('summerService', aa.summerService);
-					  	res.body.should.have.property('summerResearch', aa.summerResearch);
-
-					  	res.body.should.have.property('_id', aa.id);
-					  	res.body.should.have.property('user', user.id);
-					  	res.body.should.have.property('report', report.id);
-
-					  	done();
-					  });
 				});
-		});
+		});    
+
+		it('should be able to get a specific assignedActivity if the user does own the assignedActivity and is not a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'username',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.get('/assignedActivity/' + aa1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.have.property('_id', aa1.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});   
+
+		it('should be able to get a specific assignedActivity if the user does not own the assignedActivity and is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.get('/assignedActivity/' + aa1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.have.property('_id', aa1.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});   
+
+		it('should be able to get a specific assignedActivity if the user does own the assignedActivity is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.get('/assignedActivity/' + aa2.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.have.property('_id', aa2.id);
+					  	res.body.user.should.have.property('_id', user2.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});  
+
 	});
 
 	describe('Testing the POST methods', function() {
 
-		var aaObj = {
+		var assignedActivityObj = {
 			assignedActivity: {
 				year: '2000',
 
@@ -183,14 +286,15 @@ describe('AssignedActivity Controller Tests', function() {
 				summerTeaching: 20,
 				summerService: 20,
 				summerResearch: 60
-			}
+		 	}
 		};
 
 		it('should fail to be able to create an assignedActivity if not logged in', function(done) {
 			request(app)
 			  .post('/reports/' + report.id + '/assignedActivity')
 			  .set('Accept', 'application/json')
-			  .send(aaObj)
+			  .send(assignedActivityObj)
+			  
 			  .expect(401)
 			  .end(done);
 		});
@@ -208,47 +312,67 @@ describe('AssignedActivity Controller Tests', function() {
 					  .post('/reports/' + report.id + '/assignedActivity')
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
-					  .send(aaObj)
+					  .send(assignedActivityObj)
 					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
 
-					  	res.body.should.be.an.Object.and.have.property('year', aaObj.assignedActivity.year);
+					  	res.body.should.have.property('year', assignedActivityObj.assignedActivity.year);
 
-					  	res.body.should.have.property('springTeaching', aaObj.assignedActivity.springTeaching);
-					  	res.body.should.have.property('springService', aaObj.assignedActivity.springService);
-					  	res.body.should.have.property('springResearch', aaObj.assignedActivity.springResearch);
+					  	res.body.should.have.property('springTeaching', assignedActivityObj.assignedActivity.springTeaching);
+					  	res.body.should.have.property('springService', assignedActivityObj.assignedActivity.springService);
+					  	res.body.should.have.property('springResearch', assignedActivityObj.assignedActivity.springResearch);
 
-					  	res.body.should.have.property('fallTeaching', aaObj.assignedActivity.fallTeaching);
-					  	res.body.should.have.property('fallService', aaObj.assignedActivity.fallService);
-					  	res.body.should.have.property('fallResearch', aaObj.assignedActivity.fallResearch);
+					  	res.body.should.have.property('fallTeaching', assignedActivityObj.assignedActivity.fallTeaching);
+					  	res.body.should.have.property('fallService', assignedActivityObj.assignedActivity.fallService);
+					  	res.body.should.have.property('fallResearch', assignedActivityObj.assignedActivity.fallResearch);
 
-					  	res.body.should.have.property('summerTeaching', aaObj.assignedActivity.summerTeaching);
-					  	res.body.should.have.property('summerService', aaObj.assignedActivity.summerService);
-					  	res.body.should.have.property('summerResearch', aaObj.assignedActivity.summerResearch);
+					  	res.body.should.have.property('summerTeaching', assignedActivityObj.assignedActivity.summerTeaching);
+					  	res.body.should.have.property('summerService', assignedActivityObj.assignedActivity.summerService);
+					  	res.body.should.have.property('summerResearch', assignedActivityObj.assignedActivity.summerResearch);
 
 					  	res.body.should.have.property('_id');
-					  	res.body.should.have.property('user');
-					  	res.body.should.have.property('report');
+					  	res.body.should.have.property('user', user.id);
+					  	res.body.should.have.property('report', report.id);
 
 					  	done();
 					  });
 				});
 		});
+
 	});
 
 	describe('Testing the PUT methods', function() {
 
+		var assignedActivityObj = {
+			assignedActivity: {
+				year: '2000',
+
+				springTeaching: 20,
+				springService: 20,
+				springResearch: 60,
+
+				fallTeaching: 20,
+				fallService: 20,
+				fallResearch: 60,
+
+				summerTeaching: 20,
+				summerService: 20,
+				summerResearch: 60
+		 	}
+		};
+
 		it('should fail to be able to update a specific assignedActivity if not logged in', function(done) {
 			request(app)
-			  .put('/assignedActivity/' + aa.id)
+			  .put('/assignedActivity/' + aa1.id)
 			  .set('Accept', 'application/json')
+			  
 			  .expect(401)
 			  .end(done);
 		});
 
-		it('should be able to update a specific assignedActivity', function(done) {
+		it('should not be able to update a specific assignedActivity if the user does not own the assignedActivity and is not a superuser', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -258,14 +382,67 @@ describe('AssignedActivity Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					.put('/assignedActivity/' + aa.id)
+					.put('/assignedActivity/' + aa2.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
 				  	.send({
 				  		assignedActivity: {
-				  			fallResearch: 20,
-				  			fallService: 40,
-				  			fallTeaching: 40
+							year: '2000',
+
+							springTeaching: 20,
+							springService: 20,
+							springResearch: 60,
+
+							fallTeaching: 20,
+							fallService: 20,
+							fallResearch: 60,
+
+							summerTeaching: 20,
+							summerService: 20,
+							summerResearch: 60
+				  		}
+				  	})
+				  	
+				  	.expect(403)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+				  		res.body.should.have.property('message').and.equal('User is not authorized');
+
+				  		done();
+				  	});
+
+				});
+		});    
+
+		it('should be able to update a specific assignedActivity if the user does own the assignedActivity and is not a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'username',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.put('/assignedActivity/' + aa1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.send({
+				  		assignedActivity: {
+							year: '2000',
+
+							springTeaching: 20,
+							springService: 20,
+							springResearch: 60,
+
+							fallTeaching: 20,
+							fallService: 20,
+							fallResearch: 60,
+
+							summerTeaching: 20,
+							summerService: 20,
+							summerResearch: 60
 				  		}
 				  	})
 				  	
@@ -273,30 +450,147 @@ describe('AssignedActivity Controller Tests', function() {
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
 
-					  	res.body.should.be.an.Object.and.have.property('year', aa.year);
+					  	res.body.should.have.property('year', assignedActivityObj.assignedActivity.year);
 
-					  	res.body.should.have.property('springTeaching', aa.springTeaching);
-					  	res.body.should.have.property('springService', aa.springService);
-					  	res.body.should.have.property('springResearch', aa.springResearch);
+					  	res.body.should.have.property('springTeaching', assignedActivityObj.assignedActivity.springTeaching);
+					  	res.body.should.have.property('springService', assignedActivityObj.assignedActivity.springService);
+					  	res.body.should.have.property('springResearch', assignedActivityObj.assignedActivity.springResearch);
 
-					  	res.body.should.have.property('fallTeaching', 40);
-					  	res.body.should.have.property('fallService', 40);
-					  	res.body.should.have.property('fallResearch', 20);
+					  	res.body.should.have.property('fallTeaching', assignedActivityObj.assignedActivity.fallTeaching);
+					  	res.body.should.have.property('fallService', assignedActivityObj.assignedActivity.fallService);
+					  	res.body.should.have.property('fallResearch', assignedActivityObj.assignedActivity.fallResearch);
 
-					  	res.body.should.have.property('summerTeaching', aa.summerTeaching);
-					  	res.body.should.have.property('summerService', aa.summerService);
-					  	res.body.should.have.property('summerResearch', aa.summerResearch);
+					  	res.body.should.have.property('summerTeaching', assignedActivityObj.assignedActivity.summerTeaching);
+					  	res.body.should.have.property('summerService', assignedActivityObj.assignedActivity.summerService);
+					  	res.body.should.have.property('summerResearch', assignedActivityObj.assignedActivity.summerResearch);
 
-					  	res.body.should.have.property('_id', aa.id);
-					  	res.body.should.have.property('user', user.id);
-					  	res.body.should.have.property('report', report.id);
+					  	res.body.should.have.property('_id');
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
 
 				  		done();
 				  	});
 
 				});
-		});	
-	    
+		});   
+
+		it('should be able to update a specific assignedActivity if the user does not own the assignedActivity and is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.put('/assignedActivity/' + aa1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.send({
+				  		assignedActivity: {
+							year: '2000',
+
+							springTeaching: 20,
+							springService: 20,
+							springResearch: 60,
+
+							fallTeaching: 20,
+							fallService: 20,
+							fallResearch: 60,
+
+							summerTeaching: 20,
+							summerService: 20,
+							summerResearch: 60
+				  		}
+				  	})
+				  	
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.have.property('year', assignedActivityObj.assignedActivity.year);
+
+					  	res.body.should.have.property('springTeaching', assignedActivityObj.assignedActivity.springTeaching);
+					  	res.body.should.have.property('springService', assignedActivityObj.assignedActivity.springService);
+					  	res.body.should.have.property('springResearch', assignedActivityObj.assignedActivity.springResearch);
+
+					  	res.body.should.have.property('fallTeaching', assignedActivityObj.assignedActivity.fallTeaching);
+					  	res.body.should.have.property('fallService', assignedActivityObj.assignedActivity.fallService);
+					  	res.body.should.have.property('fallResearch', assignedActivityObj.assignedActivity.fallResearch);
+
+					  	res.body.should.have.property('summerTeaching', assignedActivityObj.assignedActivity.summerTeaching);
+					  	res.body.should.have.property('summerService', assignedActivityObj.assignedActivity.summerService);
+					  	res.body.should.have.property('summerResearch', assignedActivityObj.assignedActivity.summerResearch);
+
+					  	res.body.should.have.property('_id');
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});   
+
+		it('should be able to update a specific assignedActivity if the user does own the assignedActivity is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.put('/assignedActivity/' + aa2.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.send({
+				  		assignedActivity: {
+							year: '2000',
+
+							springTeaching: 20,
+							springService: 20,
+							springResearch: 60,
+
+							fallTeaching: 20,
+							fallService: 20,
+							fallResearch: 60,
+
+							summerTeaching: 20,
+							summerService: 20,
+							summerResearch: 60
+				  		}
+				  	})
+				  	
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.have.property('year', assignedActivityObj.assignedActivity.year);
+
+					  	res.body.should.have.property('springTeaching', assignedActivityObj.assignedActivity.springTeaching);
+					  	res.body.should.have.property('springService', assignedActivityObj.assignedActivity.springService);
+					  	res.body.should.have.property('springResearch', assignedActivityObj.assignedActivity.springResearch);
+
+					  	res.body.should.have.property('fallTeaching', assignedActivityObj.assignedActivity.fallTeaching);
+					  	res.body.should.have.property('fallService', assignedActivityObj.assignedActivity.fallService);
+					  	res.body.should.have.property('fallResearch', assignedActivityObj.assignedActivity.fallResearch);
+
+					  	res.body.should.have.property('summerTeaching', assignedActivityObj.assignedActivity.summerTeaching);
+					  	res.body.should.have.property('summerService', assignedActivityObj.assignedActivity.summerService);
+					  	res.body.should.have.property('summerResearch', assignedActivityObj.assignedActivity.summerResearch);
+
+					  	res.body.should.have.property('_id');
+					  	res.body.user.should.have.property('_id', user2.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});   
 	});
 
 	afterEach(function(done) {

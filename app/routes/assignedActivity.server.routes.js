@@ -3,15 +3,15 @@
 module.exports = function(app) {
 	var users = require('../../app/controllers/users');
 	var assignedActivity = require('../../app/controllers/assignedActivity/assignedActivity');
+	var reports = require('../../app/controllers/reports');
 
-	//todo: require authorization
 	app.route('/reports/:reportId/assignedActivity')
-		.get(users.requiresLogin, assignedActivity.readFromReport)
-		.post(users.requiresLogin, assignedActivity.create);
+		.get(users.requiresLogin, reports.hasAuthorization, assignedActivity.readFromReport)
+		.post(users.requiresLogin, reports.hasAuthorization, assignedActivity.create);
 
 	app.route('/assignedActivity/:assignedActivityId')
-		.get(users.requiresLogin, assignedActivity.read)
-		.put(users.requiresLogin, assignedActivity.update);
+		.get(users.requiresLogin, assignedActivity.hasAuthorization, assignedActivity.read)
+		.put(users.requiresLogin, assignedActivity.hasAuthorization, assignedActivity.update);
 
 	// Finish by binding the AssignedActivity middleware
 	app.param('assignedActivityId', assignedActivity.assignedActivityById);
