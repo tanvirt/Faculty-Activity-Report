@@ -7,19 +7,19 @@ var app = require('../../../server');
 var should = require('should');
 var request = require('supertest');
 
-var	membership = require('../../controllers/membership/membership');
+var	serviceToSchools = require('../../controllers/serviceToSchools/serviceToSchools');
 
 var mongoose = require('mongoose');
-var Membership = mongoose.model('Membership');
+var ServiceToSchools = mongoose.model('ServiceToSchools');
 
 var User = mongoose.model('User');
 var Report = mongoose.model('Report');
 
 var async = require('async');
 
-var user, report, member;
+var user, report, schools;
 
-describe('Membership Controller Tests', function() {
+describe('ServiceToSchools Controller Tests', function() {
 	beforeEach(function(done) {
 
 		user = new User({
@@ -40,30 +40,30 @@ describe('Membership Controller Tests', function() {
 
 		report.save();
 
-		member = new Membership({
-			info: 'I am a member of the following organizations',
+		schools = new ServiceToSchools({
+			info: 'I did stuff',
 
 			report: report,
 			user: user
 		});
 
-		member.save();
+		schools.save();
 		
 		done();
 	});
 
 	describe('Testing the GET methods', function() {
 
-		it('should fail to get a membership if not logged in', function(done) {
+		it('should fail to get a ServiceToSchools if not logged in', function(done) {
 			request(app)
-			  .get('/reports/' + report.id + '/membership')
+			  .get('/reports/' + report.id + '/serviceToSchools')
 			  .set('Accept', 'application/json')
 			  
 			  .expect(401)
 			  .end(done);
 		});
 
-		it('should be able to get a membership associated with its report id', function(done) {
+		it('should be able to get a ServiceToSchools associated with its report id', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -73,7 +73,7 @@ describe('Membership Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-						.get('/reports/' + report.id + '/membership')
+						.get('/reports/' + report.id + '/serviceToSchools')
 						.set('cookie', res.headers['set-cookie'])
 						.set('Accept', 'application/json')
 						
@@ -81,9 +81,9 @@ describe('Membership Controller Tests', function() {
 						.end(function(err, res) {
 							should.not.exist(err);
 
-							res.body.should.be.an.Object.and.have.property('info', member.info);						
+							res.body.should.be.an.Object.and.have.property('info', schools.info);						
 
-							res.body.should.have.property('_id', member.id);
+							res.body.should.have.property('_id', schools.id);
 						  	res.body.should.have.property('user', user.id);
 						  	res.body.should.have.property('report', report.id);
 						  	done();
@@ -91,16 +91,16 @@ describe('Membership Controller Tests', function() {
 				});
 		});
 
-		it('should fail to get a specific membership if not logged in', function(done) {
+		it('should fail to get a specific ServiceToSchools if not logged in', function(done) {
 			request(app)
-			  .get('/membership/' + member.id)
+			  .get('/serviceToSchools/' + schools.id)
 			  .set('Accept', 'application/json')
 			  
 			  .expect(401)
 			  .end(done);
 		});
 
-		it('should be able to get a specific membership based on its id', function(done) {
+		it('should be able to get a specific ServiceToSchools based on its id', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -110,7 +110,7 @@ describe('Membership Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					  .get('/membership/' + member.id)
+					  .get('/serviceToSchools/' + schools.id)
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
 					  
@@ -120,7 +120,7 @@ describe('Membership Controller Tests', function() {
 
 					  	res.body.should.be.an.Object;
 
-					  	res.body.should.have.property('_id', member.id);
+					  	res.body.should.have.property('_id', schools.id);
 					  	res.body.should.have.property('user', user.id);
 					  	res.body.should.have.property('report', report.id);
 
@@ -133,23 +133,23 @@ describe('Membership Controller Tests', function() {
 
 	describe('Testing the POST methods', function() {
 
-		var membershipObj = {
-			membership: {
-			    info:'I joined some other organizations'
+		var schoolsObj = {
+			serviceToSchools: {
+			    info:'I did so much stuff'
 		 	}
 		};
 
-		it('should fail to create a membership if not logged in', function(done) {
+		it('should fail to create a ServiceToSchools if not logged in', function(done) {
 			request(app)
-			  .post('/reports/' + report.id + '/membership')
+			  .post('/reports/' + report.id + '/serviceToSchools')
 			  .set('Accept', 'application/json')
-			  .send(membershipObj)
+			  .send(schoolsObj)
 			  
 			  .expect(401)
 			  .end(done);
 		});
 
-		it('should be able to create a new membership', function(done) {
+		it('should be able to create a new ServiceToSchools', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -159,16 +159,16 @@ describe('Membership Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					  .post('/reports/' + report.id + '/membership')
+					  .post('/reports/' + report.id + '/serviceToSchools')
 					  .set('cookie', res.headers['set-cookie'])
 					  .set('Accept', 'application/json')
-					  .send(membershipObj)
+					  .send(schoolsObj)
 					  
 					  .expect(200)
 					  .end(function(err, res) {
 					  	should.not.exist(err);
 
-					  	res.body.should.have.property('info', membershipObj.membership.info);
+					  	res.body.should.have.property('info', schoolsObj.serviceToSchools.info);
 
 					  	res.body.should.have.property('_id');
 					  	res.body.should.have.property('user');
@@ -183,16 +183,16 @@ describe('Membership Controller Tests', function() {
 
 	describe('Testing the PUT methods', function() {
 
-		it('should fail to update a specific membership if not logged in', function(done) {
+		it('should fail to update a specific ServiceToSchools if not logged in', function(done) {
 			request(app)
-			  .put('/membership/' + member.id)
+			  .put('/serviceToSchools/' + schools.id)
 			  .set('Accept', 'application/json')
 			  
 			  .expect(401)
 			  .end(done);
 		});
 
-		it('should be able to update a specific membership', function(done) {
+		it('should be able to update a specific ServiceToSchools', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -202,12 +202,12 @@ describe('Membership Controller Tests', function() {
 				.expect(200)
 				.end(function(err, res) {
 					request(app)
-					.put('/membership/' + member.id)
+					.put('/serviceToSchools/' + schools.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
 				  	.send({
-				  		membership: {
-				  			info: 'joining more organizations'
+				  		serviceToSchools: {
+				  			info: 'doing other stuff'
 				  		}
 				  	})
 				  	
@@ -215,9 +215,9 @@ describe('Membership Controller Tests', function() {
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
 
-					  	res.body.should.be.an.Object.and.have.property('info', 'joining more organizations');
+					  	res.body.should.be.an.Object.and.have.property('info', 'doing other stuff');
 
-					  	res.body.should.have.property('_id', member.id);
+					  	res.body.should.have.property('_id', schools.id);
 					  	res.body.should.have.property('user', user.id);
 					  	res.body.should.have.property('report', report.id);
 
@@ -231,7 +231,7 @@ describe('Membership Controller Tests', function() {
 	});
 
 	afterEach(function(done) {
-		Membership.remove().exec();
+		ServiceToSchools.remove().exec();
 		User.remove().exec();
 		Report.remove().exec();
 		done();

@@ -4,10 +4,14 @@ var mongoose = require('mongoose');
 var Membership = mongoose.model('Membership');
 
 var errorHandler = require('../errors');
+
 var is = require('is-js');
+
+var path = require('path');
+var join = path.join;
+
 var _ = require('lodash');
 
-var u = require('underscore');
 /*
 Gets the data from the frontend and
 saves it in the database.
@@ -35,6 +39,8 @@ exports.create = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
+			req.report.membership = membership;
+			req.report.save();
 			res.jsonp(membership);
 		}
 	});
@@ -47,7 +53,7 @@ exports.update = function(req, res) {
 		res.status(400);
 		return res.jsonp({
 			err: 'Put (update): Does not exist',
-			message: 'req.body.membership did not get send to backend',
+			message: 'req.body.membership did not get sent to backend',
 			changes: 'No Changes Made'
 		});
 	}
@@ -68,10 +74,7 @@ exports.update = function(req, res) {
 };
 
 exports.readFromReport = function(req, res) {
-	Membership.findOne({report: req.report})
-	.populate('user', 'displayName')
-	.populate('report', 'reportName')
-	.exec(function(err, result) {
+	Membership.findOne({report: req.report}, function(err, result) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -87,22 +90,10 @@ exports.read = function(req, res) {
 
 exports.membershipById = function(req, res, next, id) {
 	Membership.findById(id)
-	.populate('user', 'displayName')
-	.populate('report', 'reportName')
 	.exec(function(err, membership) {
 		if (err) return next(err);
 		if (!membership) return next(new Error('Failed to load Membership ' + id));
 		req.membership = membership;
 		next();
 	});
-};
-
-exports.hasAuthorization = function(req, res, next) {
-	if (req.membership.user.id !== req.user.id && !u.contains(req.user.roles, 'admin')) {
-		return res.status(403).send({
-			message: 'User is not authorized'
-		});
-	}
-
-	next();
 };

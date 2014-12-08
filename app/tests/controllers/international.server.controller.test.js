@@ -101,10 +101,10 @@ describe('International Controller Tests', function() {
 						.end(function(err, res) {
 							should.not.exist(err);
 
-							res.body.should.have.property('_id', activities.id);
-							res.body.should.have.property('info', activities.info);
-						  	res.body.user.should.have.property('_id', user.id);
-						  	res.body.report.should.have.property('_id', report.id);
+							res.body[0].should.have.property('_id', activities.id);
+							res.body[0].should.have.property('info', activities.info);
+						  	res.body[0].user.should.have.property('_id', user.id);
+						  	res.body[0].report.should.have.property('_id', report.id);
 						  	done();
 						});
 				});
