@@ -31,7 +31,9 @@
 				<div data-ng-show="error" class="text-danger col-md-offset-3">
 					<strong data-ng-bind="error"></strong>
 				</div>
-				<button type="submit" data-ng-click="create()" class="col-md-offset-9 btn btn-primary">Create</button>
+				<button type="submit" data-ng-click="create()" class="col-md-offset-9 btn btn-primary">
+					<span class="glyphicon glyphicon-check"></span> Create
+				</button>
 			</div>
 		</form>
 
@@ -56,8 +58,14 @@
 				<div class="form-group col-md-6 controls">
 				    <input type="date" data-ng-model="o.date" ng-model-instant id="date" class="form-control">
 				</div>
-				<button type="submit" data-ng-click="delete(o.id, $index)" class="col-md-offset-9 btn btn-primary">Delete</button>
-				<button type="submit" data-ng-click="update(o.id, $index)" class="col-md-offset-9 btn btn-primary">Update</button>
+				<div style="padding-bottom:5px">
+				<button type="submit" data-ng-click="update(o.id, $index)" class="col-md-offset-9 btn btn-warning">
+					<span class="glyphicon glyphicon-edit"></span> Update</button>
+				</div>
+				<div style="padding-bottom:5px">
+				<button type="submit" data-ng-click="delete(o.id, $index)" class="col-md-offset-9 btn btn-danger">
+					<span class="glyphicon glyphicon-trash"></span> Delete</button>
+				</div>
 			</div>
 		</form>
 			
