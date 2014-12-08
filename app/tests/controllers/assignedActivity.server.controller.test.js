@@ -125,23 +125,23 @@ describe('AssignedActivity Controller Tests', function() {
 						.end(function(err, res) {
 							should.not.exist(err);
 
-							res.body.should.be.an.Object.and.have.property('year', aa1.year);
+							res.body[0].should.be.an.Object.and.have.property('year', aa1.year);
 
-						  	res.body.should.have.property('springTeaching', aa1.springTeaching);
-						  	res.body.should.have.property('springService', aa1.springService);
-						  	res.body.should.have.property('springResearch', aa1.springResearch);
+						  	res.body[0].should.have.property('springTeaching', aa1.springTeaching);
+						  	res.body[0].should.have.property('springService', aa1.springService);
+						  	res.body[0].should.have.property('springResearch', aa1.springResearch);
 
-						  	res.body.should.have.property('fallTeaching', aa1.fallTeaching);
-						  	res.body.should.have.property('fallService', aa1.fallService);
-						  	res.body.should.have.property('fallResearch', aa1.fallResearch);
+						  	res.body[0].should.have.property('fallTeaching', aa1.fallTeaching);
+						  	res.body[0].should.have.property('fallService', aa1.fallService);
+						  	res.body[0].should.have.property('fallResearch', aa1.fallResearch);
 
-						  	res.body.should.have.property('summerTeaching', aa1.summerTeaching);
-						  	res.body.should.have.property('summerService', aa1.summerService);
-						  	res.body.should.have.property('summerResearch', aa1.summerResearch);
+						  	res.body[0].should.have.property('summerTeaching', aa1.summerTeaching);
+						  	res.body[0].should.have.property('summerService', aa1.summerService);
+						  	res.body[0].should.have.property('summerResearch', aa1.summerResearch);
 
-						  	res.body.should.have.property('_id', aa1.id);
-						  	res.body.user.should.have.property('_id', user.id);
-						  	res.body.report.should.have.property('_id', report.id);
+						  	res.body[0].should.have.property('_id', aa1.id);
+						  	res.body[0].user.should.have.property('_id', user.id);
+						  	res.body[0].report.should.have.property('_id', report.id);
 
 						  	done();
 						});

@@ -76,7 +76,7 @@ exports.update = function(req, res) {
 };
 
 exports.readFromReport = function(req, res) {
-	AssignedActivity.findOne({report: req.report})
+	AssignedActivity.find({report: req.report})
 	.populate('user', 'displayName')
 	.populate('report', 'reportName')
 	.exec(function(err, result) {
