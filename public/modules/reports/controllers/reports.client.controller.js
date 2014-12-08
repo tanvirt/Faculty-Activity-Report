@@ -107,9 +107,10 @@ app.controller('ReportsController', ['$scope', '$rootScope', '$http', '$statePar
 				$http.get('/reportdownload/' + $stateParams.reportId).
 					success(function(data, status, headers, config) {
 						//$location.path('reports/' + $stateParams.reportId);
-
-						$scope.generating = false;
-						$scope.pdfLocation = '/modules/reports/pdf/' + $stateParams.reportId + '.pdf';
+						if (data.message) {
+							$scope.generating = false;
+							$scope.pdfLocation = '/modules/reports/pdf/' + $stateParams.reportId + '.pdf';
+						}
 					}).
 					error(function(data, status, headers, config) {
 						console.log('error');
