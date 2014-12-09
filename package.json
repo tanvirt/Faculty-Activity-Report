@@ -2,7 +2,7 @@
   "name": "uf-faculty-activity-report",
   "description": "A web app to create UF faculty activity reports",
   "version": "0.0.1",
-  "author": "Pablo Arango, Santiago Fernandez, Daniel Fuentes, Tanvir Talukder, Adam Fortier",
+  "author": ["Pablo Arango, Santiago Fernandez, Daniel Fuentes, Tanvir Talukder, Adam Fortier", "Christine King", "Morgan Wheeler", "Greg Friedman", "Ian Fell", "Andrew Lorelle", "Josh Hammock"],
   "engines": {
     "node": "0.10.x",
     "npm": "1.4.x"
