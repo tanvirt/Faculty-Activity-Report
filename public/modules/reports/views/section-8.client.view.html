@@ -12,14 +12,17 @@
 	<form class="tab-content" ng-switch on="currentContent.name">
 		<div ng-switch-when="user">
 			<div class="form-group col-md-6 controls">
+				<label for="course">Course Title</label>
 				<input type="text" data-ng-model="$parent.course" id="course" class="form-control" placeholder="Course Title" required>
 			</div>
 
 			<div class="form-group col-md-6 controls">
-			    <input type="text" data-ng-model="$parent.year" id="year" class="form-control" placeholder="Year Taught">
+				<label for="year">Year Year Taught</label>
+			    <input type="text" data-ng-model="$parent.year" id="year" class="form-control" placeholder="Enter a year over 1980" >
 			</div>
 
 			<div class="form-group col-md-6 controls">
+				<label>Semester</label>
 				<select class="form-control" data-ng-model="$parent.semester">
 					<option value="" disabled selected>Semester</option>
 		           	<option value="Fall">Fall</option>
@@ -29,14 +32,17 @@
 			</div>
 				            
 			<div class="form-group col-md-6 controls">
+				<label for="enrolled">Number Enrolled</label>
 			    <input type="number" data-ng-model="$parent.enrolled" id="enrolled" class="form-control" placeholder="Number Enrolled">
 			</div>
 
 			<div class="form-group col-md-6 controls">
+				<label for="responses">Number Responded</label>
 			    <input type="number" data-ng-model="$parent.responses" id="responses" class="form-control" placeholder="Number Responded">
 			</div>
 
 			<div class="form-group col-md-6 controls">
+				<label>Required</label>
 				<select class="form-control" data-ng-model="$parent.required">
 					<option value="" disabled selected>Required</option>
 		           	<option value="true">Yes</option>
@@ -45,15 +51,18 @@
 			</div>
 				         
 			<div class="form-group col-md-6 controls">
-				<input type="text" data-ng-model="$parent.teacherMean" id="teacherMean" class="form-control" placeholder="Teacher Mean">
+				<label for="teacherMean">Teacher Mean</label>
+				<input type="text" data-ng-model="$parent.teacherMean" id="teacherMean" class="form-control" placeholder="Enter 10 digits separate by commas (Ex: 1,2,3,4,5,6,7,8,9,0)">
 			</div>
 
 			<div class="form-group col-md-6 controls">
-				<input type="text" data-ng-model="$parent.departmentMean" id="departmentMean" class="form-control" placeholder="Department Mean">
+				<label for="departmentMean">Department Mean</label>
+				<input type="text" data-ng-model="$parent.departmentMean" id="departmentMean" class="form-control" placeholder="Enter 10 digits separate by commas (Ex: 1,2,3,4,5,6,7,8,9,0)">
 			</div>
 
 			<div class="form-group col-md-6 controls">
-				<input type="text" data-ng-model="$parent.collegeMean" id="collegeMean" class="form-control" placeholder="College Mean">
+				<label for="collegeMean">College Mean</label>
+				<input type="text" data-ng-model="$parent.collegeMean" id="collegeMean" class="form-control" placeholder="Enter 10 digits separate by commas (Ex: 1,2,3,4,5,6,7,8,9,0)">
 			</div>
 
 			<div class="form-group">
@@ -83,14 +92,17 @@
 	<form>
 		<div ng-repeat="o in obj">
 			<div class="form-group col-md-6 controls">
+				<label for="course">Course Title</label>
 				<input type="text" data-ng-model="o.course" id="course" class="form-control" placeholder="Course Title" required>
 			</div>
 
 			<div class="form-group col-md-6 controls">
-			    <input type="text" data-ng-model="o.year" id="year" class="form-control" placeholder="Year Taught">
+				<label for="year">Year Taught</label>
+			    <input type="text" data-ng-model="o.year" id="year" class="form-control" placeholder="Enter a year over 1980">
 			</div>
 
 			<div class="form-group col-md-6 controls">
+				<label>Semester</label>
 				<select class="form-control" data-ng-model="o.semester">
 					<option value="" disabled selected>Semester</option>
 	            	<option value="Fall">Fall</option>
@@ -100,14 +112,17 @@
 			</div>
 			            
 			<div class="form-group col-md-6 controls">
+				<label for="enrolled">Number Enrolled</label>
 			    <input type="number" data-ng-model="o.enrolled" id="enrolled" class="form-control" placeholder="Number Enrolled">
 			</div>
 
 			<div class="form-group col-md-6 controls">
+				<label for="responses">Number Responded</label>
 			    <input type="number" data-ng-model="o.responses" id="responses" class="form-control" placeholder="Number Responded">
 			</div>
 
 			<div class="form-group col-md-6 controls">
+				<label>Required</label>
 				<select class="form-control" data-ng-model="o.required" placeholder="Required">
 					<option value="" disabled selected>Required</option>
 	            	<option value="true">Yes</option>
@@ -116,15 +131,18 @@
 			</div>
 			         
 			<div class="form-group col-md-6 controls">
-				<input type="text" data-ng-model="o.teacherMean" id="teacherMean" class="form-control" placeholder="Teacher Mean">
+				<label for="teacherMean">Teacher Mean</label>
+				<input type="text" data-ng-model="o.teacherMean" id="teacherMean" class="form-control" placeholder="Enter 10 digits separate by commas (Ex: 1,2,3,4,5,6,7,8,9,0)">
 			</div>
 
 			<div class="form-group col-md-6 controls">
-				<input type="text" data-ng-model="o.departmentMean" id="departmentMean" class="form-control" placeholder="Department Mean">
+				<label for="departmentMean">Department Mean</label>
+				<input type="text" data-ng-model="o.departmentMean" id="departmentMean" class="form-control" placeholder="Enter 10 digits separate by commas (Ex: 1,2,3,4,5,6,7,8,9,0)">
 			</div>
 
 			<div class="form-group col-md-6 controls">
-				<input type="text" data-ng-model="o.collegeMean" id="collegeMean" class="form-control" placeholder="College Mean">
+				<label for="collegeMean">College Mean</label>
+				<input type="text" data-ng-model="o.collegeMean" id="collegeMean" class="form-control" placeholder="Enter 10 digits separate by commas (Ex: 1,2,3,4,5,6,7,8,9,0)">
 			</div>
 
 			<div class="form-group">

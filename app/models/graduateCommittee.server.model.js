@@ -43,7 +43,7 @@ var graduateCommittee = new Schema({
 	degreeDate: {
 		type: Date, 
 		validate: [validateLocalStrategyDate, 
-		'Date must be less than or equal to the current year and greator than or equal to 1980']
+		'Date must be less than or equal to the current year and greater than or equal to 1980']
 	}
 }, {collection:'GraduateCommittee'});
 

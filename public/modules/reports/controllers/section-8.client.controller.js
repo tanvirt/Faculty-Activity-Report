@@ -65,6 +65,8 @@ angular.module('reports').controller('Section8Controller', ['$http', '$upload', 
 
 		$scope.currentContent = $scope.tabs[0];
 
+		$scope.htmlTooltip = 'hello';
+
 		$scope.setPage = function( page ) {
 			$scope.currentContent = $scope.tabs[ page ];
 		};
