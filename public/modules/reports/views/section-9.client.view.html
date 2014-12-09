@@ -4,8 +4,8 @@
 
 	<form>
 		<div class="form-group col-md-6 controls">
+			<label>Role</label>
 			<select class="form-control" data-ng-model="role">
-				<option value="" disabled selected>Role</option>
             	<option value="Chair">Chair</option>
             	<option value="Co-Chair">Co-Chair</option>
             	<option value="Member">Member</option>
@@ -14,22 +14,25 @@
 		</div>
 		            
 		<div class="form-group col-md-6 controls">
+			<label for="studentName">Student Name</label>
 		    <input type="text" data-ng-model="studentName" id="studentName" class="form-control" placeholder="Student Name">
 		</div>
 
 		<div class="form-group col-md-6 controls">
+			<label>Degree</label>
 			<select class="form-control" data-ng-model="degree">
-				<option value="" disabled selected>Degree</option>
             	<option value="M.S.">M.S.</option>
             	<option value="Ph.D.">Ph.D.</option>
           	</select>
 		</div>
 
 		<div class="form-group col-md-6 controls">
+			<label for="major">Major</label>
 		    <input type="text" data-ng-model="major" id="major" class="form-control" placeholder="Major">
 		</div>
 
 		<div class="form-group col-md-6 controlls">
+			<label for="degreeDate">Degree Date</label>
 			<input type="date" data-ng-model="degreeDate" id="degreeDate" class="form-control" placeholder="Degree Date">
 		</div>
 
