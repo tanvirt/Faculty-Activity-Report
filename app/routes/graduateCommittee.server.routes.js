@@ -5,7 +5,6 @@ module.exports = function(app) {
 	var graduateCommittee = require('../../app/controllers/graduateCommittee/graduateCommittee');
 	var reports = require('../../app/controllers/reports');
 
-	//todo: require authorization
 	app.route('/reports/:reportId/graduateCommittee')
 		.get(users.requiresLogin, reports.hasAuthorization, graduateCommittee.readFromReport)
 		.post(users.requiresLogin, reports.hasAuthorization, graduateCommittee.create);
@@ -15,6 +14,6 @@ module.exports = function(app) {
 		.put(users.requiresLogin, graduateCommittee.hasAuthorization, graduateCommittee.update)
 		.delete(users.requiresLogin, graduateCommittee.hasAuthorization, graduateCommittee.delete);
 
-	// Finish by binding the middleware
+	// Finish by binding the graduateCommittee middleware
 	app.param('graduateCommitteeId', graduateCommittee.graduateCommitteeById);
 };
