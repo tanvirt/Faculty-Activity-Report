@@ -4,16 +4,10 @@ var mongoose = require('mongoose');
 var GraduateCommittee = mongoose.model('GraduateCommittee');
 
 var errorHandler = require('../errors');
-
 var is = require('is-js');
-
-var path = require('path');
-var join = path.join;
-
 var _ = require('lodash');
 
 var u = require('underscore');
-
 /*
 Gets the data from the frontend and
 saves it in the database.
@@ -27,14 +21,14 @@ exports.create = function(req, res) {
 			changes: 'No GraduateCommittee Created'
 		});
 	}
-	
+
 	var graduateCommittee = new GraduateCommittee({
 		role: req.body.graduateCommittee.role,
 		studentName: req.body.graduateCommittee.studentName,
 		degree: req.body.graduateCommittee.degree,
 		major: req.body.graduateCommittee.major,
-		degreeDate: req.body.graduateCommittee.degreeDate, 
-			
+		degreeDate: req.body.graduateCommittee.degreeDate,
+
 		user: req.user,
 		report: req.report
 	});
@@ -51,6 +45,8 @@ exports.create = function(req, res) {
 };
 
 exports.update = function(req, res) {
+	//console.log(require('util').inspect(req.body));
+	
 	if (is.empty(req.body.graduateCommittee)) {
 		res.status(400);
 		return res.jsonp({
@@ -79,7 +75,7 @@ exports.readFromReport = function(req, res) {
 	GraduateCommittee.find({report: req.report})
 	.populate('user', 'displayName')
 	.populate('report', 'reportName')
-	.exec(function(err, result) { //Returns an array
+	.exec(function(err, result) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

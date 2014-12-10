@@ -5,7 +5,6 @@
 var app = require('../../../server');
 
 var should = require('should');
-
 var request = require('supertest');
 
 var	graduateCommittee = require('../../controllers/graduateCommittee/graduateCommittee');
@@ -18,9 +17,9 @@ var Report = mongoose.model('Report');
 
 var async = require('async');
 
-var user, report, committeeOne, committeeTwo, committeeThree;
+var user, user2, user3, report, gc1, gc2, gc3, gc4;
 
-describe('Graduate Committee Controller Tests', function() {
+describe('GraduateCommittee Controller Tests', function() {
 	beforeEach(function(done) {
 
 		user = new User({
@@ -34,6 +33,29 @@ describe('Graduate Committee Controller Tests', function() {
 
 		user.save();
 
+		user2 = new User({
+			firstName: 'Full',
+			lastName: 'Name',
+			email: 'test@test.com',
+			username: 'admin',
+			password: 'password',
+			provider: 'local',
+			roles: ['admin']
+		});
+
+		user2.save();
+
+		user3 = new User({
+			firstName: 'Full',
+			lastName: 'Name',
+			email: 'test@test.com',
+			username: 'username2',
+			password: 'password',
+			provider: 'local'
+		});
+
+		user3.save();
+
 		report = new Report({
 			reportName: 'MyReportName',
 			user: user
@@ -41,7 +63,7 @@ describe('Graduate Committee Controller Tests', function() {
 
 		report.save();
 
-		committeeOne = new GraduateCommittee({
+		gc1 = new GraduateCommittee({
 			role: 'Chair',
 			studentName: 'studentTestName',
 			degree: 'Ph.D.',
@@ -51,8 +73,8 @@ describe('Graduate Committee Controller Tests', function() {
 			report: report,
 			user: user
 		});
-		
-		committeeTwo = new GraduateCommittee({
+
+		gc2 = new GraduateCommittee({
 			role: 'Co-Chair',
 			studentName: 'studentTestName2',
 			degree: 'Ph.D.',
@@ -62,8 +84,8 @@ describe('Graduate Committee Controller Tests', function() {
 			report: report,
 			user: user
 		});
-		
-		committeeThree = new GraduateCommittee({
+
+		gc3 = new GraduateCommittee({
 			role: 'Chair',
 			studentName: 'studentTestName3',
 			degree: 'M.S.',
@@ -74,9 +96,21 @@ describe('Graduate Committee Controller Tests', function() {
 			user: user
 		});
 
-		committeeOne.save();
-		committeeTwo.save();
-		committeeThree.save();
+		gc4 = new GraduateCommittee({
+			role: 'Chair',
+			studentName: 'studentTestName4',
+			degree: 'M.S.',
+			major: 'Knitting',
+			degreeDate: '10/20/1997',
+
+			report: report,
+			user: user2
+		});
+
+		gc1.save();
+		gc2.save();
+		gc3.save();
+		gc4.save();
 
 		done();
 	});
@@ -92,7 +126,7 @@ describe('Graduate Committee Controller Tests', function() {
 			  .end(done);
 		});
 
-		it('should be able to get the graduateCommittee(s) associated with its report id', function(done) {
+		it('should be able to get graduateCommittee associated with its report id', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -110,31 +144,13 @@ describe('Graduate Committee Controller Tests', function() {
 						.end(function(err, res) {
 							should.not.exist(err);
 
-						  	res.body[0].should.be.an.Object.and.have.property('role', committeeOne.role);
-							res.body[1].should.be.an.Object.and.have.property('role', committeeTwo.role);
-							res.body[2].should.be.an.Object.and.have.property('role', committeeThree.role);
+							res.body.should.be.an.Array;
+							res.body.should.have.length(4);
 
-						  	res.body[0].should.have.property('studentName', committeeOne.studentName);
-							res.body[1].should.have.property('studentName', committeeTwo.studentName);
-							res.body[2].should.have.property('studentName', committeeThree.studentName);
-						  	res.body[0].should.have.property('degree', committeeOne.degree);
-							res.body[1].should.have.property('degree', committeeTwo.degree);
-							res.body[2].should.have.property('degree', committeeThree.degree);
-						  	res.body[0].should.have.property('major', committeeOne.major);
-							res.body[1].should.have.property('major', committeeTwo.major);
-							res.body[2].should.have.property('major', committeeThree.major);
-						  	res.body[0].should.have.property('degreeDate', committeeOne.degreeDate.toJSON());
-							res.body[1].should.have.property('degreeDate', committeeTwo.degreeDate.toJSON());
-							res.body[2].should.have.property('degreeDate', committeeThree.degreeDate.toJSON());
-
-						  	res.body[0].should.have.property('_id', committeeOne.id);
-							res.body[1].should.have.property('_id', committeeTwo.id);
-							res.body[2].should.have.property('_id', committeeThree.id);
-							
-							for(var iii = 0; iii < 3; iii++) {
-								res.body[iii].user.should.have.property('_id', user.id);
-								res.body[iii].report.should.have.property('_id', report.id);
-							}
+							res.body[0].should.be.an.Object;	
+							res.body[1].should.be.an.Object;	
+							res.body[2].should.be.an.Object;
+							res.body[3].should.be.an.Object;						
 
 						  	done();
 						});
@@ -143,14 +159,14 @@ describe('Graduate Committee Controller Tests', function() {
 
 		it('should fail to be able to get a specific graduateCommittee if not logged in', function(done) {
 			request(app)
-			  .get('/graduateCommittee/' + committeeOne.id)
+			  .get('/graduateCommittee/' + gc1.id)
 			  .set('Accept', 'application/json')
 			  
 			  .expect(401)
 			  .end(done);
 		});
 
-		it('should be able to get a specific graduateCommittee based on its id', function(done) {
+		it('should not be able to get a specific graduateCommittee if the user does not own the graduateCommittee and is not a superuser', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -159,47 +175,122 @@ describe('Graduate Committee Controller Tests', function() {
 				})
 				.expect(200)
 				.end(function(err, res) {
-				//Uses SECOND committee for request
 					request(app)
-					  .get('/graduateCommittee/' + committeeTwo.id)
-					  .set('cookie', res.headers['set-cookie'])
-					  .set('Accept', 'application/json')
-					  
-					  .expect(200)
-					  .end(function(err, res) {
-					  	should.not.exist(err);
+					.get('/graduateCommittee/' + gc4.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	
+				  	.expect(403)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
 
-						res.body.should.be.an.Object.and.have.property('role', committeeTwo.role);
+				  		res.body.should.have.property('message').and.equal('User is not authorized');
 
-						res.body.should.have.property('studentName', committeeTwo.studentName);
-						res.body.should.have.property('degree', committeeTwo.degree);
-						res.body.should.have.property('major', committeeTwo.major);
-						res.body.should.have.property('degreeDate', committeeTwo.degreeDate.toJSON());
+				  		done();
+				  	});
 
-					  	res.body.should.have.property('_id', committeeTwo.id);
-						
+				});
+		});    
+
+		it('should be able to get a specific graduateCommittee if the user does own the graduateCommittee and is not a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'username',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.get('/graduateCommittee/' + gc1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.have.property('_id', gc1.id);
 					  	res.body.user.should.have.property('_id', user.id);
 					  	res.body.report.should.have.property('_id', report.id);
 
-					  	done();
-					  });
+				  		done();
+				  	});
+
 				});
-		});
+		});   
+
+		it('should be able to get a specific graduateCommittee if the user does not own the graduateCommittee and is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.get('/graduateCommittee/' + gc1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.have.property('_id', gc1.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});   
+
+		it('should be able to get a specific graduateCommittee if the user does own the graduateCommittee is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.get('/graduateCommittee/' + gc4.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.have.property('_id', gc4.id);
+					  	res.body.user.should.have.property('_id', user2.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});  
+
 	});
 
 	describe('Testing the POST methods', function() {
 
 		var gcObj = {
 			graduateCommittee: {
-				role: 'Chair',
-				studentName: 'studentTestNamePost',
+			    role: 'Co-Chair',
+				studentName: 'studentTestName',
 				degree: 'Ph.D.',
-				major: 'Computer Science Post',
-				degreeDate: '09/09/1999'
-      		}
+				major: 'Electrical Engineering',
+				degreeDate: '03/29/1994'
+		 	}
 		};
 
-		it('should fail to be able to create an graduateCommittee if not logged in', function(done) {
+		it('should fail to be able to create a graduateCommittee if not logged in', function(done) {
 			request(app)
 			  .post('/reports/' + report.id + '/graduateCommittee')
 			  .set('Accept', 'application/json')
@@ -208,7 +299,6 @@ describe('Graduate Committee Controller Tests', function() {
 			  .expect(401)
 			  .end(done);
 		});
-
 
 		it('should be able to create a new graduateCommittee', function(done) {
 			request(app)
@@ -229,21 +319,11 @@ describe('Graduate Committee Controller Tests', function() {
 					  .end(function(err, res) {
 					  	should.not.exist(err);
 
-						res.body.should.be.an.Object.and.have.property('role', gcObj.graduateCommittee.role);
-
-						res.body.should.have.property('studentName', gcObj.graduateCommittee.studentName);
-						res.body.should.have.property('degree', gcObj.graduateCommittee.degree);
-						res.body.should.have.property('major', gcObj.graduateCommittee.major);
-						
-						var testDate = new Date(gcObj.graduateCommittee.degreeDate); //Date formats weird with JSON
-						res.body.should.have.property('degreeDate', testDate.toJSON());
+					  	res.body.should.have.property('role', gcObj.graduateCommittee.role);
 
 					  	res.body.should.have.property('_id');
-						
-					  	//res.body.user.should.have.property('_id', user.id);
-					  	//res.body.report.should.have.property('_id', report.id);
-						res.body.should.have.property('user', user.id);
-						res.body.should.have.property('report', report.id);
+					  	res.body.should.have.property('user');
+					  	res.body.should.have.property('report');
 
 					  	done();
 					  });
@@ -256,14 +336,14 @@ describe('Graduate Committee Controller Tests', function() {
 
 		it('should fail to be able to update a specific graduateCommittee if not logged in', function(done) {
 			request(app)
-			  .put('/graduateCommittee/' + committeeOne.id)
+			  .put('/graduateCommittee/' + gc1.id)
 			  .set('Accept', 'application/json')
 			  
 			  .expect(401)
 			  .end(done);
 		});
 
-		it('should be able to update a specific graduateCommittee', function(done) {
+		it('should not be able to update a specific graduateCommittee if the user does not own the graduateCommittee and is not a superuser', function(done) {
 			request(app)
 				.post('/auth/signin')
 				.send({
@@ -272,14 +352,44 @@ describe('Graduate Committee Controller Tests', function() {
 				})
 				.expect(200)
 				.end(function(err, res) {
-				//Uses THIRD committee for request
 					request(app)
-					.put('/graduateCommittee/' + committeeThree.id)
+					.put('/graduateCommittee/' + gc4.id)
 					.set('cookie', res.headers['set-cookie'])
 				  	.set('Accept', 'application/json')
 				  	.send({
 				  		graduateCommittee: {
-				  			major: 'Art History'
+				  			role:'Chair'
+				  		}
+				  	})
+				  	
+				  	.expect(403)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+				  		res.body.should.have.property('message').and.equal('User is not authorized');
+
+				  		done();
+				  	});
+
+				});
+		});    
+
+		it('should be able to update a specific graduateCommittee if the user does own the graduateCommittee and is not a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'username',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.put('/graduateCommittee/' + gc1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.send({
+				  		graduateCommittee: {
+				  			role:'Minor'
 				  		}
 				  	})
 				  	
@@ -287,22 +397,212 @@ describe('Graduate Committee Controller Tests', function() {
 				  	.end(function(err, res) {
 				  		should.not.exist(err);
 
-					  	res.body.should.be.an.Object.and.have.property('role', committeeThree.role);
+					  	res.body.should.be.an.Object.and.have.property('role', 'Minor');
 
-						res.body.should.have.property('major', 'Art History');
-						res.body.should.have.property('studentName', committeeThree.studentName);
-						res.body.should.have.property('degree', committeeThree.degree);
-						res.body.should.have.property('degreeDate', committeeThree.degreeDate.toJSON());
-
-					  	res.body.should.have.property('_id', committeeThree.id);
-						
+					  	res.body.should.have.property('_id', gc1.id);
 					  	res.body.user.should.have.property('_id', user.id);
 					  	res.body.report.should.have.property('_id', report.id);
 
 				  		done();
 				  	});
+
 				});
-		});	
+		});   
+
+		it('should be able to update a specific graduateCommittee if the user does not own the graduateCommittee and is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.put('/graduateCommittee/' + gc1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.send({
+				  		graduateCommittee: {
+				  			role:'External'
+				  		}
+				  	})
+				  	
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.be.an.Object.and.have.property('role', 'External');
+
+					  	res.body.should.have.property('_id', gc1.id);
+					  	res.body.user.should.have.property('_id', user.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});   
+
+		it('should be able to update a specific graduateCommittee if the user does own the graduateCommittee is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.put('/graduateCommittee/' + gc4.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	.set('Accept', 'application/json')
+				  	.send({
+				  		graduateCommittee: {
+				  			role:'Minor'
+				  		}
+				  	})
+				  	
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.be.an.Object.and.have.property('role', 'Minor');
+
+					  	res.body.should.have.property('_id', gc4.id);
+					  	res.body.user.should.have.property('_id', user2.id);
+					  	res.body.report.should.have.property('_id', report.id);
+
+				  		done();
+				  	});
+
+				});
+		});   
+	});
+
+	describe('Testing the DELETE methods', function() {
+		it('should not be able to delete if not logged in', function(done) {
+			request(app)
+				.delete('/graduateCommittee/' + gc1.id)
+				
+				.expect(401)
+				.end(done);
+		});
+
+		it('should not be able to delete if user does not own the report and is not a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'username2',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.delete('/graduateCommittee/' + gc1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	
+				  	.expect(403)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+				  		done();
+				  	});
+
+			});
+		});
+
+		it('should be able to delete if user owns the report and is not a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'username',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.delete('/graduateCommittee/' + gc1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.be.an.Object.and.have.property('role', gc1.role);
+					  	res.body.should.have.property('studentName', gc1.studentName);
+					  	res.body.should.have.property('degree', gc1.degree);
+					  	res.body.should.have.property('major', gc1.major);
+
+					  	res.body.should.have.property('report');
+					  	res.body.should.have.property('user');
+					  	res.body.should.have.property('_id');
+
+				  		done();
+		  			});
+				});
+		});
+
+		it('should be able to delete if user does not own the report and is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.delete('/graduateCommittee/' + gc1.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.be.an.Object.and.have.property('role', gc1.role);
+					  	res.body.should.have.property('studentName', gc1.studentName);
+					  	res.body.should.have.property('degree', gc1.degree);
+					  	res.body.should.have.property('major', gc1.major);
+
+					  	res.body.should.have.property('report');
+					  	res.body.should.have.property('user');
+					  	res.body.should.have.property('_id');
+
+				  		done();
+		  			});
+				});
+		});
+
+	it('should be able to delete if user does own the report and is a superuser', function(done) {
+			request(app)
+				.post('/auth/signin')
+				.send({
+					username:'admin',
+					password:'password'
+				})
+				.expect(200)
+				.end(function(err, res) {
+					request(app)
+					.delete('/graduateCommittee/' + gc4.id)
+					.set('cookie', res.headers['set-cookie'])
+				  	
+				  	.expect(200)
+				  	.end(function(err, res) {
+				  		should.not.exist(err);
+
+					  	res.body.should.be.an.Object.and.have.property('role', gc4.role);
+					  	res.body.should.have.property('studentName', gc4.studentName);
+					  	res.body.should.have.property('degree', gc4.degree);
+					  	res.body.should.have.property('major', gc4.major);
+
+					  	res.body.should.have.property('report');
+					  	res.body.should.have.property('user');
+					  	res.body.should.have.property('_id');
+
+				  		done();
+		  			});
+				});
+		});
 	});
 
 	afterEach(function(done) {
