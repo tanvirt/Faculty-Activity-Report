@@ -68,7 +68,7 @@ exports.update = function(req, res) {
 };
 
 exports.readFromReport = function(req, res) {
-	TeachingAdvising.find({report: req.report})
+	TeachingAdvising.findOne({report: req.report})
 	.populate('user', 'displayName')
 	.populate('report', 'reportName')
 	.exec(function(err, result) {
