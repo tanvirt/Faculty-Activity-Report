@@ -50,9 +50,29 @@
 			});
 		}));
 
-		it('Should do some controller test', inject(function() {
-			// The test logic
-			// ...
+		it('Should successfully submit a POST to the backend', inject(function(Section19) {
+			// Create a fake International object
+			var fakeInternational = new Section19({
+				activities: 'This is all test information for the international section.'
+			});
+
+			// Create a International response
+			var fakeInternationalResponse = new Section19({
+				activities: 'This is all test information for the international section.'
+			});
+
+			// Fixture mock form input values
+			scope.activities = 'This is all test information for the international section.';
+
+			// Set POST response
+			$httpBackend.expectPOST('reports', fakeInternational).respond(fakeInternationalResponse);
+
+			// Run controller functionality
+			scope.update();
+			$httpBackend.flush();
+
+			// Test form inputs are reset
+			expect(scope.activities).toEqual('');
 		}));
 	});
 }());
