@@ -50,9 +50,29 @@
 			});
 		}));
 
-		it('Should do some controller test', inject(function() {
-			// The test logic
-			// ...
+		it('Should successfully submit a POST to the backend', inject(function(Section16) {
+			// Create a fake Governance object
+			var fakeGovernance = new Section16({
+				govStr: 'This is all test information.'
+			});
+
+			// Create a Governance response
+			var fakeGovernanceResponse = new Section16({
+				govStr: 'This is all test information.'
+			});
+
+			// Fixture mock form input values
+			scope.govStr = 'This is all test information';
+
+			// Set POST response
+			$httpBackend.expectPOST('reports', fakeGovernance).respond(fakeGovernanceResponse);
+
+			// Run controller functionality
+			scope.update();
+			$httpBackend.flush();
+
+			// Test form inputs are reset
+			expect(scope.govStr).toEqual('');
 		}));
 	});
 }());
