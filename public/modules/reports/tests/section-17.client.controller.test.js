@@ -50,9 +50,29 @@
 			});
 		}));
 
-		it('Should do some controller test', inject(function() {
-			// The test logic
-			// ...
+		it('Should successfully submit a POST to the backend', inject(function(Section17) {
+			// Create a fake ConsultationsOutsidetheUniversity object
+			var fakeConsultationsOutsidetheUniversity = new Section17({
+				consultations: 'This is all test information for the consultations outside the unversity section.'
+			});
+
+			// Create a ConsultationsOutsidetheUniversity response
+			var fakeConsultationsOutsidetheUniversityResponse = new Section17({
+				consultations: 'This is all test information for the consultations outside the unversity section.'
+			});
+
+			// Fixture mock form input values
+			scope.govStr = 'This is all test information for the consultations outside the unversity section.';
+
+			// Set POST response
+			$httpBackend.expectPOST('reports', fakeConsultationsOutsidetheUniversity).respond(fakeConsultationsOutsidetheUniversityResponse);
+
+			// Run controller functionality
+			scope.update();
+			$httpBackend.flush();
+
+			// Test form inputs are reset
+			expect(scope.consultations).toEqual('');
 		}));
 	});
 }());
