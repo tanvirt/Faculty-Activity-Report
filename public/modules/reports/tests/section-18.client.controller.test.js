@@ -50,9 +50,29 @@
 			});
 		}));
 
-		it('Should do some controller test', inject(function() {
-			// The test logic
-			// ...
+		it('Should successfully submit a POST to the backend', inject(function(Section18) {
+			// Create a fake EditorServiceReviewer object
+			var fakeEditorServiceReviewer = new Section18({
+				info: 'This is all test information for the editorServiceReviewer section.'
+			});
+
+			// Create a EditorServiceReviewer response
+			var fakeEditorServiceReviewerResponse = new Section18({
+				info: 'This is all test information for the editorServiceReviewer section.'
+			});
+
+			// Fixture mock form input values
+			scope.info = 'This is all test information for the editorServiceReviewer section.';
+
+			// Set POST response
+			$httpBackend.expectPOST('reports', fakeEditorServiceReviewer).respond(fakeEditorServiceReviewerResponse);
+
+			// Run controller functionality
+			scope.update();
+			$httpBackend.flush();
+
+			// Test form inputs are reset
+			expect(scope.info).toEqual('');
 		}));
 	});
 }());
